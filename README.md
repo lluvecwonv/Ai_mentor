@@ -16,7 +16,7 @@ npm run dev  # 실행: http://localhost:5173
 리눅스 환경에서 실행 (포트: `8080`)
 
 ```bash
-conda create --name open-webui python=3.11 # 처음 실행할 때만
+conda create --name open-webui python=3.11
 conda activate open-webui
 cd open-webui/backend
 pip install -r requirements.txt -U
