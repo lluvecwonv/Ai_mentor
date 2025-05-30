@@ -1,5 +1,5 @@
 
-# JBNU AI Mentor - 로컬 실행 가이드
+# 🤖 JBNU AI Mentor - 로컬 실행 가이드
 
 ## Frontend (port: 5173)
 
