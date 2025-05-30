@@ -1,6 +1,6 @@
 from fastapi import APIRouter,FastAPI, Request, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse
-
+import json
 
 import httpx
 import asyncio
@@ -43,13 +43,30 @@ async def receive_message(request: Request):
         if stream_mode:
             # 스트리밍 모드: OpenAI 서버에서 받은 chunk들을 그대로 전달
             async def event_generator():
-                async for chunk in resp.aiter_bytes():
-                    # client 쪽이 SSE(event: message\n data: ...\n\n) 처리가 필요하면 형식 변환
-                    yield chunk
 
+
+                    # for token in ["맛", "있", "다"]:
+                    #     chunk = {
+                    #         "id": "chatcmpl-xxx",
+                    #         "object": "chat.completion.chunk",
+                    #         "choices": [{
+                    #             "delta": {"content": token},
+                    #             "index": 0,
+                    #             "finish_reason": None
+                    #         }]
+                    #     }
+                    #     # JSON → data: …\n\n
+                    #     yield f"data: {json.dumps(chunk)}\n\n"
+                    # # 스트림 종료
+                    # yield "data: [DONE]\n\n"
+
+                async for chunk in resp.aiter_lines():
+                    # client 쪽이 SSE(event: message\n data: ...\n\n) 처리가 필요하면 형식 변환
+                    yield chunk + "\n"
+                
             return StreamingResponse(
-                resp.aiter_lines(),             # 바이트 덩어리 대신 라인 단위
-                media_type="text/event-stream"
+                event_generator(),
+                media_type="text/event-stream"  # 혹은 "application/json" 필요 시 변경
             )
         else:
             # 비스트림 모드: 한 번에 JSON 파싱 후 반환
