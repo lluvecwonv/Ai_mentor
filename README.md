@@ -200,9 +200,9 @@ uvicorn main:app --host 0.0.0.0 --port 8001
 
 ## 📄 기능 항목 (진행 중)
 
-* [o] PDF 처리
-* [o] 대화 stream 처리
-* [x] 대화 기록 관리
+* [x] PDF 처리
+* [x] 대화 stream 처리
+* [ ] 대화 기록 관리
 
 ---
 
