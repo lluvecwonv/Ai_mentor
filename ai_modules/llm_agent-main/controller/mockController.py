@@ -20,7 +20,7 @@ async def receive_message(request: Request):
 
     # 3) 응답 페이로드 구성
     img_url="https://i.ytimg.com/vi/0xj6nj35ugk/sddefault.jpg"
-    pdf_url="https://koreascience.kr/article/CFKO202232249473431.pdf"
+    pdf_url="https://github.com/mozilla/pdf.js/raw/master/web/compressed.tracemonkey-pldi-09.pdf"
     response_json = {
         "choices": [
             {
@@ -33,18 +33,6 @@ async def receive_message(request: Request):
                         f"![설명 이미지]({img_url})"
                         f"[PDF 보고서 다운로드]({pdf_url})"
                     ),
-                    "attachments": [
-                    {
-                        "type": "image",
-                        "url": "https://i.ytimg.com/vi/0xj6nj35ugk/sddefault.jpg",
-                        "name": "diagram.png"
-                    },
-                    {
-                        "type": "file",
-                        "url": "https://koreascience.kr/article/CFKO202232249473431.pdf",
-                        "name": "report.pdf"
-                    }
-                    ],
                 },
                 "finish_reason": "stop",
             }
