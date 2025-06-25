@@ -89,7 +89,8 @@ cd ai_modules/llm_agent-main/
 uvicorn main:app --host 0.0.0.0 --port 8001
 ```
 
-> **Tip:** `open-webui backend, pipeline`과 동일한 `localhost` 설정을 사용해야 합니다.
+> ⚠️ **주의:** `ai_modules` 디렉토리의 파일들은 `.env` 파일을 통해 `OPENAI_API_KEY`, `DB_HOST`, `DB_PASSWORD` 등의 환경 변수를 반드시 설정해야 합니다.
+
 
 ---
 
