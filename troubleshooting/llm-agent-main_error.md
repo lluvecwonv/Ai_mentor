@@ -224,4 +224,5 @@ AttributeError: 'NoneType' object has no attribute 'cursor'
 ```
 
 ## 📌 확인 사항
-`ai_modules` 내부의 다른 초기화 모듈 또는 구성 요소가 선행 실행되어야 하는 구조일 수 있음
+1. `ai_modules\llm_agent-main\util\dbClient.py` dbClient 로직 확인 필요
+2. `ai_modules` 내부의 다른 초기화 모듈 또는 구성 요소가 선행 실행되어야 하는 구조일 수 있음
