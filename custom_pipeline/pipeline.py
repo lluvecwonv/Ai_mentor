@@ -33,7 +33,7 @@ class Pipeline:
         payload = {
             "stream": False,
             "model": model_id,
-            "messages": messages  # 여기가 핵심: 전체 히스토리 그대로 전달
+            "messages": messages  # 전체 히스토리 그대로 전달
         }
 
         try:
@@ -64,8 +64,8 @@ class Pipeline:
                     return parts[1]  # api_body만 반환
                 else:
                     return f"[LLM 응답 포맷 오류] 예상한 포맷: tool_name|api_body|이유\n\n▶ 응답 원문:\n{raw_message}"
-
-            # 그 외
+            
+            # 만약 예상치 못한 포맷이라면
             return "[LLM 응답 오류] 알 수 없는 포맷입니다."
 
         except Exception as e:
