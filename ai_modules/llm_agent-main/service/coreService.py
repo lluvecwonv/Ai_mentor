@@ -85,6 +85,7 @@ class CoreService():
                 sql = f"SELECT * FROM jbnu_tool_list WHERE tool_name = '{response_tool_name}'"
                 tool_info = self.dbClient.execute_query(sql)[0]
 
+                print("사용할 api_url:", tool_info["api_url"])
                 tool_call_response = requests.post(tool_info['api_url'], json = json.loads(response_api_body))
                 tool_result = tool_call_response.json()['message']
                 print(tool_result)
