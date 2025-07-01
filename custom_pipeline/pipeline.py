@@ -4,7 +4,9 @@ import requests
 
 class Pipeline:
     class Valves(BaseModel):
-        pass
+        # LLM 에이전트(8001번 포트) URL / 타임아웃 설정
+        agent_url: str = "http://host.docker.internal:8001/agent"
+        timeout: float = 200.0
 
     def __init__(self):
         # 파이프라인 이름 설정
@@ -26,21 +28,45 @@ class Pipeline:
         messages: List[dict], # 전체 대화 히스토리
         body: dict # 요청 본문
     ) -> Union[str, Generator, Iterator]:
+        
         # 1) UI에서 입력된 질문을 그대로 전달위해 payload 생성
-        # user_message는 사용자가 입력한 질문
-        payload = {"query": user_message}
+        payload = {
+            "stream": False,
+            "model": model_id,
+            "messages": messages  # 여기가 핵심: 전체 히스토리 그대로 전달
+        }
 
         try:
-            # 2) 7999 포트로 post 요청
             resp = requests.post(
-                "http://host.docker.internal:7999/agent",
-                json=payload, # 질문 전송
-                timeout=200 # 타임아웃 설정 (200초)
+                self.valves.agent_url,
+                json=payload,
+                timeout=self.valves.timeout
             )
             resp.raise_for_status()
 
-            # 3) 반환된 JSON의 "message" 필드 리턴
-            return resp.json().get("message", "")
-        
+            # LLM에서 온 메시지 추출
+            raw_message = resp.json().get("message", "")
+            
+            # dict이면 histroy_data일 가능성이 높음
+            if isinstance(raw_message, dict):
+                # steps 중 마지막 step의 tool_response만 뽑아서 user한테 보여주기
+                steps = raw_message.get("steps", [])
+                if steps:
+                    last_tool_response = steps[-1].get("tool_response", "")
+                    return last_tool_response
+                else:
+                    return "[LLM 응답 오류] 히스토리에 툴 실행 결과가 없습니다."
+                
+            # 원래 기대한 포맷 (string) 이라면 그대로 처리
+            if isinstance(raw_message, str):
+                parts = raw_message.split("|")
+                if len(parts) >= 2: 
+                    return parts[1]  # api_body만 반환
+                else:
+                    return f"[LLM 응답 포맷 오류] 예상한 포맷: tool_name|api_body|이유\n\n▶ 응답 원문:\n{raw_message}"
+
+            # 그 외
+            return "[LLM 응답 오류] 알 수 없는 포맷입니다."
+
         except Exception as e:
-            return f"SQL tool error: {e}"
+            return f"LLM Agent error: {e}"
