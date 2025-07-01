@@ -2,7 +2,7 @@ import uvicorn
 
 from fastapi import FastAPI
 
-from tool_dumb.controller.controller import router as agent_router
+from controller.controller import router as agent_router
 
 
 app = FastAPI()
