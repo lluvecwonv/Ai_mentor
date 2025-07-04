@@ -8,7 +8,7 @@ class SanitizeService():
 
     def execute(self, query: str):
 
-        system_prompt = """
+        system_prompt = f"""
             [Guideline]
             - 지금부터 "질문" 에 대해서 다음과 같은 처리를 하시오.
             - "질문"이 모호하면, "질문"을 더 구체적이고 명확하게 수정하시오.

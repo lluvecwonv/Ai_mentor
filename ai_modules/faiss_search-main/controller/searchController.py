@@ -20,4 +20,4 @@ async def vector_search(data: ReadBody):
 
     print(response_key)
 
-    return {"key": str(response_key)}
+    return {"message": str(response_key)}

@@ -50,7 +50,7 @@ class CoreService():
                     - Please use the list of tools below to answer user questions so that responses can be generated based on your tools (you must follow up according to the response guidlines).
                     - You can use multiple tools (more than 0) and configure the tools freely, and I will ask you questions about the results of using each tool.
                     - If there is JSON in the response, avoid escaping it.
-                    - If "Before Result:" is an empty value, you must use more than one tool.
+                    - If this is the first step (i.e., before_result is empty), you must select and call at least one tool before replying with FINISH|FINISH|FINISH.
 
                 Tool list :
                     {for_prompt_tool_list}
@@ -60,23 +60,21 @@ class CoreService():
 
                 Ensure your response follows this format exactly. dot not use other formatt like JSON 
             """
-            print(system_prompt)
+            # print(system_prompt)
 
             # 요청 및 결과
             response = self.llmClient.call_llm(system_prompt, query, json.dumps(histroy_data))
-            print(response.choices[0].message.content)
             response_data = response.choices[0].message.content
             
             response_data = re.sub(r"tool_name\|api_body\|.+", "", response_data).strip()
             response_data = response_data.split("|")
 
-            print(response_data)
+            print("response_data: ",response_data)
 
             response_tool_name = response_data[0]
             response_api_body = response_data[1]
             response_choice_reason = response_data[2]
 
-            print(response_tool_name)
             if response_tool_name == "FINISH":
 
                 return histroy_data
@@ -85,10 +83,10 @@ class CoreService():
                 sql = f"SELECT * FROM jbnu_tool_list WHERE tool_name = '{response_tool_name}'"
                 tool_info = self.dbClient.execute_query(sql)[0]
 
-                print("사용할 api_url:", tool_info["api_url"])
+                print("사용할 api_url: ", tool_info["api_url"])
                 tool_call_response = requests.post(tool_info['api_url'], json = json.loads(response_api_body))
                 tool_result = tool_call_response.json()['message']
-                print(tool_result)
+                print("tool 사용 결과: ",tool_result)
 
                 histroy_data["steps"].append({
                     "step_number": step_number,

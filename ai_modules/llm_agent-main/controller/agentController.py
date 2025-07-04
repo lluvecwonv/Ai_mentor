@@ -3,9 +3,8 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from service.coreService import CoreService
 
-# 라우터 잡기
+# 라우터 설정
 router = APIRouter()
-
 core_service = CoreService()
 
 class Message(BaseModel):
@@ -18,11 +17,14 @@ class RequestBody(BaseModel):
     messages: List[Message]
 
 @router.post("/agent")
-async def agent_api(data: RequestBody):
-    # 마지막 user 발화만 뽑아서 처리
-    last_user_message = next((m.content for m in reversed(data.messages) if m.role == "user"), "")
-    print(last_user_message)
-    result = core_service.dynamic_tool_chain(last_user_message)
+async def agent_api(request_body: RequestBody):
+    # 마지막 user 발화만 추출
+    last_user_message = next((m.content for m in reversed(request_body.messages) if m.role == "user"), "")
+    print("User query:", last_user_message)
 
-    print(result)
-    return {"message": result}
+    # dynamic_tool_chain에서 dict 반환
+    history_data = core_service.dynamic_tool_chain(last_user_message)
+
+    print("history_data:", history_data)
+
+    return {"message":history_data}

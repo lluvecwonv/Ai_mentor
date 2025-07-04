@@ -88,12 +88,39 @@ conda activate open-webui
 cd ai_modules/llm_agent-main/
 uvicorn main:app --host 0.0.0.0 --port 8001
 ```
+## faiss_search-main (port: 7997)
+
+```bash
+conda activate open-webui
+cd ai_modules/faiss_search-main/
+python main.py
+```
+## tool_dumb-main (port: 7998)
+
+```bash
+conda activate open-webui
+cd ai_modules/tool_dumb-main/
+python main.py
+```
+## tool_sql-main (port: 7999)
+
+```bash
+conda activate open-webui
+cd ai_modules/tool_sql-main/
+python main.py
+```
 
 > ⚠️ **주의:** `ai_modules` 디렉토리의 파일들은 `.env` 파일을 통해 `OPENAI_API_KEY`, `DB_HOST`, `DB_PASSWORD` 등의 환경 변수를 반드시 설정해야 합니다.
 
 
 ---
-
+## 제목 & 태그 생성 설정 External Task Model, Local Task Model
+![alt text](image.png)
+공개 설정
+![alt text](image-1.png)
+External Task Model, Local Task Model: OpenAI Pipeline
+안하면 llm-agent-main으로 보내져서 오류 뜸
+---
 ## PDF 응답 처리
 
 채팅 메시지 `content` 에 Markdown 링크로 PDF 다운로드 링크를 제공하세요:

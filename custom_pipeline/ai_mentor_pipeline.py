@@ -1,7 +1,6 @@
 from typing import List, Union, Generator, Iterator
 from pydantic import BaseModel
 import requests
-import json
 
 class Pipeline:
     class Valves(BaseModel):
@@ -32,23 +31,42 @@ class Pipeline:
         
         # 1) UI에서 입력된 질문을 그대로 전달위해 payload 생성
         payload = {
-            "stream": body.get("stream", False),
+            "stream": False,
             "model": model_id,
             "messages": messages  # 전체 히스토리 그대로 전달
         }
 
         try:
-            r = requests.post(
+            resp = requests.post(
                 self.valves.agent_url,
                 json=payload,
                 timeout=self.valves.timeout
             )
-            r.raise_for_status()
+            resp.raise_for_status()
 
-            if body["stream"]:
-                return r.iter_lines()
-            else:
-                return r.json()
+            # LLM에서 온 메시지 추출
+            raw_message = resp.json().get("message", "")
+            
+            # dict이면 histroy_data일 가능성이 높음
+            if isinstance(raw_message, dict):
+                # steps 중 마지막 step의 tool_response만 뽑아서 user한테 보여주기
+                steps = raw_message.get("steps", [])
+                if steps:
+                    last_tool_response = steps[-1].get("tool_response", "")
+                    return last_tool_response
+                else:
+                    return "[LLM 응답 오류] 히스토리에 툴 실행 결과가 없습니다."
+                
+            # 원래 기대한 포맷 (string) 이라면 그대로 처리
+            if isinstance(raw_message, str):
+                parts = raw_message.split("|")
+                if len(parts) >= 2: 
+                    return parts[1]  # api_body만 반환
+                else:
+                    return f"[LLM 응답 포맷 오류] 예상한 포맷: tool_name|api_body|이유\n\n▶ 응답 원문:\n{raw_message}"
+            
+            # 만약 예상치 못한 포맷이라면
+            return "[LLM 응답 오류] 알 수 없는 포맷입니다."
 
         except Exception as e:
             return f"LLM Agent error: {e}"
