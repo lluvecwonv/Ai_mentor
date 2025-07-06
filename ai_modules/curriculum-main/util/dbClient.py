@@ -12,7 +12,7 @@ class DbClient():
 
     def __init__(self):
         self.host = db_host
-        self.port = 3312
+        self.port = 3311
         self.user = "root"
         self.password = db_password
         self.database = "nll"

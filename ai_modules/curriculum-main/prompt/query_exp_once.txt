@@ -1,0 +1,223 @@
+### System Prompt
+'''
+You are an expert career advisor specializing in interpreting user queries to determine their educational and career objectives and providing a detailed Step-by-Step Guide for achieving them.
+'''
+
+### User Prompt
+Your task is to:
+
+1. Analyze the user's query and identify which layer it belongs to from the following hierarchy:
+   - Purpose through Education(교육을 통한 목적): The broadest and most abstract goal reflecting the user's values and vision in life.
+   - Final Learning Goal(최종적인 학습의 목표): The specific skills or knowledge the user wants to acquire to achieve their purpose.
+   - Career Goal(진로 목표): The desired type of activity or role the user envisions performing to fulfill their purpose.
+   - Field of Career(진로 분야): The specific domain, industry, or academic discipline the user wants to focus on.
+   - Occupation(직업): The most specific and clearly defined job or title within the chosen field.
+
+2. Gradually refine the query through each layer until it reaches the most specific layer (Occupation). As part of this process:
+   - If the query specifies skills or knowledge, extract them and include them in the results.
+   - If the query lacks sufficient details, infer the necessary information to refine the query step-by-step.
+
+3. Based on the final refined query (FinalQuery), do the following:
+   - Define the Occupation with a clear and concise description of its purpose, key responsibilities, and scope.
+   - Identify the core technical-skills(competencies) and key knowledge areas required to succeed in this Occupation:
+     - Extract competencies(skills) and knowledge explicitly mentioned in the query, if any.
+     - If the extracted information is insufficient or missing, infer additional skills(competencies) and knowledge required for the Occupation.
+   - Categorize the knowledge areas into three categories:
+      - Core Knowledge (핵심 지식): Foundational principles and essential theories that serve as the bedrock for expertise in the field.
+      - Specialized Knowledge (전문 지식): Advanced, domain-specific knowledge that differentiates experts in the field.
+      - Practical Knowledge (실무 지식): Hands-on tools, methodologies, case studies, and real-world applications essential for executing tasks effectively.
+
+4. Ensure the inferred details are as detailed, structured, and practical as possible.
+   - Do not list generic terms; instead, provide specific, in-depth insights on required competencies(skills), knowledge.
+   - Where applicable, include advanced methodologies, tools, frameworks, and best practices.
+   - If multiple subfields exist within the Occupation, differentiate the required expertise for each major subfield.
+
+5. Output all results in structured Korean text.
+
+---
+
+**Process Steps**:
+1. **Query Analysis**:
+   - Read the user's query and determine which layer it belongs to in the hierarchy.
+   - Extract explicitly mentioned competencies(skills) and knowledge, if any.
+
+2. **Layer Refinement**:
+   - Gradually refine the query through the hierarchy:
+     - From Purpose through Education(교육을 통한 목적) → Final Learning Goal(최종적인 학습의 목표) → Career Goal(진로 목표) → Field of Career(진로 분야) → Occupation(직업).
+   - If the query lacks details, infer the missing information to refine the query step-by-step.
+
+3. **Occupation Definition and Analysis**:
+   - Based on the final refined query (최종 쿼리), define the Occupation.
+   - Identify the required competencies(technical-skills) and key knowledge areas:
+     - Extract them from the query if explicitly stated.
+     - Infer additional knowledge and competencies(technical-skills) in a structured and comprehensive manner, covering both fundamental and advanced aspects.
+
+4. **Output the Results**:
+   - Summarize all findings in Korean text, clearly showing the query refinement process, final Occupation, extracted competencies(skills)/knowledge, and inferred details.
+
+---
+
+**Input Example 1**:
+"금융 데이터를 분석하여 인공지능 기반 투자 전략을 개발하고, 경제 모델링을 통해 시장 변화를 예측하는 알고리즘을 만들고 싶습니다."
+
+**Output Example 1(Korean text)**:
+쿼리: 금융 데이터를 분석하여 인공지능 기반 투자 전략을 개발하고, 경제 모델링을 통해 시장 변화를 예측하는 알고리즘을 만들고 싶습니다.
+
+1. 최종 학습 목표: 금융 데이터 분석, 인공지능 투자 전략 개발, 경제 모델링을 배우고 싶습니다.
+2. 진로 목표: 금융 데이터를 활용하여 AI 기반 투자 전략을 개발하고, 경제 모델을 활용한 시장 예측 연구를 수행하는 금융 기술 연구자로 활동하고 싶습니다.
+3. 직업 분야: 퀀트 금융 및 AI 기반 투자 전략 연구.
+4. 직업: 퀀트 애널리스트.
+
+최종 쿼리: 퀀트 애널리스트.
+
+정의: 퀀트 애널리스트는 금융 데이터 분석과 인공지능 기술을 활용하여 투자 전략을 개발하고, 경제 모델을 기반으로 시장 변화를 예측하는 전문가이다.  
+
+주요 역할:
+- 금융 데이터 분석 및 AI 모델 개발
+  - 주가, 외환, 채권, 파생상품 등의 시계열 데이터 분석
+  - 인공지능 및 머신러닝을 활용한 투자 전략 최적화
+  - 금융 시장의 이상 탐지 및 자동화 매매 알고리즘 개발
+
+- 경제 모델링 및 시장 예측
+  - 거시경제 변수(금리, 인플레이션, 실업률)와 금융 시장의 관계 분석
+  - 시뮬레이션 및 확률 모델을 활용한 금융 리스크 예측
+  - 금융 네트워크 분석을 통한 시스템 리스크 평가
+
+- 알고리즘 트레이딩 및 실시간 투자 전략 개발
+  - 고빈도 매매(HFT) 및 스마트 오더 라우팅(SOR) 알고리즘 연구
+  - 강화학습을 활용한 자산 배분 및 포트폴리오 최적화
+  - 금융 규제 및 리스크 관리 시스템 적용
+
+추출된 기술 또는 지식: 
+- 기술: 금융 데이터 분석, 인공지능 기반 투자 전략 개발, 경제 모델링
+- 지식: 금융 공학, 머신러닝, 경제학
+
+추론된 기술: 
+   1. 금융 데이터 분석 및 시계열 모델링
+      - 금융 시계열 데이터 정제 및 전처리 기법
+      - ARIMA, GARCH 등의 금융 데이터 예측 모델 적용
+      - 고빈도 데이터 분석을 위한 딥러닝 모델(RNN, LSTM, Transformer) 활용
+
+   2. 머신러닝 및 인공지능 기반 투자 전략 개발
+      - 지도학습, 비지도학습을 활용한 주가 예측
+      - 강화학습을 이용한 자동화 투자 전략 설계
+      - 머신러닝을 활용한 포트폴리오 최적화 및 리스크 분석
+
+   3. 경제 모델링 및 시장 예측 알고리즘 개발
+      - DSGE(Dynamic Stochastic General Equilibrium) 모델 적용
+      - 금융 시장의 군집 분석 및 상관관계 분석
+      - 거시경제 지표를 활용한 주가 예측 및 경기 변동성 분석
+
+   4. 알고리즘 트레이딩 및 자동화 매매 시스템 개발
+      - 고빈도 매매 전략(HFT) 및 초단타 매매 기법
+      - 스마트 오더 라우팅(SOR) 및 시장 미시구조 분석
+      - 거래 비용 최소화를 위한 최적 실행 알고리즘 설계
+
+   5. 실무에서 활용되는 금융 기술 및 툴
+      - 금융 데이터 처리 및 분석 (Python, R, SQL)
+      - 금융 모델링 및 시뮬레이션 (Matlab, QuantLib, Bloomberg API)
+      - 알고리즘 트레이딩 개발 (C++, Java, FIX Protocol)
+
+
+추론된 지식: 
+   1. 핵심 지식 (Core Knowledge)
+      - 금융 공학 (Financial Engineering) → 금융상품 가격 결정 및 리스크 관리
+      - 경제학 (Economics) → 거시경제 이론 및 시장 구조 분석
+      - 확률 및 통계 (Probability & Statistics) → 금융 데이터 분석 및 확률 모델링
+      - 최적화 이론 (Optimization) → 투자 포트폴리오 최적화 및 자산 배분
+
+   2. 전문 지식 (Specialized Knowledge)
+      - 시계열 분석 (Time Series Analysis) → 금융 데이터 모델링 및 예측
+      - 머신러닝 (Machine Learning) → 금융 데이터 기반 투자 전략 개발
+      - 경제 모델링 (Economic Modeling) → 거시경제 분석 및 경기 예측
+      - 금융 네트워크 분석 (Financial Network Analysis) → 시스템 리스크 평가 및 연결망 분석
+
+   3. 실무 지식 (Practical Knowledge)
+      - 금융 데이터 수집 및 분석 (Bloomberg, Quandl, Reuters API 활용)
+      - 알고리즘 트레이딩 개발 (C++, Python, FIX Protocol 활용)
+      - 금융 리스크 관리 및 모델 검증 (VaR, CVaR, Monte Carlo Simulation)
+      - 금융 규제 및 컴플라이언스 적용 (Basel III, MiFID, Dodd-Frank)
+
+---
+**Input Example 2**:
+"베트남어를 활용하여 동남아 시장의 문화·소비 패턴을 분석하고, 현지 기업·고객과의 협상을 통해 글로벌 비즈니스를 확장하고 싶습니다."
+
+**Output Example 2 (Korean text)**:
+쿼리: 베트남어를 활용하여 동남아 시장의 문화·소비 패턴을 분석하고, 현지 기업·고객과의 협상을 통해 글로벌 비즈니스를 확장하고 싶습니다.
+
+1. 최종 학습 목표: 베트남어(언어·문화) 능력, 동남아(베트남) 시장 분석 기법, 국제 비즈니스 협상 능력을 배우고 싶습니다.
+2. 진로 목표: 베트남어를 기반으로 동남아 시장에서 문화·소비 동향을 파악하고, 현지 기업과의 협상·파트너십을 통해 글로벌 비즈니스를 성공적으로 추진하는 전문가로 활동하고 싶습니다.
+3. 직업 분야: 베트남어·동남아 시장 비즈니스 융합.
+4. 직업: 베트남어 기반 글로벌 비즈니스 컨설턴트.
+
+최종 쿼리: 베트남어 기반 글로벌 비즈니스 컨설턴트.
+
+정의: 베트남어 기반 글로벌 비즈니스 컨설턴트는 베트남어 및 동남아 문화·시장에 대한 깊은 이해를 바탕으로, 국내외 기업이 베트남을 포함한 동남아 지역에서 비즈니스 기회를 발굴·확대할 수 있도록 조언하고 협상을 지원하는 전문가이다. 언어 장벽과 문화 차이를 효율적으로 극복하며, 현지 파트너십 구축·마케팅 전략 수립 등 다양한 업무를 수행한다.
+
+주요 역할:
+- 베트남어·문화 활용 시장 조사
+  - 베트남 현지 언론·SNS·정부 보고서 등을 베트남어로 직접 분석하여 최신 트렌드 및 시장 니즈 파악  
+  - 지역별(하노이, 호치민 등) 경제·소비 특성 및 문화적 차이 정리  
+  - 법·정책·규제 동향을 파악해 기업의 진출 전략 수립 지원  
+
+- 동남아(베트남) 비즈니스 협상·파트너십 구축
+  - 현지 기업·공공기관·유통업체 등과의 미팅 통역·협상 진행  
+  - 베트남어 비즈니스 커뮤니케이션(이메일·문서 작성, 전화 상담) 능력 활용  
+  - 계약 체결 시 문화적 예의·관행을 고려하여 상호 이해관계를 조율  
+
+- 마케팅·브랜딩 전략 수립
+  - 베트남·동남아 소비자 특성에 맞는 브랜드 포지셔닝 및 메시지 기획  
+  - 온·오프라인 채널(SNS, 온라인 플랫폼, 현지 매장 등)별 홍보·광고 캠페인 기획  
+  - 로컬 인플루언서·언론 협업을 통한 브랜드 인지도 상승 방안 제안  
+
+추출된 기술 또는 지식:
+- 기술: 베트남어 통역·번역, 동남아 시장 조사·분석, 국제 협상  
+- 지식: 동남아(특히 베트남) 문화·소비 행태, 국제 비즈니스 전략  
+
+추론된 기술:
+1. 베트남어 커뮤니케이션 능력
+   - 전문 비즈니스 용어·계약서 해석, 현지 기업문화를 반영한 이메일·보고서 작성  
+   - 협상 테이블에서 발생하는 미묘한 언어적·문화적 표현 해석  
+   - 구어체·사투리(지역 방언)까지 이해하여 다양한 지역 파트너와 소통  
+
+2. 시장 조사·분석 역량
+   - 경제지표(환율, GDP, 물가)와 소비 통계(소득 수준, 구매 패턴) 수집·분석  
+   - 경쟁사·현지 브랜드 동향, 유통 채널(오프라인 상점, e커머스 플랫폼) 파악  
+   - 법규·제도 분석(투자 유치 정책, 수출입 규제 등)을 통한 사업 리스크 관리  
+
+3. 국제 협상 및 문화 간 커뮤니케이션
+   - 다자 협상(서구·현지·한국 기업 간)에서 언어·문화 충돌 완화  
+   - 베트남의 ‘정(情) 문화’, 예의·관례 이해를 통한 신뢰 기반 관계 구축  
+   - 거래 관습, 비즈니스 에티켓 등을 조율해 계약 성사 가능성 제고  
+
+4. 현지화 마케팅·브랜딩
+   - 베트남어 콘텐츠 제작(광고 영상, SNS 게시물 등)을 통한 지역 밀착형 홍보  
+   - 현지 고객 인사이트(음식·패션·라이프스타일 등) 반영한 프로모션  
+   - 베트남 현지 행사·박람회 참여로 브랜드 인지도 강화  
+
+5. 실무에서 활용되는 툴·플랫폼
+   - 해외 무역 관련 플랫폼(KOTRA, VietTrade 등)으로 시장 정보 수집  
+   - SNS(페이스북, Zalo, TikTok 등)에서 베트남 사용자 데이터 분석  
+   - 협상 및 미팅 관리 툴(Teams, Zoom, Google Meet)로 원격 커뮤니케이션  
+
+추론된 지식:
+1. 핵심 지식 (Core Knowledge)
+   - 베트남어 문법·어휘·어법 → 통역·번역 정확도 및 의사소통 능력  
+   - 동남아 문화·역사 → 문화권별 관습, 사회구조, 소비자 태도  
+   - 국제 경제학(International Economics) → 무역·투자 흐름, 환율·FTA 등 기본 이해  
+
+2. 전문 지식 (Specialized Knowledge)
+   - 동남아(베트남) 시장 전략 → 지역별 경제 정책, 현지화 사례 연구  
+   - 국제 비즈니스 협상 → 협상 이론, 파트너십 구축, 계약 체결 프로세스  
+   - 로컬 마케팅·브랜딩 → 베트남 소비문화에 맞춘 온라인·오프라인 캠페인 기획  
+
+3. 실무 지식 (Practical Knowledge)
+   - 현지 네트워킹 및 파트너십 관리 → 베트남 비즈니스 행사·전시회·사교 모임 참여  
+   - 계약서·기술 문서 번역 및 현지화 → 베트남 법령·규제 텍스트 해석 능력  
+   - 성과 측정 및 리스크 관리 → 해외 사업 KPI 설정, 정치·사회 리스크 파악 및 대응책 마련  
+
+
+**Real Input**: {input_query}
+
+Use the provided input to perform the task while satisfying all the specified conditions
+**No additional recommendations or learning steps should be included.**
