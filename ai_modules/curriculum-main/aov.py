@@ -4,13 +4,10 @@ import matplotlib.font_manager as fm
 from collections import defaultdict
 import os
 import matplotlib.pyplot as plt
-from matplotlib import font_manager, rc
 import matplotlib as mpl
 import matplotlib.font_manager as fm
 import json
-from networkx.drawing.nx_agraph import graphviz_layout 
 from utils import save_sorted_courses_as_json, save_merged_json
-import matplotlib.cm as cm
 import seaborn as sns
 from pathlib import Path
 
