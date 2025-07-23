@@ -15,7 +15,7 @@ class CoreService():
     def dynamic_tool_chain(self, query: str):
         
         client_question = query
-        before_result = ' '
+        before_result = 'INIT'
         histroy_data = {
             "steps": []
         }
@@ -38,28 +38,32 @@ class CoreService():
                 
                 for_prompt_tool_list.append(data_set)
 
-            system_prompt = f"""
+                system_prompt = f"""
                 Client Question :
                     {client_question}
-                Before Result : 
+                Before Result :
                     {before_result}
 
                 Guidelines :
-                    - Look at "Client Question :" and "Before Result" and if the question is sufficiently answered, reply FINISH|FINISH|FINISH.
-                    - You are an intelligent AI bot specialized in providing information about Jeonbuk University (JBNU). Users will ask questions related to JBNU, and you, as "Bot", should answer them.
-                    - Please use the list of tools below to answer user questions so that responses can be generated based on your tools (you must follow up according to the response guidlines).
-                    - You can use multiple tools (more than 0) and configure the tools freely, and I will ask you questions about the results of using each tool.
-                    - If there is JSON in the response, avoid escaping it.
-                    - If this is the first step (i.e., before_result is empty), you must select and call at least one tool before replying with FINISH|FINISH|FINISH.
+                1. If Before Result is 'INIT', that means this is the **first tool-calling step**.
+                - In this case, you MUST choose exactly one tool from the list below.
+                - NEVER reply with FINISH|FINISH|FINISH at the first step.
+                2. After the first step, if the user's question has been fully answered by your previous tool call, reply:
+                    FINISH|FINISH|FINISH
+                and stop — do not call any more tools.
+                3. Otherwise, choose exactly one tool and respond with one line in the format:
+                    tool_name|api_body|reason
+                - tool_name must match exactly one from the tool list.
+                - api_body must be a valid JSON string.
+                - reason should be brief and NOT repeat the tool name.
+                4. DO NOT include extra `|` characters in any of the three fields.
 
-                Tool list :
+                Tool list:
                     {for_prompt_tool_list}
 
-                You Must respond as following formatt Divide based on | :
-                    tool_name|api_body|Reasons for choosing this tool and summary of the process
+                Respond strictly using only one of the two allowed forms above.
+                """
 
-                Ensure your response follows this format exactly. dot not use other formatt like JSON 
-            """
             # print(system_prompt)
 
             # 요청 및 결과
@@ -67,13 +71,13 @@ class CoreService():
             response_data = response.choices[0].message.content
             
             response_data = re.sub(r"tool_name\|api_body\|.+", "", response_data).strip()
-            response_data = response_data.split("|")
+            response_data = response_data.split("|", 2)
+            response_tool_name, response_api_body, response_choice_reason = (
+                part.strip() for part in response_data
+            )
 
             print("response_data: ",response_data)
 
-            response_tool_name = response_data[0]
-            response_api_body = response_data[1]
-            response_choice_reason = response_data[2]
 
             if response_tool_name == "FINISH":
 
@@ -91,6 +95,7 @@ class CoreService():
                 histroy_data["steps"].append({
                     "step_number": step_number,
                     "tool_name": response_tool_name,
+                    "tool_description": tool_info["description"],
                     "tool_input": response_api_body,
                     "tool_response": tool_result,
                     "reason": response_choice_reason

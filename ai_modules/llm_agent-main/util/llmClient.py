@@ -27,3 +27,20 @@ class LlmClient():
                 {"role": "assistant", "content": assistant_prompt},
             ]
         )
+    
+    def chat(self, user_prompt: str, stream: bool = False):
+        system_prompt = """
+You are a professional translator.
+Translate only the Korean text into clear, idiomatic English.
+Preserve all existing markdown syntax (including image links) unchanged.
+Do not add explanations or alter formatting beyond the translation.
+"""
+
+        return self.client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user",   "content": user_prompt},
+            ],
+            stream=stream
+        )
