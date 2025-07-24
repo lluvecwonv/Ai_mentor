@@ -45,6 +45,10 @@ if FONT_PATH.exists():
 else:
     font_prop = None  # 폰트가 없으면 None
 
+def format_sse(data: str) -> str:
+    # 각 줄을 'data: …' 로 감싸고, '\n\n' 으로 이벤트 종료
+    return "".join(f"data: {line}\n" for line in data.splitlines()) + "\n\n"
+
 def parse_course_sections_with_preamble(text: str) -> dict:
     parts = re.split(r'^===\s*(.+?)\s*===\s*$', text, flags=re.MULTILINE)
     result = {"preamble": parts[0].strip()}
@@ -195,7 +199,7 @@ async def agent_api(request_body: RequestBody) -> JSONResponse:
             parsed   = parse_course_sections_with_preamble(raw)
             final = parsed.pop("preamble", "")
             graph_b64 = generate_graph_base64(parsed)
-            image_md = f"\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
+            image_md = f"data: ![Curriculum Graph](data:image/png;base64,{graph_b64})"
             
 
             # final = f"{preamble}\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
@@ -214,7 +218,7 @@ async def agent_api(request_body: RequestBody) -> JSONResponse:
                 if delta.content:
                     yield delta.content
             # 번역 텍스트가 다 내려간 뒤, 이미지 마크다운을 그대로 추가
-            yield image_md
+            yield format_sse(image_md)
 
         return StreamingResponse(event_gen(), media_type="text/event-stream")
 
