@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+pymysql
+openai
+requests
+httpx
+networkx
+matplotlib
+seaborn
