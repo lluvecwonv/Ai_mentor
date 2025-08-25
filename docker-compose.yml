@@ -70,7 +70,10 @@ services:
       - "8080:8080"
     environment:
       - TZ=Asia/Seoul
-      - WEBUI_AUTH=False            # 로그인 완전 비활성화
+      - WEBUI_AUTH=False              # 로그인 완전 비활성화
+      - ENABLE_CODE_INTERPRETER=false # 코드 인터프리터 비활성화
+      - ENABLE_FILE_UPLOAD=false      # 파일 업로드 비활성화
+      - ENABLE_VOICE_INPUT=false      # 음성 인식 비활성화
     volumes:
       - openwebui-data:/app/backend/data
     restart: unless-stopped
