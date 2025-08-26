@@ -70,10 +70,18 @@ services:
       - "8080:8080"
     environment:
       - TZ=Asia/Seoul
-      - WEBUI_AUTH=False              # 로그인 완전 비활성화
+      # - WEBUI_AUTH=False              # 로그인 완전 비활성화
       - ENABLE_CODE_INTERPRETER=false # 코드 인터프리터 비활성화
       - ENABLE_FILE_UPLOAD=false      # 파일 업로드 비활성화
       - ENABLE_VOICE_INPUT=false      # 음성 인식 비활성화
+
+      # 로그인 관련 환경설정
+      - WEBUI_AUTH=True               # 로그인 사용(필수)
+      - ENABLE_LOGIN_FORM=True        # 로그인 폼 표시
+      - ENABLE_SIGNUP=True            # 회원가입 허용(일반 사용자가 직접 가입)
+      - DEFAULT_USER_ROLE=user        # 가입 즉시 일반 권한
+      # - ENABLE_PERSISTENT_CONFIG=False
+      
     volumes:
       - openwebui-data:/app/backend/data
     restart: unless-stopped
