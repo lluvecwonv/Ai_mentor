@@ -1,4 +1,3 @@
-# sample_usage.py
 from util.dbClient import DbClient
 
 if __name__ == "__main__":
@@ -14,11 +13,15 @@ if __name__ == "__main__":
     table_name = "jbnu_tool_list"
 
     try:
-
         print("\n--- Data in `jbnu_tool_list` ---")
-        # 데이터 내용 출력
         data_rows = db.execute_query(f"SELECT * FROM {table_name};")
-        for dr in data_rows:
-            print(dr)
+        for t in data_rows:
+            result = {
+                "tool_name": t["tool_name"],
+                "tool_description": t["description"],
+                "api_body": t["api_body"],
+                "api_url": t["api_url"]
+            }
+            print(result)
     finally:
         db.close()
