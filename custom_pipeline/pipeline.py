@@ -6,8 +6,8 @@ import json
 class Pipeline:
     class Valves(BaseModel):
         # LLM 에이전트(8001번 포트) URL / 타임아웃 설정
-        agent_url: str = "http://localhost:8001/agent"
-        timeout: float = 200.0
+        agent_url: str = "http://llm_agent:8001/agent"
+        timeout: float = 500.0
 
     def __init__(self):
         # 파이프라인 이름 설정
@@ -31,10 +31,15 @@ class Pipeline:
     ) -> Union[str, Generator, Iterator]:
         
         # 1) UI에서 입력된 질문을 그대로 전달위해 payload 생성
+        # payload = {
+        #     "stream": body.get("stream", False),
+        #     "model": model_id,
+        #     "messages": messages  # 전체 히스토리 그대로 전달
+        # }
         payload = {
-            "stream": body.get("stream", False),
+            "stream": False,
             "model": model_id,
-            "messages": messages  # 전체 히스토리 그대로 전달
+            "messages": messages
         }
 
         try:
@@ -45,10 +50,13 @@ class Pipeline:
             )
             r.raise_for_status()
 
-            if body["stream"]:
-                return r.iter_lines()
-            else:
-                return r.json()
+            # if body["stream"]:
+            #     return r.iter_lines()
+            # else:
+            #     return r.json()
+            data = r.json()
+            # OpenAI 스타일 JSON에서 텍스트(content)만 추출해 반환
+            return data["choices"][0]["message"]["content"]
 
         except Exception as e:
             return f"LLM Agent error: {e}"

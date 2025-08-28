@@ -15,85 +15,88 @@ class CoreService():
     def dynamic_tool_chain(self, query: str):
         
         client_question = query
-        before_result = ' '
-        histroy_data = {
+        before_result = 'INIT'
+        history_data = {
             "steps": []
         }
 
         step_number = 1
 
         while True:
-
-            # tool list 불러오기 -> json 형태로 넣어줌?
+            # 1) 툴 리스트 로딩
             sql = "SELECT * FROM jbnu_tool_list"
             tool_list = self.dbClient.execute_query(sql)
-            for_prompt_tool_list = []
-            for tool in tool_list:
-
-                data_set = {
-                    "tool_name" : tool['tool_name'],
-                    "tool_description" : tool['description'],
-                    "api_body" : tool["api_body"]
+            prompt_tools = [
+                {
+                    "tool_name": t["tool_name"],
+                    "tool_description": t["description"],
+                    "api_body": t["api_body"]
                 }
-                
-                for_prompt_tool_list.append(data_set)
+                for t in tool_list
+            ]
 
+            # 2) 시스템 프롬프트: 항상 JSON 반환, 끝나면 FINISH JSON
             system_prompt = f"""
-                Client Question :
-                    {client_question}
-                Before Result : 
-                    {before_result}
+Client Question:
+    {client_question}
+Before Result:
+    {before_result}
 
-                Guidelines :
-                    - Look at "Client Question :" and "Before Result" and if the question is sufficiently answered, reply FINISH|FINISH|FINISH.
-                    - You are an intelligent AI bot specialized in providing information about Jeonbuk University (JBNU). Users will ask questions related to JBNU, and you, as "Bot", should answer them.
-                    - Please use the list of tools below to answer user questions so that responses can be generated based on your tools (you must follow up according to the response guidlines).
-                    - You can use multiple tools (more than 0) and configure the tools freely, and I will ask you questions about the results of using each tool.
-                    - If there is JSON in the response, avoid escaping it.
-                    - If this is the first step (i.e., before_result is empty), you must select and call at least one tool before replying with FINISH|FINISH|FINISH.
+Guidelines:
+1. If Before Result is 'INIT', choose exactly one tool; do NOT return FINISH JSON.
+2. Otherwise, if fully answered, return exactly this JSON (no fences, no extra text):
+{{"tool_name":"FINISH","api_body":"FINISH","reason":"FINISH"}}
+3. Else return exactly one JSON object (no fences, no text) with keys:
+   • tool_name: exact tool name
+   • api_body: valid JSON string
+   • reason: brief rationale (don’t repeat tool name)
 
-                Tool list :
-                    {for_prompt_tool_list}
+Tool list:
+{json.dumps(prompt_tools, ensure_ascii=False, indent=2)}
 
-                You Must respond as following formatt Divide based on | :
-                    tool_name|api_body|Reasons for choosing this tool and summary of the process
+Respond strictly with a single JSON object.
+"""
+           
+            # 3) LLM 호출
+            resp = self.llmClient.call_llm(
+                system_prompt,
+                query,
+                json.dumps(history_data, ensure_ascii=False)
+            )
+            raw = resp.choices[0].message.content.strip()
+            # 4) JSON 방어적 파싱
+            m = re.search(r'\{[\s\S]*\}', raw)
+            json_str = m.group(0) if m else raw
+            data = json.loads(json_str)
+            # 5) 값 추출 및 FINISH 처리
+            tool_name = data.get("tool_name", "").strip()
+            api_body  = data.get("api_body", "").strip()
+            reason    = data.get("reason", "").strip()
 
-                Ensure your response follows this format exactly. dot not use other formatt like JSON 
-            """
-            # print(system_prompt)
 
-            # 요청 및 결과
-            response = self.llmClient.call_llm(system_prompt, query, json.dumps(histroy_data))
-            response_data = response.choices[0].message.content
-            
-            response_data = re.sub(r"tool_name\|api_body\|.+", "", response_data).strip()
-            response_data = response_data.split("|")
+            print("response_data: ",tool_name,api_body,reason)
 
-            print("response_data: ",response_data)
 
-            response_tool_name = response_data[0]
-            response_api_body = response_data[1]
-            response_choice_reason = response_data[2]
+            if tool_name == "FINISH":
 
-            if response_tool_name == "FINISH":
-
-                return histroy_data
+                return history_data
             else:
 
-                sql = f"SELECT * FROM jbnu_tool_list WHERE tool_name = '{response_tool_name}'"
+                sql = f"SELECT * FROM jbnu_tool_list WHERE tool_name = '{tool_name}'"
                 tool_info = self.dbClient.execute_query(sql)[0]
 
                 print("사용할 api_url: ", tool_info["api_url"])
-                tool_call_response = requests.post(tool_info['api_url'], json = json.loads(response_api_body))
+                tool_call_response = requests.post(tool_info['api_url'], json = json.loads(api_body))
                 tool_result = tool_call_response.json()['message']
                 print("tool 사용 결과: ",tool_result)
 
-                histroy_data["steps"].append({
+                history_data["steps"].append({
                     "step_number": step_number,
-                    "tool_name": response_tool_name,
-                    "tool_input": response_api_body,
+                    "tool_name": tool_name,
+                    "tool_description": tool_info["description"],
+                    "tool_input": api_body,
                     "tool_response": tool_result,
-                    "reason": response_choice_reason
+                    "reason": reason
                 })
 
                 step_number += 1

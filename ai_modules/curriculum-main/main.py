@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import random
 import numpy as np
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse,HTMLResponse
 from types import SimpleNamespace
 from contextlib import asynccontextmanager
 from pydantic import BaseModel
@@ -123,6 +124,7 @@ def recursive_top1_selection(client, db_handler, query_embedding, query, selecte
     # ✅ 후보 검색
     candidate_dict = class_retriever.retrieve_by_department(query_embedding, selected_dept_list, top_k=1, visited_class_ids=visited_ids)
     logger.info(f"Candidate dict retrieved: {candidate_dict}")
+    print("DEBUG ▶ candidate_dict:", candidate_dict)
 
     candidate_list = []
     for dept_name, dept_results in candidate_dict.items():
@@ -180,64 +182,78 @@ query_counter = 0
 def process_query(query, args, client, db_handler, idx=0):
     global query_counter
     query_counter += 1  # 쿼리 요청마다 카운터 증가
-
     logger.info(f"Processing query {idx}: {query}")
-    
+
+    # 1) 학과·강좌 인덱스 준비
     dept_retriever = DenseRetriever(client, args)
     dept_retriever.doc_embedding()
-    
-    original_query = query 
+    class_retriever = classRetriever(client, args)
+    class_retriever.doc_embedding()
+    logger.info("강의·학과 인덱스 임베딩 완료")
+
+    # 2) 쿼리 확장 & 임베딩
+    original_query = query
     query_info = query_expansion(client, query, args.query_prompt_path)
     logger.info(f"확장된 쿼리: {query_info}")
-    
-    # 쿼리 임베딩 생성
     query_embedding = dept_retriever.query_embedding(query_info)
     logger.info("쿼리 임베딩 생성 완료")
 
-    class_retriever = classRetriever(client, args)
-    class_retriever.doc_embedding()
-    logger.info("강의 정보 임베딩 생성 완료")
-
-
+    # 3) 관련 학과 top-k
     try:
         selected_depart_list = dept_retriever.retrieve(query_embedding)
-        department_list = [dept["department_name"] for dept in selected_depart_list]
         logger.info(f"선택된 학과 리스트: {selected_depart_list}")
-        
+        print("DEBUG ▶ selected_depart_list:", selected_depart_list)
     except Exception as e:
         logger.error(f"retrieve 호출 중 오류 발생: {e}")
-        raise e
-    
-  
-    # 시각화 저장 경로 설정
-    graph_dir = global_args.save_path_txt
-    graph_name = f"recommendations_query{'_exp' if global_args.query_exp else '_no_exp'}_similar_top{global_args.top_k}"
-    graph_path = os.path.join(graph_dir, graph_name)
-    gt_department = "result_department_top1"
+        raise
 
+    # 4) 시각화 저장 경로 설정 (args.save_path_txt 기반)
+    graph_dir  = args.save_path_txt
+    graph_name = f"recommendations_query{'_exp' if args.query_exp else '_no_exp'}_similar_top{args.top_k}"
+    graph_path = os.path.join(graph_dir, graph_name)
     os.makedirs(graph_path, exist_ok=True)
-    
-    # 재귀적으로 후보 클래스 선택 후 전제/후제 그래프 생성
+    gt_department = "result_department_top1"
+    logger.info(f"그래프 저장 경로: {graph_path}")
+
+    # 5) 재귀적으로 후보 클래스 선택 후 전제/후제 그래프 생성
     G = recursive_top1_selection(
-            client,
-            db_handler,
-            query_embedding,
-            query,
-            selected_depart_list,
-            class_retriever,
-            graph_path,
-            args.required_dept_count,
-            gt_department
-        )
-    logger.info("Top-1 선택 결과: %s", G)
-    # 그래프 시각화 및 정렬
+        client,
+        db_handler,
+        query_embedding,
+        query,
+        selected_depart_list,
+        class_retriever,
+        graph_path,
+        required_dept_count=args.required_dept_count,
+        gt_department=gt_department
+    )
+    logger.info("Top-1 선택 결과 그래프 생성 완료")
+
+    # 6) 그래프 시각화 및 정렬
     all_results_json = visualize_and_sort_department_graphs(G, graph_path, idx, gt_department)
     logger.info(f"시각화 및 정렬 결과: {all_results_json}")
-    
+    print("DEBUG ▶ all_results_json:", all_results_json)
 
-    return {"message": f"추천 강좌 목록이 파일로 저장되었습니다."}
+    # 7) 최종 추천 강좌 목록으로 변환
+    flat_nodes = []
+    for dept_name, dept_data in all_results_json.items():
+        # dept_data는 {"nodes": [...], "edges": [...]}
+        flat_nodes.extend(dept_data.get("nodes", []))
 
+    recommended = [
+        {
+            "class_id": node["course_id"],      # all_results_json uses "course_id"
+            "name":     node["course_name"],
+            "department": node["department"],
+            "score":    node.get("score", None)  # score는 없을 수도 있으니 get()
+        }
+        for node in flat_nodes
+    ]
 
+    return {
+        "expanded_query": query_info,
+        "all_results_json": all_results_json
+    }
 
 class QueryRequest(BaseModel):
     query: str
@@ -252,16 +268,46 @@ def chat_get():
 def process_query_endpoint(request: QueryRequest):
     global global_args, client, db_handler
 
-    
-
     try:
         global_args.required_dept_count = request.required_dept_count
-        result = process_query(request.query, global_args,client, db_handler, idx=0)
-        return result
+        result = process_query(request.query, global_args, client, db_handler)
+        # ── 여기서 언패킹 ──
+        expanded = result["expanded_query"]
+        all_json = result["all_results_json"]
+        
+        lines = [f"{expanded}\n"]
+
+        # 🎓 all_results_json 풀어서
+        for dept_name, dept_data in all_json.items():
+            lines.append(f"=== {dept_name} ===")
+            for node in dept_data.get("nodes", []):
+                # 원하는 필드만 뽑아서, 중괄호 없이
+                course = node.get("course_name", "")
+                grade  = node.get("student_grade", "")
+                sem    = node.get("semester", "")
+                prereq = node.get("prerequisites", "")
+                lines.append(
+                    f"강좌명: {course}\n"
+                    f"{grade}학년 {sem}학기\n"
+                    f"선수과목: {prereq}"
+                )
+            lines.append("")  # 한 과목군 끝나고 빈 줄
+
+    
+        message_text = "\n".join(lines).strip()
+
+        return JSONResponse(
+            status_code=200,
+            content={"message": message_text}
+        )
+
     except Exception as e:
         logger.error(f"Error processing query: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-    
+        return JSONResponse(
+            status_code=500,
+            content={"message": {"error": str(e)}}
+        )
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=7996)

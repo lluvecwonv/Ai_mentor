@@ -88,6 +88,13 @@ conda activate open-webui
 cd ai_modules/llm_agent-main/
 uvicorn main:app --host 0.0.0.0 --port 8001
 ```
+## faiss_search-main (port: 7996)
+
+```bash
+conda activate open-webui
+cd ai_modules/curriculum-main/
+python main.py
+```
 ## faiss_search-main (port: 7997)
 
 ```bash
