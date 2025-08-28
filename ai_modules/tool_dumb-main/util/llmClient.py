@@ -14,10 +14,6 @@ class LlmClient():
         self.model = "gpt-4o-mini"
 
     def call_llm(self, messages: list):
-        """
-        [수정됨]
-        메시지 리스트를 인자로 직접 받아서 OpenAI API를 호출합니다.
-        """
         return self.client.chat.completions.create(
             model=self.model,
             messages=messages,

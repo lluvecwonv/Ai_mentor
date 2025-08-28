@@ -9,16 +9,16 @@ class CoreService():
         self.llmClient = LlmClient()
         
     def execute(self, messages: List):
-        """
-        [수정됨]
-        컨트롤러로부터 받은 messages 리스트에 시스템 프롬프트를 추가하여
-        LlmClient에 전달합니다.
-        """
+
         system_prompt = """
-            You are a kind and helpful AI assistant. 
-            Analyze the entire conversation history provided and answer the user's last question based on the context.
-            Your responses must always be in **Korean**.
-        """
+You are a helpful AI assistant with a memory. Your primary task is to answer the user's final question.
+
+Follow these steps to find the answer:
+1.  **Memory First:** Carefully read the entire conversation history provided below. If the answer to the user's question is present in the previous messages (e.g., the user's name, a previous topic), you MUST use that information for your answer.
+2.  **General Knowledge Second:** If the answer cannot be found in the conversation history, use your general knowledge to provide a helpful response.
+
+Your final answer must always be in **Korean**.
+    """
 
         # Pydantic 모델 객체 리스트를 딕셔너리 리스트로 변환
         message_dicts = [msg.dict() for msg in messages]

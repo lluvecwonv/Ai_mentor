@@ -16,7 +16,7 @@ class CoreService():
         self.prompt_tools = [
             {"tool_name": "FINISH", "tool_description": "If the user's question is already fully answered, reply with FINISH.", "api_key": "FINISH", "api_value": "<FINISH>", "api_url": "FINISH"},
             {"tool_name": "JBNU_SQL", "tool_description": "Accepts a natural‐language query about JBNU (colleges, departments, courses, professors) and returns the corresponding data. Do not send raw SQL.", "api_key": "query", "api_value": "<USER_QUESTION>", "api_url": "http://localhost:7999/agent"},
-            {"tool_name": "FALLBACK", "tool_description": "Generate an answer for general or non-JBNU questions using fallback logic.", "api_key": "query", "api_value": "<USER_QUESTION>", "api_url": "http://localhost:7998/agent"},
+            {"tool_name": "FALLBACK", "tool_description": "Use for general questions, or questions that can be answered from the conversation history (e.g., 'what did I just ask?', 'what is my name?').", "api_key": "query", "api_value": "<USER_QUESTION>", "api_url": "http://localhost:7998/agent"},
             {"tool_name": "VECTOR_SEARCH", "tool_description": "Recommends courses similar to a given course name based on vector similarity. The 'count' defaults to 5 if the user does not specify a number.", "api_key": "count, key", "api_value": "<INTEGER_DEFAULT_5>, <COURSE_NAME>", "api_url": "http://localhost:7997/search"},
             {"tool_name": "CURRICULUM_RECOMMEND", "tool_description": "Accepts a natural-language learning goal and desired number of courses/departments, then returns a personalized curriculum recommendation.", "api_key": "query", "api_value": "<USER_GOAL>", "api_url": "http://localhost:7996/chat"}
         ]
@@ -128,31 +128,26 @@ Now, create your plan. Respond strictly with a single JSON object.
     # --------------------------------------------------------------------------
     # 2. ReAct 에이전트 프롬프트 (여러 번 돌리는 경우에만 사용)
     # --------------------------------------------------------------------------
+
     REACT_AGENT_SYSTEM_PROMPT = """
-You are a sophisticated AI agent. Your primary goal is to select the most appropriate tool by analyzing the **ENTIRE conversation history** and the **Previous Tool Result**.
+You are a sophisticated AI agent that reasons step-by-step to answer a user's request.
+Based on the user's conversation and your previous actions and observations (your scratchpad), you must decide on the next single action to take.
 
-Your Task:
-Based on the full context, choose the next single tool to use.
+You have a maximum of 5 steps to gather all necessary information. You must use the "FINISH" tool by step 5.
 
-Guidelines:
-1.  **If `Previous Tool Result` is 'INIT', you must choose exactly one tool. Do NOT return the FINISH JSON.**
-2.  If the conversation goal is fully achieved, return the FINISH JSON object:
-    {{"tool_name":"FINISH", "api_key": "FINISH", "api_value": "FINISH", "reason":"The user's request is fully resolved."}}
-3.  Otherwise, return exactly one JSON object with the next tool to call:
-    •   **tool_name**: The exact name of the tool to use.
-    •   **api_key**: The key for the tool's API (e.g., "query", "key").
-    •   **api_value**: The value for the tool's API (e.g., "컴퓨터공학부", "데이터베이스").
-    •   **reason**: A brief rationale for this specific step.
 Available Tools:
 {tools}
 
-Conversation History:
-    {client_question}
+To decide your next action, you MUST respond with a single JSON object with the following keys:
+- "thought": Your reasoning for choosing the next tool. Briefly explain what you know and what you need to find out next.
+- "tool_name": The name of the tool to use. If you have gathered all necessary information, use "FINISH".
+- "api_key": The key(s) for the chosen tool's API.
+- "api_value": The value(s) for the chosen tool's API.
 
-Previous Tool Result:
-    {before_result}
+Analyze the scratchpad below and determine your next action.
 
-Respond strictly with a single JSON object.
+--- SCRATCHPAD ---
+{scratchpad}
 """
 
 
@@ -173,18 +168,17 @@ Respond strictly with a single JSON object.
             tool_name = routing_decision.get("tool_name")
             api_key = routing_decision.get("api_key")
             api_value = routing_decision.get("api_value")
-
+            api_body = self._build_api_body(api_key, api_value)
 
             tool_result_json = self._execute_single_tool(tool_name, api_key, api_value, trimmed_messages)
 
-            api_body_for_log = self._build_api_body(api_key, api_value)
 
             history_data = {
                 "steps": [
                     {
                         "step_number": 1,
                         "tool_name": tool_name,
-                        "tool_input": api_body_for_log,
+                        "tool_input": api_body,
                         "tool_response": tool_result_json.get('message') or json.dumps(tool_result_json),
                         "reason": routing_decision.get('reason', 'Single step execution')
                     }
@@ -247,7 +241,7 @@ Respond strictly with a single JSON object.
         url = self.tool_urls[tool_name]
 
         if tool_name == "FALLBACK":
-            body_to_send = {"messages": [msg.dict() for msg in messages]}
+            body_to_send = {"messages": [m.dict() if hasattr(m, 'dict') else m for m in messages]}
         else:
             body_to_send = self._build_api_body(api_key, api_value)
 
@@ -261,71 +255,86 @@ Respond strictly with a single JSON object.
             return {"error": str(e)}
 
     def _execute_multi_step_chain(self, messages: list):
-        """(내부 함수) ReAct 패턴을 사용하여 여러 단계를 거쳐 작업 수행"""
-        client_question = "".join([f"- {msg.role}: {msg.content}\n" for msg in messages])
+        print("\n--- Starting ReAct Chain with Scratchpad ---")
         
-        before_result = 'INIT'
+        # 1. 스크래치패드 초기화: 최초 대화 기록을 담습니다.
+        scratchpad = "Conversation History:\n"
+        scratchpad += "".join([f"- {msg.role}: {msg.content}\n" for msg in messages])
+        
         history_data = {"steps": []}
         step_number = 1
 
-        while True:
+
+        while step_number <= 5:
             print(f"\n--- ReAct Step {step_number} ---")
             
             system_prompt = self.REACT_AGENT_SYSTEM_PROMPT.format(
-                client_question=client_question,
-                before_result=before_result,
-                tools=json.dumps(self.prompt_tools, ensure_ascii=False, indent=2)
+                tools=json.dumps(self.prompt_tools, ensure_ascii=False, indent=2),
+                scratchpad=scratchpad
             )
-
-            request_messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": "Based on the context, what is the next single tool to use? Provide your response in the required JSON format."}
-            ]
+            request_messages = [{"role": "system", "content": system_prompt}]
             
-            resp = self.llmClient.call_llm(
-                request_messages,
-                json_mode=True
-            )
+            resp = self.llmClient.call_llm(request_messages, json_mode=True)
             raw = resp.choices[0].message.content.strip()
-
+            
             try:
                 data = json.loads(raw)
             except json.JSONDecodeError:
-                print("Error parsing LLM response. Breaking loop.")
-                history_data['error'] = 'Failed to parse LLM response'
+                print("Error: Could not parse LLM thought process. Finishing.")
                 break
 
-            tool_name = data.get("tool_name", "").strip()
+            thought = data.get("thought", "").strip()
+            tool_name = data.get("tool_name", "FINISH").strip()
             api_key = data.get("api_key")
             api_value = data.get("api_value")
-            # api_key와 api_value로 도구 서버가 받을 api_body 딕셔너리를 조립
-            api_body = {api_key: api_value} if api_key and api_value is not None else {}
             
-            reason = data.get("reason", "").strip()
+            print(f"Thought: {thought}")
 
-            print(f"LLM Decision: Use tool '{tool_name}' because '{reason}'")
+            scratchpad += f"\nStep {step_number}:\nThought: {thought}\n"
 
             if tool_name == "FINISH":
-                print("FINISH signal received. Chain complete.")
-                return history_data
+                print("FINISH signal received. Proceeding to final summarization.")
+                break
 
-            if tool_name not in self.tool_urls:
-                before_result = f"Error: Tool '{tool_name}' not found. Please choose from the available tools."
-                step_number += 1
-                continue
+            # 4. '행동' 기록 및 실행
+            api_body = self._build_api_body(api_key, api_value)
+            scratchpad += f"Action: Using tool '{tool_name}' with input {json.dumps(api_body, ensure_ascii=False)}\n"
+            print(f"Action: Using tool '{tool_name}' with input {api_body}")
 
             tool_result_json = self._execute_single_tool(tool_name, api_key, api_value, messages)
             tool_result = tool_result_json.get('message') or json.dumps(tool_result_json)
 
+            # 5. '관찰' 기록
+            scratchpad += f"Observation: {tool_result}\n"
+            print(f"Observation: {tool_result}")
+
             history_data["steps"].append({
                 "step_number": step_number, "tool_name": tool_name,
-                "tool_input": api_body, "tool_response": tool_result, "reason": reason
+                "tool_input": api_body, "tool_response": tool_result, "reason": thought
             })
-
-            before_result = tool_result
             step_number += 1
-            if step_number > 5: # 무한 루프 방지
-                print("Max steps reached. Forcing FINISH.")
-                break
+
+        # 6. 최종 요약 단계
+        print("\n--- Final Summarization Step ---")
+        summarizer_prompt = f"""
+        Based on the entire scratchpad provided below, generate a final, comprehensive answer for the user in Korean.
+        Synthesize all the observations into a natural, helpful response.
+
+        --- SCRATCHPAD ---
+        {scratchpad}
+        """
+        # FALLBACK 도구는 대화 기록을 받으므로, 요약 프롬프트를 새 대화처럼 구성
+        summarizer_messages = [{"role": "user", "content": summarizer_prompt}]
+        
+        # FALLBACK 도구 호출 (api_key, api_value는 None으로 전달)
+        final_response_json = self._execute_single_tool("FALLBACK", None, None, summarizer_messages)
+        final_answer = final_response_json.get("message", "답변을 종합하는 데 실패했습니다.")
+        
+        # 최종 답변을 history_data에 추가
+        history_data["steps"].append({
+            "step_number": "Final", "tool_name": "Summarizer(FALLBACK)",
+            "tool_input": "Final Scratchpad", "tool_response": final_answer, "reason": "Synthesizing final answer."
+        })
 
         return history_data
+            
