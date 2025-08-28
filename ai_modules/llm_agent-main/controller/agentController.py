@@ -185,9 +185,8 @@ def generate_graph_base64(sections: dict) -> str:
 
 @router.post("/agent")
 async def agent_api(request_body: RequestBody) -> JSONResponse:
-    last_user = next((m.content for m in reversed(request_body.messages)
-                      if m.role == "user"), "")
-    history = core_service.dynamic_tool_chain(last_user)
+
+    history = core_service.run_agent(request_body.messages)
     step = history["steps"][-1]
     raw  = step["tool_response"]
     final = raw
@@ -211,7 +210,8 @@ async def agent_api(request_body: RequestBody) -> JSONResponse:
                                 content={"error":"그래프 생성 실패","trace":tb})
 
 
-    # # 2) 이제 번역 단계: stream 여부 따라 분기
+
+    # 2) 이제 번역 단계: stream 여부 따라 분기
     # if request_body.stream:
     #     def event_gen():
     #         for chunk in llm_client.chat(final, stream=True):
@@ -226,6 +226,8 @@ async def agent_api(request_body: RequestBody) -> JSONResponse:
     # # 비스트리밍 모드
     # resp       = llm_client.chat(final, stream=False)
     # translated = resp.choices[0].message.content
+    # content    = f"{translated}{image_md}"
+    
     content    = f"{final}{image_md}"
 
     return JSONResponse({

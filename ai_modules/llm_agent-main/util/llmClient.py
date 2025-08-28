@@ -39,34 +39,21 @@ class LlmClient():
         self.client = OpenAI(api_key=api_key)
         self.model = "gpt-4o-mini"
 
-    def call_llm(self, system_prompt=None, user_prompt=None, assistant_prompt=None, stream: bool = False):
-        sys_c  = _to_openai_content(system_prompt)
-        usr_c  = _to_openai_content(user_prompt)
-        asst_c = _to_openai_content(assistant_prompt)
-
-        messages = []
-        if sys_c != "":
-            messages.append({"role": "system", "content": sys_c})
-        messages.append({"role": "user", "content": usr_c})
-        if asst_c != "":
-            messages.append({"role": "assistant", "content": asst_c})
-
-        # 디버그: 실제 타입 확인 (반드시 로그에 찍혀야 함)
-        print("[LlmClient.call_llm] messages types:",
-              [{"role": m["role"], "type": type(m["content"]).__name__} for m in messages])
-
+    # ★★★ 수정한 call_llm 함수 ★★★
+    def call_llm(self, messages: list, json_mode: bool = False) -> str:
+        """
+        메시지 리스트를 직접 받아 LLM을 호출합니다.
+        json_mode가 True이면 JSON 응답을 강제합니다.
+        """
+        extra_args = {}
+        if json_mode:
+            # JSON 모드는 GPT-4o, GPT-3.5-Turbo 최신 모델에서 지원됩니다.
+            extra_args["response_format"] = {"type": "json_object"}
+            
         return self.client.chat.completions.create(
             model=self.model,
             messages=messages,
-            stream=stream,
-        )
-
-    def chat(self, user_prompt, stream: bool = False):
-        system_prompt = (
-            "You are a professional translator.\n"
-            "Translate only the Korean text into clear, idiomatic English.\n"
-            "Preserve all existing markdown syntax (including image links) unchanged.\n"
-            "Do not add explanations or alter formatting beyond the translation."
+            **extra_args
         )
 
         sys_c = _to_openai_content(system_prompt)
