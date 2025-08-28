@@ -173,7 +173,6 @@ openai
 anthropic
 google-generativeai
 vertexai
-tiktoken 
 
 # Database
 pymongo
