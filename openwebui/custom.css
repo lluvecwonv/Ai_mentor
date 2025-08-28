@@ -1,0 +1,19 @@
+/* ===== 음성 입력 버튼 숨기기 ===== */
+button[aria-label="Start voice input"],
+[data-testid="voice-input-button"],
+svg.lucide.lucide-mic,
+svg.lucide-mic {
+  display: none !important;
+}
+
+/* ===== 캡처 / 파일 업로드 메뉴 숨기기 ===== */
+button[aria-label="+"],
+[data-testid="action-plus-button"] {
+  display: none !important;
+}
+
+/* 다른 변형 셀렉터 대비 */
+[role="menu"] [data-testid*="capture"],
+[role="menu"] [data-testid*="upload"] {
+  display: none !important;
+}

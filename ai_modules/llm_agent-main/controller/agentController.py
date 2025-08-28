@@ -198,7 +198,8 @@ async def agent_api(request_body: RequestBody) -> JSONResponse:
             parsed   = parse_course_sections_with_preamble(raw)
             final = parsed.pop("preamble", "")
             graph_b64 = generate_graph_base64(parsed)
-            image_md = f"data: ![Curriculum Graph](data:image/png;base64,{graph_b64})"
+            #image_md = f"data: ![Curriculum Graph](data:image/png;base64,{graph_b64})"
+            image_md = f"\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
             
 
             # final = f"{preamble}\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
@@ -207,6 +208,7 @@ async def agent_api(request_body: RequestBody) -> JSONResponse:
             print("🚨 /agent 예외:\n", tb)
             return JSONResponse(status_code=500,
                                 content={"error":"그래프 생성 실패","trace":tb})
+
 
 
     # 2) 이제 번역 단계: stream 여부 따라 분기
@@ -225,8 +227,9 @@ async def agent_api(request_body: RequestBody) -> JSONResponse:
     # resp       = llm_client.chat(final, stream=False)
     # translated = resp.choices[0].message.content
     # content    = f"{translated}{image_md}"
-
+    
     content    = f"{final}{image_md}"
+
     return JSONResponse({
         "choices": [{
             "index": 0,

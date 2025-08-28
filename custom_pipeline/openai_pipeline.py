@@ -18,11 +18,12 @@ class Pipeline:
         # self.id = "openai_pipeline"
         self.name = "OpenAI Pipeline"
         self.valves = self.Valves(
-            **{
-                "OPENAI_API_KEY": os.getenv(
-                    "OPENAI_API_KEY", "your-openai-api-key-here"
-                )
-            }
+            # **{
+            #     "OPENAI_API_KEY": os.getenv(
+            #         "OPENAI_API_KEY", "your-openai-api-key-here"
+            #     )
+            # }   
+            **{"OPENAI_API_KEY": os.getenv("OPENAI_API_KEY", "")}
         )
         pass
 
@@ -46,7 +47,7 @@ class Pipeline:
         print(user_message)
 
         OPENAI_API_KEY = self.valves.OPENAI_API_KEY
-        MODEL = "gpt-3.5-turbo"
+        MODEL = "gpt-4o-mini"
 
         headers = {}
         headers["Authorization"] = f"Bearer {OPENAI_API_KEY}"

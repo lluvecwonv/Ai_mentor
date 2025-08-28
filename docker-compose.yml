@@ -1,0 +1,109 @@
+services:
+  svc7996:
+    build:
+      context: ./ai_modules/curriculum-main
+      dockerfile: Dockerfile
+    container_name: svc7996
+    environment:
+      - PORT=7996
+      - TZ=Asia/Seoul
+    ports:
+      - "7996:7996"
+    restart: unless-stopped
+
+  svc7997:
+    build:
+      context: ./ai_modules/faiss_search-main
+      dockerfile: Dockerfile
+    container_name: svc7997
+    environment:
+      - PORT=7997
+      - TZ=Asia/Seoul
+    ports:
+      - "7997:7997"
+    restart: unless-stopped
+
+  llm_agent:
+    build:
+      context: ./ai_modules/llm_agent-main
+      dockerfile: Dockerfile
+    container_name: llm-agent
+    environment:
+      - PORT=8001
+      - TZ=Asia/Seoul
+    ports:
+      - "8001:8001"
+    depends_on:
+      - svc7996
+      - svc7997
+    restart: unless-stopped
+
+  svc7998:
+    build:
+      context: ./ai_modules/tool_dumb-main
+      dockerfile: Dockerfile
+    container_name: svc7998
+    environment:
+      - PORT=7998
+      - TZ=Asia/Seoul
+    ports:
+      - "7998:7998"
+    restart: unless-stopped
+
+  svc7999:
+    build:
+      context: ./ai_modules/tool_sql-main
+      dockerfile: Dockerfile
+    container_name: svc7999
+    environment:
+      - PORT=7999
+      - TZ=Asia/Seoul
+    ports:
+      - "7999:7999"
+    restart: unless-stopped
+
+# OpenwebUI
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui
+    ports:
+      - "8080:8080"
+    environment:
+      - TZ=Asia/Seoul
+      # - WEBUI_AUTH=False              # 로그인 완전 비활성화
+      - ENABLE_CODE_INTERPRETER=false # 코드 인터프리터 비활성화
+      - ENABLE_FILE_UPLOAD=false      # 파일 업로드 비활성화
+      - ENABLE_VOICE_INPUT=false      # 음성 인식 비활성화
+
+      # 로그인 관련 환경설정
+      - WEBUI_AUTH=True               # 로그인 사용(필수)
+      - ENABLE_LOGIN_FORM=True        # 로그인 폼 표시
+      - ENABLE_SIGNUP=True            # 회원가입 허용(일반 사용자가 직접 가입)
+      - DEFAULT_USER_ROLE=user        # 가입 즉시 일반 권한
+      # - ENABLE_PERSISTENT_CONFIG=False
+      
+    volumes:
+      - openwebui-data:/app/backend/data
+    restart: unless-stopped
+
+
+# Pipeline
+  pipelines:
+    image: ghcr.io/open-webui/pipelines:main
+    container_name: pipelines
+    ports:
+      - "9099:9099"
+    environment:
+      - TZ=Asia/Seoul
+      # ai_mentor.py가 읽을 값
+      - LLM_AGENT_URL=http://llm_agent:8001/agent
+      # openai_pipeline.py 쓸 경우에만
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./custom_pipeline:/app/pipelines
+    depends_on:
+      - llm_agent
+    restart: unless-stopped
+
+volumes:
+  openwebui-data:
