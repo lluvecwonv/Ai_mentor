@@ -7,7 +7,7 @@ class Pipeline:
     class Valves(BaseModel):
         # LLM 에이전트(8001번 포트) URL / 타임아웃 설정
         agent_url: str = "http://llm_agent:8001/agent"
-        timeout: float = 200.0
+        timeout: float = 500.0
 
     def __init__(self):
         # 파이프라인 이름 설정
