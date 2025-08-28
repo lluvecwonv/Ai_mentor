@@ -199,7 +199,8 @@ async def agent_api(request_body: RequestBody) -> JSONResponse:
             parsed   = parse_course_sections_with_preamble(raw)
             final = parsed.pop("preamble", "")
             graph_b64 = generate_graph_base64(parsed)
-            image_md = f"data: ![Curriculum Graph](data:image/png;base64,{graph_b64})"
+            #image_md = f"data: ![Curriculum Graph](data:image/png;base64,{graph_b64})"
+            image_md = f"\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
             
 
             # final = f"{preamble}\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
