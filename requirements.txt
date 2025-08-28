@@ -173,6 +173,7 @@ openai
 anthropic
 google-generativeai
 vertexai
+tiktoken 
 
 # Database
 pymongo
@@ -220,3 +221,4 @@ beautifulsoup4
 # Llama Index for RAG
 llama-index
 llama-index-llms-ollama
+
