@@ -44,15 +44,9 @@ class ResultSynthesizer:
             if self.llm_handler and hasattr(self.llm_handler, 'invoke_simple'):
                 # LangChain 방식
                 synthesized = await self.llm_handler.invoke_simple(synthesis_prompt)
-            elif self.llm_handler and hasattr(self.llm_handler, 'chat_completion'):
-                # 기본 chat completion 방식
-                messages = [{"role": "user", "content": synthesis_prompt}]
-                if asyncio.iscoroutinefunction(self.llm_handler.chat_completion):
-                    synthesized = await self.llm_handler.chat_completion(messages)
-                else:
-                    synthesized = await asyncio.get_event_loop().run_in_executor(
-                        None, lambda: self.llm_handler.chat_completion(messages)
-                    )
+            elif self.llm_handler and hasattr(self.llm_handler, 'chat'):
+                # 기본 chat 방식
+                synthesized = await self.llm_handler.chat(synthesis_prompt)
             else:
                 SynthesisLogger.log_handler_unavailable()
                 return found_results

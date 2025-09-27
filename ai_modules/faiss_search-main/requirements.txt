@@ -5,6 +5,8 @@ faiss-cpu
 pymysql
 numpy
 pydantic
-dotenv
+python-dotenv
 openai
 cryptography
+langchain
+langchain-openai

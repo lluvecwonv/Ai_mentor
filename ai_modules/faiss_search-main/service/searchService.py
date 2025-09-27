@@ -1,6 +1,7 @@
 import faiss
 import numpy as np
 import logging
+import requests
 from typing import Dict, List
 from util.langchainLlmClient import LangchainLlmClient
 from util.utils import load_prompt, extract_sql_from_response, prepare_vectors
@@ -27,7 +28,7 @@ class SearchService:
 
     def _get_filtered_courses(self, query_text: str) -> List[Dict]:
         """LLM SQL 생성 + 강의 필터링 (통합)"""
-      
+
         if not self.db_client or not self.db_client.ensure_connection():
             return []
 
@@ -37,6 +38,11 @@ class SearchService:
         response = self.llm_client.get_llm().invoke(full_prompt)
 
         sql_query = extract_sql_from_response(response.content)
+
+        # SQL이 None이면 빈 결과 반환 (재라우팅 비활성화로 순환 참조 방지)
+        if sql_query is None:
+            logger.warning(f"SQL 생성 실패, 빈 결과 반환: {query_text}")
+            return []
 
         # 2. SQL 실행
         with self.db_client.connection.cursor() as cursor:

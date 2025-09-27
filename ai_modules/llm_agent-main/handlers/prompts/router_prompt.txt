@@ -1,6 +1,10 @@
 # CRITICAL DEPARTMENT ALIAS ROUTER v4
 
-## � 핵심 규칙
+## 🚨 STRICT JSON RESPONSE REQUIREMENT
+**YOU MUST RESPOND ONLY WITH VALID JSON. NO EXPLANATION, NO COMMENTS, NO EXTRA TEXT.**
+**START YOUR RESPONSE WITH { AND END WITH }**
+
+## 🔥 핵심 규칙
 - "컴공" 등장 시 → 무조건 Department-Mapping 선행!
   - owner_hint = DEPARTMENT_MAPPING+SQL_QUERY
   - complexity = heavy
@@ -12,23 +16,44 @@
 - Curriculum-Agent: 융합/복수전공 커리큘럼 설계
 - LLM-Fallback-Agent: 일반 대화, 인사, 잡담
 
+[CRITICAL 과목 추천 vs 융합 커리큘럼 구분]
+- 과목/강의/수업 관련 키워드 → FAISS Search (무조건):
+  "과목 추천", "강의 추천", "수업 추천", "들을 수 있는 과목",
+  "추천해줘", "~관련 수업", "~관련 강의", "~과목", "~수업",
+  "~와 관련된 수업", "~에 대한 과목", "배울 수 있는 과목"
+  → FAISS_SEARCH (과목 내용 검색)
+
+- 융합 커리큘럼 키워드 → Curriculum Agent (무조건):
+  "융합", "복수전공", "부전공", "다른 학과", "커리큘럼 설계",
+  "융합 커리큘럼", "다전공", "학습 경로", "로드맵", "진로 설계"
+  → CURRICULUM_PLAN (커리큘럼 설계)
+
 [라우팅 우선순위]
-1) 학과 별칭(컴공/전전/소웨공 등) → Department-Mapping 선행
+1) 과목/강의/수업 추천 키워드 → FAISS (무조건)
+2) 융합/복수전공 커리큘럼 키워드 → Curriculum (무조건 medium)
+3) 학과 별칭(컴공/전전/소웨공 등) → Department-Mapping 선행
    - 교수 쿼리: Mapping → SQL
    - 과목 내용: Mapping → FAISS
    - 학과명만: Mapping
-2) 교수 언급(사람 이름+교수/Prof) → SQL (단, 학과별칭 없을 때)
-3) 학과/대학 행정정보 → SQL
-4) 학년/학기/분반 조건 → SQL
-5) 강좌 내용/주제 검색 → FAISS
-6) 융합/복수전공 커리큘럼 설계 → Curriculum (단일 전공은 SQL)
-7) 일반 대화 → LLM-Fallback
+4) 교수 언급(사람 이름+교수/Prof) → SQL (단, 학과별칭 없을 때)
+5) 학과/대학 행정정보 → SQL
+6) 학년/학기/분반 조건 → SQL
+7) 강좌 내용/주제 검색 → FAISS
+8) 일반 대화 → LLM-Fallback
 
 [복잡도 정의]
-- light: 인사/잡담 → 1단계 LLM-Fallback
+- light: 순수 일반 대화/인사/잡담 (학교/학과 정보가 전혀 필요없는 경우만!) → LLM-Fallback
+  예시: "안녕하세요", "고마워", "날씨어때", "기분좋네"
 - medium: 단일 에이전트 1개 실행 → plan 길이 1
+  예시: 과목검색, 교수검색, 학과정보, 단일전공 정보
 - heavy: 다중 에이전트 실행 → plan 길이 ≥2
+  예시: 학과별칭+검색, 융합커리큘럼, 복합조건 검색
 - 커리큘럼 설계: 무조건 medium
+
+[CRITICAL LIGHT 조건]
+- 학교/학과/과목/교수와 관련된 모든 질문은 light가 아님!
+- "컴퓨터공학과", "과목", "수업", "강의", "교수", "전공" 등 키워드가 있으면 무조건 medium 이상
+- light는 오직 순수 잡담/인사만!
 
 [출력 스키마]
 {
@@ -82,3 +107,34 @@ Q: "컴공 교수님 누구 있어?"
     "step_2": ["step_1"]
   }
 }
+
+Q: "컴퓨터공학과 과목 추천해주세요"
+{
+  "complexity": "medium",
+  "owner_hint": "FAISS_SEARCH",
+  "category": "course_lookup",
+  "question_type": "CourseRecommendation",
+  "data_source": "DB",
+  "reasoning": "과목 추천 키워드 → FAISS 검색",
+  "plan": [
+    {"step": 1, "agent": "FAISS-Search-Agent", "goal": "컴퓨터공학과 과목 추천"}
+  ]
+}
+
+Q: "융합 커리큘럼 설계해주세요"
+{
+  "complexity": "medium",
+  "owner_hint": "CURRICULUM_PLAN",
+  "category": "curriculum_design",
+  "question_type": "CurriculumDesign",
+  "data_source": "Mixed",
+  "reasoning": "융합 키워드 → Curriculum Agent",
+  "plan": [
+    {"step": 1, "agent": "Curriculum-Agent", "goal": "융합 커리큘럼 설계"}
+  ]
+}
+
+## 🚨 FINAL REMINDER: RESPOND ONLY WITH JSON
+Query: {query}
+
+**CRITICAL**: Your response must be ONLY valid JSON following the schema above. NO explanations, NO comments. Start with { and end with }.

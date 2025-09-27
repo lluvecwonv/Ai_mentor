@@ -40,6 +40,7 @@ class RoutingNodes(BaseNode):
                 **state,
                 "route": complexity,
                 "complexity": complexity,
+                "owner_hint": analysis_result.get('owner_hint', ''),
                 "routing_reason": analysis_result.get('reasoning', ''),
                 "plan": plan,
                 "expanded_query": expanded_query,

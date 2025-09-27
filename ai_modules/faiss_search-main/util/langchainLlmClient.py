@@ -19,7 +19,7 @@ class LangchainLlmClient:
             api_key=self.api_key
         )
         self.embeddings = OpenAIEmbeddings(
-            model="text-embedding-ada-002",
+            model="text-embedding-3-small",
             api_key=self.api_key
         )
 

@@ -1,6 +1,6 @@
 """
 SQL Core Service Package
 """
-from .sqlCoreService import SqlCoreService
+from .sqlCoreService import SqlService, sql_service
 
-__all__ = ['SqlCoreService']
+__all__ = ['SqlService', 'sql_service']

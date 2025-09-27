@@ -23,16 +23,22 @@ async def analyze_routing_async(llm_client, query: str, contextual_prompt: str =
     if contextual_prompt:
         router_prompt = f"{contextual_prompt}\n\n{router_prompt}"
 
-    response = await asyncio.get_event_loop().run_in_executor(
-        None,
-        lambda: llm_client.chat_completion(
-            messages=[{"role": "user", "content": router_prompt}],
-            model="gpt-4o-mini"
-        )
-    )
+    response = await llm_client.chat(router_prompt)
+    logger.info(f"🔍 [DEBUG] 라우터 응답: {response}")
 
-    data = extract_json_block(response) or {}
+    data = extract_json_block(response)
+
+    # JSON 파싱 실패 시 재시도
+    if not data:
+        logger.warning("🔄 JSON 파싱 실패, 재시도 중...")
+        retry_prompt = router_prompt + "\n\n**CRITICAL: Your previous response was not valid JSON. Please respond ONLY with JSON starting with { and ending with }.**"
+        response = await llm_client.chat(retry_prompt, json_mode=True)
+        logger.info(f"🔍 [RETRY] 라우터 재시도 응답: {response}")
+        data = extract_json_block(response) or {}
+
+    logger.info(f"🔍 [DEBUG] 추출된 JSON: {data}")
     decision = to_router_decision(data)
+    logger.info(f"🔍 [DEBUG] 최종 결정: {decision}")
 
     logger.info(f"🎯 라우팅 결정: {decision.get('complexity')}")
     return decision
@@ -49,13 +55,7 @@ async def expand_query_async(llm_client, query: str, history_context: str = None
         expansion_prompt = expansion_prompt.replace('{query}',
             f"\n\n### 이전 대화:\n{history_context}\n\n### 현재 질문:\n{query}")
 
-    response = await asyncio.get_event_loop().run_in_executor(
-        None,
-        lambda: llm_client.chat_completion(
-            messages=[{"role": "user", "content": expansion_prompt}],
-            model="gpt-4o-mini"
-        )
-    )
+    response = await llm_client.chat(expansion_prompt)
 
     # 결과 파싱
     expansion_data = extract_json_block(response) or {}

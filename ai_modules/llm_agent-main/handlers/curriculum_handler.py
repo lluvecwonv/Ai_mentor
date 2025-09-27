@@ -16,7 +16,25 @@ class CurriculumHandler(BaseQueryHandler):
 
     def __init__(self, base_url: str = None):
         self.base_url = base_url or settings.curriculum_service_url.replace('/chat', '')
-        self._health_status = False
+        # 기본적으로 사용 가능하다고 가정하고, 필요시 워밍업에서 검증
+        self._health_status = True
+
+        # 기본적인 동기 검증
+        try:
+            import os
+            # API 키 확인 (curriculum 서비스가 OpenAI를 사용할 수 있는지)
+            if not os.getenv("OPENAI_API_KEY"):
+                logger.warning("⚠️ OPENAI_API_KEY가 설정되지 않았습니다")
+                # API 키가 없어도 curriculum 서비스 자체는 작동할 수 있음
+
+            # URL 형식 검증
+            if not self.base_url or not self.base_url.startswith('http'):
+                logger.warning(f"⚠️ 잘못된 curriculum 서비스 URL: {self.base_url}")
+                self._health_status = False
+
+        except Exception as e:
+            logger.warning(f"⚠️ Curriculum 핸들러 초기화 중 경고: {e}")
+            # 경고만 하고 계속 진행
 
     async def warmup(self) -> None:
         """커리큘럼 서비스 워밍업"""

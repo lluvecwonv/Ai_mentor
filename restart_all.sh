@@ -34,12 +34,12 @@ log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# Docker Compose 명령어 확인
+# Docker Compose 명령어 확인 (v2 우선)
 get_compose_cmd() {
-    if command -v docker-compose >/dev/null 2>&1; then
-        echo "docker-compose"
-    elif docker compose version >/dev/null 2>&1; then
+    if docker compose version >/dev/null 2>&1; then
         echo "docker compose"
+    elif command -v docker-compose >/dev/null 2>&1; then
+        echo "docker-compose"
     else
         log_error "Docker Compose를 찾을 수 없습니다."
         exit 1
@@ -137,19 +137,23 @@ restart_services() {
     # 환경변수 로드
     load_env
 
-    # 기존 서비스 중지
+    # 기존 서비스 중지 및 정리
     if [[ "$CLEAN" == true ]]; then
         log_info "기존 컨테이너와 볼륨 정리 중..."
-        $compose_cmd down --volumes --remove-orphans
+        $compose_cmd down --volumes --remove-orphans 2>/dev/null || true
+
+        # 프로젝트별 컨테이너만 정리 (안전하게)
+        log_info "프로젝트 컨테이너 정리 중..."
+        docker container prune -f --filter "label=com.docker.compose.project=aimentor_edit" 2>/dev/null || true
     else
         log_info "기존 서비스 중지 중..."
-        $compose_cmd down
+        $compose_cmd down --remove-orphans 2>/dev/null || true
     fi
 
     # 서비스 시작
     if [[ "$REBUILD" == true ]]; then
         log_info "이미지 재빌드 후 서비스 시작..."
-        $compose_cmd up -d --build
+        $compose_cmd up -d --build --force-recreate
     else
         log_info "서비스 시작 중..."
         $compose_cmd up -d

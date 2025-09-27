@@ -89,13 +89,12 @@ class LangGraphApp:
                         "medium_sql": "medium_sql",
                         "medium_vector": "medium_vector",
                         "medium_curriculum": "medium_curriculum",
-                        "medium_agent": "medium_agent",
                         "heavy_sequential": "heavy_sequential"
                     }
                 )
 
         # 모든 처리 노드 → synthesis → finalize → END
-        for node in ["light", "medium_sql", "medium_vector", "medium_curriculum", "medium_agent", "heavy_sequential"]:
+        for node in ["light", "medium_sql", "medium_vector", "medium_curriculum", "heavy_sequential"]:
             graph.add_edge(node, "synthesis")
 
         graph.add_edge("synthesis", "finalize")

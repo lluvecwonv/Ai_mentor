@@ -20,6 +20,16 @@ async def execute_sql(request: SqlRequest):
         logger.error(f"SQL 실행 실패: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.post("/agent")
+async def execute_sql_agent(request: SqlRequest):
+    """SQL 에이전트 엔드포인트 (agent 호출용)"""
+    try:
+        result = sql_service.execute(request.query)
+        return {"result": result}
+    except Exception as e:
+        logger.error(f"SQL 실행 실패: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @router.get("/health")
 async def health_check():
     """헬스 체크 엔드포인트"""

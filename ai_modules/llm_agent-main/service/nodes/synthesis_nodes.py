@@ -26,10 +26,13 @@ class SynthesisNodes(BaseNode):
 
                 # 결과 수집
                 results = []
+                logger.info(f"🔍 [DEBUG] 슬롯 내용: {slots}")
                 for key, value in slots.items():
                     if value and str(value).strip():
                         results.append(str(value))
+                        logger.info(f"✅ [DEBUG] 슬롯 {key}에서 결과 발견: {len(str(value))}자")
 
+                logger.info(f"📊 [DEBUG] 총 {len(results)}개 결과 수집됨")
                 # 결과가 없으면 기본 메시지
                 if not results:
                     final_result = "죄송합니다. 요청하신 정보를 찾지 못했습니다."

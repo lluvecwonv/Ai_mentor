@@ -4,6 +4,7 @@ import pickle
 import numpy as np
 import faiss
 from typing import Dict, Any, List, Optional
+from langchain_openai import OpenAIEmbeddings
 
 def load_config() -> Dict[str, str]:
     """JSON 설정 파일에서 키워드 매핑 로드"""
@@ -44,12 +45,22 @@ def load_embeddings() -> Optional[np.ndarray]:
 def build_faiss_index(embeddings: np.ndarray) -> Optional[faiss.Index]:
     """FAISS 인덱스 구축"""
     if embeddings is not None:
+        print(f"✅ 저장된 임베딩 차원: {embeddings.shape}")
         index = faiss.IndexFlatIP(embeddings.shape[1])
         index.add(embeddings.astype('float32'))
         return index
     return None
 
 def get_query_embedding(query: str) -> Optional[np.ndarray]:
-    """쿼리 임베딩 생성 (실제로는 의미적 임베딩)"""
-    # 여기서는 간단한 예시, 실제로는 의미적 임베딩 사용
-    return np.random.random(128).astype('float32')
+    """쿼리 임베딩 생성 (OpenAI 임베딩 사용)"""
+    # OpenAI 임베딩 모델 초기화 - 저장된 데이터와 일치하는 3072 차원 모델 사용
+    embeddings = OpenAIEmbeddings(
+        model="text-embedding-3-large",
+        api_key=os.getenv("OPENAI_API_KEY")
+    )
+
+    # 쿼리 임베딩 생성
+    query_embedding = embeddings.embed_query(query)
+    result = np.array(query_embedding, dtype='float32')
+    print(f"✅ 쿼리 임베딩 차원: {result.shape}")
+    return result

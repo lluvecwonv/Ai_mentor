@@ -15,8 +15,8 @@ from controller.agentController import router as agent_router
 from service.core.mentor_service import HybridMentorService
 
 # 로그 디렉토리 확인 및 생성
-log_dir = Path("/home/dbs0510/AiMentor_edit/ai_modules/llm_agent-main/logs")
-log_dir.mkdir(exist_ok=True)
+log_dir = Path("/app/logs")
+log_dir.mkdir(parents=True, exist_ok=True)
 
 # 커스텀 로깅 설정 적용
 logging.config.dictConfig(LOGGING_CONFIG)
@@ -48,6 +48,7 @@ async def lifespan(_: FastAPI):
     else:
         logger.warning(f"⚠️ 워밍업 부분 실패: {warmup_status}")
 
+    yield  # 서버 실행 중
 
     # Shutdown
     logger.info("서버 종료")
@@ -77,6 +78,7 @@ app.include_router(agent_router, tags=["AI Mentor"])
 
 # OpenAI API 호환 엔드포인트
 @app.get("/v1/models")
+@app.get("/models")
 async def get_models():
     """OpenAI API 호환 모델 목록"""
     return {
@@ -90,6 +92,7 @@ async def get_models():
 
 
 @app.post("/v1/chat/completions")
+@app.post("/chat/completions")
 async def chat_completions(request: Request):
     """OpenAI API 호환 채팅 완성"""
     try:
@@ -106,6 +109,12 @@ async def chat_completions(request: Request):
         global global_mentor_service
         response = await global_mentor_service.run_agent(user_message.strip())
 
+        # 응답이 이미 dict 형태인지 확인하고 content만 추출
+        if isinstance(response, dict) and 'choices' in response:
+            content = response['choices'][0]['message']['content']
+        else:
+            content = str(response)
+
         # OpenAI 형식 응답
         return {
             "id": "chatcmpl-ai-mentor",
@@ -113,7 +122,7 @@ async def chat_completions(request: Request):
             "model": "ai-mentor",
             "choices": [{
                 "index": 0,
-                "message": {"role": "assistant", "content": str(response)},
+                "message": {"role": "assistant", "content": content},
                 "finish_reason": "stop"
             }]
         }

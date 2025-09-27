@@ -51,4 +51,8 @@ class SqlService:
         return sql
 
 
+# 서비스 인스턴스 생성
+sql_service = SqlService()
+
+
 

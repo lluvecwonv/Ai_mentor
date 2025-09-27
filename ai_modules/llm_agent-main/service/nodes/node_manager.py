@@ -60,15 +60,27 @@ class NodeManager:
         def route_by_complexity(state: dict) -> str:
             """복잡도에 따른 세부 라우팅"""
             complexity = state.get("route", "light")  # 기본값을 light로 변경
+            owner_hint = state.get("owner_hint", "").upper()
             plan = state.get("plan", []) or []
 
             # Light 복잡도
             if complexity == "light":
                 return "light"
 
-            # Medium 복잡도 - plan 기반으로 세부 분기
+            # Medium 복잡도 - owner_hint 우선, plan 보조
             elif complexity == "medium":
-                if plan and len(plan) > 0:
+                # 1. owner_hint 우선 검사
+                if "FAISS_SEARCH" in owner_hint or "VECTOR" in owner_hint:
+                    return "medium_vector"
+                elif "SQL_QUERY" in owner_hint:
+                    return "medium_sql"
+                elif "CURRICULUM" in owner_hint:
+                    return "medium_curriculum"
+                elif "DEPARTMENT_MAPPING" in owner_hint or "MAPPING" in owner_hint:
+                    return "medium_department"
+
+                # 2. plan 기반 검사 (owner_hint가 명확하지 않을 때)
+                elif plan and len(plan) > 0:
                     first_agent = plan[0].get("agent", "").upper()
                     if "SQL" in first_agent:
                         return "medium_sql"
@@ -81,7 +93,7 @@ class NodeManager:
                     else:
                         return "light"  # 특별한 처리가 필요없으면 light로
                 else:
-                    return "light"  # plan이 없으면 light로
+                    return "light"  # owner_hint와 plan 모두 없으면 light로
 
             # Heavy 복잡도
             elif complexity == "heavy":

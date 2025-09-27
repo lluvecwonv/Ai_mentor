@@ -9,7 +9,7 @@ class VectorSearchHandler(BaseQueryHandler):
     def __init__(self):
         super().__init__()
         self.http_client = httpx.AsyncClient(timeout=30.0)
-        self.faiss_service_url = f"{settings.search_service_url}-sql-filter"
+        self.faiss_service_url = settings.search_service_url
 
     def is_available(self) -> bool:
         return self.http_client is not None

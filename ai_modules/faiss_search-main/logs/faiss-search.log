@@ -1670,3 +1670,127 @@
 2025-09-27 02:30:52 | INFO | controller.searchController |   2. 이산수학 (컴퓨터인공지능학부) - 유사도: 0.049
 2025-09-27 02:30:52 | INFO | controller.searchController |   3. 컴퓨터공학총론 (컴퓨터인공지능학부) - 유사도: 0.030
 2025-09-27 02:30:52 | INFO | controller.searchController |   ... 총 5개 결과
+2025-09-28 03:31:20 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 03:31:20 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 03:31:20 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 03:47:09 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 03:47:09 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 03:47:09 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 03:56:34 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 03:56:34 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 03:56:34 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 03:57:24 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 03:57:24 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 03:57:24 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 04:05:40 | INFO | service.searchService | 검색 시작: '안녕하세요 테스트입니다'
+2025-09-28 04:05:41 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:05:41 | INFO | service.searchService | SQL 생성됨: None
+2025-09-28 04:06:51 | INFO | service.searchService | 검색 시작: '컴퓨터공학과 커리큘럼 추천해주세요'
+2025-09-28 04:06:53 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:06:53 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-28 04:06:53 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:07:40 | INFO | service.searchService | 검색 시작: '컴퓨터공학과 추천해줘'
+2025-09-28 04:07:42 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:07:42 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-28 04:07:42 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:08:23 | INFO | service.searchService | 검색 시작: '컴퓨터공학과 커리큘럼 추천해주세요'
+2025-09-28 04:08:24 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:08:24 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-28 04:08:24 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:09:27 | INFO | service.searchService | 검색 시작: '컴퓨터공학과에서 들을 수 있는 과목을 추천해줘'
+2025-09-28 04:09:29 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:09:29 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-28 04:09:29 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:12:16 | INFO | service.searchService | 검색 시작: '컴퓨터공학과 과목 추천해주세요'
+2025-09-28 04:12:18 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:12:18 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-28 04:12:18 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:12:49 | INFO | service.searchService | 검색 시작: '융합 커리큘럼 설계해주세요'
+2025-09-28 04:12:49 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:12:49 | INFO | service.searchService | SQL 생성됨: None
+2025-09-28 04:16:02 | INFO | service.searchService | 검색 시작: '융합 커리큘럼 설계해주세요'
+2025-09-28 04:16:03 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:16:03 | INFO | service.searchService | SQL 생성됨: None
+2025-09-28 04:18:17 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 04:18:17 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 04:18:17 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 04:18:33 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 04:18:33 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 04:18:33 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 04:18:48 | INFO | service.searchService | 검색 시작: '안녕하세요'
+2025-09-28 04:18:49 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:18:49 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 안녕하세요
+2025-09-28 04:18:49 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:19:49 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 04:19:49 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 04:19:49 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 04:20:03 | INFO | service.searchService | 검색 시작: '오늘 날씨가 좋네요'
+2025-09-28 04:20:04 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:20:04 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 오늘 날씨가 좋네요
+2025-09-28 04:20:10 | INFO | service.searchService | llm_agent 재라우팅 성공
+2025-09-28 04:20:10 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:20:38 | INFO | service.searchService | 검색 시작: '컴퓨터공학과 추천 과목'
+2025-09-28 04:20:40 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:20:40 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-28 04:20:40 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:24:41 | INFO | service.searchService | 검색 시작: '안녕하세요'
+2025-09-28 04:24:42 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:24:42 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 안녕하세요
+2025-09-28 04:24:47 | INFO | service.searchService | llm_agent 재라우팅 성공
+2025-09-28 04:24:47 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:25:01 | INFO | service.searchService | 검색 시작: '융합 커리큘럼 설계해주세요'
+2025-09-28 04:25:02 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:25:02 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 융합 커리큘럼 설계해주세요
+2025-09-28 04:25:22 | INFO | service.searchService | llm_agent 재라우팅 성공
+2025-09-28 04:25:22 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:26:28 | INFO | service.searchService | 검색 시작: '데이터베이스 관련 과목 추천해주세요'
+2025-09-28 04:26:29 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:26:29 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 데이터베이스 관련 과목 추천해주세요
+2025-09-28 04:26:59 | INFO | service.searchService | 검색 시작: '데이터베이스 관련 과목 추천해주세요'
+2025-09-28 04:27:00 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:27:00 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 데이터베이스 관련 과목 추천해주세요
+2025-09-28 04:27:30 | INFO | service.searchService | 검색 시작: '데이터베이스 관련 과목 추천해주세요'
+2025-09-28 04:27:31 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:27:31 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 데이터베이스 관련 과목 추천해주세요
+2025-09-28 04:28:01 | INFO | service.searchService | 검색 시작: '데이터베이스 관련 과목 추천해주세요'
+2025-09-28 04:28:01 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:28:01 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 데이터베이스 관련 과목 추천해주세요
+2025-09-28 04:28:10 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 04:28:10 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 04:28:10 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 04:28:35 | INFO | service.searchService | 검색 시작: '데이터베이스 관련 과목 추천해주세요'
+2025-09-28 04:28:36 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:28:36 | WARNING | service.searchService | SQL 생성 실패, llm_agent로 재라우팅: 데이터베이스 관련 과목 추천해주세요
+2025-09-28 04:28:47 | INFO | service.searchService | llm_agent 재라우팅 성공
+2025-09-28 04:28:47 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:29:35 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 04:29:35 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 04:29:35 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 04:29:49 | INFO | service.searchService | 검색 시작: '데이터베이스 관련 과목'
+2025-09-28 04:29:49 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:29:49 | WARNING | service.searchService | SQL 생성 실패, 빈 결과 반환: 데이터베이스 관련 과목
+2025-09-28 04:29:49 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:34:51 | INFO | service.searchService | 검색 시작: '컴퓨터공학과 과목 추천해주세요'
+2025-09-28 04:34:53 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:34:53 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-28 04:34:53 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-28 04:48:28 | INFO | service.searchService | 검색 시작: '컴퓨터공학과 과목 추천해주세요'
+2025-09-28 04:48:31 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 04:48:31 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-28 04:48:31 | INFO | service.searchService | 검색 완료: 0개 결과

@@ -5,7 +5,7 @@ Medium 복잡도 노드들
 
 import logging
 from typing import Dict, Any, Optional
-from .base_node import BaseNode, NodeTimer
+from ..base_node import BaseNode, NodeTimer
 
 logger = logging.getLogger(__name__)
 

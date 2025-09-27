@@ -9,9 +9,9 @@ from .base_node import BaseNode, NodeTimer
 # Node categories
 from .routing_nodes import RoutingNodes
 from .synthesis_nodes import SynthesisNodes
-from .light_nodes import LightNodes
-from .medium_nodes import MediumNodes
-from .heavy_nodes import HeavyNodes
+from .query_route.light_nodes import LightNodes
+from .query_route.medium_nodes import MediumNodes
+from .query_route.heavy_nodes import HeavyNodes
 from .utility_nodes import UtilityNodes
 
 # Node manager

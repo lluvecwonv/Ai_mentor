@@ -9,6 +9,9 @@ services:
     environment:
       - PORT=7996
       - TZ=Asia/Seoul
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DB_HOST=${DB_HOST}
+      - DB_PASSWORD=${DB_PASSWORD}
     ports:
       - "7996:7996"
     restart: unless-stopped
@@ -43,6 +46,7 @@ services:
       - PORT=8001
       - TZ=Asia/Seoul
       - PYTHONPATH=/app:/app/tool_sql-main
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       # Downstream service URLs (override defaults to correct Docker DNS names)
       - SQL_SERVICE_URL=http://tool-sql:7999/api/v1/agent
       - SEARCH_SERVICE_URL=http://vector-search:7997/search
@@ -67,12 +71,13 @@ services:
 
   llm-client:
     build:
-      context: ./ai_modules/tool_dumb-main
+      context: ./ai_modules/tool_sql-main
       dockerfile: Dockerfile
     container_name: llm-client
     environment:
       - PORT=7998
       - TZ=Asia/Seoul
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - "7998:7998"
     restart: unless-stopped
@@ -85,6 +90,7 @@ services:
     environment:
       - PORT=7999
       - TZ=Asia/Seoul
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - DB_HOST=${DB_HOST}
       - DB_PORT=3313
       - DB_USER=root
@@ -103,6 +109,7 @@ services:
     environment:
       - PORT=8000
       - TZ=Asia/Seoul
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - "8000:8000"
     volumes:
@@ -139,6 +146,7 @@ services:
       - ENABLE_LOGIN=false
       - ENABLE_SIGNUP=false
       - ALLOW_ANONYMOUS=true
+      - DISABLE_AUTH=true
       - BYPASS_MODEL_VALIDATION=true
       - DEFAULT_USER_ROLE=user
       - OPENAI_API_BASE_URL=http://llm-agent:8001

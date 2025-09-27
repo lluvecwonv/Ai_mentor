@@ -124,7 +124,7 @@ LOGGING_CONFIG = {
             "class": "logging.FileHandler",
             "level": "DEBUG",  # DEBUG 이상 파일 기록
             "formatter": "default",
-            "filename": "/home/dbs0510/AiMentor_edit/ai_modules/llm_agent-main/logs/llm-agent.log",
+            "filename": "/app/logs/llm-agent.log",
             "mode": "a",
             "encoding": "utf-8",
         },
