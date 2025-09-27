@@ -99,6 +99,20 @@ FROM jbnu_class_gpt
 WHERE professor LIKE '%김평%'
 ```
 
+질문: "오일석 교수님은 무엇을 가르쳐?"
+쿼리:
+```sql
+SELECT name, course_code, professor, credits, prerequisite, target_grade,
+       schedule, location, delivery_mode, department_full_name, gpt_description
+FROM jbnu_class_gpt
+WHERE professor LIKE '%오일석%'
+```
+
+**교수명 검색 규칙:**
+- 사용자가 말한 교수 이름을 정확히 그대로 사용하세요
+- 불필요한 영문 변환이나 부분 이름 추측 금지
+- 단순하게 LIKE '%사용자입력이름%' 만 사용
+
 질문: "송현제 교수님 데이터마이닝 수업 어디서 열려?"
 쿼리:
 ```sql

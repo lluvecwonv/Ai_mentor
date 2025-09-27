@@ -27,7 +27,7 @@ class SqlQueryHandler(BaseQueryHandler):
 
             if response.status_code == 200:
                 result = response.json()
-                return result.get("message", "조회 결과를 가져올 수 없습니다.")
+                return result.get("result", result.get("message", "조회 결과를 가져올 수 없습니다."))
             else:
                 return f"데이터베이스 조회 실패 (상태코드: {response.status_code})"
 

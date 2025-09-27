@@ -27,6 +27,14 @@ class SynthesisNodes(BaseNode):
                 # 결과 수집
                 results = []
                 logger.info(f"🔍 [DEBUG] 슬롯 내용: {slots}")
+
+                # final_result 확인 (Medium 노드에서 사용)
+                final_result_from_state = state.get("final_result")
+                if final_result_from_state and str(final_result_from_state).strip():
+                    results.append(str(final_result_from_state))
+                    logger.info(f"✅ [DEBUG] final_result에서 결과 발견: {len(str(final_result_from_state))}자")
+
+                # slots에서 추가 결과 수집
                 for key, value in slots.items():
                     if value and str(value).strip():
                         results.append(str(value))
