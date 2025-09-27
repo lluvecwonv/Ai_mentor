@@ -22,19 +22,23 @@ def load_config() -> Dict[str, str]:
 def load_data() -> List[Dict[str, Any]]:
     """PKL 파일에서 학과 데이터 로드"""
     try:
-        with open("/app/data/goal_Dataset.pkl", 'rb') as f:
+        data_path = os.path.join(os.path.dirname(__file__), "../data/goal_Dataset.pkl")
+        with open(data_path, 'rb') as f:
             data = pickle.load(f)
         return data.get('lookup_index', [])
-    except:
+    except Exception as e:
+        print(f"데이터 로드 중 오류 발생: {str(e)}")
         return []
 
 def load_embeddings() -> Optional[np.ndarray]:
     """실제 임베딩 데이터 로드"""
     try:
-        with open("/app/data/goal_Dataset.pkl", 'rb') as f:
+        data_path = os.path.join(os.path.dirname(__file__), "../data/goal_Dataset.pkl")
+        with open(data_path, 'rb') as f:
             data = pickle.load(f)
         return data.get('embeddings')
-    except:
+    except Exception as e:
+        print(f"임베딩 로드 중 오류 발생: {str(e)}")
         return None
 
 def build_faiss_index(embeddings: np.ndarray) -> Optional[faiss.Index]:
