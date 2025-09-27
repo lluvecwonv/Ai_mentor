@@ -205,16 +205,6 @@ def _error_response(status_code: int, error_code: str, message: str) -> JSONResp
 
 
 # === 헬스체크 ===
-@router.get("/health")
-async def health_check():
-    """서비스 헬스 체크"""
-    try:
-        health_status = hybrid_service.get_health_status()
-        status_code = 200 if health_status["status"] == "healthy" else 503
-        return JSONResponse(status_code=status_code, content=health_status)
-    except Exception as e:
-        logger.error(f"헬스 체크 실패: {e}")
-        return _error_response(503, "HEALTH_CHECK_ERROR", str(e))
 
 
 # === 세션 관리 ===

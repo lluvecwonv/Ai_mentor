@@ -1,0 +1,658 @@
+2025-09-21 21:30:57 - __main__ - [0m[32mINFO[0m[0m - ✅ 🔧 [메인] 개발 서버 시작
+2025-09-22 11:03:14 - __main__ - [0m[32mINFO[0m[0m - ✅ 🔧 [메인] 개발 서버 시작
+2025-09-22 11:03:40 - __main__ - [0m[32mINFO[0m[0m - ✅ 🔧 [메인] 개발 서버 시작
+2025-09-22 11:03:52 - __main__ - [0m[32mINFO[0m[0m - ✅ 🔧 [메인] 개발 서버 시작
+2025-09-22 11:05:44 - __main__ - [0m[32mINFO[0m[0m - ✅ 🔧 [메인] 개발 서버 시작
+2025-09-22 11:05:45 - asyncio - [0m[36mDEBUG[0m[0m - 🔧 Using selector: EpollSelector
+2025-09-22 11:05:45 - main - [0m[32mINFO[0m[0m - ✅ 🚀 [애플리케이션] SQL 도구 서버 시작
+2025-09-22 11:05:45 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🔧 [서비스 초기화] SqlCoreService 생성
+2025-09-22 11:05:45 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ 🔧 [체인 설정] SQL 처리 체인 초기화 시작
+2025-09-22 11:05:45 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ ✅ [체인 설정] SQL 처리 체인 초기화 완료
+2025-09-22 11:05:45 - service.sqlCoreService - [0m[32mINFO[0m[0m - ✅ ✅ [서비스 초기화] SqlCoreService 초기화 완료
+2025-09-22 11:05:45 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+2025-09-22 11:05:45 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+2025-09-22 11:05:45 - main - [0m[32mINFO[0m[0m - ✅ 🔥 [워밍업] SqlCoreService 에이전트 초기화 완료
+2025-09-22 11:05:51 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🚀 [요청 시작] ID: d8fe8746-db43-440a-af6c-9d313673c4e8, 세션: None
+2025-09-22 11:05:51 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 📝 [질문] 데이터베이스에 있는 테이블 목록을 보여주세요
+2025-09-22 11:05:51 - controller.sqlController - [0m[36mDEBUG[0m[0m - 🔧 🌐 [클라이언트] IP: 127.0.0.1, UA: curl/7.68.0
+2025-09-22 11:05:51 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🔧 [SQL 실행] 시작
+2025-09-22 11:05:51 - service.sqlCoreService - [0m[32mINFO[0m[0m - ✅ 🚀 [메인 체인] 실행 시작: 데이터베이스에 있는 테이블 목록을 보여주세요...
+2025-09-22 11:05:51 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 🚀 [SQL 에이전트] 실행 시작: 데이터베이스에 있는 테이블 목록을 보여주세요...
+2025-09-22 11:05:51 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 🔍 [SQL 에이전트] 쿼리 실행 시작: '데이터베이스에 있는 테이블 목록을 보여주세요'
+2025-09-22 11:05:51 - openai._base_client - [0m[36mDEBUG[0m[0m - 🔧 Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-d66db6d5-3a1a-4533-95ad-b576c7b64b8e', 'json_data': {'messages': [{'content': 'You are an agent designed to interact with a SQL database.\nGiven an input question, create a syntactically correct mysql query to run, then look at the results of the query and return the answer.\nUnless the user specifies a specific number of examples they wish to obtain, always limit your query to at most 10 results.\nYou can order the results by a relevant column to return the most interesting examples in the database.\nNever query for all the columns from a specific table, only ask for the relevant columns given the question.\nYou have access to tools for interacting with the database.\nOnly use the below tools. Only use the information returned by the below tools to construct your final answer.\nYou MUST double check your query before executing it. If you get an error while executing a query, rewrite the query and try again.\n\nDO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.\n\nIf the question does not seem related to the database, just return "I don\'t know" as the answer.\n', 'role': 'system'}, {'content': '데이터베이스에 있는 테이블 목록을 보여주세요', 'role': 'user'}, {'content': 'I should look at the tables in the database to see what I can query.  Then I should query the schema of the most relevant tables.', 'role': 'assistant'}], 'model': 'gpt-4o-mini', 'n': 1, 'seed': 42, 'stream': True, 'temperature': 0.05, 'tools': [{'type': 'function', 'function': {'name': 'sql_db_query', 'description': "Input to this tool is a detailed and correct SQL query, output is a result from the database. If the query is not correct, an error message will be returned. If an error is returned, rewrite the query, check the query, and try again. If you encounter an issue with Unknown column 'xxxx' in 'field list', use sql_db_schema to query the correct table fields.", 'parameters': {'type': 'object', 'properties': {'query': {'description': 'A detailed and correct SQL query.', 'type': 'string'}}, 'required': ['query']}}}, {'type': 'function', 'function': {'name': 'sql_db_schema', 'description': 'Input to this tool is a comma-separated list of tables, output is the schema and sample rows for those tables. Be sure that the tables actually exist by calling sql_db_list_tables first! Example Input: table1, table2, table3', 'parameters': {'type': 'object', 'properties': {'table_names': {'description': "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'", 'type': 'string'}}, 'required': ['table_names']}}}, {'type': 'function', 'function': {'name': 'sql_db_list_tables', 'description': 'Input is an empty string, output is a comma-separated list of tables in the database.', 'parameters': {'type': 'object', 'properties': {'tool_input': {'description': 'An empty string', 'default': '', 'type': 'string'}}}}}, {'type': 'function', 'function': {'name': 'sql_db_query_checker', 'description': 'Use this tool to double check if your query is correct before executing it. Always use this tool before executing a query with sql_db_query!', 'parameters': {'type': 'object', 'properties': {'query': {'description': 'A detailed and SQL query to be checked.', 'type': 'string'}}, 'required': ['query']}}}]}}
+2025-09-22 11:05:51 - openai._base_client - [0m[36mDEBUG[0m[0m - 🔧 Sending HTTP Request: POST https://api.openai.com/v1/chat/completions
+2025-09-22 11:05:51 - httpcore.connection - [0m[36mDEBUG[0m[0m - 🔧 connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=None socket_options=None
+2025-09-22 11:05:51 - httpcore.connection - [0m[36mDEBUG[0m[0m - 🔧 connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7fe06b0e7e50>
+2025-09-22 11:05:51 - httpcore.connection - [0m[36mDEBUG[0m[0m - 🔧 start_tls.started ssl_context=<ssl.SSLContext object at 0x7fe0a8d651c0> server_hostname='api.openai.com' timeout=None
+2025-09-22 11:05:51 - httpcore.connection - [0m[36mDEBUG[0m[0m - 🔧 start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7fe06b0e7b20>
+2025-09-22 11:05:51 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 send_request_headers.started request=<Request [b'POST']>
+2025-09-22 11:05:51 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 send_request_headers.complete
+2025-09-22 11:05:51 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 send_request_body.started request=<Request [b'POST']>
+2025-09-22 11:05:51 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 send_request_body.complete
+2025-09-22 11:05:51 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 receive_response_headers.started request=<Request [b'POST']>
+2025-09-22 11:05:52 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 22 Sep 2025 02:05:52 GMT'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-organization', b'jeonbuk-national-university'), (b'openai-processing-ms', b'735'), (b'openai-project', b'proj_GsEDOgdDSI76JalmDfnt7uXv'), (b'openai-version', b'2020-10-01'), (b'x-envoy-upstream-service-time', b'920'), (b'x-ratelimit-limit-requests', b'30000'), (b'x-ratelimit-limit-tokens', b'150000000'), (b'x-ratelimit-remaining-requests', b'29999'), (b'x-ratelimit-remaining-tokens', b'149999692'), (b'x-ratelimit-reset-requests', b'2ms'), (b'x-ratelimit-reset-tokens', b'0s'), (b'x-request-id', b'req_abd27d5df85844b1a5cf5f8c9c30b453'), (b'x-openai-proxy-wasm', b'v0.1'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=WLlu4cj5ah2nwnXA4Hyq8eOflZrhEQrSt4LTHCfqU0s-1758506752-1.0.1.1-.8311xPIdyrCdH_2xpP8lbN..ObhlVltRFMOdqOx.TTW1HMBhs.mMhp2Lzhsn4vFf4nHZnb_7UCff071fBDZxqanu1sdpCOlzEKoxiZTH.E; path=/; expires=Mon, 22-Sep-25 02:35:52 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=F0WOa4CxvKTZ3lQf9KnHNjrPrfFeNnVs6_5I3ykMVes-1758506752908-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'982e3d5eceb4ea11-ICN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-22 11:05:52 - httpx - [0m[32mINFO[0m[0m - ✅ HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-22 11:05:52 - openai._base_client - [0m[36mDEBUG[0m[0m - 🔧 HTTP Response: POST https://api.openai.com/v1/chat/completions "200 OK" Headers([('date', 'Mon, 22 Sep 2025 02:05:52 GMT'), ('content-type', 'text/event-stream; charset=utf-8'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('access-control-expose-headers', 'X-Request-ID'), ('openai-organization', 'jeonbuk-national-university'), ('openai-processing-ms', '735'), ('openai-project', 'proj_GsEDOgdDSI76JalmDfnt7uXv'), ('openai-version', '2020-10-01'), ('x-envoy-upstream-service-time', '920'), ('x-ratelimit-limit-requests', '30000'), ('x-ratelimit-limit-tokens', '150000000'), ('x-ratelimit-remaining-requests', '29999'), ('x-ratelimit-remaining-tokens', '149999692'), ('x-ratelimit-reset-requests', '2ms'), ('x-ratelimit-reset-tokens', '0s'), ('x-request-id', 'req_abd27d5df85844b1a5cf5f8c9c30b453'), ('x-openai-proxy-wasm', 'v0.1'), ('cf-cache-status', 'DYNAMIC'), ('set-cookie', '__cf_bm=WLlu4cj5ah2nwnXA4Hyq8eOflZrhEQrSt4LTHCfqU0s-1758506752-1.0.1.1-.8311xPIdyrCdH_2xpP8lbN..ObhlVltRFMOdqOx.TTW1HMBhs.mMhp2Lzhsn4vFf4nHZnb_7UCff071fBDZxqanu1sdpCOlzEKoxiZTH.E; path=/; expires=Mon, 22-Sep-25 02:35:52 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('strict-transport-security', 'max-age=31536000; includeSubDomains; preload'), ('x-content-type-options', 'nosniff'), ('set-cookie', '_cfuvid=F0WOa4CxvKTZ3lQf9KnHNjrPrfFeNnVs6_5I3ykMVes-1758506752908-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('server', 'cloudflare'), ('cf-ray', '982e3d5eceb4ea11-ICN'), ('alt-svc', 'h3=":443"; ma=86400')])
+2025-09-22 11:05:52 - openai._base_client - [0m[36mDEBUG[0m[0m - 🔧 request_id: req_abd27d5df85844b1a5cf5f8c9c30b453
+2025-09-22 11:05:52 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 receive_response_body.started request=<Request [b'POST']>
+2025-09-22 11:05:53 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 receive_response_body.complete
+2025-09-22 11:05:53 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 response_closed.started
+2025-09-22 11:05:53 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 response_closed.complete
+2025-09-22 11:05:53 - openai._base_client - [0m[36mDEBUG[0m[0m - 🔧 Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-5f965ec4-8f6b-4ad4-ac18-0b1f3970bf68', 'json_data': {'messages': [{'content': 'You are an agent designed to interact with a SQL database.\nGiven an input question, create a syntactically correct mysql query to run, then look at the results of the query and return the answer.\nUnless the user specifies a specific number of examples they wish to obtain, always limit your query to at most 10 results.\nYou can order the results by a relevant column to return the most interesting examples in the database.\nNever query for all the columns from a specific table, only ask for the relevant columns given the question.\nYou have access to tools for interacting with the database.\nOnly use the below tools. Only use the information returned by the below tools to construct your final answer.\nYou MUST double check your query before executing it. If you get an error while executing a query, rewrite the query and try again.\n\nDO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.\n\nIf the question does not seem related to the database, just return "I don\'t know" as the answer.\n', 'role': 'system'}, {'content': '데이터베이스에 있는 테이블 목록을 보여주세요', 'role': 'user'}, {'content': 'I should look at the tables in the database to see what I can query.  Then I should query the schema of the most relevant tables.', 'role': 'assistant'}, {'content': None, 'role': 'assistant', 'tool_calls': [{'type': 'function', 'id': 'call_Lrkp9Mx87aI0kT2WZr1sCh5N', 'function': {'name': 'sql_db_list_tables', 'arguments': '{}'}}]}, {'content': 'jbnu_class, jbnu_class0, jbnu_class2, jbnu_class3, jbnu_class4, jbnu_class5, jbnu_college, jbnu_department', 'role': 'tool', 'tool_call_id': 'call_Lrkp9Mx87aI0kT2WZr1sCh5N'}], 'model': 'gpt-4o-mini', 'n': 1, 'seed': 42, 'stream': True, 'temperature': 0.05, 'tools': [{'type': 'function', 'function': {'name': 'sql_db_query', 'description': "Input to this tool is a detailed and correct SQL query, output is a result from the database. If the query is not correct, an error message will be returned. If an error is returned, rewrite the query, check the query, and try again. If you encounter an issue with Unknown column 'xxxx' in 'field list', use sql_db_schema to query the correct table fields.", 'parameters': {'type': 'object', 'properties': {'query': {'description': 'A detailed and correct SQL query.', 'type': 'string'}}, 'required': ['query']}}}, {'type': 'function', 'function': {'name': 'sql_db_schema', 'description': 'Input to this tool is a comma-separated list of tables, output is the schema and sample rows for those tables. Be sure that the tables actually exist by calling sql_db_list_tables first! Example Input: table1, table2, table3', 'parameters': {'type': 'object', 'properties': {'table_names': {'description': "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'", 'type': 'string'}}, 'required': ['table_names']}}}, {'type': 'function', 'function': {'name': 'sql_db_list_tables', 'description': 'Input is an empty string, output is a comma-separated list of tables in the database.', 'parameters': {'type': 'object', 'properties': {'tool_input': {'description': 'An empty string', 'default': '', 'type': 'string'}}}}}, {'type': 'function', 'function': {'name': 'sql_db_query_checker', 'description': 'Use this tool to double check if your query is correct before executing it. Always use this tool before executing a query with sql_db_query!', 'parameters': {'type': 'object', 'properties': {'query': {'description': 'A detailed and SQL query to be checked.', 'type': 'string'}}, 'required': ['query']}}}]}}
+2025-09-22 11:05:53 - openai._base_client - [0m[36mDEBUG[0m[0m - 🔧 Sending HTTP Request: POST https://api.openai.com/v1/chat/completions
+2025-09-22 11:05:53 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 send_request_headers.started request=<Request [b'POST']>
+2025-09-22 11:05:53 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 send_request_headers.complete
+2025-09-22 11:05:53 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 send_request_body.started request=<Request [b'POST']>
+2025-09-22 11:05:53 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 send_request_body.complete
+2025-09-22 11:05:53 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 receive_response_headers.started request=<Request [b'POST']>
+2025-09-22 11:05:54 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 22 Sep 2025 02:05:54 GMT'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-organization', b'jeonbuk-national-university'), (b'openai-processing-ms', b'254'), (b'openai-project', b'proj_GsEDOgdDSI76JalmDfnt7uXv'), (b'openai-version', b'2020-10-01'), (b'x-envoy-upstream-service-time', b'366'), (b'x-ratelimit-limit-requests', b'30000'), (b'x-ratelimit-limit-tokens', b'150000000'), (b'x-ratelimit-remaining-requests', b'29999'), (b'x-ratelimit-remaining-tokens', b'149999662'), (b'x-ratelimit-reset-requests', b'2ms'), (b'x-ratelimit-reset-tokens', b'0s'), (b'x-request-id', b'req_abc8dd59bcaa4429860290a9b299a25f'), (b'x-openai-proxy-wasm', b'v0.1'), (b'cf-cache-status', b'DYNAMIC'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'982e3d683956ea11-ICN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-22 11:05:54 - httpx - [0m[32mINFO[0m[0m - ✅ HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-22 11:05:54 - openai._base_client - [0m[36mDEBUG[0m[0m - 🔧 HTTP Response: POST https://api.openai.com/v1/chat/completions "200 OK" Headers({'date': 'Mon, 22 Sep 2025 02:05:54 GMT', 'content-type': 'text/event-stream; charset=utf-8', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'access-control-expose-headers': 'X-Request-ID', 'openai-organization': 'jeonbuk-national-university', 'openai-processing-ms': '254', 'openai-project': 'proj_GsEDOgdDSI76JalmDfnt7uXv', 'openai-version': '2020-10-01', 'x-envoy-upstream-service-time': '366', 'x-ratelimit-limit-requests': '30000', 'x-ratelimit-limit-tokens': '150000000', 'x-ratelimit-remaining-requests': '29999', 'x-ratelimit-remaining-tokens': '149999662', 'x-ratelimit-reset-requests': '2ms', 'x-ratelimit-reset-tokens': '0s', 'x-request-id': 'req_abc8dd59bcaa4429860290a9b299a25f', 'x-openai-proxy-wasm': 'v0.1', 'cf-cache-status': 'DYNAMIC', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '982e3d683956ea11-ICN', 'alt-svc': 'h3=":443"; ma=86400'})
+2025-09-22 11:05:54 - openai._base_client - [0m[36mDEBUG[0m[0m - 🔧 request_id: req_abc8dd59bcaa4429860290a9b299a25f
+2025-09-22 11:05:54 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 receive_response_body.started request=<Request [b'POST']>
+2025-09-22 11:05:55 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 receive_response_body.complete
+2025-09-22 11:05:55 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 response_closed.started
+2025-09-22 11:05:55 - httpcore.http11 - [0m[36mDEBUG[0m[0m - 🔧 response_closed.complete
+2025-09-22 11:05:55 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 📋 [SQL 에이전트] 원본 응답 타입: <class 'dict'>
+2025-09-22 11:05:55 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 📋 [SQL 에이전트] 원본 응답 구조: {'input': '데이터베이스에 있는 테이블 목록을 보여주세요', 'output': '데이터베이스에 있는 테이블 목록은 다음과 같습니다:\n\n1. jbnu_class\n2. jbnu_class0\n3. jbnu_class2\n4. jbnu_class3\n5. jbnu_class4\n6. jbnu_class5\n7. jbnu_college\n8. jbnu_department'}
+2025-09-22 11:05:55 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 📋 [SQL 에이전트] 응답 키들: ['input', 'output']
+2025-09-22 11:05:55 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 📋 [SQL 에이전트] input: <class 'str'> = 데이터베이스에 있는 테이블 목록을 보여주세요...
+2025-09-22 11:05:55 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 📋 [SQL 에이전트] output: <class 'str'> = 데이터베이스에 있는 테이블 목록은 다음과 같습니다:
+
+1. jbnu_class
+2. jbnu_class0
+3. jbnu_class2
+4. jbnu_class3
+5. jbnu_class4
+6. jbnu_class5
+7. jbnu_college
+8. jbnu_department...
+2025-09-22 11:05:55 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 📋 [SQL 에이전트] 파싱된 출력 길이: 153자
+2025-09-22 11:05:55 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 📋 [SQL 에이전트] 파싱된 출력 내용: 데이터베이스에 있는 테이블 목록은 다음과 같습니다:
+
+1. jbnu_class
+2. jbnu_class0
+3. jbnu_class2
+4. jbnu_class3
+5. jbnu_class4
+6. jbnu_class5
+7. jbnu_college
+8. jbnu_department
+2025-09-22 11:05:55 - processors.sql_processor - [0m[36mDEBUG[0m[0m - 🔧 추출된 SQL 쿼리 수: 0
+2025-09-22 11:05:55 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ ✅ [SQL 에이전트] 실행 완료: 3.772초
+2025-09-22 11:05:55 - processors.result_formatter - [0m[36mDEBUG[0m[0m - 🔧 🔧 [마크다운 제거] 처리 시작
+2025-09-22 11:05:55 - processors.result_formatter - [0m[36mDEBUG[0m[0m - 🔧 🔧 [마크다운 제거] 처리 완료: 153 → 153 문자
+2025-09-22 11:05:55 - processors.result_formatter - [0m[36mDEBUG[0m[0m - 🔧 🔧 [결과 포맷팅] 처리 시작
+2025-09-22 11:05:55 - processors.result_formatter - [0m[36mDEBUG[0m[0m - 🔧 ✅ [결과 포맷팅] 처리 완료
+2025-09-22 11:05:55 - monitoring.performance_monitor - [0m[36mDEBUG[0m[0m - 🔧 📊 [성능 모니터] 쿼리 기록: 성공=True, 시간=3.780초
+2025-09-22 11:05:55 - service.sqlCoreService - [0m[32mINFO[0m[0m - ✅ ✅ [메인 체인] 실행 완료: 3.780초
+2025-09-22 11:05:55 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 📋 [2단계] SQL 결과: 데이터베이스에 있는 테이블 목록은 다음과 같습니다:
+
+1. jbnu_class
+2. jbnu_class0
+3. jbnu_class2
+4. jbnu_class3
+5. jbnu_class4
+6. jbnu_class5
+7. jbnu_college
+8. jbnu_department
+2025-09-22 11:05:55 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 📊 [2단계] SQL 결과 길이: 153자
+2025-09-22 11:05:55 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ ✅ [2단계] SQL 실행 완료: 3.780초
+2025-09-22 11:05:55 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ ✅ [요청 완료] ID: d8fe8746-db43-440a-af6c-9d313673c4e8, 상태: 성공, 시간: 3.781초
+2025-09-22 11:21:37 - main - [0m[32mINFO[0m[0m - ✅ 🛑 [애플리케이션] SQL 도구 서버 종료
+2025-09-22 11:21:37 - main - [0m[32mINFO[0m[0m - ✅ 🚀 [애플리케이션] SQL 도구 서버 시작
+2025-09-22 11:21:37 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🔧 [서비스 초기화] SqlCoreService 생성
+2025-09-22 11:21:38 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ 🔧 [체인 설정] SQL 처리 체인 초기화 시작
+2025-09-22 11:21:38 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ ✅ [체인 설정] SQL 처리 체인 초기화 완료
+2025-09-22 11:21:38 - service.sqlCoreService - [0m[32mINFO[0m[0m - ✅ ✅ [서비스 초기화] SqlCoreService 초기화 완료
+2025-09-22 11:21:38 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+2025-09-22 11:21:38 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+2025-09-22 11:21:38 - main - [0m[32mINFO[0m[0m - ✅ 🔥 [워밍업] SqlCoreService 에이전트 초기화 완료
+2025-09-22 11:22:09 - main - [0m[32mINFO[0m[0m - ✅ 🛑 [애플리케이션] SQL 도구 서버 종료
+2025-09-22 11:22:10 - main - [0m[32mINFO[0m[0m - ✅ 🚀 [애플리케이션] SQL 도구 서버 시작
+2025-09-22 11:22:10 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🔧 [서비스 초기화] SqlCoreService 생성
+2025-09-22 11:22:10 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ 🔧 [체인 설정] SQL 처리 체인 초기화 시작
+2025-09-22 11:22:10 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ ✅ [체인 설정] SQL 처리 체인 초기화 완료
+2025-09-22 11:22:10 - service.sqlCoreService - [0m[32mINFO[0m[0m - ✅ ✅ [서비스 초기화] SqlCoreService 초기화 완료
+2025-09-22 11:22:10 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+2025-09-22 11:22:11 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+2025-09-22 11:22:11 - main - [0m[32mINFO[0m[0m - ✅ 🔥 [워밍업] SqlCoreService 에이전트 초기화 완료
+2025-09-22 11:22:25 - main - [0m[32mINFO[0m[0m - ✅ 🛑 [애플리케이션] SQL 도구 서버 종료
+2025-09-22 11:22:26 - main - [0m[32mINFO[0m[0m - ✅ 🚀 [애플리케이션] SQL 도구 서버 시작
+2025-09-22 11:22:26 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🔧 [서비스 초기화] SqlCoreService 생성
+2025-09-22 11:22:26 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ 🔧 [체인 설정] SQL 처리 체인 초기화 시작
+2025-09-22 11:22:26 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ ✅ [체인 설정] SQL 처리 체인 초기화 완료
+2025-09-22 11:22:26 - service.sqlCoreService - [0m[32mINFO[0m[0m - ✅ ✅ [서비스 초기화] SqlCoreService 초기화 완료
+2025-09-22 11:22:26 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+2025-09-22 11:22:26 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+2025-09-22 11:22:26 - main - [0m[32mINFO[0m[0m - ✅ 🔥 [워밍업] SqlCoreService 에이전트 초기화 완료
+2025-09-22 11:22:32 - main - [0m[32mINFO[0m[0m - ✅ 🛑 [애플리케이션] SQL 도구 서버 종료
+2025-09-22 11:22:33 - main - [0m[32mINFO[0m[0m - ✅ 🚀 [애플리케이션] SQL 도구 서버 시작
+2025-09-22 11:22:33 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🔧 [서비스 초기화] SqlCoreService 생성
+2025-09-22 11:22:33 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ 🔧 [체인 설정] SQL 처리 체인 초기화 시작
+2025-09-22 11:22:33 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ ✅ [체인 설정] SQL 처리 체인 초기화 완료
+2025-09-22 11:22:33 - service.sqlCoreService - [0m[32mINFO[0m[0m - ✅ ✅ [서비스 초기화] SqlCoreService 초기화 완료
+2025-09-22 11:22:33 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+2025-09-22 11:22:33 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+2025-09-22 11:22:33 - main - [0m[32mINFO[0m[0m - ✅ 🔥 [워밍업] SqlCoreService 에이전트 초기화 완료
+2025-09-22 11:22:43 - main - [0m[32mINFO[0m[0m - ✅ 🛑 [애플리케이션] SQL 도구 서버 종료
+2025-09-22 11:22:43 - main - [0m[32mINFO[0m[0m - ✅ 🚀 [애플리케이션] SQL 도구 서버 시작
+2025-09-22 11:22:43 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🔧 [서비스 초기화] SqlCoreService 생성
+2025-09-22 11:22:44 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ 🔧 [체인 설정] SQL 처리 체인 초기화 시작
+2025-09-22 11:22:44 - chains.sql_chain_manager - [0m[32mINFO[0m[0m - ✅ ✅ [체인 설정] SQL 처리 체인 초기화 완료
+2025-09-22 11:22:44 - service.sqlCoreService - [0m[32mINFO[0m[0m - ✅ ✅ [서비스 초기화] SqlCoreService 초기화 완료
+2025-09-22 11:22:44 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+2025-09-22 11:22:44 - processors.sql_processor - [0m[32mINFO[0m[0m - ✅ ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+2025-09-22 11:22:44 - main - [0m[32mINFO[0m[0m - ✅ 🔥 [워밍업] SqlCoreService 에이전트 초기화 완료
+2025-09-22 11:25:25 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ 🔍 [헬스 체크] 요청됨
+2025-09-22 11:25:25 - controller.sqlController - [0m[32mINFO[0m[0m - ✅ ✅ [헬스 체크] 모든 서비스 정상
+ℹ️ 2025-09-23 05:28:47 - processors.sql_processor - INFO - 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+✅ 2025-09-23 05:28:47 - processors.sql_processor - INFO - ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+🤖 2025-09-23 05:28:55 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:28:55 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 컴퓨터인공지능학부 3학년 과목 중 데이터베이스 관련 수업 알려줘...
+ℹ️ 2025-09-23 05:28:55 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '컴퓨터인공지능학부 3학년 과목 중 데이터베이스 관련 수업 알려줘'
+⚠️ 2025-09-23 05:29:12 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:29:12 - processors.sql_processor - INFO - 📋 [최종 결과] 2844자: Here are some database-related courses offered for 3rd-year students in the Computer Artificial Intelligence Department:
+
+1. **현장실습** (Field Practice)
+   - **Code**: 106493
+   - **Professor**: 송준희
+   ...
+✅ 2025-09-23 05:29:12 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 16.927초
+🤖 2025-09-23 05:29:12 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:29:12 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 2664자
+✅ 2025-09-23 05:29:12 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 16.931초
+✅ 2025-09-23 05:29:12 - controller.sqlController - INFO - ✅ [요청 완료] ID: f936a630-bbd2-42e4-872a-508350ca05f4, 상태: 성공, 시간: 16.931초
+ℹ️ 2025-09-23 05:29:48 - processors.sql_processor - INFO - 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+✅ 2025-09-23 05:29:48 - processors.sql_processor - INFO - ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+🤖 2025-09-23 05:30:17 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:30:17 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 컴퓨터인공지능학부에서 데이터베이스 관련 과목 뭐 있어?...
+ℹ️ 2025-09-23 05:30:17 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '컴퓨터인공지능학부에서 데이터베이스 관련 과목 뭐 있어?'
+⚠️ 2025-09-23 05:30:28 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:30:28 - processors.sql_processor - INFO - 📋 [최종 결과] 1041자: 컴퓨터인공지능학부에서 제공하는 데이터베이스 관련 과목은 다음과 같습니다:
+
+1. **네트워크보안** (코드: 128199)
+   - 네트워크 보안 기술에 관한 기본 개념 및 응용 방법 이해
+
+2. **컴퓨터비전** (코드: 128201)
+   - 컴퓨터 비전은 카메라로 입력된 영상을 자동으로 분석하여 인간의 시각 기능을 흉내 내는 학문으로서 인공지능의 세부...
+✅ 2025-09-23 05:30:28 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 11.342초
+🤖 2025-09-23 05:30:28 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:30:28 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1001자
+✅ 2025-09-23 05:30:28 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 11.348초
+✅ 2025-09-23 05:30:28 - controller.sqlController - INFO - ✅ [요청 완료] ID: 515bb96c-3191-4ea6-a52b-c056e7e6d477, 상태: 성공, 시간: 11.348초
+ℹ️ 2025-09-23 05:30:54 - processors.sql_processor - INFO - 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+✅ 2025-09-23 05:30:54 - processors.sql_processor - INFO - ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+🤖 2025-09-23 05:30:56 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:30:56 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 데이터베이스 과목 알려줘...
+ℹ️ 2025-09-23 05:30:56 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '데이터베이스 과목 알려줘'
+⚠️ 2025-09-23 05:31:26 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:31:26 - processors.sql_processor - INFO - 📋 [최종 결과] 1520자: Here are some of the subjects (classes) offered in the database along with their descriptions:
+
+1. **문화경제학**: 
+   - Description: 경제학은 도덕성과 인간의 합리성, 과학적 지식을 기반으로 행복한 삶을 고양시키기 위하여 자원배분의 효율성과 내적, 외적으로 발생...
+✅ 2025-09-23 05:31:26 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 29.980초
+🤖 2025-09-23 05:31:26 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:31:26 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1480자
+✅ 2025-09-23 05:31:26 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 29.985초
+✅ 2025-09-23 05:31:26 - controller.sqlController - INFO - ✅ [요청 완료] ID: 5587fca6-9c62-4027-85e2-9cd815c15814, 상태: 성공, 시간: 29.985초
+ℹ️ 2025-09-23 05:31:54 - processors.sql_processor - INFO - 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+✅ 2025-09-23 05:31:54 - processors.sql_processor - INFO - ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+🤖 2025-09-23 05:32:03 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:32:03 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 데이터베이스 과목...
+ℹ️ 2025-09-23 05:32:03 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '데이터베이스 과목'
+⚠️ 2025-09-23 05:32:18 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:32:18 - processors.sql_processor - INFO - 📋 [최종 결과] 260자: The database class related to database subjects is:
+
+- **Class Name**: 데이터베이스설계 (Database Design)
+  - **Description**: Theories about database design and implementation together with DBMS. 
+
+If you ne...
+✅ 2025-09-23 05:32:18 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 15.072초
+🤖 2025-09-23 05:32:18 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:32:18 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 252자
+✅ 2025-09-23 05:32:18 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 15.077초
+✅ 2025-09-23 05:32:18 - controller.sqlController - INFO - ✅ [요청 완료] ID: 2cd4cb01-69da-4919-90a4-1f9b5e0b92b1, 상태: 성공, 시간: 15.077초
+ℹ️ 2025-09-23 05:33:31 - processors.sql_processor - INFO - 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+✅ 2025-09-23 05:33:31 - processors.sql_processor - INFO - ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+🤖 2025-09-23 05:33:35 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:33:35 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 데이터베이스 과목 찾아줘...
+ℹ️ 2025-09-23 05:33:35 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '데이터베이스 과목 찾아줘'
+⚠️ 2025-09-23 05:34:11 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:34:11 - processors.sql_processor - INFO - 📋 [최종 결과] 2219자: Here are some courses related to "데이터베이스" (Database) from the database:
+
+1. **Course Name:** 데이터베이스시스템설계
+   - **Description:** 본 강좌에서는 데이터베이스의 개념과 기초 이론을 바탕으로 데이터베이스를 설계하기 위한 단계별 프로세스와 현재 많이 사용되고 있는 모...
+✅ 2025-09-23 05:34:11 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 36.276초
+🤖 2025-09-23 05:34:11 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:34:11 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 2091자
+✅ 2025-09-23 05:34:11 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 36.282초
+✅ 2025-09-23 05:34:11 - controller.sqlController - INFO - ✅ [요청 완료] ID: a58d1fb4-20ca-439d-80cc-f795e50cabbd, 상태: 성공, 시간: 36.282초
+🤖 2025-09-23 05:35:14 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:35:14 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문정과 교수님 누가있어?
+강동기 교수님은 무슨 수업 가르치시는데
+문헌정보학과 교수님들 조회해줘
+어떤 과목부터 수강하는 것이 좋을까요?...
+ℹ️ 2025-09-23 05:35:14 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문정과 교수님 누가있어?
+강동기 교수님은 무슨 수업 가르치시는데
+문헌정보학과 교수님들 조회해줘
+어떤 과목부터 수강하는 것이 좋을까요?'
+⚠️ 2025-09-23 05:35:34 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:35:34 - processors.sql_processor - INFO - 📋 [최종 결과] 1404자: Here are the answers to your questions:
+
+1. **Professors in the 문헌정보학과 (Department of Library and Information Science)**:
+   - 이현실
+   - 박진희
+   - 김주섭
+   - 김선태
+   - 윤정원
+   - 이정은
+   - 천정한
+   - 김평
+   - 김수...
+✅ 2025-09-23 05:35:34 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 20.824초
+🤖 2025-09-23 05:35:34 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:35:34 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1352자
+✅ 2025-09-23 05:35:34 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 20.826초
+✅ 2025-09-23 05:35:34 - controller.sqlController - INFO - ✅ [요청 완료] ID: 06607d75-ba46-4c72-b456-f675c2a48cdd, 상태: 성공, 시간: 20.826초
+🤖 2025-09-23 05:37:17 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:37:17 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 05:37:17 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 05:37:29 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:37:29 - processors.sql_processor - INFO - 📋 [최종 결과] 1032자: I have gathered the schema for the relevant tables in the database. Here are the details:
+
+1. **jbnu_class**: Contains information about classes offered, including fields like `id`, `offered_year`, `s...
+✅ 2025-09-23 05:37:29 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 12.190초
+🤖 2025-09-23 05:37:29 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:37:29 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1000자
+✅ 2025-09-23 05:37:29 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 12.191초
+✅ 2025-09-23 05:37:29 - controller.sqlController - INFO - ✅ [요청 완료] ID: 1a872670-218c-466f-bb9d-1eb2c25e4621, 상태: 성공, 시간: 12.192초
+🤖 2025-09-23 05:37:29 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:37:29 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 05:37:29 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 05:37:40 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:37:40 - processors.sql_processor - INFO - 📋 [최종 결과] 1120자: I have gathered the schema for the relevant tables in the database. Here are the details:
+
+1. **jbnu_class**: Contains information about classes offered, including fields like `id`, `offered_year`, `s...
+✅ 2025-09-23 05:37:40 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 11.357초
+🤖 2025-09-23 05:37:40 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:37:40 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1088자
+✅ 2025-09-23 05:37:40 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 11.359초
+✅ 2025-09-23 05:37:40 - controller.sqlController - INFO - ✅ [요청 완료] ID: f30113bb-8c3e-48c6-b7e1-27d965971926, 상태: 성공, 시간: 11.359초
+🤖 2025-09-23 05:37:40 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 05:37:40 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: '문정과 교수님들 알려줘'에 대한 유사한 학과를 찾을 수 없습니다. 문정과 교수님들 알려줘...
+ℹ️ 2025-09-23 05:37:40 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: ''문정과 교수님들 알려줘'에 대한 유사한 학과를 찾을 수 없습니다. 문정과 교수님들 알려줘'
+⚠️ 2025-09-23 05:37:58 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 05:37:58 - processors.sql_processor - INFO - 📋 [최종 결과] 36자: Agent stopped due to max iterations.
+✅ 2025-09-23 05:37:58 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 17.850초
+🤖 2025-09-23 05:37:58 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 05:37:58 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 36자
+✅ 2025-09-23 05:37:58 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 17.851초
+✅ 2025-09-23 05:37:58 - controller.sqlController - INFO - ✅ [요청 완료] ID: a82487f9-d738-403b-8a27-b80d35b35699, 상태: 성공, 시간: 17.851초
+🤖 2025-09-23 06:04:19 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:04:19 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과에서 데이터 분석 관련 수업을 찾아줘...
+ℹ️ 2025-09-23 06:04:19 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과에서 데이터 분석 관련 수업을 찾아줘'
+⚠️ 2025-09-23 06:04:27 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:04:27 - processors.sql_processor - INFO - 📋 [최종 결과] 34자: 해당 학과에서 "데이터 분석" 관련 수업을 찾을 수 없습니다.
+✅ 2025-09-23 06:04:27 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 8.465초
+🤖 2025-09-23 06:04:27 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:04:27 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 34자
+✅ 2025-09-23 06:04:27 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 8.467초
+✅ 2025-09-23 06:04:27 - controller.sqlController - INFO - ✅ [요청 완료] ID: 61dcf805-c945-4463-9360-099b6ce4f7da, 상태: 성공, 시간: 8.467초
+🤖 2025-09-23 06:04:58 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:04:58 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과에서 수강할 수 있는 데이터사이언스 관련 모든 수업을 찾아서 학점과 담당 교수까지 상세히 알려줘...
+ℹ️ 2025-09-23 06:04:58 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과에서 수강할 수 있는 데이터사이언스 관련 모든 수업을 찾아서 학점과 담당 교수까지 상세히 알려줘'
+⚠️ 2025-09-23 06:05:21 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:05:21 - processors.sql_processor - INFO - 📋 [최종 결과] 246자: It seems that there are currently no data science-related classes offered by the Department of Library and Information Science (문헌정보학과) in the database. 
+
+If you have any other questions or need infor...
+✅ 2025-09-23 06:05:21 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 22.697초
+🤖 2025-09-23 06:05:21 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:05:21 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 246자
+✅ 2025-09-23 06:05:21 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 22.699초
+✅ 2025-09-23 06:05:21 - controller.sqlController - INFO - ✅ [요청 완료] ID: 0d8265ef-07c9-4d62-a81c-3e077b1cfcdf, 상태: 성공, 시간: 22.699초
+🤖 2025-09-23 06:05:51 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:05:51 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과에서 수강할 수 있는 데이터 관련 수업을 찾아줘...
+ℹ️ 2025-09-23 06:05:51 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과에서 수강할 수 있는 데이터 관련 수업을 찾아줘'
+⚠️ 2025-09-23 06:06:06 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:06:06 - processors.sql_processor - INFO - 📋 [최종 결과] 1487자: 문헌정보학과에서 수강할 수 있는 데이터 관련 수업은 다음과 같습니다:
+
+1. **정보자원구성론**
+   - 본 과목은 도서관.정보센터 서비스에 기초가 되는 정보자원 관리에 관한 이론 학습과 실제를 파악하여 학생들이 도서관 장서관리에 대해 배우고 미래 사서로서 역량을 함양하는 것을 목적으로 한다.
+
+2. **멀티자료조직론**
+   - 정보전달 수단으로서 다양...
+✅ 2025-09-23 06:06:06 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 15.578초
+🤖 2025-09-23 06:06:06 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:06:06 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1447자
+✅ 2025-09-23 06:06:06 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 15.580초
+✅ 2025-09-23 06:06:06 - controller.sqlController - INFO - ✅ [요청 완료] ID: 3d23984d-3105-4ae2-a84a-39fb4066b5fb, 상태: 성공, 시간: 15.580초
+🤖 2025-09-23 06:15:41 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:15:41 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과에서 데이터 수업 찾아줘...
+ℹ️ 2025-09-23 06:15:41 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과에서 데이터 수업 찾아줘'
+⚠️ 2025-09-23 06:16:03 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:16:03 - processors.sql_processor - INFO - 📋 [최종 결과] 1455자: Here are the data classes offered by the "문헌정보학과" (Library and Information Science) department:
+
+1. **정보자원구성론**
+   - Code: 109058
+   - Schedule: 화 6-A, 화 6-B, 화 7-A, 화 7-B, 목 8-A, 목 8-B
+   - Credits: ...
+✅ 2025-09-23 06:16:03 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 22.071초
+🤖 2025-09-23 06:16:03 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:16:03 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1415자
+✅ 2025-09-23 06:16:03 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 22.075초
+✅ 2025-09-23 06:16:03 - controller.sqlController - INFO - ✅ [요청 완료] ID: 9e7c12be-38f9-4784-bca9-d26a099b3781, 상태: 성공, 시간: 22.075초
+🤖 2025-09-23 06:26:47 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:26:47 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 06:26:47 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 06:26:57 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:26:57 - processors.sql_processor - INFO - 📋 [최종 결과] 1032자: I have gathered the schema for the relevant tables in the database. Here are the details:
+
+1. **jbnu_class**: Contains information about classes offered, including fields like `id`, `offered_year`, `s...
+✅ 2025-09-23 06:26:57 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 10.094초
+🤖 2025-09-23 06:26:57 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:26:57 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1000자
+✅ 2025-09-23 06:26:57 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 10.096초
+✅ 2025-09-23 06:26:57 - controller.sqlController - INFO - ✅ [요청 완료] ID: ce956c37-db85-4e93-a748-6b0079284cbe, 상태: 성공, 시간: 10.096초
+🤖 2025-09-23 06:26:57 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:26:57 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 06:26:57 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 06:27:13 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:27:13 - processors.sql_processor - INFO - 📋 [최종 결과] 1032자: I have gathered the schema for the relevant tables in the database. Here are the details:
+
+1. **jbnu_class**: Contains information about classes offered, including fields like `id`, `offered_year`, `s...
+✅ 2025-09-23 06:27:13 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 15.622초
+🤖 2025-09-23 06:27:13 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:27:13 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1000자
+✅ 2025-09-23 06:27:13 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 15.625초
+✅ 2025-09-23 06:27:13 - controller.sqlController - INFO - ✅ [요청 완료] ID: 7ee3ce30-61f2-41ee-bb79-c319993062f3, 상태: 성공, 시간: 15.625초
+🤖 2025-09-23 06:27:13 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:27:13 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과에서 데이터 수업 찾아줘...
+ℹ️ 2025-09-23 06:27:13 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과에서 데이터 수업 찾아줘'
+⚠️ 2025-09-23 06:27:47 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:27:47 - processors.sql_processor - INFO - 📋 [최종 결과] 3124자: Here are some data classes offered in the Department of Library and Information Science (문헌정보학과):
+
+1. **정보자원구성론 (Information Resource Organization Theory)**
+   - Code: 109058
+   - Schedule: 화 6-A, 화 6...
+✅ 2025-09-23 06:27:47 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 34.136초
+🤖 2025-09-23 06:27:47 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:27:47 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 3084자
+✅ 2025-09-23 06:27:47 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 34.138초
+✅ 2025-09-23 06:27:47 - controller.sqlController - INFO - ✅ [요청 완료] ID: 39fadd61-fb58-4926-b994-00ff10bd4675, 상태: 성공, 시간: 34.139초
+🤖 2025-09-23 06:28:03 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:28:03 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: test...
+ℹ️ 2025-09-23 06:28:03 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'test'
+⚠️ 2025-09-23 06:28:10 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:28:10 - processors.sql_processor - INFO - 📋 [최종 결과] 927자: Here are the schemas for the relevant tables in the database:
+
+1. **jbnu_class**
+   - **Columns**: 
+     - id (INTEGER)
+     - offered_year (INTEGER)
+     - semester (INTEGER)
+     - name (VARCHAR)
+  ...
+✅ 2025-09-23 06:28:10 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 7.358초
+🤖 2025-09-23 06:28:10 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:28:10 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 903자
+✅ 2025-09-23 06:28:10 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 7.360초
+✅ 2025-09-23 06:28:10 - controller.sqlController - INFO - ✅ [요청 완료] ID: e9cd3f43-f5c3-474d-b820-606aa41a404d, 상태: 성공, 시간: 7.361초
+🤖 2025-09-23 06:28:31 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:28:31 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 데이터...
+ℹ️ 2025-09-23 06:28:31 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 데이터'
+⚠️ 2025-09-23 06:29:07 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:29:08 - processors.sql_processor - INFO - 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+✅ 2025-09-23 06:29:09 - processors.sql_processor - INFO - ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+🤖 2025-09-23 06:29:22 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:29:22 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 데이터...
+ℹ️ 2025-09-23 06:29:22 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 데이터'
+⚠️ 2025-09-23 06:29:48 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:29:48 - processors.sql_processor - INFO - 📋 [최종 결과] 1461자: Here are the classes offered by the Library and Information Science department (Department ID: 90) for the upcoming semester:
+
+1. **정보자료조직연습** (Information Organization Practice)
+   - Offered Year: 20...
+✅ 2025-09-23 06:29:48 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 25.452초
+🤖 2025-09-23 06:29:48 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:29:48 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1421자
+✅ 2025-09-23 06:29:48 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 25.458초
+✅ 2025-09-23 06:29:48 - controller.sqlController - INFO - ✅ [요청 완료] ID: 26cf5900-2d12-41d4-88b9-29af76939cab, 상태: 성공, 시간: 25.458초
+🤖 2025-09-23 06:30:14 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:30:14 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과에서 데이터 수업 찾아줘...
+ℹ️ 2025-09-23 06:30:14 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과에서 데이터 수업 찾아줘'
+⚠️ 2025-09-23 06:30:43 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:30:43 - processors.sql_processor - INFO - 📋 [최종 결과] 3166자: Here are the data-related courses offered in the "문헌정보학과" (Library and Information Science):
+
+1. **정보자원구성론 (Information Resource Organization Theory)**
+   - Code: 109058
+   - Schedule: 화 6-A, 화 6-B, 화...
+✅ 2025-09-23 06:30:43 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 29.234초
+🤖 2025-09-23 06:30:43 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:30:43 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 3126자
+✅ 2025-09-23 06:30:43 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 29.236초
+✅ 2025-09-23 06:30:43 - controller.sqlController - INFO - ✅ [요청 완료] ID: 410eb957-8b99-4f2d-9b79-a3211cc58983, 상태: 성공, 시간: 29.236초
+🤖 2025-09-23 06:35:55 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:35:55 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과 수업을 찾아줘...
+ℹ️ 2025-09-23 06:35:55 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과 수업을 찾아줘'
+⚠️ 2025-09-23 06:36:03 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:36:03 - processors.sql_processor - INFO - 📋 [최종 결과] 682자: The relevant tables for your query are `jbnu_class`, `jbnu_department`, and `jbnu_college`. 
+
+1. **jbnu_class**: Contains information about classes, including the name, code, department, schedule, and...
+✅ 2025-09-23 06:36:03 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 7.942초
+🤖 2025-09-23 06:36:03 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:36:03 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 670자
+✅ 2025-09-23 06:36:03 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 7.944초
+✅ 2025-09-23 06:36:03 - controller.sqlController - INFO - ✅ [요청 완료] ID: 398aa5e2-a256-4956-9ecf-6f2df5c1e82c, 상태: 성공, 시간: 7.944초
+🤖 2025-09-23 06:36:48 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:36:48 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과 수업을 찾아줘...
+ℹ️ 2025-09-23 06:36:48 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과 수업을 찾아줘'
+⚠️ 2025-09-23 06:36:54 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:36:54 - processors.sql_processor - INFO - 📋 [최종 결과] 669자: The relevant tables for your query are `jbnu_class`, `jbnu_department`, and `jbnu_college`. 
+
+From the schema, we can see that:
+- The `jbnu_class` table contains information about classes, including t...
+✅ 2025-09-23 06:36:54 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 6.259초
+🤖 2025-09-23 06:36:54 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:36:54 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 669자
+✅ 2025-09-23 06:36:54 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 6.260초
+✅ 2025-09-23 06:36:54 - controller.sqlController - INFO - ✅ [요청 완료] ID: 8bd69e64-2b14-4a44-8747-4907276be5c2, 상태: 성공, 시간: 6.261초
+🤖 2025-09-23 06:37:03 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:37:03 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과에서 데이터 관련 수업을 찾아줘...
+ℹ️ 2025-09-23 06:37:03 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과에서 데이터 관련 수업을 찾아줘'
+⚠️ 2025-09-23 06:37:19 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:37:19 - processors.sql_processor - INFO - 📋 [최종 결과] 2100자: Here are some data-related courses offered in the 문헌정보학과 (Department of Library and Information Science):
+
+1. **정보자원구성론**: This course focuses on the management of information resources that are found...
+✅ 2025-09-23 06:37:19 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 15.376초
+🤖 2025-09-23 06:37:19 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:37:19 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 2060자
+✅ 2025-09-23 06:37:19 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 15.378초
+✅ 2025-09-23 06:37:19 - controller.sqlController - INFO - ✅ [요청 완료] ID: 53ff2f6e-ac31-4cd2-b2f3-83d98b088ccd, 상태: 성공, 시간: 15.379초
+🤖 2025-09-23 06:38:14 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:38:14 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 06:38:14 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 06:38:21 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:38:21 - processors.sql_processor - INFO - 📋 [최종 결과] 664자: Here are the schemas for the relevant tables:
+
+1. **jbnu_class**
+   - Columns: 
+     - id
+     - offered_year
+     - semester
+     - name
+     - code
+     - department_id
+     - student_grade
+     - s...
+✅ 2025-09-23 06:38:21 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 7.111초
+🤖 2025-09-23 06:38:21 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:38:21 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 652자
+✅ 2025-09-23 06:38:21 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 7.113초
+✅ 2025-09-23 06:38:21 - controller.sqlController - INFO - ✅ [요청 완료] ID: d9d30f63-5af1-4f5e-9e9f-08a38c1c0520, 상태: 성공, 시간: 7.113초
+🤖 2025-09-23 06:38:21 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:38:21 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 06:38:21 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 06:38:34 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:38:34 - processors.sql_processor - INFO - 📋 [최종 결과] 995자: I have gathered the schema for the relevant tables in the database. Here are the key tables and their columns:
+
+1. **jbnu_class**
+   - id
+   - offered_year
+   - semester
+   - name
+   - code
+   - depar...
+✅ 2025-09-23 06:38:34 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 12.293초
+🤖 2025-09-23 06:38:34 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:38:34 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 963자
+✅ 2025-09-23 06:38:34 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 12.295초
+✅ 2025-09-23 06:38:34 - controller.sqlController - INFO - ✅ [요청 완료] ID: 0794f311-4a4d-437a-916d-0f5d9bd8e84e, 상태: 성공, 시간: 12.295초
+🤖 2025-09-23 06:38:40 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:38:40 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과에서 데이터 수업 찾아줘...
+ℹ️ 2025-09-23 06:38:40 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과에서 데이터 수업 찾아줘'
+⚠️ 2025-09-23 06:39:14 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:39:14 - processors.sql_processor - INFO - 📋 [최종 결과] 3457자: Here are the data-related courses offered in the "문헌정보학과" (Library and Information Science) department:
+
+1. **정보자원구성론 (Information Resource Organization Theory)**
+   - **Code:** 109058
+   - **Professo...
+✅ 2025-09-23 06:39:14 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 34.258초
+🤖 2025-09-23 06:39:14 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:39:14 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 3217자
+✅ 2025-09-23 06:39:14 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 34.260초
+✅ 2025-09-23 06:39:14 - controller.sqlController - INFO - ✅ [요청 완료] ID: cf25e00f-64f8-4e0e-8a7b-4bcd2c651661, 상태: 성공, 시간: 34.260초
+🤖 2025-09-23 06:41:15 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:41:15 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 06:41:15 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 06:41:28 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:41:28 - processors.sql_processor - INFO - 📋 [최종 결과] 991자: I have gathered the schema for the relevant tables in the database. Here are the key tables and their columns:
+
+1. **jbnu_class**
+   - id
+   - offered_year
+   - semester
+   - name
+   - code
+   - depar...
+✅ 2025-09-23 06:41:28 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 12.509초
+🤖 2025-09-23 06:41:28 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:41:28 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 959자
+✅ 2025-09-23 06:41:28 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 12.512초
+✅ 2025-09-23 06:41:28 - controller.sqlController - INFO - ✅ [요청 완료] ID: 4de208bb-e07b-4fda-b11b-390102a0cba0, 상태: 성공, 시간: 12.512초
+🤖 2025-09-23 06:41:28 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:41:28 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 06:41:28 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 06:41:36 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:41:36 - processors.sql_processor - INFO - 📋 [최종 결과] 676자: Here are the schemas for the relevant tables:
+
+1. **jbnu_class**
+   - Columns: 
+     - id
+     - offered_year
+     - semester
+     - name
+     - code
+     - department_id
+     - student_grade
+     - s...
+✅ 2025-09-23 06:41:36 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 8.489초
+🤖 2025-09-23 06:41:36 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:41:36 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 664자
+✅ 2025-09-23 06:41:36 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 8.490초
+✅ 2025-09-23 06:41:36 - controller.sqlController - INFO - ✅ [요청 완료] ID: 612e0223-f5f7-4d1b-924c-67aa6cf4e0e6, 상태: 성공, 시간: 8.490초
+🤖 2025-09-23 06:41:41 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:41:41 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과에서 데이터 수업 찾아줘...
+ℹ️ 2025-09-23 06:41:41 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과에서 데이터 수업 찾아줘'
+⚠️ 2025-09-23 06:41:57 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:41:57 - processors.sql_processor - INFO - 📋 [최종 결과] 647자: In the 문헌정보학과 (Library and Information Science) department, the following data-related courses are offered:
+
+1. 정보자원구성론 (Information Resource Organization Theory)
+2. 멀티자료조직론 (Multi-Material Organizati...
+✅ 2025-09-23 06:41:57 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 15.896초
+🤖 2025-09-23 06:41:57 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:41:57 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 647자
+✅ 2025-09-23 06:41:57 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 15.898초
+✅ 2025-09-23 06:41:57 - controller.sqlController - INFO - ✅ [요청 완료] ID: 29a636b1-82d6-4a53-96eb-b787f67a68b1, 상태: 성공, 시간: 15.899초
+🤖 2025-09-23 06:44:31 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:44:31 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 06:44:31 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 06:44:44 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:44:44 - processors.sql_processor - INFO - 📋 [최종 결과] 999자: I have gathered the schema for the relevant tables in the database. Here are the details:
+
+1. **jbnu_class**: Contains information about classes offered, including fields like `id`, `offered_year`, `s...
+✅ 2025-09-23 06:44:44 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 13.760초
+🤖 2025-09-23 06:44:44 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:44:44 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 967자
+✅ 2025-09-23 06:44:44 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 13.763초
+✅ 2025-09-23 06:44:44 - controller.sqlController - INFO - ✅ [요청 완료] ID: 3ae6447f-9600-4dc4-afe6-045e20b6279f, 상태: 성공, 시간: 13.763초
+🤖 2025-09-23 06:44:44 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:44:44 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: SELECT 1...
+ℹ️ 2025-09-23 06:44:44 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: 'SELECT 1'
+⚠️ 2025-09-23 06:44:51 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:44:51 - processors.sql_processor - INFO - 📋 [최종 결과] 664자: Here are the schemas for the relevant tables:
+
+1. **jbnu_class**
+   - Columns: 
+     - id
+     - offered_year
+     - semester
+     - name
+     - code
+     - department_id
+     - student_grade
+     - s...
+✅ 2025-09-23 06:44:51 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 6.235초
+🤖 2025-09-23 06:44:51 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:44:51 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 652자
+✅ 2025-09-23 06:44:51 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 6.237초
+✅ 2025-09-23 06:44:51 - controller.sqlController - INFO - ✅ [요청 완료] ID: e0e321d4-1957-462c-9114-7bde46103b4c, 상태: 성공, 시간: 6.238초
+🤖 2025-09-23 06:45:00 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:45:00 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과에서 데이터 수업 찾아줘...
+ℹ️ 2025-09-23 06:45:00 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과에서 데이터 수업 찾아줘'
+⚠️ 2025-09-23 06:45:15 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:45:15 - processors.sql_processor - INFO - 📋 [최종 결과] 609자: Here are the data-related courses offered by the Department of Library and Information Science (문헌정보학과):
+
+1. 정보자원구성론 (Information Resource Organization)
+2. 멀티자료조직론 (Multi-Material Organization)
+3. 웹DB...
+✅ 2025-09-23 06:45:15 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 15.155초
+🤖 2025-09-23 06:45:15 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:45:15 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 609자
+✅ 2025-09-23 06:45:15 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 15.157초
+✅ 2025-09-23 06:45:15 - controller.sqlController - INFO - ✅ [요청 완료] ID: 97a81d09-ff9b-45be-a416-3a14a3cabd2c, 상태: 성공, 시간: 15.157초
+🤖 2025-09-23 06:57:11 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 06:57:11 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 문헌정보학과 문정과 수업을 찾아줘...
+ℹ️ 2025-09-23 06:57:11 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '문헌정보학과 문정과 수업을 찾아줘'
+⚠️ 2025-09-23 06:57:35 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 06:57:35 - processors.sql_processor - INFO - 📋 [최종 결과] 1452자: Here are the classes related to "문헌정보학과" (Library and Information Science):
+
+1. **정보자원구성론**
+   - Code: 109058
+   - Schedule: 화 6-A, 화 6-B, 화 7-A, 화 7-B, 목 8-A, 목 8-B
+   - Credits: 3
+   - Professor: 이현...
+✅ 2025-09-23 06:57:35 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 23.711초
+🤖 2025-09-23 06:57:35 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 06:57:35 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 1412자
+✅ 2025-09-23 06:57:35 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 23.712초
+✅ 2025-09-23 06:57:35 - controller.sqlController - INFO - ✅ [요청 완료] ID: 2efd74fa-6721-4958-a610-eb932c8bef5a, 상태: 성공, 시간: 23.712초
+ℹ️ 2025-09-23 21:45:30 - processors.sql_processor - INFO - 🔧 [에이전트 생성] SQL 에이전트 초기화 시작
+✅ 2025-09-23 21:45:30 - processors.sql_processor - INFO - ✅ [에이전트 생성] SQL 에이전트 초기화 완료
+🤖 2025-09-23 21:45:45 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 시작
+ℹ️ 2025-09-23 21:45:45 - processors.sql_processor - INFO - 🚀 [SQL 에이전트] 실행 시작: 컴공에서 인공지능 수업을 찾아줘...
+ℹ️ 2025-09-23 21:45:45 - processors.sql_processor - INFO - 🔍 [SQL 에이전트] 쿼리 실행 시작: '컴공에서 인공지능 수업을 찾아줘'
+⚠️ 2025-09-23 21:45:45 - langchain_core.callbacks.manager - WARNING - Error in StdOutCallbackHandler.on_chain_start callback: AttributeError("'NoneType' object has no attribute 'get'")
+⚠️ 2025-09-23 21:46:20 - processors.sql_processor - WARNING - ⚠️ [SQL 생성] 생성된 SQL 쿼리를 찾을 수 없음
+ℹ️ 2025-09-23 21:46:20 - processors.sql_processor - INFO - 📋 [최종 결과] 2481자: Here are some classes related to artificial intelligence:
+
+1. **교육과정개발**
+   - **Code:** 100741
+   - **Professor:** 문정미
+   - **Schedule:** 화 3-A, 화 3-B, 목 1-A, 목 1-B, 목 2-A, 목 2-B
+   - **Credits:** 3
+ ...
+✅ 2025-09-23 21:46:20 - processors.sql_processor - INFO - ✅ [SQL 에이전트] 실행 완료: 35.201초
+🤖 2025-09-23 21:46:20 - chains.sql_chain_manager - INFO - 🔗 [체인 1/3] SQL 에이전트 실행 완료 - 성공
+✅ 2025-09-23 21:46:20 - chains.sql_chain_manager - INFO - 🔗 [전체 체인] 실행 완료 - 최종 결과 길이: 2241자
+✅ 2025-09-23 21:46:20 - controller.sqlController - INFO - ✅ [2단계] SQL 실행 완료: 35.212초
+✅ 2025-09-23 21:46:20 - controller.sqlController - INFO - ✅ [요청 완료] ID: eab93fc2-eb91-4cee-adae-12d03a6e5e77, 상태: 성공, 시간: 35.212초

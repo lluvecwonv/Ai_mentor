@@ -1,75 +1,20 @@
 # Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-env/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.log
-.git
-.mypy_cache
-.pytest_cache
-.hypothesis
 
 # VSCode
 .vscode/
-.idea/
 
-# 환경 파일 및 민감 정보
+# 환경 파일
 .env
 .env.*
-*.env
-env_backup/
-
-# 데이터베이스 파일
-*.db
-*.sqlite
-*.sqlite3
-memory.db
-
-# 로그 파일
-logs/
-*.log
 
 # 가상환경
 venv/
-env/
-ENV/
-env.bak/
-venv.bak/
-
-# 캐시 및 임시 파일
-cache/
-uploads/
-vector_db/
-openwebui_new/
-reverse-proxy/openwebui/
+*.sqlite3
 
 # OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 
-# Docker
-.dockerignore
-
-# 기타 민감 정보
 open-webui/backend/Miniconda3-latest-Linux-x86_64.sh
-*.key
-*.pem
-*.crt
-config.json
-secrets/

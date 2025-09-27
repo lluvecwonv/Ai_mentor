@@ -24,8 +24,7 @@ class SynthesisNodes(BaseNode):
                 processing_type = state.get("processing_type", "unknown")
 
                 # Light 처리는 이미 완료된 상태
-                if processing_type == "light_llm" or processing_type == "light_greeting":
-                    logger.info("💬 Light 처리 완료 - 합성 스킵")
+                if processing_type == "light":
                     return state
 
                 user_message = self.get_user_message(state)
@@ -49,8 +48,7 @@ class SynthesisNodes(BaseNode):
                     conversation_history=conversation_history
                 )
 
-                logger.info(f"✅ 통합 합성 완료: {len(synthesized_result)} 문자 결과")
-                logger.info(f"🎯 [최종답변] Synthesis 결과: {synthesized_result}")
+                logger.info("✅ 통합 합성 완료")
 
                 return {
                     **state,
@@ -99,7 +97,7 @@ class SynthesisNodes(BaseNode):
                     else:
                         final_result = "검색을 완료했지만 관련 정보를 찾지 못했습니다."
 
-                logger.info(f"🎯 [최종답변] Quick Synthesis 결과: {final_result}")
+                logger.info("🎯 빠른 합성 완료")
 
                 return {
                     **state,
@@ -140,8 +138,7 @@ class SynthesisNodes(BaseNode):
                     self.get_user_message(state)
                 )
 
-                logger.info(f"✅ ToT 합성 완료: {len(candidates)}개 후보 중 선택")
-                logger.info(f"🎯 [최종답변] ToT Synthesis 결과: {combined_result}")
+                logger.info("✅ ToT 합성 완료")
 
                 return {
                     **state,

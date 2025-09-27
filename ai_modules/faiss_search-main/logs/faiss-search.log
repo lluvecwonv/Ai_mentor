@@ -1,0 +1,1672 @@
+2025-09-26 14:26:58 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 14:26:58 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 14:26:58 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 14:27:12 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 14:27:12 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능 관련 수업'
+2025-09-26 14:27:12 | INFO | controller.searchController |   - 요청 개수: 5
+2025-09-26 14:27:12 | INFO | controller.searchController |   - 시작 시간: 14:27:12.878
+2025-09-26 14:27:12 | INFO | service.vectorService | 🎯 [SQL+Vector] LLM 기반 SQL 사전필터링 + 벡터 검색 시작: '컴공에서 인공지능 관련 수업'
+2025-09-26 14:27:12 | INFO | service.vectorService | 🤖 [SQL+Vector] SqlPrefilterService 호출 중...
+2025-09-26 14:27:12 | INFO | service.sqlPrefilterService | 🔍 [SQL필터] SQL 사전필터링 분석 시작: '컴공에서 인공지능 관련 수업'
+2025-09-26 14:27:14 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 14:27:14 | INFO | service.sqlPrefilterService | 📝 [SQL필터] LLM 응답 전문: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 14:27:14 | INFO | service.sqlPrefilterService | 🤖 [SQL필터] 사용된 프롬프트: 다음 쿼리를 분석하여 SQL 사전 필터링 쿼리를 생성하세요: 컴공에서 인공지능 관련 수업
+2025-09-26 14:27:14 | INFO | service.sqlPrefilterService | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 14:27:14 | INFO | service.sqlPrefilterService | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 14:27:14 | INFO | service.sqlPrefilterService | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리
+2025-09-26 14:27:14 | INFO | service.vectorService | 📋 [SQL+Vector] LLM이 반환한 SQL: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 14:27:14 | INFO | service.vectorService | 🔎 [SQL+Vector] SQL 쿼리 실행 중: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 14:27:14 | INFO | service.sqlPrefilterService | 🔎 [SQL필터] SQL 쿼리 실행: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 14:27:14 | ERROR | service.sqlPrefilterService | ❌ [SQL필터] SQL 실행 실패: 'NoneType' object has no attribute 'cursor'
+2025-09-26 14:27:14 | WARNING | service.vectorService | ⚠️ [SQL+Vector] SQL 필터링 결과 없음 - 전체 검색으로 전환
+2025-09-26 14:27:14 | INFO | service.vectorService | 🔬 [VectorService] 벡터 검색 시작:
+2025-09-26 14:27:14 | INFO | service.vectorService |   - 원본 쿼리: '컴공에서 인공지능 관련 수업'
+2025-09-26 14:27:14 | INFO | service.vectorService |   - 요청 결과 수: 5
+2025-09-26 14:27:14 | INFO | service.vectorService | 🔗 [VectorService] OpenAI 임베딩 생성 중...
+2025-09-26 14:27:14 | INFO | service.vectorService |   - 임베딩할 텍스트: '컴공에서 인공지능 관련 수업'
+2025-09-26 14:27:14 | INFO | service.vectorService |   - 사용 모델: text-embedding-3-small
+2025-09-26 14:27:14 | INFO | service.vectorService | 🌐 [OpenAI API] 임베딩 요청:
+2025-09-26 14:27:14 | INFO | service.vectorService |   - 입력 길이: 15자
+2025-09-26 14:27:14 | INFO | service.vectorService |   - 입력 내용: '컴공에서 인공지능 관련 수업'
+2025-09-26 14:27:15 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 14:27:15 | INFO | service.vectorService | ✅ [OpenAI API] 임베딩 응답 수신:
+2025-09-26 14:27:15 | INFO | service.vectorService |   - 사용량: 15 토큰
+2025-09-26 14:27:15 | INFO | service.vectorService |   - 벡터 차원: 1536
+2025-09-26 14:27:15 | INFO | service.vectorService | ✅ [VectorService] 임베딩 생성 완료 (차원: 1536)
+2025-09-26 14:27:15 | INFO | service.vectorService |   - 정규화 후 L2 norm: 1.000000
+2025-09-26 14:27:15 | INFO | service.vectorService | 🔍 [VectorService] FAISS 인덱스 검색 중...
+2025-09-26 17:24:18 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 17:24:18 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 17:24:18 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 17:24:20 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 17:24:20 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 17:24:20 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 17:24:20 | INFO | controller.searchController |   - 시작 시간: 17:24:20.409
+2025-09-26 17:24:20 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 17:24:20 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 17:24:22 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 17:24:22 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 17:24:22 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 17:24:22 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 17:24:22 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 17:24:22 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음
+2025-09-26 17:24:22 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 17:24:22 | INFO | controller.searchController |   - 처리 시간: 1.775초
+2025-09-26 17:24:22 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 17:24:22 | WARNING | controller.searchController | ⚠️ [SQL+Vector] 검색 결과 없음: '테스트'
+2025-09-26 17:24:22 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 17:24:22 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 17:24:22 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 17:24:22 | INFO | controller.searchController |   - 시작 시간: 17:24:22.188
+2025-09-26 17:24:22 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 17:24:22 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 17:24:23 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 17:24:23 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 17:24:23 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 17:24:23 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 17:24:23 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 17:24:23 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음
+2025-09-26 17:24:23 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 17:24:23 | INFO | controller.searchController |   - 처리 시간: 1.062초
+2025-09-26 17:24:23 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 17:24:23 | WARNING | controller.searchController | ⚠️ [SQL+Vector] 검색 결과 없음: '테스트'
+2025-09-26 17:31:25 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 17:31:25 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 17:31:25 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 17:31:25 | INFO | controller.searchController |   - 시작 시간: 17:31:25.585
+2025-09-26 17:31:25 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 17:31:25 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 18:08:09 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 18:08:09 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 18:08:09 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 18:08:24 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 18:08:24 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:08:24 | INFO | controller.searchController |   - 요청 개수: 5
+2025-09-26 18:08:24 | INFO | controller.searchController |   - 시작 시간: 18:08:24.609
+2025-09-26 18:08:24 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:08:24 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:08:30 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:08:30 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 18:08:30 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 18:08:30 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 18:08:30 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리
+2025-09-26 18:08:30 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 18:08:30 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 42개 강의
+2025-09-26 18:08:30 | INFO | service.queryService |    #1: ID=26, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #2: ID=84, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #3: ID=277, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #4: ID=457, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #5: ID=749, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #6: ID=764, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #7: ID=793, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #8: ID=818, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #9: ID=1041, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #10: ID=1183, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #11: ID=1352, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #12: ID=1444, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #13: ID=1520, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #14: ID=1553, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #15: ID=1554, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #16: ID=1583, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #17: ID=1715, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #18: ID=1814, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #19: ID=1954, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #20: ID=2311, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #21: ID=2402, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #22: ID=2406, 과목명=네트워크보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #23: ID=2594, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #24: ID=2729, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #25: ID=2819, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #26: ID=2954, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #27: ID=3004, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #28: ID=3094, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #29: ID=3117, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #30: ID=3166, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #31: ID=3363, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #32: ID=3379, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #33: ID=3702, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #34: ID=3723, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #35: ID=3734, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #36: ID=3796, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #37: ID=3978, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #38: ID=4094, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #39: ID=4308, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #40: ID=4346, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #41: ID=4541, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.queryService |    #42: ID=4555, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 18:08:30 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 42개 강의
+2025-09-26 18:08:30 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 42개 강의
+2025-09-26 18:08:30 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 42개
+2025-09-26 18:08:30 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 18:08:31 | ERROR | service.searchService | ❌ [SearchService] 벡터 검색 실패: 
+2025-09-26 18:08:31 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 0개 결과
+2025-09-26 18:08:31 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 18:08:31 | INFO | controller.searchController |   - 처리 시간: 6.498초
+2025-09-26 18:08:31 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:08:31 | WARNING | controller.searchController | ⚠️ [SQL+Vector] 검색 결과 없음: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:09:34 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 18:09:34 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 18:09:34 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 18:09:49 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 18:09:49 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:09:49 | INFO | controller.searchController |   - 요청 개수: 3
+2025-09-26 18:09:49 | INFO | controller.searchController |   - 시작 시간: 18:09:49.462
+2025-09-26 18:09:49 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:09:49 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:09:52 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:09:52 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 18:09:52 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 18:09:52 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 18:09:52 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리
+2025-09-26 18:09:52 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 18:09:52 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 42개 강의
+2025-09-26 18:09:52 | INFO | service.queryService |    #1: ID=26, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #2: ID=84, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #3: ID=277, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #4: ID=457, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #5: ID=749, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #6: ID=764, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #7: ID=793, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #8: ID=818, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #9: ID=1041, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #10: ID=1183, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #11: ID=1352, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #12: ID=1444, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #13: ID=1520, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #14: ID=1553, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #15: ID=1554, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #16: ID=1583, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #17: ID=1715, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #18: ID=1814, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #19: ID=1954, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #20: ID=2311, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #21: ID=2402, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #22: ID=2406, 과목명=네트워크보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #23: ID=2594, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #24: ID=2729, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #25: ID=2819, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #26: ID=2954, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #27: ID=3004, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #28: ID=3094, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #29: ID=3117, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #30: ID=3166, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #31: ID=3363, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #32: ID=3379, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #33: ID=3702, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #34: ID=3723, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #35: ID=3734, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #36: ID=3796, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #37: ID=3978, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #38: ID=4094, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #39: ID=4308, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #40: ID=4346, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #41: ID=4541, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.queryService |    #42: ID=4555, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 18:09:52 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 42개 강의
+2025-09-26 18:09:52 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 42개 강의
+2025-09-26 18:09:52 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 42개
+2025-09-26 18:09:53 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 18:09:53 | ERROR | service.searchService | ❌ [SearchService] 벡터 검색 실패: 
+2025-09-26 18:09:53 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 0개 결과
+2025-09-26 18:09:53 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 18:09:53 | INFO | controller.searchController |   - 처리 시간: 4.404초
+2025-09-26 18:09:53 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:09:53 | WARNING | controller.searchController | ⚠️ [SQL+Vector] 검색 결과 없음: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:10:11 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 18:10:11 | INFO | controller.searchController |   - 쿼리: '인공지능'
+2025-09-26 18:10:11 | INFO | controller.searchController |   - 요청 개수: 3
+2025-09-26 18:10:11 | INFO | controller.searchController |   - 시작 시간: 18:10:11.367
+2025-09-26 18:10:11 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '인공지능'
+2025-09-26 18:10:11 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '인공지능'
+2025-09-26 18:10:12 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:10:12 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 18:10:12 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 18:10:12 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 18:10:12 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 18:10:12 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음
+2025-09-26 18:10:12 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 18:10:12 | INFO | controller.searchController |   - 처리 시간: 1.151초
+2025-09-26 18:10:12 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:10:12 | WARNING | controller.searchController | ⚠️ [SQL+Vector] 검색 결과 없음: '인공지능'
+2025-09-26 18:15:10 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 18:15:10 | INFO | controller.searchController |   - 쿼리: '인공지능'
+2025-09-26 18:15:10 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 18:15:10 | INFO | controller.searchController |   - 시작 시간: 18:15:10.475
+2025-09-26 18:15:10 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '인공지능'
+2025-09-26 18:15:10 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '인공지능'
+2025-09-26 18:15:11 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:15:11 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 18:15:11 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 18:15:11 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 18:15:11 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 18:15:11 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음
+2025-09-26 18:15:11 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 18:15:11 | INFO | controller.searchController |   - 처리 시간: 1.192초
+2025-09-26 18:15:11 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:15:11 | WARNING | controller.searchController | ⚠️ [SQL+Vector] 검색 결과 없음: '인공지능'
+2025-09-26 18:17:09 | INFO | controller.searchController | 🔍 [FAISS] 검색 시작:
+2025-09-26 18:17:09 | INFO | controller.searchController |   - 쿼리: '인공지능'
+2025-09-26 18:17:09 | INFO | controller.searchController |   - 요청 개수: 5
+2025-09-26 18:17:09 | INFO | controller.searchController |   - 시작 시간: 18:17:09.416
+2025-09-26 18:17:09 | INFO | controller.searchController | 🔍 [FAISS] 검색: '인공지능'
+2025-09-26 18:17:09 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '인공지능'
+2025-09-26 18:17:09 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '인공지능'
+2025-09-26 18:17:11 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:17:11 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 18:17:11 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 18:17:11 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 18:17:11 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 18:17:11 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음
+2025-09-26 18:17:11 | INFO | controller.searchController | ✅ [FAISS] 검색 완료:
+2025-09-26 18:17:11 | INFO | controller.searchController |   - 처리 시간: 2.558초
+2025-09-26 18:17:11 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:17:11 | WARNING | controller.searchController | ⚠️ [FAISS] 검색 결과 없음: '인공지능'
+2025-09-26 18:17:17 | INFO | controller.searchController | 🔍 [FAISS] 검색 시작:
+2025-09-26 18:17:17 | INFO | controller.searchController |   - 쿼리: '인공지능'
+2025-09-26 18:17:17 | INFO | controller.searchController |   - 요청 개수: 5
+2025-09-26 18:17:17 | INFO | controller.searchController |   - 시작 시간: 18:17:17.447
+2025-09-26 18:17:17 | INFO | controller.searchController | 🔍 [FAISS] 검색: '인공지능'
+2025-09-26 18:17:17 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '인공지능'
+2025-09-26 18:17:17 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '인공지능'
+2025-09-26 18:17:18 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:17:18 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 18:17:18 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 18:17:18 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 18:17:18 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 18:17:18 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음
+2025-09-26 18:17:18 | INFO | controller.searchController | ✅ [FAISS] 검색 완료:
+2025-09-26 18:17:18 | INFO | controller.searchController |   - 처리 시간: 1.492초
+2025-09-26 18:17:18 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:17:18 | WARNING | controller.searchController | ⚠️ [FAISS] 검색 결과 없음: '인공지능'
+2025-09-26 18:17:24 | INFO | controller.searchController | 🔍 [FAISS] 검색 시작:
+2025-09-26 18:17:24 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:17:24 | INFO | controller.searchController |   - 요청 개수: 5
+2025-09-26 18:17:24 | INFO | controller.searchController |   - 시작 시간: 18:17:24.450
+2025-09-26 18:17:24 | INFO | controller.searchController | 🔍 [FAISS] 검색: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:17:24 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:17:24 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:17:26 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:17:26 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 18:17:26 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 18:17:26 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 18:17:26 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리
+2025-09-26 18:17:26 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 18:17:26 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 42개 강의
+2025-09-26 18:17:26 | INFO | service.queryService |    #1: ID=26, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #2: ID=84, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #3: ID=277, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #4: ID=457, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #5: ID=749, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #6: ID=764, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #7: ID=793, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #8: ID=818, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #9: ID=1041, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #10: ID=1183, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #11: ID=1352, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #12: ID=1444, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #13: ID=1520, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #14: ID=1553, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #15: ID=1554, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #16: ID=1583, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #17: ID=1715, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #18: ID=1814, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #19: ID=1954, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #20: ID=2311, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #21: ID=2402, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #22: ID=2406, 과목명=네트워크보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #23: ID=2594, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #24: ID=2729, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #25: ID=2819, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #26: ID=2954, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #27: ID=3004, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #28: ID=3094, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #29: ID=3117, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #30: ID=3166, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #31: ID=3363, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #32: ID=3379, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #33: ID=3702, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #34: ID=3723, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #35: ID=3734, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #36: ID=3796, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #37: ID=3978, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #38: ID=4094, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #39: ID=4308, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #40: ID=4346, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #41: ID=4541, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.queryService |    #42: ID=4555, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 18:17:26 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 42개 강의
+2025-09-26 18:17:26 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 42개 강의
+2025-09-26 18:17:26 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 42개
+2025-09-26 18:17:26 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 18:17:26 | ERROR | service.searchService | ❌ [SearchService] 벡터 검색 실패: 
+2025-09-26 18:17:26 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 0개 결과
+2025-09-26 18:17:26 | INFO | controller.searchController | ✅ [FAISS] 검색 완료:
+2025-09-26 18:17:26 | INFO | controller.searchController |   - 처리 시간: 2.506초
+2025-09-26 18:17:26 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:17:26 | WARNING | controller.searchController | ⚠️ [FAISS] 검색 결과 없음: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:22 | INFO | controller.searchController | 🔍 [FAISS] 검색 시작:
+2025-09-26 18:18:22 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:22 | INFO | controller.searchController |   - 요청 개수: 5
+2025-09-26 18:18:22 | INFO | controller.searchController |   - 시작 시간: 18:18:22.278
+2025-09-26 18:18:22 | INFO | controller.searchController | 🔍 [FAISS] 검색: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:22 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:22 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:24 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:18:24 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 18:18:24 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 18:18:24 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 18:18:24 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리
+2025-09-26 18:18:24 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 18:18:24 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 42개 강의
+2025-09-26 18:18:24 | INFO | service.queryService |    #1: ID=26, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #2: ID=84, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #3: ID=277, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #4: ID=457, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #5: ID=749, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #6: ID=764, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #7: ID=793, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #8: ID=818, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #9: ID=1041, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #10: ID=1183, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #11: ID=1352, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #12: ID=1444, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #13: ID=1520, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #14: ID=1553, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #15: ID=1554, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #16: ID=1583, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #17: ID=1715, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #18: ID=1814, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #19: ID=1954, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #20: ID=2311, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #21: ID=2402, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #22: ID=2406, 과목명=네트워크보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #23: ID=2594, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #24: ID=2729, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #25: ID=2819, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #26: ID=2954, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #27: ID=3004, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #28: ID=3094, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #29: ID=3117, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #30: ID=3166, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #31: ID=3363, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #32: ID=3379, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #33: ID=3702, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #34: ID=3723, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #35: ID=3734, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #36: ID=3796, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #37: ID=3978, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #38: ID=4094, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #39: ID=4308, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #40: ID=4346, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #41: ID=4541, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.queryService |    #42: ID=4555, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:24 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 42개 강의
+2025-09-26 18:18:24 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 42개 강의
+2025-09-26 18:18:24 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 42개
+2025-09-26 18:18:24 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 18:18:24 | ERROR | service.searchService | ❌ [SearchService] 벡터 검색 실패: 
+2025-09-26 18:18:24 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 0개 결과
+2025-09-26 18:18:24 | INFO | controller.searchController | ✅ [FAISS] 검색 완료:
+2025-09-26 18:18:24 | INFO | controller.searchController |   - 처리 시간: 2.577초
+2025-09-26 18:18:24 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:18:24 | WARNING | controller.searchController | ⚠️ [FAISS] 검색 결과 없음: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:48 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 18:18:48 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 18:18:48 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 18:18:56 | INFO | controller.searchController | 🔍 [FAISS] 검색 시작:
+2025-09-26 18:18:56 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:56 | INFO | controller.searchController |   - 요청 개수: 5
+2025-09-26 18:18:56 | INFO | controller.searchController |   - 시작 시간: 18:18:56.750
+2025-09-26 18:18:56 | INFO | controller.searchController | 🔍 [FAISS] 검색: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:56 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:56 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 18:18:59 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 18:18:59 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 18:18:59 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 18:18:59 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 18:18:59 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리
+2025-09-26 18:18:59 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 18:18:59 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 42개 강의
+2025-09-26 18:18:59 | INFO | service.queryService |    #1: ID=26, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #2: ID=84, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #3: ID=277, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #4: ID=457, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #5: ID=749, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #6: ID=764, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #7: ID=793, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #8: ID=818, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #9: ID=1041, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #10: ID=1183, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #11: ID=1352, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #12: ID=1444, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #13: ID=1520, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #14: ID=1553, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #15: ID=1554, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #16: ID=1583, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #17: ID=1715, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #18: ID=1814, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #19: ID=1954, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #20: ID=2311, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #21: ID=2402, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #22: ID=2406, 과목명=네트워크보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #23: ID=2594, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #24: ID=2729, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #25: ID=2819, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #26: ID=2954, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #27: ID=3004, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #28: ID=3094, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #29: ID=3117, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #30: ID=3166, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #31: ID=3363, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #32: ID=3379, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #33: ID=3702, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #34: ID=3723, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #35: ID=3734, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #36: ID=3796, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #37: ID=3978, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #38: ID=4094, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #39: ID=4308, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #40: ID=4346, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #41: ID=4541, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.queryService |    #42: ID=4555, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 18:18:59 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 42개 강의
+2025-09-26 18:18:59 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 42개 강의
+2025-09-26 18:18:59 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 42개
+2025-09-26 18:18:59 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 18:18:59 | ERROR | service.searchService | ❌ [SearchService] 벡터 검색 실패: 
+2025-09-26 18:18:59 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 0개 결과
+2025-09-26 18:18:59 | INFO | controller.searchController | ✅ [FAISS] 검색 완료:
+2025-09-26 18:18:59 | INFO | controller.searchController |   - 처리 시간: 3.224초
+2025-09-26 18:18:59 | INFO | controller.searchController |   - 결과 개수: 0
+2025-09-26 18:18:59 | WARNING | controller.searchController | ⚠️ [FAISS] 검색 결과 없음: '컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-26 19:53:18 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 19:53:18 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 19:53:18 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 19:55:33 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 19:55:33 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 19:55:33 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 19:55:33 | INFO | controller.searchController |   - 시작 시간: 19:55:33.786
+2025-09-26 19:55:33 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 19:55:33 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 19:55:35 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 19:55:35 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 19:55:35 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 19:55:35 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 19:55:35 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 19:55:35 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 19:55:35 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 19:55:35 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 1000개 강의
+2025-09-26 19:55:35 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 1000개 강의
+2025-09-26 19:55:35 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 1000개 강의
+2025-09-26 19:55:38 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 1000개
+2025-09-26 19:55:38 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(1000, 1536)
+2025-09-26 19:55:38 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 19:55:38 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 19:55:39 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 19:55:39 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 19:55:39 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 19:55:39 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 19:55:39 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.08421763], indices=[110]
+2025-09-26 19:55:39 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 응용역학, score=0.0842
+2025-09-26 19:55:39 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 19:55:39 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 19:55:39 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 19:55:39 | INFO | controller.searchController |   - 처리 시간: 6.074초
+2025-09-26 19:55:39 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 19:55:39 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 19:55:39 | INFO | controller.searchController |   1. 응용역학 (토목환경자원에너지공학부(토목공학)) - 유사도: 0.084
+2025-09-26 19:55:39 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 19:55:39 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 19:55:39 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 19:55:39 | INFO | controller.searchController |   - 시작 시간: 19:55:39.861
+2025-09-26 19:55:39 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 19:55:39 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 19:55:41 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 19:55:41 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 19:55:41 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 19:55:41 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 19:55:41 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 19:55:41 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 19:55:41 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 19:55:41 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 1000개 강의
+2025-09-26 19:55:41 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 1000개 강의
+2025-09-26 19:55:41 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 1000개 강의
+2025-09-26 19:55:44 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 1000개
+2025-09-26 19:55:44 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(1000, 1536)
+2025-09-26 19:55:44 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 19:55:44 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 19:55:45 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 19:55:45 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 19:55:45 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 19:55:45 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 19:55:45 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.0842459], indices=[110]
+2025-09-26 19:55:45 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 응용역학, score=0.0842
+2025-09-26 19:55:45 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 19:55:45 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 19:55:45 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 19:55:45 | INFO | controller.searchController |   - 처리 시간: 5.776초
+2025-09-26 19:55:45 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 19:55:45 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 19:55:45 | INFO | controller.searchController |   1. 응용역학 (토목환경자원에너지공학부(토목공학)) - 유사도: 0.084
+2025-09-26 20:00:38 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:00:38 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 20:00:38 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 20:00:38 | INFO | controller.searchController |   - 시작 시간: 20:00:38.705
+2025-09-26 20:00:38 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 20:00:38 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 20:00:42 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:00:42 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 20:00:42 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 20:00:42 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 20:00:42 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 20:00:42 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 20:00:42 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 20:00:42 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 1000개 강의
+2025-09-26 20:00:42 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 1000개 강의
+2025-09-26 20:00:42 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 1000개 강의
+2025-09-26 20:00:45 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 1000개
+2025-09-26 20:00:45 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(1000, 1536)
+2025-09-26 20:00:45 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:00:45 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 20:00:45 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:00:45 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:00:45 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:00:45 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 20:00:45 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.0842459], indices=[110]
+2025-09-26 20:00:45 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 응용역학, score=0.0842
+2025-09-26 20:00:45 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 20:00:45 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 20:00:45 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:00:45 | INFO | controller.searchController |   - 처리 시간: 7.192초
+2025-09-26 20:00:45 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 20:00:45 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:00:45 | INFO | controller.searchController |   1. 응용역학 (토목환경자원에너지공학부(토목공학)) - 유사도: 0.084
+2025-09-26 20:00:45 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:00:45 | INFO | controller.searchController |   - 쿼리: '컴공과 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:00:45 | INFO | controller.searchController |   - 요청 개수: 30
+2025-09-26 20:00:45 | INFO | controller.searchController |   - 시작 시간: 20:00:45.902
+2025-09-26 20:00:45 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공과 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:00:45 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공과 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:00:49 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:00:49 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 20:00:49 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 20:00:49 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 20:00:49 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리
+2025-09-26 20:00:49 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 20:00:49 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 42개 강의
+2025-09-26 20:00:49 | INFO | service.queryService |    #1: ID=26, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #2: ID=84, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #3: ID=277, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #4: ID=457, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #5: ID=749, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #6: ID=764, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #7: ID=793, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #8: ID=818, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #9: ID=1041, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #10: ID=1183, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #11: ID=1352, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #12: ID=1444, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #13: ID=1520, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #14: ID=1553, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #15: ID=1554, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #16: ID=1583, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #17: ID=1715, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #18: ID=1814, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #19: ID=1954, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #20: ID=2311, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #21: ID=2402, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #22: ID=2406, 과목명=네트워크보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #23: ID=2594, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #24: ID=2729, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #25: ID=2819, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #26: ID=2954, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #27: ID=3004, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #28: ID=3094, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #29: ID=3117, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #30: ID=3166, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #31: ID=3363, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #32: ID=3379, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #33: ID=3702, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #34: ID=3723, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #35: ID=3734, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #36: ID=3796, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #37: ID=3978, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #38: ID=4094, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #39: ID=4308, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #40: ID=4346, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #41: ID=4541, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.queryService |    #42: ID=4555, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 20:00:49 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 42개 강의
+2025-09-26 20:00:49 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 42개 강의
+2025-09-26 20:00:49 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 42개
+2025-09-26 20:00:49 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(42, 1536)
+2025-09-26 20:00:49 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:00:49 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '컴공과 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:00:50 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=30
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.07544841 0.06933489 0.06646274], indices=[31  5 33]
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 산학실전캡스톤 3, score=0.0754
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 2: 자료구조, score=0.0693
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 3: 산학실전캡스톤 1, score=0.0665
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 4: 컴퓨터논리및논술론, score=0.0629
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 5: 확률및통계, score=0.0586
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 6: 클라우드컴퓨팅, score=0.0583
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 7: 데이터마이닝, score=0.0580
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 8: 정보검색, score=0.0489
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 9: 산학실전캡스톤 2, score=0.0486
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 10: 선형대수학, score=0.0472
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 11: 소프트웨어공학, score=0.0471
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 12: 오픈소스소프트웨어개발, score=0.0470
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 13: 이산수학, score=0.0447
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 14: 데이터통신, score=0.0423
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 15: 컴퓨터구조, score=0.0417
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 16: 네트워크보안, score=0.0413
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 17: 컴퓨터네트워크, score=0.0391
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 18: 데이터베이스, score=0.0383
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 19: 기계학습, score=0.0380
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 20: 웹서비스설계, score=0.0378
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 21: 자연어처리, score=0.0352
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 22: 컴파일러, score=0.0350
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 23: 컴퓨터공학총론, score=0.0343
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 24: 창업특강, score=0.0330
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 25: 논리설계, score=0.0323
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 26: 모바일프로그래밍, score=0.0319
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 27: 수치해석및최적화, score=0.0305
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 28: 인공지능, score=0.0294
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 29: 컴퓨터그래픽스, score=0.0285
+2025-09-26 20:00:50 | INFO | service.searchService | 🔧 [SearchService] 결과 30: 컴퓨터비전, score=0.0275
+2025-09-26 20:00:50 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 30개 결과
+2025-09-26 20:00:50 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 30개 결과
+2025-09-26 20:00:50 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:00:50 | INFO | controller.searchController |   - 처리 시간: 4.611초
+2025-09-26 20:00:50 | INFO | controller.searchController |   - 결과 개수: 30
+2025-09-26 20:00:50 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:00:50 | INFO | controller.searchController |   1. 산학실전캡스톤 3 (컴퓨터인공지능학부) - 유사도: 0.075
+2025-09-26 20:00:50 | INFO | controller.searchController |   2. 자료구조 (컴퓨터인공지능학부) - 유사도: 0.069
+2025-09-26 20:00:50 | INFO | controller.searchController |   3. 산학실전캡스톤 1 (컴퓨터인공지능학부) - 유사도: 0.066
+2025-09-26 20:00:50 | INFO | controller.searchController |   ... 총 30개 결과
+2025-09-26 20:02:14 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:02:14 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:02:14 | INFO | controller.searchController |   - 요청 개수: 30
+2025-09-26 20:02:14 | INFO | controller.searchController |   - 시작 시간: 20:02:14.639
+2025-09-26 20:02:14 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:02:14 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:02:19 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:02:19 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 20:02:19 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 20:02:19 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 20:02:19 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리
+2025-09-26 20:02:19 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 20:02:19 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 42개 강의
+2025-09-26 20:02:19 | INFO | service.queryService |    #1: ID=26, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #2: ID=84, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #3: ID=277, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #4: ID=457, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #5: ID=749, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #6: ID=764, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #7: ID=793, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #8: ID=818, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #9: ID=1041, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #10: ID=1183, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #11: ID=1352, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #12: ID=1444, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #13: ID=1520, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #14: ID=1553, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #15: ID=1554, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #16: ID=1583, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #17: ID=1715, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #18: ID=1814, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #19: ID=1954, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #20: ID=2311, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #21: ID=2402, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #22: ID=2406, 과목명=네트워크보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #23: ID=2594, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #24: ID=2729, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #25: ID=2819, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #26: ID=2954, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #27: ID=3004, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #28: ID=3094, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #29: ID=3117, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #30: ID=3166, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #31: ID=3363, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #32: ID=3379, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #33: ID=3702, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #34: ID=3723, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #35: ID=3734, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #36: ID=3796, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #37: ID=3978, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #38: ID=4094, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #39: ID=4308, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #40: ID=4346, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #41: ID=4541, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.queryService |    #42: ID=4555, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 20:02:19 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 42개 강의
+2025-09-26 20:02:19 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 42개 강의
+2025-09-26 20:02:20 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 42개
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(42, 1536)
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '컴공에서 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:02:20 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=30
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.07536252 0.06745681 0.06547737], indices=[31  5 33]
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 산학실전캡스톤 3, score=0.0754
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 2: 자료구조, score=0.0675
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 3: 산학실전캡스톤 1, score=0.0655
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 4: 컴퓨터논리및논술론, score=0.0621
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 5: 확률및통계, score=0.0597
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 6: 클라우드컴퓨팅, score=0.0594
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 7: 데이터마이닝, score=0.0564
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 8: 산학실전캡스톤 2, score=0.0482
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 9: 오픈소스소프트웨어개발, score=0.0481
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 10: 정보검색, score=0.0478
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 11: 소프트웨어공학, score=0.0473
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 12: 선형대수학, score=0.0466
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 13: 이산수학, score=0.0459
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 14: 데이터통신, score=0.0448
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 15: 네트워크보안, score=0.0421
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 16: 컴퓨터네트워크, score=0.0410
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 17: 컴퓨터구조, score=0.0395
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 18: 웹서비스설계, score=0.0385
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 19: 데이터베이스, score=0.0371
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 20: 컴퓨터공학총론, score=0.0362
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 21: 기계학습, score=0.0361
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 22: 모바일프로그래밍, score=0.0343
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 23: 창업특강, score=0.0340
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 24: 자연어처리, score=0.0338
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 25: 컴파일러, score=0.0336
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 26: 논리설계, score=0.0310
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 27: 수치해석및최적화, score=0.0308
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 28: 컴퓨터비전, score=0.0295
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 29: 인공지능, score=0.0287
+2025-09-26 20:02:20 | INFO | service.searchService | 🔧 [SearchService] 결과 30: 컴퓨터그래픽스, score=0.0282
+2025-09-26 20:02:20 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 30개 결과
+2025-09-26 20:02:20 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 30개 결과
+2025-09-26 20:02:20 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:02:20 | INFO | controller.searchController |   - 처리 시간: 5.913초
+2025-09-26 20:02:20 | INFO | controller.searchController |   - 결과 개수: 30
+2025-09-26 20:02:20 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:02:20 | INFO | controller.searchController |   1. 산학실전캡스톤 3 (컴퓨터인공지능학부) - 유사도: 0.075
+2025-09-26 20:02:20 | INFO | controller.searchController |   2. 자료구조 (컴퓨터인공지능학부) - 유사도: 0.067
+2025-09-26 20:02:20 | INFO | controller.searchController |   3. 산학실전캡스톤 1 (컴퓨터인공지능학부) - 유사도: 0.065
+2025-09-26 20:02:20 | INFO | controller.searchController |   ... 총 30개 결과
+2025-09-26 20:07:33 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:07:33 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:07:33 | INFO | controller.searchController |   - 요청 개수: 30
+2025-09-26 20:07:33 | INFO | controller.searchController |   - 시작 시간: 20:07:33.824
+2025-09-26 20:07:33 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:07:33 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:07:36 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:07:36 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 20:07:36 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 20:07:36 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 20:07:36 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리
+2025-09-26 20:07:36 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 20:07:36 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 42개 강의
+2025-09-26 20:07:36 | INFO | service.queryService |    #1: ID=26, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #2: ID=84, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #3: ID=277, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #4: ID=457, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #5: ID=749, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #6: ID=764, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #7: ID=793, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #8: ID=818, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #9: ID=1041, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #10: ID=1183, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #11: ID=1352, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #12: ID=1444, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #13: ID=1520, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #14: ID=1553, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #15: ID=1554, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #16: ID=1583, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #17: ID=1715, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #18: ID=1814, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #19: ID=1954, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #20: ID=2311, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #21: ID=2402, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #22: ID=2406, 과목명=네트워크보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #23: ID=2594, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #24: ID=2729, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #25: ID=2819, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #26: ID=2954, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #27: ID=3004, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #28: ID=3094, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #29: ID=3117, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #30: ID=3166, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #31: ID=3363, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #32: ID=3379, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #33: ID=3702, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #34: ID=3723, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #35: ID=3734, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #36: ID=3796, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #37: ID=3978, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #38: ID=4094, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #39: ID=4308, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #40: ID=4346, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #41: ID=4541, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.queryService |    #42: ID=4555, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 20:07:36 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 42개 강의
+2025-09-26 20:07:36 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 42개 강의
+2025-09-26 20:07:36 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 42개
+2025-09-26 20:07:36 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(42, 1536)
+2025-09-26 20:07:36 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:07:36 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '컴공에서 인공지능 관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:07:37 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=30
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.07536252 0.06745681 0.06547737], indices=[31  5 33]
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 산학실전캡스톤 3, score=0.0754
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 2: 자료구조, score=0.0675
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 3: 산학실전캡스톤 1, score=0.0655
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 4: 컴퓨터논리및논술론, score=0.0621
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 5: 확률및통계, score=0.0597
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 6: 클라우드컴퓨팅, score=0.0594
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 7: 데이터마이닝, score=0.0564
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 8: 산학실전캡스톤 2, score=0.0482
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 9: 오픈소스소프트웨어개발, score=0.0481
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 10: 정보검색, score=0.0478
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 11: 소프트웨어공학, score=0.0473
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 12: 선형대수학, score=0.0466
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 13: 이산수학, score=0.0459
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 14: 데이터통신, score=0.0448
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 15: 네트워크보안, score=0.0421
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 16: 컴퓨터네트워크, score=0.0410
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 17: 컴퓨터구조, score=0.0395
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 18: 웹서비스설계, score=0.0385
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 19: 데이터베이스, score=0.0371
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 20: 컴퓨터공학총론, score=0.0362
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 21: 기계학습, score=0.0361
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 22: 모바일프로그래밍, score=0.0343
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 23: 창업특강, score=0.0340
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 24: 자연어처리, score=0.0338
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 25: 컴파일러, score=0.0336
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 26: 논리설계, score=0.0310
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 27: 수치해석및최적화, score=0.0308
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 28: 컴퓨터비전, score=0.0295
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 29: 인공지능, score=0.0287
+2025-09-26 20:07:37 | INFO | service.searchService | 🔧 [SearchService] 결과 30: 컴퓨터그래픽스, score=0.0282
+2025-09-26 20:07:37 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 30개 결과
+2025-09-26 20:07:37 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 30개 결과
+2025-09-26 20:07:37 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:07:37 | INFO | controller.searchController |   - 처리 시간: 3.664초
+2025-09-26 20:07:37 | INFO | controller.searchController |   - 결과 개수: 30
+2025-09-26 20:07:37 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:07:37 | INFO | controller.searchController |   1. 산학실전캡스톤 3 (컴퓨터인공지능학부) - 유사도: 0.075
+2025-09-26 20:07:37 | INFO | controller.searchController |   2. 자료구조 (컴퓨터인공지능학부) - 유사도: 0.067
+2025-09-26 20:07:37 | INFO | controller.searchController |   3. 산학실전캡스톤 1 (컴퓨터인공지능학부) - 유사도: 0.065
+2025-09-26 20:07:37 | INFO | controller.searchController |   ... 총 30개 결과
+2025-09-26 20:13:29 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 20:13:29 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 20:13:29 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 20:13:31 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:13:31 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 20:13:31 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 20:13:31 | INFO | controller.searchController |   - 시작 시간: 20:13:31.144
+2025-09-26 20:13:31 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 20:13:31 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 20:13:32 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:13:32 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 20:13:32 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 20:13:32 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 20:13:32 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 20:13:32 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 20:13:32 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 20:13:32 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 448개 강의
+2025-09-26 20:13:32 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 448개 강의
+2025-09-26 20:13:32 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 448개 강의
+2025-09-26 20:13:33 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 448개
+2025-09-26 20:13:33 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(448, 1536)
+2025-09-26 20:13:33 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:13:33 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 20:13:34 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:13:34 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:13:34 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:13:34 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 20:13:34 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.07314133], indices=[123]
+2025-09-26 20:13:34 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 컴퓨터네트워크, score=0.0731
+2025-09-26 20:13:34 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 20:13:34 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 20:13:34 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:13:34 | INFO | controller.searchController |   - 처리 시간: 3.236초
+2025-09-26 20:13:34 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 20:13:34 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:13:34 | INFO | controller.searchController |   1. 컴퓨터네트워크 (전자공학부) - 유사도: 0.073
+2025-09-26 20:13:34 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:13:34 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 20:13:34 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 20:13:34 | INFO | controller.searchController |   - 시작 시간: 20:13:34.381
+2025-09-26 20:13:34 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 20:13:34 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 20:13:35 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:13:35 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 20:13:35 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 20:13:35 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 20:13:35 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 20:13:35 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 20:13:35 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 20:13:35 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 448개 강의
+2025-09-26 20:13:35 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 448개 강의
+2025-09-26 20:13:35 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 448개 강의
+2025-09-26 20:13:37 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 448개
+2025-09-26 20:13:37 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(448, 1536)
+2025-09-26 20:13:37 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:13:37 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 20:13:37 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:13:37 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:13:37 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:13:37 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 20:13:37 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.0731496], indices=[123]
+2025-09-26 20:13:37 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 컴퓨터네트워크, score=0.0731
+2025-09-26 20:13:37 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 20:13:37 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 20:13:37 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:13:37 | INFO | controller.searchController |   - 처리 시간: 3.316초
+2025-09-26 20:13:37 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 20:13:37 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:13:37 | INFO | controller.searchController |   1. 컴퓨터네트워크 (전자공학부) - 유사도: 0.073
+2025-09-26 20:17:17 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 20:17:17 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 20:17:17 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 20:19:43 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:19:43 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 20:19:43 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 20:19:43 | INFO | controller.searchController |   - 시작 시간: 20:19:43.868
+2025-09-26 20:19:43 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 20:19:43 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 20:19:45 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:19:45 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 20:19:45 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 20:19:45 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 20:19:45 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 20:19:45 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 20:19:45 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 20:19:45 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 448개 강의
+2025-09-26 20:19:45 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 448개 강의
+2025-09-26 20:19:45 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 448개 강의
+2025-09-26 20:19:46 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 448개
+2025-09-26 20:19:46 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(448, 1536)
+2025-09-26 20:19:46 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:19:46 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 20:19:47 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:19:47 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:19:47 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:19:47 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 20:19:47 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.07314133], indices=[123]
+2025-09-26 20:19:47 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 컴퓨터네트워크, score=0.0731
+2025-09-26 20:19:47 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 20:19:47 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 20:19:47 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:19:47 | INFO | controller.searchController |   - 처리 시간: 3.398초
+2025-09-26 20:19:47 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 20:19:47 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:19:47 | INFO | controller.searchController |   1. 컴퓨터네트워크 (전자공학부) - 유사도: 0.073
+2025-09-26 20:19:47 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:19:47 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 20:19:47 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 20:19:47 | INFO | controller.searchController |   - 시작 시간: 20:19:47.267
+2025-09-26 20:19:47 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 20:19:47 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 20:19:48 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:19:48 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 20:19:48 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 20:19:48 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 20:19:48 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 20:19:48 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 20:19:48 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 20:19:48 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 448개 강의
+2025-09-26 20:19:48 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 448개 강의
+2025-09-26 20:19:48 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 448개 강의
+2025-09-26 20:19:49 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 448개
+2025-09-26 20:19:50 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(448, 1536)
+2025-09-26 20:19:50 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:19:50 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 20:19:50 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:19:50 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:19:50 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:19:50 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 20:19:50 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.0731496], indices=[123]
+2025-09-26 20:19:50 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 컴퓨터네트워크, score=0.0731
+2025-09-26 20:19:50 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 20:19:50 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 20:19:50 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:19:50 | INFO | controller.searchController |   - 처리 시간: 3.617초
+2025-09-26 20:19:50 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 20:19:50 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:19:50 | INFO | controller.searchController |   1. 컴퓨터네트워크 (전자공학부) - 유사도: 0.073
+2025-09-26 20:22:01 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:22:01 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 20:22:01 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 20:22:01 | INFO | controller.searchController |   - 시작 시간: 20:22:01.637
+2025-09-26 20:22:01 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 20:22:01 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 20:22:02 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:22:02 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 20:22:02 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 20:22:02 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 20:22:02 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 20:22:02 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 20:22:02 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 20:22:03 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 448개 강의
+2025-09-26 20:22:03 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 448개 강의
+2025-09-26 20:22:03 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 448개 강의
+2025-09-26 20:22:04 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 448개
+2025-09-26 20:22:04 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(448, 1536)
+2025-09-26 20:22:04 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:22:04 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 20:22:04 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:22:04 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:22:04 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:22:04 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 20:22:04 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.0731496], indices=[123]
+2025-09-26 20:22:04 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 컴퓨터네트워크, score=0.0731
+2025-09-26 20:22:04 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 20:22:04 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 20:22:04 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:22:04 | INFO | controller.searchController |   - 처리 시간: 3.275초
+2025-09-26 20:22:04 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 20:22:04 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:22:04 | INFO | controller.searchController |   1. 컴퓨터네트워크 (전자공학부) - 유사도: 0.073
+2025-09-26 20:22:04 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:22:04 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:22:04 | INFO | controller.searchController |   - 요청 개수: 30
+2025-09-26 20:22:04 | INFO | controller.searchController |   - 시작 시간: 20:22:04.915
+2025-09-26 20:22:04 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:22:04 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:22:07 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:22:07 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-26 20:22:07 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-26 20:22:07 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-26 20:22:07 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리
+2025-09-26 20:22:07 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-26 20:22:07 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 82개 강의
+2025-09-26 20:22:07 | INFO | service.queryService |    #1: ID=21, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #2: ID=63, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #3: ID=191, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #4: ID=240, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #5: ID=280, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #6: ID=506, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #7: ID=548, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #8: ID=811, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #9: ID=924, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #10: ID=950, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #11: ID=1001, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #12: ID=1037, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #13: ID=1217, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #14: ID=1242, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #15: ID=1291, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #16: ID=1326, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #17: ID=1402, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #18: ID=1623, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #19: ID=1668, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #20: ID=1863, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #21: ID=1881, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #22: ID=1994, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #23: ID=2113, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #24: ID=2115, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #25: ID=2163, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #26: ID=2165, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #27: ID=2211, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #28: ID=2230, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #29: ID=2330, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #30: ID=2377, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #31: ID=2379, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #32: ID=2405, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #33: ID=2419, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #34: ID=2561, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #35: ID=2593, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #36: ID=2743, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #37: ID=2760, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #38: ID=2935, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #39: ID=3259, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #40: ID=3369, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #41: ID=3433, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #42: ID=3575, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #43: ID=3688, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #44: ID=3737, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #45: ID=3800, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #46: ID=3929, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #47: ID=4115, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #48: ID=4132, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #49: ID=4204, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #50: ID=4249, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #51: ID=4331, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #52: ID=4358, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #53: ID=4425, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #54: ID=4469, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #55: ID=4544, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #56: ID=4676, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #57: ID=4690, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #58: ID=4704, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #59: ID=4709, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #60: ID=4779, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #61: ID=5036, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #62: ID=5056, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #63: ID=5216, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #64: ID=5242, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #65: ID=5258, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #66: ID=5351, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #67: ID=5551, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #68: ID=5576, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #69: ID=5592, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #70: ID=5631, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #71: ID=5686, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #72: ID=5807, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #73: ID=5963, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #74: ID=6131, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #75: ID=6138, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #76: ID=6182, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #77: ID=6459, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #78: ID=6464, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #79: ID=6481, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #80: ID=6513, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #81: ID=6808, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.queryService |    #82: ID=6826, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-26 20:22:07 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 82개 강의
+2025-09-26 20:22:07 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 82개 강의
+2025-09-26 20:22:07 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 5개
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(5, 1536)
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '컴공에서 인공지능관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 데이터과학'
+2025-09-26 20:22:07 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=5
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.05810902 0.04905596 0.02943347], indices=[4 1 3]
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 모바일프로그래밍, score=0.0581
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 결과 2: 이산수학, score=0.0491
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 결과 3: 웹서비스설계, score=0.0294
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 결과 4: 컴퓨터공학총론, score=0.0291
+2025-09-26 20:22:07 | INFO | service.searchService | 🔧 [SearchService] 결과 5: 시스템보안, score=0.0168
+2025-09-26 20:22:07 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 5개 결과
+2025-09-26 20:22:07 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 5개 결과
+2025-09-26 20:22:07 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:22:07 | INFO | controller.searchController |   - 처리 시간: 2.614초
+2025-09-26 20:22:07 | INFO | controller.searchController |   - 결과 개수: 5
+2025-09-26 20:22:07 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:22:07 | INFO | controller.searchController |   1. 모바일프로그래밍 (컴퓨터인공지능학부) - 유사도: 0.058
+2025-09-26 20:22:07 | INFO | controller.searchController |   2. 이산수학 (컴퓨터인공지능학부) - 유사도: 0.049
+2025-09-26 20:22:07 | INFO | controller.searchController |   3. 웹서비스설계 (컴퓨터인공지능학부) - 유사도: 0.029
+2025-09-26 20:22:07 | INFO | controller.searchController |   ... 총 5개 결과
+2025-09-26 20:25:52 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 20:25:52 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 20:25:52 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 20:25:54 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:25:54 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 20:25:54 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 20:25:54 | INFO | controller.searchController |   - 시작 시간: 20:25:54.291
+2025-09-26 20:25:54 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 20:25:54 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 20:25:55 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:25:55 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 20:25:55 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 20:25:55 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 20:25:55 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 20:25:55 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 20:25:55 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 20:25:56 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 1000개 강의
+2025-09-26 20:25:56 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 1000개 강의
+2025-09-26 20:25:56 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 1000개 강의
+2025-09-26 20:25:59 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 1000개
+2025-09-26 20:25:59 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(1000, 1536)
+2025-09-26 20:25:59 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:25:59 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 20:25:59 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:25:59 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:25:59 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:25:59 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 20:25:59 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.08421394], indices=[110]
+2025-09-26 20:25:59 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 응용역학, score=0.0842
+2025-09-26 20:25:59 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 20:25:59 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 20:25:59 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:25:59 | INFO | controller.searchController |   - 처리 시간: 5.195초
+2025-09-26 20:25:59 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 20:25:59 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:25:59 | INFO | controller.searchController |   1. 응용역학 (토목환경자원에너지공학부(토목공학)) - 유사도: 0.084
+2025-09-26 20:25:59 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-26 20:25:59 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-26 20:25:59 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-26 20:25:59 | INFO | controller.searchController |   - 시작 시간: 20:25:59.487
+2025-09-26 20:25:59 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-26 20:25:59 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-26 20:26:01 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-26 20:26:01 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-26 20:26:01 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-26 20:26:01 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-26 20:26:01 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-26 20:26:01 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-26 20:26:01 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-26 20:26:01 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 1000개 강의
+2025-09-26 20:26:01 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 1000개 강의
+2025-09-26 20:26:01 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 1000개 강의
+2025-09-26 20:26:04 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 1000개
+2025-09-26 20:26:04 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(1000, 1536)
+2025-09-26 20:26:04 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-26 20:26:04 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-26 20:26:04 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-26 20:26:04 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-26 20:26:04 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-26 20:26:04 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-26 20:26:04 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.08421394], indices=[110]
+2025-09-26 20:26:04 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 응용역학, score=0.0842
+2025-09-26 20:26:04 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-26 20:26:04 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-26 20:26:04 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-26 20:26:04 | INFO | controller.searchController |   - 처리 시간: 5.459초
+2025-09-26 20:26:04 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-26 20:26:04 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-26 20:26:04 | INFO | controller.searchController |   1. 응용역학 (토목환경자원에너지공학부(토목공학)) - 유사도: 0.084
+2025-09-26 20:30:02 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 20:30:02 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 20:30:02 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-26 20:41:16 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-26 20:41:16 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-26 20:41:16 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-27 02:30:43 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-27 02:30:43 | INFO | controller.searchController |   - 쿼리: '테스트'
+2025-09-27 02:30:43 | INFO | controller.searchController |   - 요청 개수: 1
+2025-09-27 02:30:43 | INFO | controller.searchController |   - 시작 시간: 02:30:43.053
+2025-09-27 02:30:43 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '테스트'
+2025-09-27 02:30:43 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '테스트'
+2025-09-27 02:30:45 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-27 02:30:45 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": null,
+  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
+}
+```
+2025-09-27 02:30:45 | INFO | util.utils | ℹ️ [SQL필터] SQL 필터링 불필요
+2025-09-27 02:30:45 | INFO | util.utils | 💭 [SQL필터] 이유: 주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함
+2025-09-27 02:30:45 | INFO | service.queryService | ℹ️ [QueryService] SQL 필터링 불필요
+2025-09-27 02:30:45 | WARNING | service.searchService | ⚠️ [SearchService] SQL 필터링 결과 없음 - 전체 DB에서 벡터 검색 실행
+2025-09-27 02:30:45 | INFO | service.searchService | 🔍 [SearchService] 전체 DB에서 벡터 데이터 조회
+2025-09-27 02:30:45 | INFO | service.searchService | 📊 [SearchService] 전체 DB 조회 결과: 448개 강의
+2025-09-27 02:30:45 | INFO | service.searchService | 📊 [SearchService] 전체 DB 검색: 448개 강의
+2025-09-27 02:30:45 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 448개 강의
+2025-09-27 02:30:47 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 448개
+2025-09-27 02:30:47 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(448, 1536)
+2025-09-27 02:30:47 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-27 02:30:47 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '테스트'
+2025-09-27 02:30:47 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-27 02:30:47 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-27 02:30:47 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-27 02:30:47 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=1
+2025-09-27 02:30:47 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.0731496], indices=[123]
+2025-09-27 02:30:47 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 컴퓨터네트워크, score=0.0731
+2025-09-27 02:30:47 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 1개 결과
+2025-09-27 02:30:47 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 1개 결과
+2025-09-27 02:30:47 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-27 02:30:47 | INFO | controller.searchController |   - 처리 시간: 4.763초
+2025-09-27 02:30:47 | INFO | controller.searchController |   - 결과 개수: 1
+2025-09-27 02:30:47 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-27 02:30:47 | INFO | controller.searchController |   1. 컴퓨터네트워크 (전자공학부) - 유사도: 0.073
+2025-09-27 02:30:47 | INFO | controller.searchController | 🎯 [SQL+Vector] SQL 필터링 검색 시작:
+2025-09-27 02:30:47 | INFO | controller.searchController |   - 쿼리: '컴공에서 인공지능관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence offered in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 프로그래밍'
+2025-09-27 02:30:47 | INFO | controller.searchController |   - 요청 개수: 30
+2025-09-27 02:30:47 | INFO | controller.searchController |   - 시작 시간: 02:30:47.820
+2025-09-27 02:30:47 | INFO | service.searchService | 🚀 [SearchService] 검색 시작: '컴공에서 인공지능관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence offered in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 프로그래밍'
+2025-09-27 02:30:47 | INFO | service.queryService | 🔍 [QueryService] SQL 쿼리 생성 시작: '컴공에서 인공지능관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence offered in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 프로그래밍'
+2025-09-27 02:30:51 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-27 02:30:51 | INFO | service.queryService | 📝 [QueryService] LLM 응답: ```json
+{
+  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
+  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리"
+}
+```
+2025-09-27 02:30:51 | INFO | util.utils | ✅ [SQL필터] SQL 쿼리 생성 완료
+2025-09-27 02:30:51 | INFO | util.utils | 📋 [SQL필터] 생성된 쿼리: SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
+2025-09-27 02:30:51 | INFO | util.utils | 💭 [SQL필터] 생성 이유: 학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 관련 주제는 벡터 검색에서 처리
+2025-09-27 02:30:51 | INFO | service.queryService | 🔍 [QueryService] SQL 실행: 
+                SELECT id, name, department_full_name, department, professor, credits,
+                       schedule, location, delivery_mode, gpt_description, vector
+                FROM jbnu_class_gpt
+                WHERE id IN (
+                    SELECT DISTINCT id FROM (SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')) as filtered
+                )
+                
+2025-09-27 02:30:51 | INFO | service.queryService | 📊 [QueryService] 필터링 결과: 82개 강의
+2025-09-27 02:30:51 | INFO | service.queryService |    #1: ID=21, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #2: ID=63, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #3: ID=191, 과목명=인간-컴퓨터상호작용, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #4: ID=240, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #5: ID=280, 과목명=게임및혼합현실, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #6: ID=506, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #7: ID=548, 과목명=컴퓨터비전, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #8: ID=811, 과목명=컴퓨터논리및논술론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #9: ID=924, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #10: ID=950, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #11: ID=1001, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #12: ID=1037, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #13: ID=1217, 과목명=프로그래밍언어론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #14: ID=1242, 과목명=자료구조, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #15: ID=1291, 과목명=인공지능, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #16: ID=1326, 과목명=리눅스프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #17: ID=1402, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #18: ID=1623, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #19: ID=1668, 과목명=운영체제, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #20: ID=1863, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #21: ID=1881, 과목명=데이터베이스, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #22: ID=1994, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #23: ID=2113, 과목명=산학실전캡스톤 2, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #24: ID=2115, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #25: ID=2163, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #26: ID=2165, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #27: ID=2211, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #28: ID=2230, 과목명=수치해석및최적화, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #29: ID=2330, 과목명=오픈소스소프트웨어개발, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #30: ID=2377, 과목명=자연어처리, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #31: ID=2379, 과목명=논리설계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #32: ID=2405, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #33: ID=2419, 과목명=컴퓨터네트워크, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #34: ID=2561, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #35: ID=2593, 과목명=암호론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #36: ID=2743, 과목명=컴파일러, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #37: ID=2760, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #38: ID=2935, 과목명=선형대수학, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #39: ID=3259, 과목명=임베디드시스템, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #40: ID=3369, 과목명=객체지향프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #41: ID=3433, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #42: ID=3575, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #43: ID=3688, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #44: ID=3737, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #45: ID=3800, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #46: ID=3929, 과목명=컴퓨터구조, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #47: ID=4115, 과목명=이산수학, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #48: ID=4132, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #49: ID=4204, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #50: ID=4249, 과목명=소프트웨어공학, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #51: ID=4331, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #52: ID=4358, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #53: ID=4425, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #54: ID=4469, 과목명=확률및통계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #55: ID=4544, 과목명=정보검색, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #56: ID=4676, 과목명=컴퓨터공학총론, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #57: ID=4690, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #58: ID=4704, 과목명=모바일프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #59: ID=4709, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #60: ID=4779, 과목명=데이터마이닝, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #61: ID=5036, 과목명=웹서비스설계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #62: ID=5056, 과목명=산학실전캡스톤 3, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #63: ID=5216, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #64: ID=5242, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #65: ID=5258, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #66: ID=5351, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #67: ID=5551, 과목명=디지털시스템설계, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #68: ID=5576, 과목명=산학실전캡스톤 1, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #69: ID=5592, 과목명=클라우드컴퓨팅, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #70: ID=5631, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #71: ID=5686, 과목명=C++프로그래밍, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #72: ID=5807, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #73: ID=5963, 과목명=창업특강, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #74: ID=6131, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #75: ID=6138, 과목명=알고리즘, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #76: ID=6182, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #77: ID=6459, 과목명=시스템보안, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #78: ID=6464, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #79: ID=6481, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #80: ID=6513, 과목명=데이터통신, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #81: ID=6808, 과목명=컴퓨터그래픽스, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.queryService |    #82: ID=6826, 과목명=기계학습, 학과=컴퓨터인공지능학부
+2025-09-27 02:30:51 | INFO | service.searchService | 📊 [SearchService] SQL 필터링 결과: 82개 강의
+2025-09-27 02:30:51 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 시작: 82개 강의
+2025-09-27 02:30:51 | INFO | service.searchService | ✅ [SearchService] 유효한 벡터: 5개
+2025-09-27 02:30:51 | INFO | service.searchService | 🔧 [SearchService] 벡터 배열 생성: shape=(5, 1536)
+2025-09-27 02:30:51 | INFO | service.searchService | 🔧 [SearchService] FAISS 인덱스 생성 완료: dimension=1536
+2025-09-27 02:30:51 | INFO | service.searchService | 🔧 [SearchService] 쿼리 임베딩 생성 시작: '컴공에서 인공지능관련 수업을 찾아줘
+
+[확장정보] 배경정보: Looking for courses related to artificial intelligence offered in the Computer Science department. | 관련키워드: 인공지능, AI, 컴퓨터공학, 머신러닝, 딥러닝, 프로그래밍'
+2025-09-27 02:30:52 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 생성 완료: shape=(1536,)
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] 쿼리 벡터 정규화 완료: shape=(1, 1536)
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 시작: search_count=5
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] FAISS 검색 완료: scores=[0.05859648 0.04932368 0.02954846], indices=[4 1 0]
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] 결과 1: 모바일프로그래밍, score=0.0586
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] 결과 2: 이산수학, score=0.0493
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] 결과 3: 컴퓨터공학총론, score=0.0295
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] 결과 4: 웹서비스설계, score=0.0250
+2025-09-27 02:30:52 | INFO | service.searchService | 🔧 [SearchService] 결과 5: 시스템보안, score=0.0150
+2025-09-27 02:30:52 | INFO | service.searchService | 🎯 [SearchService] 벡터 검색 완료: 5개 결과
+2025-09-27 02:30:52 | INFO | service.searchService | ✅ [SearchService] 검색 완료: 5개 결과
+2025-09-27 02:30:52 | INFO | controller.searchController | ✅ [SQL+Vector] 검색 완료:
+2025-09-27 02:30:52 | INFO | controller.searchController |   - 처리 시간: 4.923초
+2025-09-27 02:30:52 | INFO | controller.searchController |   - 결과 개수: 5
+2025-09-27 02:30:52 | INFO | controller.searchController | 📋 [SQL+Vector] 검색 결과:
+2025-09-27 02:30:52 | INFO | controller.searchController |   1. 모바일프로그래밍 (컴퓨터인공지능학부) - 유사도: 0.059
+2025-09-27 02:30:52 | INFO | controller.searchController |   2. 이산수학 (컴퓨터인공지능학부) - 유사도: 0.049
+2025-09-27 02:30:52 | INFO | controller.searchController |   3. 컴퓨터공학총론 (컴퓨터인공지능학부) - 유사도: 0.030
+2025-09-27 02:30:52 | INFO | controller.searchController |   ... 총 5개 결과

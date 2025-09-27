@@ -1,0 +1,140 @@
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:207 - ✅ 🚀 Curriculum 디버깅 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 쿼리 검증 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_query_validation:92 - ✅ 📝 쿼리 검증 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 1 통과
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 2 통과
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 3 통과
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 4 통과
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 5 통과
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_query_validation:118 - ✅ 📊 쿼리 검증 테스트 결과: 5/5 통과
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 쿼리 검증 테스트 완료 (0.00초)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 검색 시뮬레이션 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_retrieval_simulation:124 - ✅ 🔍 검색 시뮬레이션 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_data_validation:177 - ✅ 📊 [데이터 검증] 학과 검색 결과 검증 통과
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_data_validation:177 - ✅ 📊 [데이터 검증] 강의 검색 결과 검증 통과
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_department_selection:98 - ✅ 🏫 [학과 선택] 3개 학과 선택됨:
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    1. 컴퓨터공학과 (점수: 0.95)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    2. 소프트웨어학과 (점수: 0.87)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    3. 인공지능학과 (점수: 0.82)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:106 - ✅ 📚 [강의 검색 depth=1] 컴퓨터공학과에서 2개 강의 검색:
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 프로그래밍 기초 (ID: CS101, 점수: 0.92)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 자료구조 (ID: CS201, 점수: 0.89)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 검색 시뮬레이션 테스트 완료 (0.00초)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 워크플로우 시뮬레이션 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_full_workflow_simulation:156 - ✅ 🔄 전체 워크플로우 시뮬레이션 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_query_start:89 - ✅ 🚀 [쿼리 1] 처리 시작: '컴퓨터공학 프로그래밍 관련 수업을 추천해주세요'
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_query_expansion:93 - ✅ 📝 [쿼리 확장] 원본: '컴퓨터공학 프로그래밍 관련 수업을 추천해주세요'
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_query_expansion:94 - ✅ 📝 [쿼리 확장] 확장: '컴퓨터공학, 프로그래밍, 소프트웨어 개발, 알고리즘, 자료구조'
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_department_selection:98 - ✅ 🏫 [학과 선택] 2개 학과 선택됨:
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    1. 컴퓨터공학과 (점수: 0.95)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    2. 소프트웨어학과 (점수: 0.87)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:106 - ✅ 📚 [강의 검색 depth=1] 컴퓨터공학과에서 2개 강의 검색:
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 프로그래밍 1 (ID: CS200, 점수: 0.8)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 알고리즘 1 (ID: CS201, 점수: 0.7000000000000001)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:117 - ✅ 🔗 [그래프 구축] 현재 2/30개 노드 선택됨
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 프로그래밍 1 (ID: CS200)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 알고리즘 1 (ID: CS201)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:106 - ✅ 📚 [강의 검색 depth=2] 컴퓨터공학과에서 2개 강의 검색:
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 프로그래밍 2 (ID: CS300, 점수: 0.7)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 알고리즘 2 (ID: CS301, 점수: 0.6000000000000001)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:117 - ✅ 🔗 [그래프 구축] 현재 4/30개 노드 선택됨
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 프로그래밍 2 (ID: CS300)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 알고리즘 2 (ID: CS301)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 프로그래밍 2 (ID: CS300)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 알고리즘 2 (ID: CS301)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:106 - ✅ 📚 [강의 검색 depth=3] 컴퓨터공학과에서 2개 강의 검색:
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 프로그래밍 3 (ID: CS400, 점수: 0.6)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 알고리즘 3 (ID: CS401, 점수: 0.5)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:117 - ✅ 🔗 [그래프 구축] 현재 6/30개 노드 선택됨
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_graph_building:124 - ✅    (총 6개 클래스 선택됨)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_final_result:129 - ✅ 🎯 [최종 결과] 2개 학과, 3개 강의 추천 (처리시간: 5.23초)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_final_result:133 - ✅    📖 컴퓨터공학과: 2개 강의
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - log_final_result:133 - ✅    📖 소프트웨어학과: 1개 강의
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 워크플로우 시뮬레이션 테스트 완료 (0.00초)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 데이터베이스 연결 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_database_connection:25 - ✅ 🔗 데이터베이스 연결 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_database_connection:44 - ✅ ✅ 데이터베이스 연결 성공
+2025-09-22 11:37:39 - curriculum_debug - [31mERROR[0m - log_error:137 - ❌ 💥 [에러] 데이터베이스 연결 테스트: 'DatabaseHandler' object has no attribute 'execute_query'
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ❌ 실패 데이터베이스 연결 테스트 완료 (0.02초)
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 OpenAI 클라이언트 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_openai_client:61 - ✅ 🤖 OpenAI 클라이언트 테스트 시작
+2025-09-22 11:37:39 - curriculum_debug - [32mINFO[0m - test_openai_client:71 - ✅ ✅ OpenAI 클라이언트 초기화 성공
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - test_openai_client:81 - ✅ 📐 임베딩 차원: 1536
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 OpenAI 클라이언트 테스트 완료 (1.36초)
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - run_all_tests:243 - ✅ 📊 테스트 결과 요약:
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ 쿼리 검증: 0.00초
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ 검색 시뮬레이션: 0.00초
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ 워크플로우 시뮬레이션: 0.00초
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ❌ 데이터베이스 연결: 0.02초
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ OpenAI 클라이언트: 1.36초
+2025-09-22 11:37:40 - curriculum_debug - [32mINFO[0m - run_all_tests:255 - ✅ 🎯 전체 결과: 4/5 테스트 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:207 - ✅ 🚀 Curriculum 디버깅 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 쿼리 검증 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_query_validation:92 - ✅ 📝 쿼리 검증 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 1 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 2 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 3 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 4 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_query_validation:110 - ✅ ✅ 테스트 케이스 5 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_query_validation:118 - ✅ 📊 쿼리 검증 테스트 결과: 5/5 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 쿼리 검증 테스트 완료 (0.00초)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 검색 시뮬레이션 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_retrieval_simulation:124 - ✅ 🔍 검색 시뮬레이션 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_data_validation:177 - ✅ 📊 [데이터 검증] 학과 검색 결과 검증 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_data_validation:177 - ✅ 📊 [데이터 검증] 강의 검색 결과 검증 통과
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_department_selection:98 - ✅ 🏫 [학과 선택] 3개 학과 선택됨:
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    1. 컴퓨터공학과 (점수: 0.95)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    2. 소프트웨어학과 (점수: 0.87)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    3. 인공지능학과 (점수: 0.82)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:106 - ✅ 📚 [강의 검색 depth=1] 컴퓨터공학과에서 2개 강의 검색:
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 프로그래밍 기초 (ID: CS101, 점수: 0.92)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 자료구조 (ID: CS201, 점수: 0.89)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 검색 시뮬레이션 테스트 완료 (0.00초)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 워크플로우 시뮬레이션 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_full_workflow_simulation:156 - ✅ 🔄 전체 워크플로우 시뮬레이션 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_query_start:89 - ✅ 🚀 [쿼리 1] 처리 시작: '컴퓨터공학 프로그래밍 관련 수업을 추천해주세요'
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_query_expansion:93 - ✅ 📝 [쿼리 확장] 원본: '컴퓨터공학 프로그래밍 관련 수업을 추천해주세요'
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_query_expansion:94 - ✅ 📝 [쿼리 확장] 확장: '컴퓨터공학, 프로그래밍, 소프트웨어 개발, 알고리즘, 자료구조'
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_department_selection:98 - ✅ 🏫 [학과 선택] 2개 학과 선택됨:
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    1. 컴퓨터공학과 (점수: 0.95)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_department_selection:102 - ✅    2. 소프트웨어학과 (점수: 0.87)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:106 - ✅ 📚 [강의 검색 depth=1] 컴퓨터공학과에서 2개 강의 검색:
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 프로그래밍 1 (ID: CS200, 점수: 0.8)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 알고리즘 1 (ID: CS201, 점수: 0.7000000000000001)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:117 - ✅ 🔗 [그래프 구축] 현재 2/30개 노드 선택됨
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 프로그래밍 1 (ID: CS200)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 알고리즘 1 (ID: CS201)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:106 - ✅ 📚 [강의 검색 depth=2] 컴퓨터공학과에서 2개 강의 검색:
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 프로그래밍 2 (ID: CS300, 점수: 0.7)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 알고리즘 2 (ID: CS301, 점수: 0.6000000000000001)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:117 - ✅ 🔗 [그래프 구축] 현재 4/30개 노드 선택됨
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 프로그래밍 2 (ID: CS300)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 알고리즘 2 (ID: CS301)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 프로그래밍 2 (ID: CS300)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:122 - ✅    - 알고리즘 2 (ID: CS301)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:106 - ✅ 📚 [강의 검색 depth=3] 컴퓨터공학과에서 2개 강의 검색:
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 프로그래밍 3 (ID: CS400, 점수: 0.6)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_class_retrieval:111 - ✅    - 알고리즘 3 (ID: CS401, 점수: 0.5)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:117 - ✅ 🔗 [그래프 구축] 현재 6/30개 노드 선택됨
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_graph_building:124 - ✅    (총 6개 클래스 선택됨)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_final_result:129 - ✅ 🎯 [최종 결과] 2개 학과, 3개 강의 추천 (처리시간: 5.23초)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_final_result:133 - ✅    📖 컴퓨터공학과: 2개 강의
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - log_final_result:133 - ✅    📖 소프트웨어학과: 1개 강의
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 워크플로우 시뮬레이션 테스트 완료 (0.00초)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 데이터베이스 연결 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_database_connection:25 - ✅ 🔗 데이터베이스 연결 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_database_connection:44 - ✅ ✅ 데이터베이스 연결 성공
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_database_connection:49 - ✅ 📊 테스트 쿼리 결과: [{'count': 3512}]
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 데이터베이스 연결 테스트 완료 (0.02초)
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - run_all_tests:220 - ✅ 🧪 OpenAI 클라이언트 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_openai_client:61 - ✅ 🤖 OpenAI 클라이언트 테스트 시작
+2025-09-23 21:47:46 - curriculum_debug - [32mINFO[0m - test_openai_client:71 - ✅ ✅ OpenAI 클라이언트 초기화 성공
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - test_openai_client:81 - ✅ 📐 임베딩 차원: 1536
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - run_all_tests:232 - ✅ ✅ 성공 OpenAI 클라이언트 테스트 완료 (0.85초)
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - run_all_tests:243 - ✅ 📊 테스트 결과 요약:
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ 쿼리 검증: 0.00초
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ 검색 시뮬레이션: 0.00초
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ 워크플로우 시뮬레이션: 0.00초
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ 데이터베이스 연결: 0.02초
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - run_all_tests:250 - ✅    ✅ OpenAI 클라이언트: 0.85초
+2025-09-23 21:47:47 - curriculum_debug - [32mINFO[0m - run_all_tests:255 - ✅ 🎯 전체 결과: 5/5 테스트 통과
