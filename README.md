@@ -1,27 +1,6 @@
 
 # 🤖 JBNU AI Mentor - 로컬 실행 가이드
 
-docker logs --tail 15000 llm-agent | cat
-docker logs llm-agent > ~/llm-agent.log 2>&1
-docker logs --tail 400 svc7997 | cat
-docker logs  --tail 400 svc7999 | cat
-docker logs  --tail 400 department-mapping | cat
-
-
-llm-agent (포트 8001): LLM 메인 오케스트레이터/게이트웨이. 프론트 요청을 받아 적절한 서브 에이전트로 라우팅. 디렉터리: ai_modules/llm_agent-main
-svc7997 (포트 7997): Vector-Search-Agent (FAISS 유사도 검색). 과목/키워드 유사도 기반 검색. 엔드포인트: /search
-svc7999 (포트 7999): DB-Agent (SQL 질의). 구조화된 DB 질의 처리. 엔드포인트: /agent
-department-mapping (포트 8000): Department-Agent. 학과/전공 명칭 매핑·정규화. 엔드포인트: /agent
-추가로 프로젝트에 자주 보이는 것:
-svc7996: Curriculum-Agent (커리큘럼 생성/플래닝, /chat)
-svc7998: LLM Fallback/General-Agent (일반 LLM 처리, /agent)
-
-
-
-    - cd /home/dbs0510/
-  AiMentor_edit
-      - ./restart_all.sh --rebuild
-
 
 
 ## Frontend (port: 5173)
@@ -257,19 +236,3 @@ External Task Model, Local Task Model: OpenAI Pipeline
 
 
 
-
-
----
-
-## 📄 기능 항목 (진행 중)
-
-* [x] PDF 처리
-* [x] 대화 stream 처리
-* [ ] 대화 기록 관리
-
----
-
-## 🧼 참고사항
-
-* 모든 서버는 `.env` 환경파일을 통해 민감정보(API KEY 등)를 관리합니다.
-# Ai_mentor
