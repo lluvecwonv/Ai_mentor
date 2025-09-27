@@ -49,43 +49,37 @@
 
 ## 응답 형식
 
-```json
-{
-  "sql_query": "생성된 SQL 쿼리 (필터링이 필요한 경우) 또는 null",
-  "reasoning": "SQL 생성 이유 또는 불필요한 이유"
-}
+SQL 쿼리만 반환하세요. 설명이나 JSON 형식은 필요 없습니다.
+필터링이 필요 없으면 빈 문자열 반환.
+
+```sql
+SELECT ... FROM ... WHERE ...
 ```
 
 ## 예시
 
 **쿼리**: "컴공에서 인공지능 관련 수업"
-```json
-{
-  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')",
-  "reasoning": "학과(컴공→컴퓨터) 필터링만 적용하고, 인공지능 주제는 벡터 검색에서 처리"
-}
+```sql
+SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%컴퓨터%' OR c.department_full_name LIKE '%컴퓨터%')
 ```
 
 **쿼리**: "송현제 교수님 수업"
-```json
-{
-  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE c.professor LIKE '%송현제%'",
-  "reasoning": "교수명(송현제) 필터링만 적용"
-}
+```sql
+SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE c.professor LIKE '%송현제%'
 ```
 
 **쿼리**: "머신러닝 관련 수업 알려줘"
-```json
-{
-  "sql_query": null,
-  "reasoning": "주제만 있고 학과나 교수 정보 없음. 벡터 검색으로 처리하는 것이 더 정확함"
-}
+```sql
+
 ```
 
 **쿼리**: "전전 3학년 수업"
-```json
-{
-  "sql_query": "SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name FROM jbnu_class_gpt c WHERE (c.department LIKE '%전자%' OR c.department_full_name LIKE '%전자%') AND c.target_grade = 3",
-  "reasoning": "학과(전전→전자)와 학년(3학년) 필터링 필요"
-}
+```sql
+SELECT c.id, c.name, c.gpt_description, c.department_full_name as department_name
+FROM jbnu_class_gpt c
+WHERE (c.department LIKE '%전자%' OR c.department_full_name LIKE '%전자%') AND c.target_grade = 3
 ```
