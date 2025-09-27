@@ -272,3 +272,4 @@ External Task Model, Local Task Model: OpenAI Pipeline
 ## 🧼 참고사항
 
 * 모든 서버는 `.env` 환경파일을 통해 민감정보(API KEY 등)를 관리합니다.
+# Ai_mentor
