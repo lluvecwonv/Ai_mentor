@@ -16,7 +16,7 @@ from handlers import (
     CurriculumHandler,
     QueryAnalyzer,
     ResultSynthesizer,
-    LlmClientLangChain
+    LlmClient
 )
 from service.memory.memory import ConversationMemory
 from .langgraph_state import GraphState, create_initial_state
@@ -46,12 +46,12 @@ class LangGraphApp:
         # NodeManager 초기화
         self.node_manager = NodeManager(
             query_analyzer=QueryAnalyzer(),
-            llm_handler=LlmClientLangChain(),
+            llm_handler=LlmClient(),
             sql_handler=SqlQueryHandler(),
             vector_handler=VectorSearchHandler(),
             dept_handler=DepartmentMappingHandler(),
             curriculum_handler=CurriculumHandler(),
-            result_synthesizer=ResultSynthesizer(LlmClientLangChain())
+            result_synthesizer=ResultSynthesizer(LlmClient())
         )
 
         # 그래프 빌드

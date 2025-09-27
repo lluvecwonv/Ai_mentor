@@ -9,7 +9,7 @@ from .department_mapping_handler import DepartmentMappingHandler
 from .curriculum_handler import CurriculumHandler
 from .query_main import QueryAnalyzer
 from .result_synthesizer import ResultSynthesizer
-from .llm_client_langchain import LlmClientLangChain
+from .llm_client_main import LlmClient
 
 __all__ = [
     'BaseQueryHandler',
@@ -19,5 +19,5 @@ __all__ = [
     'CurriculumHandler',
     'QueryAnalyzer',
     'ResultSynthesizer',
-    'LlmClientLangChain'
+    'LlmClient'
 ]

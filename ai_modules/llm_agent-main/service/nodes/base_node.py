@@ -1,7 +1,3 @@
-"""
-LangGraph 노드들의 기본 클래스 및 공통 유틸리티
-"""
-
 import time
 import logging
 from typing import Dict, Any, List
@@ -21,6 +17,18 @@ class BaseNode:
             if isinstance(message, HumanMessage):
                 return message.content
         return state.get("user_query", "")
+
+    @staticmethod
+    def add_step_time(state: Dict[str, Any], result: Dict[str, Any], timer: 'NodeTimer') -> Dict[str, Any]:
+        """단계 실행 시간을 결과에 추가"""
+        step_times = state.get("step_times", {}).copy()
+        step_times[timer.node_name] = timer.duration
+
+        return {
+            **state,
+            **result,
+            "step_times": step_times
+        }
 
     @staticmethod
     def update_step_time(state: Dict[str, Any], step_name: str, duration: float) -> Dict[str, float]:

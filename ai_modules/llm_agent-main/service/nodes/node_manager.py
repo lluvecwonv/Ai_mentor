@@ -33,7 +33,7 @@ class NodeManager:
             "light": self.light.light_node,
 
             # Medium nodes
-            "medium_agent": self.medium.medium_agent_node,
+            "medium_department": self.medium.medium_department_node,
             "medium_sql": self.medium.medium_sql_node,
             "medium_vector": self.medium.medium_vector_node,
             "medium_curriculum": self.medium.medium_curriculum_node,
@@ -59,7 +59,7 @@ class NodeManager:
 
         def route_by_complexity(state: dict) -> str:
             """복잡도에 따른 세부 라우팅"""
-            complexity = state.get("route", "medium")
+            complexity = state.get("route", "light")  # 기본값을 light로 변경
             plan = state.get("plan", []) or []
 
             # Light 복잡도
@@ -72,20 +72,23 @@ class NodeManager:
                     first_agent = plan[0].get("agent", "").upper()
                     if "SQL" in first_agent:
                         return "medium_sql"
-                    elif "FAISS" in first_agent or "SEARCH" in first_agent:
+                    elif "VECTOR" in first_agent or "FAISS" in first_agent or "SEARCH" in first_agent:
                         return "medium_vector"
                     elif "CURRICULUM" in first_agent:
                         return "medium_curriculum"
-
-                # 기본 medium 처리
-                return "medium_agent"
+                    elif "DEPARTMENT" in first_agent or "MAPPING" in first_agent:
+                        return "medium_department"
+                    else:
+                        return "light"  # 특별한 처리가 필요없으면 light로
+                else:
+                    return "light"  # plan이 없으면 light로
 
             # Heavy 복잡도
             elif complexity == "heavy":
                 return "heavy_sequential"
 
             # 기본값
-            return "medium_agent"
+            return "light"
 
         return {
             "route_by_complexity": route_by_complexity

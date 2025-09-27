@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from typing import Dict, Any
 
-from .llm_client_langchain import LlmClientLangChain
+from .llm_client_main import LlmClient
 from .query_analyzer.analyzer import (
     analyze_routing_async,
     expand_query_async,
@@ -17,7 +17,7 @@ class QueryAnalyzer:
     """Query 복잡도 분석 및 분류 - LangChain LLM + 규칙 결합 (v3)"""
 
     def __init__(self, conversation_memory=None):
-        self.llm_client = LlmClientLangChain()
+        self.llm_client = LlmClient()
         self.conversation_memory = conversation_memory
 
     async def analyze_query_parallel(self, query: str, session_id: str = "default", contextual_prompt: str = None) -> Dict[str, Any]:

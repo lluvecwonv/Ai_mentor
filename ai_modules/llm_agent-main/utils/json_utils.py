@@ -1,6 +1,3 @@
-"""
-JSON utility functions
-"""
 import json
 import re
 import logging
@@ -183,3 +180,23 @@ def robust_json_parse(response: str) -> Optional[Dict[str, Any]]:
         pass
 
     return None  # 실패시 None 반환
+
+
+def _to_openai_content(content: Any) -> str:
+    """OpenAI 호환 content 형태로 정규화
+
+    Args:
+        content: 변환할 컨텐츠 (str, dict, list, None 등)
+
+    Returns:
+        str: 정규화된 문자열
+    """
+    if content is None:
+        return ""
+    if isinstance(content, str):
+        return content
+    if isinstance(content, (list, dict)):
+        if isinstance(content, dict) and "text" in content:
+            return content["text"]
+        return json.dumps(content, ensure_ascii=False)
+    return str(content)
