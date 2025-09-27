@@ -13,14 +13,14 @@ from handlers import (
     VectorSearchHandler,
     SqlQueryHandler,
     DepartmentMappingHandler,
-    CurriculumHandler
+    CurriculumHandler,
+    QueryAnalyzer,
+    ResultSynthesizer,
+    LlmClientLangChain
 )
-from service.analysis.result_synthesizer import ResultSynthesizer
-from service.analysis.query_analyzer import QueryAnalyzer
-from service.core.memory import ConversationMemory
+from service.memory.memory import ConversationMemory
 from .langgraph_state import GraphState, create_initial_state
 from service.nodes import NodeManager
-from utils.llm_client_langchain import LlmClientLangChain as LlmClientLangChainAdvanced
 
 # OpenAI 클라이언트 생성
 from openai import OpenAI
@@ -46,13 +46,12 @@ class LangGraphApp:
         # NodeManager 초기화
         self.node_manager = NodeManager(
             query_analyzer=QueryAnalyzer(),
-            llm_handler=LlmClientLangChainAdvanced(),
+            llm_handler=LlmClientLangChain(),
             sql_handler=SqlQueryHandler(),
             vector_handler=VectorSearchHandler(),
             dept_handler=DepartmentMappingHandler(),
             curriculum_handler=CurriculumHandler(),
-            result_synthesizer=ResultSynthesizer(LlmClientLangChainAdvanced()),
-            openai_client=OpenAI(api_key=settings.openai_api_key)
+            result_synthesizer=ResultSynthesizer(LlmClientLangChain())
         )
 
         # 그래프 빌드

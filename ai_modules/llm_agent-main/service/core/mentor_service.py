@@ -4,7 +4,7 @@ from datetime import datetime
 
 from config.settings import settings
 from exceptions import AIMentorException
-from service.core.memory import ConversationMemory
+from service.memory.memory import ConversationMemory
 
 logger = logging.getLogger(__name__)
 

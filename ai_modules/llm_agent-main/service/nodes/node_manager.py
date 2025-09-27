@@ -13,10 +13,10 @@ class NodeManager:
     def __init__(self, query_analyzer=None, llm_handler=None,
                  sql_handler=None, vector_handler=None,
                  dept_handler=None, curriculum_handler=None,
-                 result_synthesizer=None, openai_client=None):
+                 result_synthesizer=None):
 
         # Node categories 초기화
-        self.routing = RoutingNodes(query_analyzer, openai_client)
+        self.routing = RoutingNodes(query_analyzer)
         self.light = LightNodes(llm_handler)
         self.medium = MediumNodes(sql_handler, vector_handler, dept_handler, curriculum_handler)
         self.heavy = HeavyNodes(sql_handler, vector_handler, dept_handler, curriculum_handler, llm_handler)
@@ -43,8 +43,6 @@ class NodeManager:
 
             # Synthesis nodes
             "synthesis": self.synthesis.synthesis_node,
-            "quick_synthesis": self.synthesis.quick_synthesis_node,
-            "tot_synthesis": self.synthesis.tot_synthesis_node,
 
             # Utility nodes
             "finalize": self.utility.finalize_node,
@@ -93,14 +91,3 @@ class NodeManager:
             "route_by_complexity": route_by_complexity
         }
 
-    def validate_setup(self) -> dict:
-        """노드 설정 유효성 검사"""
-        return {
-            "routing": True,
-            "light": True,
-            "medium": True,
-            "heavy": True,
-            "synthesis": True,
-            "utility": True,
-            "total_nodes": len(self.get_all_nodes())
-        }

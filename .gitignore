@@ -18,3 +18,9 @@ venv/
 Thumbs.db
 
 open-webui/backend/Miniconda3-latest-Linux-x86_64.sh
+*.bin
+*.safetensors
+cache/
+models/
+*.pkl
+*.h5

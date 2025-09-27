@@ -129,133 +129,57 @@ def extract_json_block(text: str) -> Optional[Dict[str, Any]]:
 
 
 def to_router_decision(data: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    RouterDecision 형태의 dict로 정규화
+    """라우팅 결정 - 최단 버전"""
 
-    입력 JSON에서 최소 필드만 사용하여 라우팅에 필요한 정보만 추립니다.
-
-    Returns keys:
-      - complexity, is_complex, category, owner_hint, plan(list of {step, agent, goal}), reasoning
-    """
-    # 1) 복잡도 판단
     complexity = data.get('complexity', 'medium')
-    is_complex = complexity in ('medium', 'heavy')
 
-    # 2) 파이프라인 플랜 정규화 (최대 4단계) - pipeline과 plan 필드 모두 지원
-    pipeline = data.get('plan') or data.get('pipeline') or []
-    plan: List[Dict[str, Any]] = []
-    for i, p in enumerate(pipeline[:4], start=1):
-        try:
-            plan.append({
-                'step': int(i),
-                'agent': str(p.get('agent', 'LLM-Fallback-Agent')),
-                'goal': str(p.get('why', p.get('goal', '')))
-            })
-        except Exception as e:
-            logger.warning(f"🔶 플랜 단계 파싱 실패 (step {i}): {e}")
-            continue
+    # 간단한 힌트 매핑
+    hint_map = {
+        'sql': 'SQL_QUERY',
+        'search': 'FAISS_SEARCH',
+        'faiss': 'FAISS_SEARCH',
+        'curriculum': 'CURRICULUM_PLAN'
+    }
 
-    # 3) 담당 에이전트 힌트 (ActionType 또는 AgentName 둘 다 허용)
-    #    - 우선 data.owner_hint 사용
-    #    - 없으면 pipeline[0].agent에서 유추하여 표준 토큰으로 정규화
-    #    - 그래도 없으면 안전 폴백: LLM_FALLBACK
-    def _agent_name_to_hint(agent_name: str) -> str:
-        name = (agent_name or '').strip().lower()
-        if 'sql' in name:
-            return 'SQL_QUERY'
-        if 'faiss' in name or 'search' in name:
-            return 'FAISS_SEARCH'
-        if 'department' in name or 'mapping' in name:
-            return 'DEPARTMENT_MAPPING'
-        if 'curriculum' in name:
-            return 'CURRICULUM_PLAN'
-        if 'llm' in name or 'fallback' in name:
-            return 'LLM_FALLBACK'
-        return ''
-
-    owner_hint = (data.get('owner_hint') or '').strip()
-    if not owner_hint:
-        if pipeline and isinstance(pipeline, list) and isinstance(pipeline[0], dict):
-            # pipeline의 에이전트명을 표준 토큰으로 변환
-            inferred = _agent_name_to_hint(pipeline[0].get('agent', ''))
-            owner_hint = inferred or 'LLM_FALLBACK'
-        else:
-            owner_hint = 'LLM_FALLBACK'
+    owner_hint = data.get('owner_hint', 'LLM_FALLBACK')
+    if not owner_hint or owner_hint == 'LLM_FALLBACK':
+        # 첫 번째 에이전트에서 추론
+        plans = data.get('plan', data.get('pipeline', []))
+        if plans:
+            agent = plans[0].get('agent', '').lower()
+            for key, hint in hint_map.items():
+                if key in agent:
+                    owner_hint = hint
+                    break
 
     return {
         'complexity': complexity,
-        'is_complex': is_complex,
+        'is_complex': complexity in ('medium', 'heavy'),
         'category': data.get('category', complexity),
         'owner_hint': owner_hint,
-        'plan': plan or None,
+        'plan': plans if 'plans' in locals() else None,
         'reasoning': data.get('reasoning', '')
     }
 
 
 def robust_json_parse(response: str) -> Optional[Dict[str, Any]]:
-    """강화된 JSON 파싱 - 다양한 오류 케이스 처리"""
-    logger.info(f"🔍 [JSON파싱] 강화된 파싱 시작: {len(response.strip())} 문자")
+    """간단한 JSON 파싱"""
 
+    # 1단계: 기본 파싱
     try:
-        # 방법 1: 기존 extract_json_block 사용
-        parsed = extract_json_block(response)
-        if parsed is not None:
-            logger.info("✅ [JSON파싱] 기본 extract_json_block 성공")
-            return parsed
-    except Exception as e:
-        logger.info(f"⚠️ [JSON파싱] extract_json_block 실패: {e}")
+        return extract_json_block(response)
+    except:
+        pass
 
+    # 2단계: 키 따옴표 수정
     try:
-        # 방법 2: 텍스트 정리 후 직접 파싱
-        cleaned_response = response.strip()
-
-        # JSON 패턴 찾기
-        json_match = re.search(r'\{[^{}]*\}', cleaned_response)
+        json_match = re.search(r'\{[^{}]*\}', response)
         if json_match:
             json_text = json_match.group()
-            logger.info(f"🔍 [JSON파싱] JSON 패턴 발견: {repr(json_text)}")
+            # 키에 따옴표 추가
+            fixed = re.sub(r'([a-zA-Z_]\w*)\s*:', r'"\1":', json_text)
+            return json.loads(fixed)
+    except:
+        pass
 
-            # JSON 키를 올바른 형식으로 표준화
-            try:
-                # 먼저 원본 JSON 파싱 시도
-                json.loads(json_text)
-                fixed_json = json_text
-                logger.info("🔧 [JSON파싱] 원본 JSON이 이미 올바름")
-            except json.JSONDecodeError:
-                # 키 따옴표 문제 수정 - 더 정확한 패턴 사용
-                # 이미 따옴표가 있는 키는 건드리지 않고, 없는 키만 수정
-                fixed_json = re.sub(r'(?<!["\'])([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=:)', r'"\1"', json_text)
-                logger.info("🔧 [JSON파싱] 키 따옴표 수정 적용")
-
-            logger.info(f"🔧 [JSON파싱] 수정된 JSON: {repr(fixed_json)}")
-
-            parsed = json.loads(fixed_json)
-            logger.info("✅ [JSON파싱] 키 수정 파싱 성공")
-            return parsed
-    except Exception as e:
-        logger.info(f"⚠️ [JSON파싱] 키 수정 파싱 실패: {e}")
-
-    try:
-        # 방법 3: 정규식으로 직접 값 추출
-        logger.info("🔍 [JSON파싱] 정규식 직접 추출 시도")
-
-        needs_history_match = re.search(r'["\']?needs_history["\']?\s*:\s*(true|false)', response, re.IGNORECASE)
-        reasoning_match = re.search(r'["\']?reasoning["\']?\s*:\s*["\']([^"\']+)["\']', response)
-        context_type_match = re.search(r'["\']?context_type["\']?\s*:\s*["\']([^"\']+)["\']', response)
-        confidence_match = re.search(r'["\']?confidence["\']?\s*:\s*([\d.]+)', response)
-
-        if needs_history_match:
-            result = {
-                "needs_history": needs_history_match.group(1).lower() == 'true',
-                "reasoning": reasoning_match.group(1) if reasoning_match else "정규식 추출",
-                "context_type": context_type_match.group(1) if context_type_match else "independent",
-                "confidence": float(confidence_match.group(1)) if confidence_match else 0.8
-            }
-            logger.info("✅ [JSON파싱] 정규식 직접 추출 성공")
-            return result
-    except Exception as e:
-        logger.info(f"⚠️ [JSON파싱] 정규식 직접 추출 실패: {e}")
-
-    # 모든 방법 실패
-    logger.error("❌ [JSON파싱] 모든 JSON 파싱 방법 실패")
-    return None
+    return None  # 실패시 None 반환

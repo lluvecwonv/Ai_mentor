@@ -60,7 +60,7 @@ class LlmProcessor:
                     from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
                     from langchain_core.runnables import RunnableWithMessageHistory
                     from langchain.schema import HumanMessage, SystemMessage
-                    from service.core.memory import ConversationMemory
+                    from service.memory.memory import ConversationMemory
 
                     cm: ConversationMemory = data.get("conversation_memory")  # injected by service
                     if cm is None:

@@ -1,8 +1,3 @@
-"""
-라우팅 관련 노드들
-복잡도 분석 및 경로 결정
-"""
-
 import logging
 from typing import Dict, Any, Literal
 from .base_node import BaseNode, NodeTimer
@@ -13,7 +8,7 @@ logger = logging.getLogger(__name__)
 class RoutingNodes(BaseNode):
     """라우팅 관련 노드들"""
 
-    def __init__(self, query_analyzer, openai_client=None):
+    def __init__(self, query_analyzer):
         self.query_analyzer = query_analyzer
 
     async def router_node(self, state: Dict[str, Any]) -> Dict[str, Any]:
