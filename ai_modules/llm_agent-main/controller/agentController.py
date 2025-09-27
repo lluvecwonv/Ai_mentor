@@ -1,240 +1,368 @@
-from typing import List
+"""
+AI 멘토 에이전트 컨트롤러 - 리팩토링된 버전
+"""
+
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse, StreamingResponse
-from pydantic import BaseModel
-import traceback
-import re, io, base64
-from pathlib import Path
+import logging
+import json
 
-import networkx as nx
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import matplotlib.font_manager as fm
-import seaborn as sns
-
-from service.coreService import CoreService
-from aov import assign_positions
-
-from util.llmClient import LlmClient
+from service.core.mentor_service import HybridMentorService
+import os
+from models.validation import RequestBody, ChainRequest, AgentRequest, ErrorResponse
+from utils.response_formatters import strip_markdown, format_sse
+from utils.course_parser import parse_course_sections_with_preamble
+from utils.graph_generator import generate_graph_base64
+from exceptions import AIMentorException, ValidationError
 
 router = APIRouter()
-core_service = CoreService()
-llm_client    = LlmClient()
 
-class Message(BaseModel):
-    role: str
-    content: str
-
-class RequestBody(BaseModel):
-    stream: bool
-    model: str
-    messages: List[Message]
-
-# — 한글 폰트 설정 (NanumGothic) — 
-HERE      = Path(__file__).resolve().parent.parent
-FONT_PATH = HERE / "NanumGothic-Regular.ttf"
-
-if FONT_PATH.exists():
-    mpl.font_manager.fontManager.addfont(str(FONT_PATH))
-    # font_prop 을 전역으로 보관
-    font_prop = fm.FontProperties(fname=str(FONT_PATH))
-    # rcParams 에 등록
-    mpl.rcParams['font.family']        = font_prop.get_name()
-    mpl.rcParams['font.sans-serif']    = font_prop.get_name()
-    mpl.rcParams['axes.unicode_minus'] = False
-else:
-    font_prop = None  # 폰트가 없으면 None
-
-def format_sse(data: str) -> str:
-    # 각 줄을 'data: …' 로 감싸고, '\n\n' 으로 이벤트 종료
-    return "".join(f"data: {line}\n" for line in data.splitlines()) + "\n\n"
-
-def parse_course_sections_with_preamble(text: str) -> dict:
-    parts = re.split(r'^===\s*(.+?)\s*===\s*$', text, flags=re.MULTILINE)
-    result = {"preamble": parts[0].strip()}
-    for i in range(1, len(parts), 2):
-        dept = parts[i].strip()
-        body = parts[i+1]
-        lines = [L.strip() for L in body.splitlines() if L.strip()]
-
-        courses = []
-        curr = {}
-        for L in lines:
-            if L.startswith("강좌명:"):
-                if curr:
-                    courses.append(curr)
-                curr = {"강좌명": L.split(":",1)[1].strip()}
-            elif re.match(r'^\d+학년\s*\d+학기$', L):
-                curr["학년·학기"] = L
-            elif L.startswith("선수과목:"):
-                curr["선수과목"] = L.split(":",1)[1].strip()
-        if curr:
-            courses.append(curr)
-        result[dept] = courses
-
-    return result
-
-# … (폰트 설정, import 등 생략) …
-
-def generate_graph_base64(sections: dict) -> str:
-    # 1) DiGraph 생성
-    G = nx.DiGraph()
-    allowed = {c["강좌명"] for lst in sections.values() for c in lst}
-
-    for dept, lst in sections.items():
-        for c in lst:
-            name = c["강좌명"]
-            m = re.match(r'(\d+)학년\s*(\d+)학기', c.get("학년·학기",""))
-            grade, sem = (m.group(1), m.group(2)) if m else ("","")
-            G.add_node(name,
-                       department=dept,
-                       student_grade=grade,
-                       semester=sem)
-
-        for c in lst:
-            tgt = c["강좌명"]
-            for p in filter(None, map(str.strip, c.get("선수과목","").split(","))):
-                if p in allowed:
-                    G.add_edge(p, tgt)
-
-    # 2) 위치 계산
-    pos, semester_labels = assign_positions(G)
-    missing = [n for n in G.nodes() if n not in pos]
-    if missing:
-        spring = nx.spring_layout(G, seed=42)
-        for n in missing:
-            pos[n] = spring[n]
-
-    # 3) 색상 매핑
-    depts   = sorted({G.nodes[n]["department"] for n in G.nodes()})
-    palette = sns.color_palette("Set3", n_colors=len(depts))
-    color_map = {d: palette[i] for i, d in enumerate(depts)}
-    node_colors = [color_map[G.nodes[n]["department"]] for n in G.nodes()]
-
-    # 4) 그리기
-    plt.figure(figsize=(12,8))
-    nx.draw_networkx_nodes(
-        G, pos,
-        node_size=800,
-        node_color=node_colors,
-        edgecolors="black",
-        linewidths=1.0
-    )
-    nx.draw_networkx_edges(
-        G, pos,
-        arrowstyle='-|>',
-        arrowsize=8,
-        width=1.0,
-        edge_color='gray'
-    )
-    # 노드 라벨 (한글 폰트 적용)
-    nx.draw_networkx_labels(
-        G, pos,
-        labels={n: n for n in G.nodes()},
-        font_size=8,
-        font_color='black',
-        font_family=font_prop.get_name() if font_prop else 'sans-serif',
-        font_weight='normal',
-        alpha=None,
-        verticalalignment='center',
-        horizontalalignment='center'
-    )
-
-    # 5) 학기 레이블
-    # 최하단 y좌표 계산
-    min_y = min(pos.values(), key=lambda v: v[1])[1]
-    label_y = min_y - 0.4  # 학기 텍스트를 그 아래로
-
-    # 학기 레이블 출력 (위치 y는 고정)
-    for sem, (x, _) in semester_labels.items():
-        plt.text(
-            x, label_y,
-            sem.replace("학기_", ""),
-            fontproperties=font_prop,
-            fontsize=11,
-            fontweight='bold',
-            ha='center'
-        )
-
-    # 6) 범례 (한글 폰트 적용)
-    patches = [
-        plt.Line2D([0],[0], marker='o', color='w',
-                   markerfacecolor=color_map[d],
-                   markeredgecolor='black',
-                   markersize=12, label=d)
-        for d in depts
-    ]
-    plt.legend(
-        handles=patches,
-        title="학과별 색상",
-        prop=font_prop,
-        loc="upper right"
-    )
-
-    plt.axis('off')
-    plt.tight_layout()
-
-    # 7) PNG → base64
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=150, bbox_inches='tight')
-    plt.close()
-    buf.seek(0)
-    return base64.b64encode(buf.read()).decode('utf-8')
+# LangGraph 전용 모드로 간소화
+hybrid_service = HybridMentorService(use_unified_langgraph=True)
+logger = logging.getLogger(__name__)
 
 
+@router.post("/agent", response_model=dict)
+async def agent_api(request_body: RequestBody):
+    """메인 에이전트 API (스트리밍 지원)"""
+    session_id = request_body.session_id or "default"
+    stream = getattr(request_body, 'stream', False)
+    logger.info(f"🚀 /agent endpoint called for session: {session_id}, stream: {stream}")
 
-@router.post("/agent")
-async def agent_api(request_body: RequestBody) -> JSONResponse:
+    # 스트리밍 요청인 경우
+    if stream:
+        return await _handle_streaming_request(request_body, session_id)
 
-    history = core_service.run_agent(request_body.messages)
-    step = history["steps"][-1]
-    raw  = step["tool_response"]
-    final = raw
-    image_md =""
+    # 일반 요청 처리
+    try:
+        # 메시지에서 사용자 입력 추출
+        user_message = ""
+        messages = [{"role": msg.role, "content": msg.content} for msg in request_body.messages]
 
-    
-    if step["tool_name"] == "CURRICULUM_RECOMMEND":
+        for msg in messages:
+            if msg.get("role") == "user":
+                user_message = msg.get("content", "")
+
+        # AI 멘토 서비스 실행
+        history = await hybrid_service.run_agent(user_message, session_id)
+
+        # 응답 처리
+        content = _process_response(history, request_body)
+
+        return JSONResponse({
+            "choices": [{
+                "index": 0,
+                "message": {"role": "assistant", "content": content},
+                "finish_reason": "stop"
+            }]
+        })
+
+    except ValidationError as e:
+        logger.error(f"입력 검증 오류: {e}")
+        return _error_response(400, "VALIDATION_ERROR", str(e))
+
+    except AIMentorException as e:
+        logger.error(f"AI 멘토 서비스 오류: {e}")
+        return _error_response(500, "SERVICE_ERROR", str(e))
+
+    except Exception as e:
+        logger.error(f"예상치 못한 오류: {e}")
+        return _error_response(500, "INTERNAL_ERROR", str(e))
+
+
+async def _handle_streaming_request(request_body: RequestBody, session_id: str):
+    """스트리밍 요청 처리"""
+    logger.info(f"🌊 Streaming request for session: {session_id}")
+
+    async def generate_stream():
         try:
-            parsed   = parse_course_sections_with_preamble(raw)
-            final = parsed.pop("preamble", "")
-            graph_b64 = generate_graph_base64(parsed)
-            #image_md = f"data: ![Curriculum Graph](data:image/png;base64,{graph_b64})"
-            image_md = f"\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
-            
+            # 메시지에서 사용자 입력 추출
+            user_message = ""
+            messages = [{"role": msg.role, "content": msg.content} for msg in request_body.messages]
 
-            # final = f"{preamble}\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
-        except Exception:
-            tb = traceback.format_exc()
-            print("🚨 /agent 예외:\n", tb)
-            return JSONResponse(status_code=500,
-                                content={"error":"그래프 생성 실패","trace":tb})
+            for msg in messages:
+                if msg.get("role") == "user":
+                    user_message = msg.get("content", "")
+
+            # 즉시 "생각중입니다" 메시지 전송
+            thinking_chunk = {
+                "choices": [{
+                    "index": 0,
+                    "delta": {"content": "🤔 생각중입니다..."},
+                    "finish_reason": None
+                }]
+            }
+            yield f"data: {json.dumps(thinking_chunk, ensure_ascii=False)}\n\n"
+
+            # 계획 수립 메시지
+            planning_chunk = {
+                "choices": [{
+                    "index": 0,
+                    "delta": {"content": "\n\n📋 분석하고 검색하고 있습니다..."},
+                    "finish_reason": None
+                }]
+            }
+            yield f"data: {json.dumps(planning_chunk, ensure_ascii=False)}\n\n"
+
+            # AI 멘토 서비스 실행
+            history = await hybrid_service.run_agent(user_message, session_id)
+
+            # 응답 처리
+            content = _process_response(history, request_body)
+
+            # 완료 메시지
+            ready_chunk = {
+                "choices": [{
+                    "index": 0,
+                    "delta": {"content": "\n\n✅ 처리 완료! 답변을 준비하고 있습니다...\n\n"},
+                    "finish_reason": None
+                }]
+            }
+            yield f"data: {json.dumps(ready_chunk, ensure_ascii=False)}\n\n"
+
+            # 스트리밍 형태로 응답 전송 (단어별로 분할)
+            words = content.split()
+            for i, word in enumerate(words):
+                chunk_data = {
+                    "choices": [{
+                        "index": 0,
+                        "delta": {"content": word + " "},
+                        "finish_reason": None
+                    }]
+                }
+                yield f"data: {json.dumps(chunk_data, ensure_ascii=False)}\n\n"
+
+                # 마지막 청크에는 finish_reason 추가
+                if i == len(words) - 1:
+                    final_chunk = {
+                        "choices": [{
+                            "index": 0,
+                            "delta": {},
+                            "finish_reason": "stop"
+                        }]
+                    }
+                    yield f"data: {json.dumps(final_chunk, ensure_ascii=False)}\n\n"
+
+        except Exception as e:
+            logger.error(f"스트리밍 처리 실패: {e}")
+            error_chunk = {
+                "error": {
+                    "message": str(e),
+                    "type": "internal_error"
+                }
+            }
+            yield f"data: {json.dumps(error_chunk, ensure_ascii=False)}\n\n"
+
+    return StreamingResponse(
+        generate_stream(),
+        media_type="text/plain",
+        headers={"Cache-Control": "no-cache", "Connection": "keep-alive"}
+    )
 
 
+def _process_response(history: dict, request_body: RequestBody) -> str:
+    """응답 처리 로직"""
+    # OpenAI 호환 응답 처리
+    if "choices" in history and len(history["choices"]) > 0:
+        content = history["choices"][0]["message"]["content"]
+        step = {"tool_name": "LANGGRAPH_RESPONSE"}
+    else:
+        step = history.get("steps", [{}])[-1] if "steps" in history else {}
+        content = step.get("tool_response", "응답을 생성할 수 없습니다.")
 
-    # 2) 이제 번역 단계: stream 여부 따라 분기
-    # if request_body.stream:
-    #     def event_gen():
-    #         for chunk in llm_client.chat(final, stream=True):
-    #             delta = chunk.choices[0].delta
-    #             if delta.content:
-    #                 yield delta.content
-    #         # 번역 텍스트가 다 내려간 뒤, 이미지 마크다운을 그대로 추가
-    #         yield format_sse(image_md)
+    # 커리큘럼 그래프 처리
+    if step.get("tool_name") == "CURRICULUM_RECOMMEND":
+        content = _process_curriculum_graph(content)
 
-    #     return StreamingResponse(event_gen(), media_type="text/event-stream")
+    # 포맷 처리
+    if request_body.format == "plain" or step.get("tool_name") == "JBNU_SQL":
+        content = strip_markdown(content)
 
-    # # 비스트리밍 모드
-    # resp       = llm_client.chat(final, stream=False)
-    # translated = resp.choices[0].message.content
-    # content    = f"{translated}{image_md}"
-    
-    content    = f"{final}{image_md}"
+    return content
 
-    return JSONResponse({
-        "choices": [{
-            "index": 0,
-            "message": {"role":"assistant","content": content},
-            "finish_reason":"stop"
-       }]
-    })
 
+def _process_curriculum_graph(raw_content: str) -> str:
+    """커리큘럼 그래프 처리"""
+    try:
+        parsed = parse_course_sections_with_preamble(raw_content)
+        preamble = parsed.pop("preamble", "")
+        graph_b64 = generate_graph_base64(parsed)
+        return f"{preamble}\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
+    except Exception as e:
+        logger.error(f"커리큘럼 그래프 생성 실패: {e}")
+        return raw_content  # 원본 텍스트 반환
+
+
+def _error_response(status_code: int, error_code: str, message: str) -> JSONResponse:
+    """에러 응답 생성"""
+    return JSONResponse(
+        status_code=status_code,
+        content=ErrorResponse(
+            error=message,
+            error_code=error_code
+        ).model_dump()
+    )
+
+
+# === 헬스체크 ===
+@router.get("/health")
+async def health_check():
+    """서비스 헬스 체크"""
+    try:
+        health_status = hybrid_service.get_health_status()
+        status_code = 200 if health_status["status"] == "healthy" else 503
+        return JSONResponse(status_code=status_code, content=health_status)
+    except Exception as e:
+        logger.error(f"헬스 체크 실패: {e}")
+        return _error_response(503, "HEALTH_CHECK_ERROR", str(e))
+
+
+# === 세션 관리 ===
+@router.get("/session/{session_id}/summary")
+async def get_session_summary(session_id: str):
+    """세션 요약 조회"""
+    try:
+        stats = hybrid_service.get_session_info(session_id)
+        session_info = stats.get('session_info', {})
+        summary = f"대화 요약: {session_info.get('total_messages', 0)}개 메시지, 주제: {session_info.get('current_topic', 'None')}"
+        return JSONResponse({
+            "session_id": session_id,
+            "summary": summary,
+            "stats": stats
+        })
+    except Exception as e:
+        logger.error(f"세션 요약 조회 실패: {e}")
+        return _error_response(500, "SESSION_SUMMARY_ERROR", str(e))
+
+
+@router.delete("/session/{session_id}")
+async def clear_session(session_id: str):
+    """세션 초기화"""
+    try:
+        success = hybrid_service.clear_session_history(session_id)
+        if success:
+            return JSONResponse({
+                "session_id": session_id,
+                "message": "Session history cleared successfully"
+            })
+        else:
+            return _error_response(500, "SESSION_CLEAR_ERROR", "세션 초기화 실패")
+    except Exception as e:
+        logger.error(f"세션 초기화 실패: {e}")
+        return _error_response(500, "SESSION_CLEAR_ERROR", str(e))
+
+
+# === LangChain 기능 ===
+@router.post("/langchain/chain")
+async def run_langchain_chain(request: ChainRequest):
+    """LangChain 체인 실행"""
+    try:
+        logger.info(f"LangChain 체인 실행: {request.chain_type} - {request.user_input}")
+
+        # 체인 타입별 처리
+        if request.chain_type == "basic":
+            result = await hybrid_service.llm_handler.run_chain("basic", request.user_input)
+        elif request.chain_type == "context":
+            result = await hybrid_service.llm_handler.run_chain("context", request.user_input, context=request.context)
+        elif request.chain_type == "analysis":
+            result = await hybrid_service.llm_handler.run_chain("analysis", request.user_input)
+        else:
+            return _error_response(400, "INVALID_CHAIN_TYPE", f"지원하지 않는 체인 타입: {request.chain_type}")
+
+        return JSONResponse({
+            "chain_type": request.chain_type,
+            "result": result,
+            "session_id": request.session_id
+        })
+
+    except Exception as e:
+        logger.error(f"LangChain 체인 실행 오류: {e}")
+        return _error_response(500, "CHAIN_EXECUTION_ERROR", str(e))
+
+
+@router.post("/langchain/agent")
+async def run_langchain_agent(request: AgentRequest):
+    """LangChain 에이전트 실행"""
+    try:
+        logger.info(f"LangChain 에이전트 실행: {request.user_input}")
+        result = await hybrid_service.llm_handler.run_agent(request.user_input)
+
+        return JSONResponse({
+            "agent_result": result,
+            "session_id": request.session_id
+        })
+
+    except Exception as e:
+        logger.error(f"LangChain 에이전트 실행 오류: {e}")
+        return _error_response(500, "AGENT_EXECUTION_ERROR", str(e))
+
+
+# === 스트리밍 API ===
+@router.post("/agent-stream")
+async def agent_streaming_api(request_body: RequestBody):
+    """스트리밍 지원 에이전트 API"""
+    session_id = request_body.session_id or "default"
+    logger.info(f"🌊 /v2/agent endpoint called for session: {session_id}")
+
+    # stream 파라미터 확인
+    stream = getattr(request_body, 'stream', False)
+    logger.info(f"Stream parameter: {stream}, request_body.stream: {request_body.stream}")
+
+    if not stream:
+        # 스트리밍이 아닌 경우 기본 agent_api 호출
+        return await agent_api(request_body)
+
+    async def generate_stream():
+        try:
+            # 메시지에서 사용자 입력 추출
+            user_message = ""
+            messages = [{"role": msg.role, "content": msg.content} for msg in request_body.messages]
+
+            for msg in messages:
+                if msg.get("role") == "user":
+                    user_message = msg.get("content", "")
+
+            # AI 멘토 서비스 실행
+            history = await hybrid_service.run_agent(user_message, session_id)
+
+            # 응답 처리
+            content = _process_response(history, request_body)
+
+            # 스트리밍 형태로 응답 전송 (단어별로 분할)
+            words = content.split()
+            for i, word in enumerate(words):
+                chunk_data = {
+                    "choices": [{
+                        "index": 0,
+                        "delta": {"content": word + " "},
+                        "finish_reason": None
+                    }]
+                }
+                yield f"data: {json.dumps(chunk_data, ensure_ascii=False)}\n\n"
+
+                # 마지막 청크에는 finish_reason 추가
+                if i == len(words) - 1:
+                    final_chunk = {
+                        "choices": [{
+                            "index": 0,
+                            "delta": {},
+                            "finish_reason": "stop"
+                        }]
+                    }
+                    yield f"data: {json.dumps(final_chunk, ensure_ascii=False)}\n\n"
+
+        except Exception as e:
+            logger.error(f"스트리밍 처리 실패: {e}")
+            error_chunk = {
+                "error": {
+                    "message": str(e),
+                    "type": "internal_error"
+                }
+            }
+            yield f"data: {json.dumps(error_chunk, ensure_ascii=False)}\n\n"
+
+    return StreamingResponse(
+        generate_stream(),
+        media_type="text/plain",
+        headers={"Cache-Control": "no-cache", "Connection": "keep-alive"}
+    )

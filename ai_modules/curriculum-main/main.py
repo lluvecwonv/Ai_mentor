@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import random
 import numpy as np
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse,HTMLResponse
 from types import SimpleNamespace
 from contextlib import asynccontextmanager
@@ -17,11 +18,19 @@ from utils import update_json_with_index, read_json
 from db.db_search import DatabaseHandler
 from pathlib import Path
 import logging
+import time
+from debug_utils import (
+    CurriculumDebugger,
+    performance_monitor,
+    validate_query_data,
+    validate_retrieval_result
+)
 
 # 전역 변수 (FastAPI startup 이벤트에서 초기화)
 global_args = None
 client = None
 db_handler = None
+debugger = None
 
 HERE        = Path(__file__).resolve().parent
 DATA_DIR    = HERE / "data"
@@ -55,7 +64,11 @@ set_seed()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global global_args, client, db_handler
+    global global_args, client, db_handler, debugger
+
+    # 디버거 초기화
+    debugger = CurriculumDebugger(log_level="INFO", enable_console=True, enable_file=True)
+    debugger.logger.info("🚀 Curriculum 서비스 초기화 시작")
     
     CHATBOT_DIR.mkdir(exist_ok=True)
     RESULT_DIR .mkdir(exist_ok=True)
@@ -75,7 +88,11 @@ async def lifespan(app: FastAPI):
     )
     
     # DB 설정 및 연결
+    debugger.logger.info("🔗 OpenAI 클라이언트 초기화 중...")
     client = initialize_openai_client(global_args.openai_api_key)
+    debugger.logger.info("✅ OpenAI 클라이언트 초기화 완료")
+
+    debugger.logger.info("🗄️ 데이터베이스 연결 중...")
     db_handler = DatabaseHandler(
         host=db_host,
         port=3311,
@@ -85,16 +102,26 @@ async def lifespan(app: FastAPI):
         charset="utf8mb4"
     )
     db_handler.connect()
-    logger.info("DB 연결 완료")
-    
-    logger.info("FastAPI Startup: 모든 초기화 완료.")
+    debugger.logger.info("✅ 데이터베이스 연결 완료")
+
+    debugger.logger.info("🎯 FastAPI Startup: 모든 초기화 완료")
 
     yield
 
+    debugger.logger.info("🛑 서비스 종료 중...")
     db_handler.close()
-    logger.info("FastAPI Shutdown: DB 연결 종료.")
+    debugger.logger.info("✅ 데이터베이스 연결 종료 완료")
 
 app = FastAPI(title="Curriculum Recommendation API", lifespan=lifespan)
+
+# CORS for browser/ proxy preflight
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def recursive_top1_selection(client, db_handler, query_embedding, query, selected_dept_list,  
@@ -179,32 +206,52 @@ def recursive_top1_selection(client, db_handler, query_embedding, query, selecte
 
 query_counter = 0
 
+@performance_monitor("full_query_processing")
 def process_query(query, args, client, db_handler, idx=0):
-    global query_counter
+    global query_counter, debugger
     query_counter += 1  # 쿼리 요청마다 카운터 증가
-    logger.info(f"Processing query {idx}: {query}")
+
+    # 쿼리 시작 로깅
+    debugger.log_query_start(query, query_counter)
+
+    # 입력 데이터 검증
+    validation_issues = validate_query_data(query, getattr(args, 'required_dept_count', 30))
+    if validation_issues:
+        debugger.log_data_validation("입력 쿼리", query, validation_issues)
+        # 경고만 하고 계속 진행
+    else:
+        debugger.log_data_validation("입력 쿼리", query, [])
 
     # 1) 학과·강좌 인덱스 준비
+    debugger.logger.info("📚 학과·강좌 인덱스 임베딩 시작")
     dept_retriever = DenseRetriever(client, args)
     dept_retriever.doc_embedding()
     class_retriever = classRetriever(client, args)
     class_retriever.doc_embedding()
-    logger.info("강의·학과 인덱스 임베딩 완료")
+    debugger.logger.info("✅ 강의·학과 인덱스 임베딩 완료")
 
     # 2) 쿼리 확장 & 임베딩
     original_query = query
+    debugger.logger.info("🔄 쿼리 확장 시작")
     query_info = query_expansion(client, query, args.query_prompt_path)
-    logger.info(f"확장된 쿼리: {query_info}")
+    debugger.log_query_expansion(original_query, query_info)
+
+    debugger.logger.info("🧠 쿼리 임베딩 생성 중")
     query_embedding = dept_retriever.query_embedding(query_info)
-    logger.info("쿼리 임베딩 생성 완료")
+    debugger.logger.info("✅ 쿼리 임베딩 생성 완료")
 
     # 3) 관련 학과 top-k
     try:
+        debugger.logger.info("🏫 관련 학과 검색 시작")
         selected_depart_list = dept_retriever.retrieve(query_embedding)
-        logger.info(f"선택된 학과 리스트: {selected_depart_list}")
-        print("DEBUG ▶ selected_depart_list:", selected_depart_list)
+
+        # 검색 결과 검증
+        dept_issues = validate_retrieval_result(selected_depart_list, "department")
+        debugger.log_data_validation("학과 검색 결과", selected_depart_list, dept_issues)
+
+        debugger.log_department_selection(selected_depart_list)
     except Exception as e:
-        logger.error(f"retrieve 호출 중 오류 발생: {e}")
+        debugger.log_error(e, "학과 검색")
         raise
 
     # 4) 시각화 저장 경로 설정 (args.save_path_txt 기반)
@@ -216,6 +263,9 @@ def process_query(query, args, client, db_handler, idx=0):
     logger.info(f"그래프 저장 경로: {graph_path}")
 
     # 5) 재귀적으로 후보 클래스 선택 후 전제/후제 그래프 생성
+    debugger.logger.info("🔄 재귀적 강의 선택 및 그래프 생성 시작")
+    start_time = time.time()
+
     G = recursive_top1_selection(
         client,
         db_handler,
@@ -227,12 +277,18 @@ def process_query(query, args, client, db_handler, idx=0):
         required_dept_count=args.required_dept_count,
         gt_department=gt_department
     )
-    logger.info("Top-1 선택 결과 그래프 생성 완료")
+
+    graph_time = time.time() - start_time
+    debugger.log_performance("그래프 생성", graph_time)
 
     # 6) 그래프 시각화 및 정렬
+    debugger.logger.info("🎨 그래프 시각화 및 정렬 시작")
+    start_time = time.time()
+
     all_results_json = visualize_and_sort_department_graphs(G, graph_path, idx, gt_department)
-    logger.info(f"시각화 및 정렬 결과: {all_results_json}")
-    print("DEBUG ▶ all_results_json:", all_results_json)
+
+    viz_time = time.time() - start_time
+    debugger.log_performance("시각화 및 정렬", viz_time)
 
     # 7) 최종 추천 강좌 목록으로 변환
     flat_nodes = []
@@ -250,6 +306,10 @@ def process_query(query, args, client, db_handler, idx=0):
         for node in flat_nodes
     ]
 
+    # 최종 결과 로깅
+    total_time = time.time() - start_time if 'start_time' in locals() else 0
+    debugger.log_final_result(all_results_json, total_time)
+
     return {
         "expanded_query": query_info,
         "all_results_json": all_results_json
@@ -266,9 +326,11 @@ def chat_get():
 
 @app.post("/chat")
 def process_query_endpoint(request: QueryRequest):
-    global global_args, client, db_handler
+    global global_args, client, db_handler, debugger
 
     try:
+        debugger.logger.info(f"📨 API 요청 수신: '{request.query[:100]}{'...' if len(request.query) > 100 else ''}' (요구 과목 수: {request.required_dept_count})")
+
         global_args.required_dept_count = request.required_dept_count
         result = process_query(request.query, global_args, client, db_handler)
         # ── 여기서 언패킹 ──
@@ -296,13 +358,15 @@ def process_query_endpoint(request: QueryRequest):
     
         message_text = "\n".join(lines).strip()
 
+        debugger.logger.info(f"✅ API 응답 완료: {len(message_text)}자 응답 생성")
+
         return JSONResponse(
             status_code=200,
             content={"message": message_text}
         )
 
     except Exception as e:
-        logger.error(f"Error processing query: {e}")
+        debugger.log_error(e, "API 요청 처리")
         return JSONResponse(
             status_code=500,
             content={"message": {"error": str(e)}}

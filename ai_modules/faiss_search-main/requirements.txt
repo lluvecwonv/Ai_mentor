@@ -6,3 +6,5 @@ pymysql
 numpy
 pydantic
 dotenv
+openai
+cryptography

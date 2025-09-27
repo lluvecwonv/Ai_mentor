@@ -1,34 +1,75 @@
-from langchain_community.utilities import SQLDatabase
-from dotenv import load_dotenv
 import os
+import pymysql
+from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv()  # 컨테이너/로컬 환경 변수 로드
 
-db_host = os.getenv("DB_HOST")
-db_password = os.getenv("DB_PASSWORD")
 
 class DbClient:
+
     def __init__(self):
-        self.host = db_host
-        self.port = 3311
-        self.user = "root"
-        self.password = db_password
-        self.database = "nll"
-        self.mysql_uri = (
-            f"mysql+pymysql://{self.user}:{self.password}"
-            f"@{self.host}:{self.port}/{self.database}"
-        )
+        # 환경변수 우선, 없으면 합리적인 기본값 사용
+        self.host = os.getenv("DB_HOST", "210.117.181.113")
+        self.port = int(os.getenv("DB_PORT", "3313"))
+        self.user = os.getenv("DB_USER", "root")
 
-        # pool_pre_ping=True 로 “MySQL server has gone away” 방지
-        self.db = SQLDatabase.from_uri(
-            self.mysql_uri,
-            engine_args={"pool_pre_ping": True}
-        )
+        # VECTOR_DB_PASSWORD 우선, 없으면 DB_PASSWORD, 그래도 없으면 안전한 기본값
+        self.password = os.getenv("VECTOR_DB_PASSWORD") 
+        # 기본 DB는 운영에서 사용하는 'nll'
+        self.database = os.getenv("DB_NAME", "nll_third")
+        self.connection = None
 
-    def execute_query(self, query: str):
-        try:
-            result = self.db.run(query)
-            return result
-        except Exception as e:
-            print(f"Error reading data: {e}")
+    def connect(self):
+        if self.connection is None:
+            try:
+                self.connection = pymysql.connect(
+                    host=self.host,
+                    port=self.port,
+                    user=self.user,
+                    password=self.password,
+                    database=self.database,
+                    cursorclass=pymysql.cursors.DictCursor,
+                    charset='utf8mb4'  # UTF-8 인코딩 명시
+                )
+                print(f"✅ 벡터 DB 연결 성공: {self.host}:{self.port}/{self.database}")
+            except pymysql.MySQLError as e:
+                print(f"❌ 벡터 DB 연결 실패: {self.host}:{self.port}/{self.database} - {e}")
+                self.connection = None
+
+    def ensure_connection(self):
+        """연결 상태 확인 및 재연결"""
+        if not self.connection or not self.connection.open:
+            print("🔄 DB 연결이 끊어져 재연결 시도...")
+            self.connection = None
+            self.connect()
+        return self.connection is not None
+
+    # R
+    def execute_query(self, query, params=None):
+        if not self.ensure_connection():
             return None
+        try:
+            with self.connection.cursor() as cursor:
+                cursor.execute(query, params)
+                return cursor.fetchall()
+        except pymysql.MySQLError:
+            return None
+
+    # CUD
+    def execute_update(self, query, params=None):
+        if not self.ensure_connection():
+            return False
+        try:
+            with self.connection.cursor() as cursor:
+                cursor.execute(query, params)
+                self.connection.commit()
+                return True
+        except pymysql.MySQLError:
+            if self.connection:
+                self.connection.rollback()
+            return False
+
+    def close(self):
+        if self.connection:
+            self.connection.close()
+            self.connection = None

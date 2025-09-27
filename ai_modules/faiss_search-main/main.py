@@ -1,9 +1,13 @@
 import uvicorn
+import os
 
 from fastapi import FastAPI
 
 from controller.searchController import router as agent_router
+from util.logging_setup import init_logging
 
+# 로깅 초기화
+logger = init_logging(service_name=os.getenv("SERVICE_NAME", "faiss-search"))
 
 app = FastAPI()
 

@@ -22,6 +22,20 @@ class DatabaseHandler:
             print('Error connecting to database:', e)
             raise e
 
+    def execute_query(self, query, params=None):
+        """Execute a custom SQL query and return results."""
+        try:
+            if not self.connection or not self.cursor:
+                raise Exception("Database connection is not established.")
+
+            self.cursor.execute(query, params)
+            columns = [col[0] for col in self.cursor.description]
+            rows = self.cursor.fetchall()
+            return [dict(zip(columns, row)) for row in rows]
+        except pymysql.MySQLError as e:
+            print(f"Error executing query: {e}")
+            raise
+
     def fetch_all_departments(self):
         """Fetch all department IDs and names from the department table."""
         try:

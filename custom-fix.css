@@ -1,0 +1,667 @@
+/* AI 멘토 OpenWebUI 완전 커스터마이징 */
+
+/* 음성/마이크 관련 모든 요소 완전 제거 */
+/* 다양한 선택자로 음성 기능 완전 차단 */
+button[title*="voice" i],
+button[title*="Voice" i],
+button[title*="음성" i],
+button[title*="mic" i],
+button[title*="microphone" i],
+button[title*="record" i],
+button[title*="audio" i],
+button[title*="speak" i],
+button[title*="speech" i],
+button[aria-label*="voice" i],
+button[aria-label*="Voice" i],
+button[aria-label*="음성" i],
+button[aria-label*="mic" i],
+button[aria-label*="microphone" i],
+button[aria-label*="record" i],
+button[aria-label*="audio" i],
+button[aria-label*="speak" i],
+button[aria-label*="speech" i],
+[class*="voice" i],
+[class*="mic" i],
+[class*="microphone" i],
+[class*="audio" i],
+[class*="speech" i],
+[class*="record" i],
+[id*="voice" i],
+[id*="mic" i],
+[id*="microphone" i],
+[id*="audio" i],
+[id*="speech" i],
+[id*="record" i],
+.voice-button,
+.microphone-button,
+.audio-button,
+.speech-button,
+.record-button,
+.mic-button {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* SVG 아이콘들 완전 제거 */
+svg[class*="microphone" i],
+svg[class*="mic" i],
+svg[class*="voice" i],
+svg[class*="audio" i],
+svg[class*="speech" i],
+svg[class*="record" i],
+svg[aria-label*="microphone" i],
+svg[aria-label*="mic" i],
+svg[aria-label*="voice" i],
+svg[aria-label*="audio" i],
+svg[aria-label*="speech" i],
+svg[aria-label*="record" i],
+i[class*="microphone" i],
+i[class*="mic" i],
+i[class*="voice" i],
+i[class*="audio" i],
+i[class*="speech" i],
+i[class*="record" i],
+.fa-microphone,
+.fa-microphone-alt,
+.fa-volume-up,
+.fa-volume-down,
+.lucide-microphone,
+.lucide-mic,
+.lucide-volume-2,
+.tabler-microphone,
+.tabler-mic,
+.heroicon-microphone {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* 입력 영역 내 마이크 버튼 제거 */
+.chat-input button:has(svg[class*="mic" i]),
+.message-input button:has(svg[class*="mic" i]),
+.input-container button:has(svg[class*="microphone" i]),
+textarea + button:has(svg[class*="mic" i]) {
+    display: none !important;
+}
+
+/* OpenWebUI 특정 클래스들 */
+.voice-toggle,
+.audio-toggle,
+.mic-toggle,
+.speech-toggle,
+.tts-toggle,
+.stt-toggle {
+    display: none !important;
+}
+
+/* 사이드바의 불필요한 기능들 숨기기 */
+.sidebar button[title*="Settings" i],
+.sidebar button[title*="Admin" i],
+.sidebar button[title*="Models" i],
+.sidebar button[title*="설정" i],
+.sidebar button[title*="관리" i],
+.sidebar button[title*="모델" i],
+.sidebar a[href*="admin"],
+.sidebar a[href*="settings"],
+.sidebar a[href*="models"],
+nav button[title*="Settings" i],
+nav button[title*="Admin" i],
+nav button[title*="Models" i],
+/* 설정 메뉴 아이콘들 */
+button[aria-label*="Settings" i],
+button[aria-label*="Admin" i],
+button[aria-label*="Models" i],
+/* 특정 설정 항목들 숨기기 */
+[class*="settings"],
+[class*="admin-panel"],
+[class*="model-settings"],
+/* 드롭다운 메뉴의 불필요한 항목들 */
+.dropdown-item[href*="settings"],
+.dropdown-item[href*="admin"],
+.dropdown-item[href*="models"],
+.menu-item[href*="settings"],
+.menu-item[href*="admin"],
+.menu-item[href*="models"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* 채팅 영역 개선 */
+.chat-container {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+}
+
+/* 메시지 입력 영역 개선 */
+.message-input-container {
+    position: relative !important;
+}
+
+/* 전송 버튼을 더 명확하게 만들기 */
+button[type="submit"],
+.send-button,
+button[aria-label*="Send" i],
+button[title*="Send" i],
+button[title*="전송" i],
+button[aria-label*="전송" i],
+/* OpenWebUI 특정 전송 버튼 선택자들 */
+.chat-input button[type="submit"],
+.message-input button[type="submit"],
+form button[type="submit"],
+button[class*="send"],
+button[class*="submit"],
+/* 화살표 아이콘을 가진 전송 버튼들 */
+button:has(svg[class*="arrow"]):not([class*="voice"]):not([class*="mic"]) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    min-width: 60px !important;
+    position: relative !important;
+    z-index: 10 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+button[type="submit"]:hover,
+.send-button:hover,
+button[aria-label*="Send" i]:hover,
+button[title*="Send" i]:hover,
+button[title*="전송" i]:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* 전송 버튼 내 아이콘 스타일 */
+button[type="submit"] svg,
+.send-button svg,
+button[aria-label*="Send" i] svg,
+button[title*="Send" i] svg {
+    color: white !important;
+    fill: white !important;
+}
+
+/* 입력 필드 스타일링 */
+textarea[placeholder*="message"],
+input[placeholder*="message"],
+.message-input {
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    font-size: 16px !important;
+    resize: none !important;
+}
+
+/* --- Public mode: hide login/signup/account UI and top header bars --- */
+/* 로그인/회원가입/로그아웃/계정 관련 링크 및 버튼 제거 */
+a[href*="/login"],
+a[href*="/signup"],
+a[href*="/auth"],
+a[href*="/logout"],
+button[title*="login" i],
+button[title*="logout" i],
+button[title*="sign" i],
+button[aria-label*="login" i],
+button[aria-label*="logout" i],
+button[aria-label*="sign" i],
+[class*="login" i],
+[class*="signup" i],
+[class*="signin" i],
+[class*="account" i],
+[class*="profile" i] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* 상단 공지/배너/탑바 패턴 숨김 (네비게이션바 위 요소 제거 목적) */
+header .announcement,
+header .announcements,
+header .banner,
+header .top,
+header .topbar,
+header .top-bar,
+header [class*="announce" i],
+header [class*="banner" i],
+header [class*="top" i]:not(nav):not(nav *),
+.navbar + .banner,
+.navbar + .announcement {
+    display: none !important;
+}
+
+/* 헤더 안에서 nav를 제외한 다른 행(네비게이션바 위/아래)을 숨김 */
+header:has(> nav) > :not(nav) {
+    display: none !important;
+}
+
+/* ===== Strong Navbar/Header Removal (Public Kiosk Mode) ===== */
+/* 네비게이션바 완전 숨김 */
+nav,
+.navbar,
+.nav,
+.navigation,
+.navbar-nav,
+.navbar-container,
+.navbar-wrapper,
+.navbar-inner,
+.navbar-header,
+.navbar-brand,
+.navbar-menu,
+.navbar-items,
+.navbar-links,
+.navbar-actions,
+.navbar-tools,
+.navbar-utilities,
+.navbar-controls,
+.navbar-buttons,
+.navbar-icons,
+.navbar-dropdown,
+.navbar-dropdown-menu,
+.navbar-dropdown-toggle,
+.navbar-collapse,
+.navbar-toggle,
+.navbar-toggler,
+.navbar-hamburger,
+.navbar-menu-button,
+.navbar-menu-icon,
+.navbar-menu-toggle,
+.navbar-menu-trigger,
+.navbar-menu-control,
+.navbar-menu-handler,
+.navbar-menu-activator,
+.navbar-menu-switcher,
+.navbar-menu-switch,
+header nav,
+header .navbar,
+header .nav,
+header .navigation,
+header .navbar-nav,
+header .navbar-container,
+header .navbar-wrapper,
+header .navbar-inner,
+header .navbar-header,
+header .navbar-brand,
+header .navbar-menu,
+header .navbar-items,
+header .navbar-links,
+header .navbar-actions,
+header .navbar-tools,
+header .navbar-utilities,
+header .navbar-controls,
+header .navbar-buttons,
+header .navbar-icons,
+header .navbar-dropdown,
+header .navbar-dropdown-menu,
+header .navbar-dropdown-toggle,
+header .navbar-collapse,
+header .navbar-toggle,
+header .navbar-toggler,
+header .navbar-hamburger,
+header .navbar-menu-button,
+header .navbar-menu-icon,
+header .navbar-menu-toggle,
+header .navbar-menu-trigger,
+header .navbar-menu-control,
+header .navbar-menu-handler,
+header .navbar-menu-activator,
+header .navbar-menu-switcher,
+header .navbar-menu-switch,
+/* OpenWebUI 특정 네비게이션 클래스들 */
+[class*="navbar"],
+[class*="nav-"],
+[class*="-nav"],
+[class*="navigation"],
+[class*="menu-"],
+[class*="-menu"],
+[class*="header-"],
+[class*="-header"],
+[class*="top-"],
+[class*="-top"],
+[class*="bar-"],
+[class*="-bar"],
+[class*="toolbar"],
+[class*="actionbar"],
+[class*="menubar"],
+/* 특정 ID들 */
+#navbar,
+#nav,
+#navigation,
+#menu,
+#header,
+#topbar,
+#toolbar,
+#actionbar,
+#menubar,
+#navbar-nav,
+#navbar-menu,
+#navbar-container,
+#navbar-wrapper,
+#navbar-inner,
+#navbar-header,
+#navbar-brand,
+#navbar-items,
+#navbar-links,
+#navbar-actions,
+#navbar-tools,
+#navbar-utilities,
+#navbar-controls,
+#navbar-buttons,
+#navbar-icons,
+#navbar-dropdown,
+#navbar-dropdown-menu,
+#navbar-dropdown-toggle,
+#navbar-collapse,
+#navbar-toggle,
+#navbar-toggler,
+#navbar-hamburger,
+#navbar-menu-button,
+#navbar-menu-icon,
+#navbar-menu-toggle,
+#navbar-menu-trigger,
+#navbar-menu-control,
+#navbar-menu-handler,
+#navbar-menu-activator,
+#navbar-menu-switcher,
+#navbar-menu-switch {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 상단 헤더 영역 전체 숨김 (진짜 키오스크 모드) */
+header,
+.header,
+.top-header,
+.main-header,
+.page-header,
+.site-header,
+.app-header,
+.container-header,
+.wrapper-header,
+[class*="header"],
+[class*="top"],
+[class*="bar"]:not(.progress-bar):not(.scrollbar) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+/* 메인 콘텐츠가 상단으로 올라오도록 */
+body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+main,
+.main,
+.content,
+.container,
+.wrapper,
+[class*="main"],
+[class*="content"],
+[class*="container"]:not(.navbar-container) {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* 메인 콘텐츠 너비 보정 */
+.main-content,
+.content-area,
+.chat-container,
+.message-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.message-input:focus {
+    border-color: #667eea !important;
+    outline: none !important;
+}
+
+/* 헤더 간소화 */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+.header h1::after {
+    content: " - AI 멘토" !important;
+}
+
+/* 메시지 스타일 개선 */
+.message.user {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+.message.assistant {
+    background: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+}
+
+/* 불필요한 메뉴 항목들 숨기기 */
+.dropdown-menu .menu-item[href*="playground"],
+.dropdown-menu .menu-item[href*="workspace"],
+.dropdown-menu .menu-item[href*="memory"],
+.dropdown-menu .menu-item[href*="knowledge"] {
+    display: none !important;
+}
+
+/* 상단 네비게이션 바 완전 숨기기 */
+.navbar,
+.nav-bar,
+.top-nav,
+.header-nav,
+nav[role="navigation"],
+header nav,
+.navigation,
+.main-nav,
+/* OpenWebUI 특정 네비게이션 요소들 */
+.navbar-brand,
+.navbar-nav,
+.navbar-collapse,
+.nav-pills,
+.nav-tabs,
+/* 상단 메뉴 바 */
+[class*="topbar"],
+[class*="top-bar"],
+[class*="header-bar"],
+[class*="menu-bar"],
+/* 사이드바 토글 버튼 */
+.sidebar-toggle,
+.menu-toggle,
+button[aria-label*="menu" i],
+button[aria-label*="Menu" i],
+/* 햄버거 메뉴 */
+.hamburger,
+.menu-icon,
+/* 프로필 드롭다운 */
+.profile-dropdown,
+.user-menu,
+.account-menu,
+/* 추가 네비게이션 요소들 */
+[role="menubar"],
+[role="toolbar"],
+.toolbar,
+.menu-container {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 95% !important;
+        margin: 10px auto !important;
+    }
+
+    button[type="submit"],
+    .send-button {
+        min-width: 50px !important;
+        padding: 8px 15px !important;
+    }
+}
+
+/* 텍스트 방향 수정 */
+* {
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+    letter-spacing: normal !important;
+}
+
+/* 로딩 상태 개선 */
+.loading-indicator {
+    color: #667eea !important;
+}
+
+/* 에러 메시지 스타일 */
+.error-message {
+    background: #fee !important;
+    border: 1px solid #fcc !important;
+    color: #c33 !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+}
+
+/* 더욱 강력한 네비게이션 숨기기 규칙 */
+* {
+    /* 모든 요소에서 설정/관리 관련 텍스트를 가진 것들 숨기기 */
+}
+
+/* 모든 버튼 중 설정/관리 관련 숨기기 */
+button:contains("Settings"),
+button:contains("설정"),
+button:contains("Admin"),
+button:contains("관리"),
+button:contains("Models"),
+button:contains("모델"),
+a:contains("Settings"),
+a:contains("설정"),
+a:contains("Admin"),
+a:contains("관리"),
+/* 상단 헤더 영역 전체 숨기기 */
+header,
+.header,
+.app-header,
+.top-header,
+/* 사이드바 전체 숨기기 */
+aside,
+.sidebar,
+.side-nav,
+.left-sidebar,
+/* 메뉴 관련 모든 것 숨기기 */
+.menu,
+.dropdown,
+.dropdown-menu,
+/* 툴바 숨기기 */
+.toolbar,
+.app-toolbar {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    left: -10000px !important;
+    top: -10000px !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* 맨 왼쪽 + 버튼 (새 채팅) 숨기기 */
+button[title*="New Chat" i],
+button[title*="새 채팅" i],
+button[aria-label*="New Chat" i],
+button[aria-label*="새 채팅" i],
+.new-chat-button,
+.chat-new,
+.add-chat,
+button:has(svg[class*="plus"]),
+button:has(svg[class*="add"]),
+/* + 아이콘 버튼들 */
+button[class*="new"],
+button[class*="add"],
+button[class*="create"],
+/* 왼쪽 상단 버튼들 */
+.top-left-button,
+.left-button,
+/* 사이드바 토글 + 버튼 */
+.sidebar-button,
+.sidebar .button,
+
+/* 맨 오른쪽 메뉴들 숨기기 */
+.user-menu,
+.profile-menu,
+.account-dropdown,
+.user-dropdown,
+.settings-menu,
+.right-menu,
+.top-right-menu,
+/* 오른쪽 상단 버튼들 */
+.top-right-button,
+.right-button,
+/* 프로필 이미지/아바타 */
+.avatar,
+.profile-avatar,
+.user-avatar,
+/* 드롭다운 토글 버튼 */
+.dropdown-toggle,
+.menu-toggle-right,
+/* 점 3개 메뉴 (더 보기) */
+button[aria-label*="More" i],
+button[aria-label*="더 보기" i],
+button[title*="More" i],
+button[title*="더 보기" i],
+.more-menu,
+.kebab-menu,
+/* 설정 아이콘 버튼 */
+button:has(svg[class*="settings"]),
+button:has(svg[class*="gear"]),
+button:has(svg[class*="cog"]),
+/* 사용자 관련 버튼 */
+button:has(svg[class*="user"]),
+button:has(svg[class*="person"]),
+button:has(svg[class*="account"]) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    left: -10000px !important;
+    top: -10000px !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}

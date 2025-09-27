@@ -1,3 +1,5 @@
+version: '3.3'
+
 services:
   svc7996:
     build:
@@ -19,6 +21,15 @@ services:
     environment:
       - PORT=7997
       - TZ=Asia/Seoul
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=3313
+      - DB_USER=root
+      - DB_NAME=nll_third
+      - DB_PASSWORD=${DB_PASSWORD}
+      - VECTOR_DB_PASSWORD=${VECTOR_DB_PASSWORD}
+    volumes:
+      - ./ai_modules/faiss_search-main/logs:/app/logs
     ports:
       - "7997:7997"
     restart: unless-stopped
@@ -31,11 +42,25 @@ services:
     environment:
       - PORT=8001
       - TZ=Asia/Seoul
+      - PYTHONPATH=/app:/app/tool_sql-main
+      # Downstream service URLs (override defaults to correct Docker DNS names)
+      - SQL_QUERY_URL=http://svc7999:7999/api/v1/agent
+      - FAISS_SEARCH_URL=http://svc7997:7997/search-sql-filter
+      - DEPARTMENT_MAPPING_URL=http://department_mapping:8000/agent
+    volumes:
+      - ./ai_modules/llm_agent-main/logs:/app/logs
+      - ./ai_modules/tool_sql-main:/app/tool_sql-main
+      - ./ai_modules/llm_agent-main/processors:/app/processors
+      - ./ai_modules/llm_agent-main/service:/app/service
+      - ./ai_modules/llm_agent-main/tot:/app/tot
     ports:
       - "8001:8001"
     depends_on:
       - svc7996
       - svc7997
+      - svc7998
+      - svc7999
+      - department_mapping
     restart: unless-stopped
 
   svc7998:
@@ -58,52 +83,120 @@ services:
     environment:
       - PORT=7999
       - TZ=Asia/Seoul
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=3313
+      - DB_USER=root
+      - DB_NAME=nll_third
+      - DB_PASSWORD=${DB_PASSWORD}
+      - VECTOR_DB_PASSWORD=${VECTOR_DB_PASSWORD}
     ports:
       - "7999:7999"
     restart: unless-stopped
 
-# OpenwebUI
+  department_mapping:
+    build:
+      context: ./ai_modules/department_mapping-main
+      dockerfile: Dockerfile
+    container_name: department-mapping
+    environment:
+      - PORT=8000
+      - TZ=Asia/Seoul
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai_modules/curriculum-main/result:/app/data
+    restart: unless-stopped
+
+  # Simple AI Mentor Frontend - DISABLED
+  # simple_frontend:
+  #   build:
+  #     context: ./simple-frontend
+  #     dockerfile: Dockerfile
+  #   container_name: simple-frontend
+  #   ports:
+  #     - "8080:80"
+  #   environment:
+  #     - TZ=Asia/Seoul
+  #   depends_on:
+  #     - llm_agent
+  #   restart: unless-stopped
+
+  # OpenWebUI (Main AI Mentor Interface)
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: openwebui
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Direct external access
     environment:
       - TZ=Asia/Seoul
-      # - WEBUI_AUTH=False              # 로그인 완전 비활성화
-      - ENABLE_CODE_INTERPRETER=false # 코드 인터프리터 비활성화
-      - ENABLE_FILE_UPLOAD=false      # 파일 업로드 비활성화
-      - ENABLE_VOICE_INPUT=false      # 음성 인식 비활성화
-
-      # 로그인 관련 환경설정
-      - WEBUI_AUTH=True               # 로그인 사용(필수)
-      - ENABLE_LOGIN_FORM=True        # 로그인 폼 표시
-      - ENABLE_SIGNUP=True            # 회원가입 허용(일반 사용자가 직접 가입)
-      - DEFAULT_USER_ROLE=user        # 가입 즉시 일반 권한
-      # - ENABLE_PERSISTENT_CONFIG=False
-      
-    volumes:
-      - openwebui-data:/app/backend/data
-    restart: unless-stopped
-
-
-# Pipeline
-  pipelines:
-    image: ghcr.io/open-webui/pipelines:main
-    container_name: pipelines
-    ports:
-      - "9099:9099"
-    environment:
-      - TZ=Asia/Seoul
-      # ai_mentor.py가 읽을 값
-      - LLM_AGENT_URL=http://llm_agent:8001/agent
-      # openai_pipeline.py 쓸 경우에만
+      - PUBLIC_MODE=true
+      - ENABLE_ADMIN_PANEL=false
+      - RATE_LIMIT_RPM=60
+      - WEBUI_AUTH=false
+      - AUTHENTICATION=false
+      - ENABLE_LOGIN=false
+      - ENABLE_SIGNUP=false
+      - ALLOW_ANONYMOUS=true
+      - BYPASS_MODEL_VALIDATION=true
+      - DEFAULT_USER_ROLE=user
+      - OPENAI_API_BASE_URL=http://llm_agent:8001
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OLLAMA_BASE_URL=
+      - ENABLE_OLLAMA_API=false
+      - USE_OLLAMA_DOCKER=false
+      - ENABLE_TITLE_GENERATION=false
+      - ENABLE_TAGS_GENERATION=false
+      - ENABLE_SEARCH=false
+      - ENABLE_ADMIN=false
+      - ENABLE_MODEL_FILTER=false
+      - ENABLE_COMMUNITY_SHARING=false
+      - ENABLE_USER_IMPORT=false
+      - ENABLE_MESSAGE_RATING=false
+      - ENABLE_WEB_SEARCH=false
+      - ENABLE_RAG_WEB_SEARCH=false
+      - SHOW_ADMIN_DETAILS=false
+      - WEBUI_NAME=AI 멘토
+      - DEFAULT_LOCALE=ko-KR
+      - ENABLE_VOICE_CHAT=false
+      - ENABLE_MESSAGING=false
+      - AUDIO_STT_ENABLED=false
+      - AUDIO_TTS_ENABLED=false
+      - ENABLE_VOICE_INPUT=false
+      - ENABLE_VOICE_OUTPUT=false
+      - SHOW_VOICE_BUTTON=false
+      - ENABLE_AUDIO_RECORDING=false
+      - ENABLE_MIC_INPUT=false
+      - TTS_ENABLED=false
+      - STT_ENABLED=false
+      - VOICE_INPUT_ENABLED=false
+      - VOICE_OUTPUT_ENABLED=false
+      - ENABLE_STT=false
+      - ENABLE_TTS=false
+      - SPEECH_TO_TEXT_ENABLED=false
+      - TEXT_TO_SPEECH_ENABLED=false
     volumes:
-      - ./custom_pipeline:/app/pipelines
+      - ./openwebui_new:/app/backend/data
+      - ./custom-fix.css:/app/backend/static/custom.css:ro
     depends_on:
       - llm_agent
+      - svc7996
+      - svc7997
+      - svc7998
+      - svc7999
     restart: unless-stopped
 
-volumes:
-  openwebui-data:
+  # nginx reverse proxy - disabled to avoid port conflict
+  # Enable if you need advanced proxy features
+  # web:
+  #   build:
+  #     context: ./reverse-proxy
+  #     dockerfile: Dockerfile
+  #   container_name: openwebui-proxy
+  #   ports:
+  #     - "8081:8080"  # Changed to 8081 to avoid conflict
+  #   volumes:
+  #     - ./openwebui/custom.css:/etc/nginx/custom.css:ro
+  #     - ./reverse-proxy/suppress-warnings.js:/etc/nginx/suppress-warnings.js:ro
+  #   depends_on:
+  #     - openwebui
+  #   restart: unless-stopped

@@ -1,11 +1,12 @@
 import uvicorn
-
 from fastapi import FastAPI
-
 from controller.controller import router as agent_router
 
-
-app = FastAPI()
+app = FastAPI(
+    title="AI Mentor Fallback Service",
+    description="LLM Fallback/General-Agent for system stability",
+    version="1.0"
+)
 
 # 라우터 목록 등록
 app.include_router(agent_router)

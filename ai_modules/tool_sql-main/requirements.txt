@@ -6,4 +6,6 @@ openai
 langchain
 langchain-community
 langchain-openai
+langchain-core
 pymysql
+cryptography

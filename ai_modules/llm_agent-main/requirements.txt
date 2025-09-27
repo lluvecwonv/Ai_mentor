@@ -8,3 +8,8 @@ httpx
 networkx
 matplotlib
 seaborn
+tiktoken
+langchain
+langchain-openai
+langgraph
+pydantic-settings

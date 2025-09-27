@@ -15,7 +15,7 @@ class DbClient():
         self.port = 3312
         self.user = "root"
         self.password = db_password
-        self.database = "nll"
+        self.database = "nll_third"
         self.connection = None
 
     def connect(self):

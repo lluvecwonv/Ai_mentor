@@ -1,9 +1,9 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 from pydantic import BaseModel, ConfigDict
 
 class OpenAIChatMessage(BaseModel):
     role: str
-    content: str | List
+    content: Union[str, List]
 
     model_config = ConfigDict(extra="allow")
 
