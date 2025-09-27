@@ -80,12 +80,12 @@ class Settings(BaseSettings):
             raise ValueError('max_history_length must be between 1 and 1000')
         return v
     
-    # 외부 서비스 URL 설정
-    sql_query_url: str = "http://svc7999:7999/api/v1/agent"
-    faiss_search_url: str = "http://svc7997:7997/search"
-    curriculum_plan_url: str = "http://localhost:7996/chat"
-    department_mapping_url: str = "http://department-mapping:8000/agent"
-    llm_fallback_url: str = "http://svc7998:7998/agent"
+    # 외부 서비스 URL 설정 (일관성 있는 이름으로 수정)
+    sql_service_url: str = "http://tool-sql:7999/api/v1/agent"
+    search_service_url: str = "http://vector-search:7997/search"
+    curriculum_service_url: str = "http://curriculum:7996/chat"
+    mapping_service_url: str = "http://department-mapping:8000/map"
+    llm_service_url: str = "http://llm-client:7998/agent"
 
     # 타임존 설정
     tz: str = "Asia/Seoul"

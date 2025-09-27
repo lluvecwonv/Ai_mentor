@@ -5,6 +5,7 @@ Vector Search Handler for FAISS-based course search via HTTP
 import httpx
 import asyncio
 from .base_handler import BaseQueryHandler
+from config.settings import settings
 from typing import Dict, Any, Optional
 
 class VectorSearchHandler(BaseQueryHandler):
@@ -34,7 +35,7 @@ class VectorSearchHandler(BaseQueryHandler):
             headers={"Connection": "keep-alive"}
         )
         # FAISS 검색 서비스 URL (LLM 기반 SQL 사전 필터링 포함)
-        self.faiss_service_url = "http://svc7997:7997/search-sql-filter"
+        self.faiss_service_url = f"{settings.search_service_url}-sql-filter"
         self._warmed_up: bool = False
         self._warmup_lock = asyncio.Lock()
 

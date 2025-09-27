@@ -6,6 +6,7 @@ import httpx
 import logging
 from typing import Dict, Any, Optional
 from .base_handler import BaseQueryHandler
+from config.settings import settings
 
 logger = logging.getLogger(__name__)
 
@@ -13,8 +14,8 @@ logger = logging.getLogger(__name__)
 class CurriculumHandler(BaseQueryHandler):
     """커리큘럼 서비스와 연동하는 핸들러"""
 
-    def __init__(self, base_url: str = "http://localhost:7996"):
-        self.base_url = base_url
+    def __init__(self, base_url: str = None):
+        self.base_url = base_url or settings.curriculum_service_url.replace('/chat', '')
         self._health_status = False
 
     async def warmup(self) -> None:

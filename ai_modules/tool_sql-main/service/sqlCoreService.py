@@ -1,95 +1,54 @@
-"""
-리팩토링된 LangChain 기반 SQL 처리 서비스
-"""
 import logging
-import time
-from typing import Dict, Any
 
 from util.langchainLlmClient import LangchainLlmClient
 from util.dbClient import DbClient
+from util.utils import load_prompt, format_result
 
-from processors.sql_processor import SqlProcessor
-from processors.result_formatter import ResultFormatter
-from chains.sql_chain_manager import SqlChainManager
-from monitoring.performance_monitor import PerformanceMonitor
-
-# 로거 설정
 logger = logging.getLogger(__name__)
 
-class SqlCoreService:
-    """리팩토링된 LangChain 기반 SQL 처리 서비스"""
+class SqlService:
+    """초간단 SQL 처리 서비스"""
 
     def __init__(self):
-        self.logger = logger
-        
-        # 의존성 주입
         self.llm_client = LangchainLlmClient()
         self.db_client = DbClient()
-        
-        # 컴포넌트 초기화
-        self.sql_processor = SqlProcessor(self.db_client, self.llm_client)
-        self.result_formatter = ResultFormatter()
-        self.performance_monitor = PerformanceMonitor()
-        
-        # 체인 관리자 초기화
-        self.chain_manager = SqlChainManager(self.sql_processor, self.result_formatter)
-        
-        self.logger.info("✅ [서비스 초기화] SqlCoreService 초기화 완료")
-
-    def create_agent(self):
-        """SQL 에이전트 생성 (호환성을 위한 래퍼)"""
-        self.sql_processor.create_agent()
+        logger.info("✅ SqlService 초기화 완료")
 
     def execute(self, query: str) -> str:
-        """LangChain 체인을 사용한 질문 처리"""
-        start_time = time.time()
-        self.logger.info(f"🚀 [메인 체인] 실행 시작: {query[:100]}...")
-        self.logger.info(f"📝 [SQL] 전체 쿼리: {query}")
+        """SQL 쿼리 실행"""
+        logger.info(f"🚀 실행: {query[:50]}...")
 
         try:
-            # 체인 실행
-            result = self.chain_manager.execute_chain(query)
+            # 1. 자연어 → SQL 변환
+            sql = self._to_sql(query)
 
-            execution_time = time.time() - start_time
-            self.performance_monitor.record_query(execution_time, True)
+            # 2. SQL 실행
+            result = self.db_client.execute_query(sql)
 
-            self.logger.info(f"📊 [SQL] 실행 결과 길이: {len(result)} 문자")
-            self.logger.info(f"📄 [SQL] 실행 결과: {result[:500]}...")  # 처음 500자만 로그
-            self.logger.info(f"✅ [메인 체인] 실행 완료: {execution_time:.3f}초")
-            return result
-            
+            # 3. 결과 반환
+            return format_result(result)
+
         except Exception as e:
-            execution_time = time.time() - start_time
-            self.performance_monitor.record_query(execution_time, False)
-            self.logger.error(f"❌ [메인 체인] 실행 실패: {e}")
-            
-            # 폴백 실행
-            return self._fallback_execute(query)
+            logger.error(f"❌ 실패: {e}")
+            return f"오류: {str(e)}"
 
-    def process_query(self, query: str) -> str:
-        """호환성을 위한 래퍼 메서드"""
-        return self.execute(query)
+    def _to_sql(self, query: str) -> str:
+        """자연어를 SQL로 변환"""
+        system_prompt = load_prompt("sql_system_prompt")
 
-    def _fallback_execute(self, query: str) -> str:
-        """체인 실행 실패시 폴백 메서드"""
-        self.logger.warning("⚠️ [폴백 실행] 체인 실패로 인한 폴백 모드 시작")
-        
-        try:
-            result = self.sql_processor.execute_with_agent(query)
-            if result.success:
-                return self.result_formatter.remove_markdown(result.result)
-            else:
-                return f"SQL 처리 중 오류가 발생했습니다: {result.error_message}"
-                
-        except Exception as e:
-            self.logger.error(f"❌ [폴백 실행] 폴백 모드도 실패: {e}")
-            return f"SQL 처리 중 오류가 발생했습니다: {str(e)}"
+        # LLM 호출
+        full_prompt = f"{system_prompt}\n\n질문: {query}\n\nSQL 쿼리:"
+        response = self.llm_client.get_llm().invoke(full_prompt)
+        sql = response.content.strip()
 
-    def get_performance_stats(self) -> Dict[str, Any]:
-        """성능 통계 조회"""
-        return self.performance_monitor.get_stats()
+        # 정리
+        if sql.startswith("```sql"):
+            sql = sql.replace("```sql", "").replace("```", "").strip()
+        if not sql.endswith(';'):
+            sql += ';'
 
-    def reset_stats(self):
-        """성능 통계 초기화"""
-        self.performance_monitor.reset_stats()
-        self.logger.info("🔄 [통계 초기화] 성능 통계 리셋 완료")
+        logger.info(f"✅ SQL 변환: {sql}")
+        return sql
+
+
+

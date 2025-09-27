@@ -1,11 +1,11 @@
 version: '3.3'
 
 services:
-  svc7996:
+  curriculum:
     build:
       context: ./ai_modules/curriculum-main
       dockerfile: Dockerfile
-    container_name: svc7996
+    container_name: curriculum
     environment:
       - PORT=7996
       - TZ=Asia/Seoul
@@ -13,11 +13,11 @@ services:
       - "7996:7996"
     restart: unless-stopped
 
-  svc7997:
+  vector-search:
     build:
       context: ./ai_modules/faiss_search-main
       dockerfile: Dockerfile
-    container_name: svc7997
+    container_name: vector-search
     environment:
       - PORT=7997
       - TZ=Asia/Seoul
@@ -44,9 +44,11 @@ services:
       - TZ=Asia/Seoul
       - PYTHONPATH=/app:/app/tool_sql-main
       # Downstream service URLs (override defaults to correct Docker DNS names)
-      - SQL_QUERY_URL=http://svc7999:7999/api/v1/agent
-      - FAISS_SEARCH_URL=http://svc7997:7997/search-sql-filter
-      - DEPARTMENT_MAPPING_URL=http://department_mapping:8000/agent
+      - SQL_SERVICE_URL=http://tool-sql:7999/api/v1/agent
+      - SEARCH_SERVICE_URL=http://vector-search:7997/search
+      - CURRICULUM_SERVICE_URL=http://curriculum:7996/chat
+      - MAPPING_SERVICE_URL=http://department-mapping:8000/map
+      - LLM_SERVICE_URL=http://llm-client:7998/agent
     volumes:
       - ./ai_modules/llm_agent-main/logs:/app/logs
       - ./ai_modules/tool_sql-main:/app/tool_sql-main
@@ -56,18 +58,18 @@ services:
     ports:
       - "8001:8001"
     depends_on:
-      - svc7996
-      - svc7997
-      - svc7998
-      - svc7999
+      - curriculum
+      - vector-search
+      - llm-client
+      - tool-sql
       - department_mapping
     restart: unless-stopped
 
-  svc7998:
+  llm-client:
     build:
       context: ./ai_modules/tool_dumb-main
       dockerfile: Dockerfile
-    container_name: svc7998
+    container_name: llm-client
     environment:
       - PORT=7998
       - TZ=Asia/Seoul
@@ -75,11 +77,11 @@ services:
       - "7998:7998"
     restart: unless-stopped
 
-  svc7999:
+  tool-sql:
     build:
       context: ./ai_modules/tool_sql-main
       dockerfile: Dockerfile
-    container_name: svc7999
+    container_name: tool-sql
     environment:
       - PORT=7999
       - TZ=Asia/Seoul
@@ -139,7 +141,7 @@ services:
       - ALLOW_ANONYMOUS=true
       - BYPASS_MODEL_VALIDATION=true
       - DEFAULT_USER_ROLE=user
-      - OPENAI_API_BASE_URL=http://llm_agent:8001
+      - OPENAI_API_BASE_URL=http://llm-agent:8001
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OLLAMA_BASE_URL=
       - ENABLE_OLLAMA_API=false
@@ -179,10 +181,10 @@ services:
       - ./custom-fix.css:/app/backend/static/custom.css:ro
     depends_on:
       - llm_agent
-      - svc7996
-      - svc7997
-      - svc7998
-      - svc7999
+      - curriculum
+      - vector-search
+      - llm-client
+      - tool-sql
     restart: unless-stopped
 
   # nginx reverse proxy - disabled to avoid port conflict

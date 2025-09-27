@@ -13,8 +13,8 @@ class DbClient:
         self.port = int(os.getenv("DB_PORT", "3313"))
         self.user = os.getenv("DB_USER", "root")
 
-        # VECTOR_DB_PASSWORD 우선, 없으면 DB_PASSWORD, 그래도 없으면 안전한 기본값
-        self.password = os.getenv("VECTOR_DB_PASSWORD") 
+        # VECTOR_DB_PASSWORD 우선, 없으면 DB_PASSWORD 사용
+        self.password = os.getenv("DB_PASSWORD") 
         # 기본 DB는 운영에서 사용하는 'nll'
         self.database = os.getenv("DB_NAME", "nll_third")
         self.connection = None

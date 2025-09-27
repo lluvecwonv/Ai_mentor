@@ -12,6 +12,8 @@ from fastapi.responses import JSONResponse
 from config.settings import settings, LOGGING_CONFIG
 from controller.agentController import router as agent_router
 
+from service.core.mentor_service import HybridMentorService
+
 # 로그 디렉토리 확인 및 생성
 log_dir = Path("/home/dbs0510/AiMentor_edit/ai_modules/llm_agent-main/logs")
 log_dir.mkdir(exist_ok=True)
@@ -35,26 +37,17 @@ async def lifespan(_: FastAPI):
     # Startup
     global global_mentor_service
     logger.info("🚀 서버 시작 - 핸들러 워밍업 시작")
+    # 서비스 인스턴스 생성 (통합 LangGraph 모드로 초기화)
+    global_mentor_service = HybridMentorService(use_unified_langgraph=True)
 
-    try:
-        from service.core.mentor_service import HybridMentorService
+    # 워밍업 완료 확인
+    warmup_status = global_mentor_service.get_health_status()
 
-        # 서비스 인스턴스 생성 (통합 LangGraph 모드로 초기화)
-        global_mentor_service = HybridMentorService(use_unified_langgraph=True)
+    if warmup_status.get("status") == "healthy":
+        logger.info("✅ 서버 시작 - 모든 핸들러 워밍업 완료")
+    else:
+        logger.warning(f"⚠️ 워밍업 부분 실패: {warmup_status}")
 
-        # 워밍업 완료 확인
-        warmup_status = global_mentor_service.get_health_status()
-
-        if warmup_status.get("status") == "healthy":
-            logger.info("✅ 서버 시작 - 모든 핸들러 워밍업 완료")
-        else:
-            logger.warning(f"⚠️ 워밍업 부분 실패: {warmup_status}")
-
-    except Exception as e:
-        logger.error(f"❌ 서버 시작 워밍업 실패: {e}")
-        global_mentor_service = None
-
-    yield
 
     # Shutdown
     logger.info("서버 종료")

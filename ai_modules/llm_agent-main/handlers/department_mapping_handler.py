@@ -1,6 +1,7 @@
 import os
 import httpx
 from .base_handler import BaseQueryHandler
+from config.settings import settings
 from typing import Dict
 
 
@@ -11,7 +12,7 @@ class DepartmentMappingHandler(BaseQueryHandler):
         super().__init__()
         self.http = httpx.AsyncClient(timeout=10.0)
         self.mapping_service_url = os.getenv(
-            "DEPARTMENT_MAPPING_URL", "http://department-mapping:8000/agent"
+            "DEPARTMENT_MAPPING_URL", settings.mapping_service_url
         )
 
     def is_available(self) -> bool:
