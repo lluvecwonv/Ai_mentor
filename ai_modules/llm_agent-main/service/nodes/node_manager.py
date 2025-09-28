@@ -59,6 +59,10 @@ class NodeManager:
 
         def route_by_complexity(state: dict) -> str:
             """복잡도에 따른 세부 라우팅"""
+            # 재라우팅 요청이 있으면 라우트 노드로
+            if state.get("needs_reroute"):
+                return "router"
+
             complexity = state.get("route", "light")  # 기본값을 light로 변경
             owner_hint = state.get("owner_hint", "").upper()
             plan = state.get("plan", []) or []

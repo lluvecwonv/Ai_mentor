@@ -141,8 +141,8 @@ class CurriculumHandler(BaseQueryHandler):
                 "service": "curriculum"
             }
 
-    async def handle(self, user_message: str, query_analysis: Dict, **kwargs) -> str:
-        """Handle curriculum-related queries"""
+    async def handle(self, user_message: str, query_analysis: Dict, **kwargs) -> Dict:
+        """Handle curriculum-related queries and return standardized response"""
         logger.info("\n" + "="*60)
         logger.info("📚 커리큘럼 에이전트 처리 시작")
         logger.info(f"📥 사용자 질문: {user_message}")
@@ -150,6 +150,15 @@ class CurriculumHandler(BaseQueryHandler):
         logger.info(f"🔧 추가 인자: {kwargs}")
         logger.info(f"🏥 서비스 상태: {'정상' if self._health_status else '비정상'}")
         logger.info(f"🌐 베이스 URL: {self.base_url}")
+
+        if not self.is_available():
+            return self.create_response(
+                agent_type="curriculum",
+                result=None,
+                normalized="",
+                display="커리큘럼 서비스를 사용할 수 없습니다.",
+                success=False
+            )
 
         try:
             # 쿼리 분석 정보 활용 - LLM이 이미 분석한 결과 그대로 사용
@@ -197,20 +206,48 @@ class CurriculumHandler(BaseQueryHandler):
                     preview = message[:200] + "..." if message_length > 200 else message
                     logger.info(f"📄 응답 미리보기: {preview}")
 
+                # 커리큘럼 결과를 정규화 (너무 길면 요약)
+                normalized_result = message[:300]
+                if len(message) > 300:
+                    normalized_result += "..."
+
                 logger.info("="*60)
-                return message
+                return self.create_response(
+                    agent_type="curriculum",
+                    result=message,
+                    normalized=normalized_result,
+                    display=message,
+                    metadata={
+                        "source": "curriculum_service",
+                        "query": query,
+                        "complexity": additional_context.get("complexity", "medium"),
+                        "response_length": message_length
+                    },
+                    success=True
+                )
             else:
                 error_msg = response.get("error", "커리큘럼 서비스 오류가 발생했습니다.")
                 logger.error(f"❌ 커리큘럼 서비스 실패: {error_msg}")
                 logger.info("="*60)
-                return error_msg
+                return self.create_response(
+                    agent_type="curriculum",
+                    result=None,
+                    display=error_msg,
+                    success=False
+                )
 
         except Exception as e:
             logger.error(f"❌ Curriculum handler 전체 처리 실패: {e}")
             import traceback
             logger.error(f"❌ 스택 트레이스: {traceback.format_exc()}")
             logger.info("="*60)
-            return "커리큘럼 서비스에 문제가 발생했습니다."
+            return self.create_response(
+                agent_type="curriculum",
+                result=None,
+                display="커리큘럼 서비스에 문제가 발생했습니다.",
+                metadata={"error": str(e)},
+                success=False
+            )
 
     def is_available(self) -> bool:
         """Check if curriculum service is available"""
