@@ -890,3 +890,1365 @@
 2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 리눅스프로그래밍
 2025-09-29 03:20:35 | INFO | service.curriculumService | ✅ 쿼리 처리 완료: 2개 학과 결과
 2025-09-29 03:20:35 | INFO | controller.curriculumController | ✅ API 응답 완료: 2100자
+2025-09-29 03:21:53 | INFO | root | === curriculum 서비스 시작 ===
+2025-09-29 03:21:53 | INFO | root | 공통 로그 파일: ./logs/curriculum.log
+2025-09-29 03:21:53 | INFO | root | Curriculum 전용 로그 파일: ./curriculum.log
+2025-09-29 03:22:26 | INFO | controller.curriculumController | 📨 API 요청 수신: '반도체와 컴공을 융합한 인공지능 수업을 듣고싶어 근데 우리학교에는 해당 수업이없어 관련 커리큘럼을 짜줘 (이전 분석: 학과: 컴퓨터인공지능학부)' (요구 과목 수: 30)
+2025-09-29 03:22:26 | INFO | service.curriculumService | 쿼리 처리 시작: 반도체와 컴공을 융합한 인공지능 수업을 듣고싶어 근데 우리학교에는 해당 수업이없어 관련 커...
+2025-09-29 03:22:26 | INFO | service.curriculumService | 📚 Retriever 초기화 시작
+2025-09-29 03:22:27 | INFO | service.curriculumService | ✅ Retriever 초기화 완료
+2025-09-29 03:22:40 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 03:22:42 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:22:42 | INFO | service.curriculumService | Visited nodes total: 0
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:42 | INFO | service.curriculumService | Visited nodes total: 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | Visited nodes total: 4
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | Visited nodes total: 6
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | Visited nodes total: 8
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | Visited nodes total: 10
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | Visited nodes total: 12
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:42 | INFO | service.curriculumService | Visited nodes total: 14
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:42 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:42 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:42 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | Visited nodes total: 16
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | Visited nodes total: 18
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | Visited nodes total: 20
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | Visited nodes total: 22
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | Visited nodes total: 24
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | Visited nodes total: 26
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전력전자공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 초급양자역학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | Visited nodes total: 28
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전력전자공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전자회로 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 초급양자역학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | Visited nodes total: 30
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:22:43 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전력전자공학
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 전자회로 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:43 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:43 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:44 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:44 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:22:44 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:22:44 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 초급양자역학
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:22:44 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:22:44 | INFO | service.curriculumService | ✅ 쿼리 처리 완료: 2개 학과 결과
+2025-09-29 03:22:44 | INFO | controller.curriculumController | ✅ API 응답 완료: 2848자
+2025-09-29 03:26:21 | INFO | root | === curriculum 서비스 시작 ===
+2025-09-29 03:26:21 | INFO | root | 공통 로그 파일: ./logs/curriculum.log
+2025-09-29 03:26:21 | INFO | root | Curriculum 전용 로그 파일: ./curriculum.log
+2025-09-29 03:26:42 | INFO | controller.curriculumController | 📨 API 요청 수신: '반도체와 인공지능을 결합한 융합 커리큘럼을 짜줘
+
+[확장정보] 배경정보: Looking for a curriculum that combines semiconductor techno...' (요구 과목 수: 30)
+2025-09-29 03:26:42 | INFO | service.curriculumService | 쿼리 처리 시작: 반도체와 인공지능을 결합한 융합 커리큘럼을 짜줘
+
+[확장정보] 배경정보: Looking f...
+2025-09-29 03:26:42 | INFO | service.curriculumService | 📚 Retriever 초기화 시작
+2025-09-29 03:26:42 | INFO | service.curriculumService | ✅ Retriever 초기화 완료
+2025-09-29 03:26:58 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 03:27:01 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 0
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 4
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 6
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 8
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 10
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 12
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 14
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 16
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 18
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 20
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | Visited nodes total: 22
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:01 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:01 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:01 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | Visited nodes total: 24
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | Visited nodes total: 26
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 산업수요맞춤형현장실습프로젝트
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | Visited nodes total: 28
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 산업수요맞춤형현장실습프로젝트
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 데이터구조및프로그래밍실습
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 초급양자역학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | Visited nodes total: 30
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1360, 'class_name': '반도체물리전자', 'student_grade': 3, 'semester': 1, 'description': '본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ', 'language': '한국어', 'prerequisite': '일반물리학\n대학수학', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3385, 'class_name': '창의적공학설계입문', 'student_grade': 1, 'semester': 2, 'description': '공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양', 'language': '한국어', 'prerequisite': '', 'department_name': '전자공학부', 'college_name': '공과대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 창의적공학설계입문
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 창의적공학설계입문
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 산업수요맞춤형현장실습프로젝트
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 데이터구조및프로그래밍실습
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 97, 'class_name': '반도체공정', 'student_grade': 3, 'semester': 1, 'description': 'The purpose of this course is to provide students with technical background on silicon process technology.', 'language': '한국어', 'prerequisite': '반도체재료, 반도체소자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 320, 'class_name': '반도체재료학개론', 'student_grade': 2, 'semester': 1, 'description': '태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다.', 'language': '한국어', 'prerequisite': '', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 1755, 'class_name': '반도체공학개론', 'student_grade': 2, 'semester': 1, 'description': '-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n', 'language': '한국어', 'prerequisite': '물리전자', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}, {'class_id': 4618, 'class_name': '현대물리학', 'student_grade': 2, 'semester': 2, 'description': '고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다.', 'language': '한국어', 'prerequisite': '일반물리학1, 2', 'department_name': '반도체과학기술학과', 'college_name': '자연과학대학'}]
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체재료학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 선행과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 현대물리학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:27:02 | INFO | service.curriculumService | 현재과목: 초급양자역학
+2025-09-29 03:27:02 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:27:03 | INFO | service.curriculumService | ✅ 쿼리 처리 완료: 2개 학과 결과
+2025-09-29 03:27:03 | INFO | controller.curriculumController | ✅ API 응답 완료: 2915자

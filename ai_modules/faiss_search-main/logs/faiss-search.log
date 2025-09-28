@@ -3300,3 +3300,9 @@ WHERE c.department LIKE '%컴퓨터인공지능학부%'
 2025-09-29 03:15:29 | INFO | root | === faiss-search 서비스 시작 ===
 2025-09-29 03:15:29 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
 2025-09-29 03:15:29 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 03:21:51 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 03:21:51 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 03:21:51 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 03:26:19 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 03:26:19 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 03:26:19 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log

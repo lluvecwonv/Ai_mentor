@@ -9,7 +9,7 @@ class LlmClient:
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             model=model,
             temperature=0,
-            max_tokens=4000
+            max_tokens=16000
         )
     
     async def chat(self, message: str, context: str = None, json_mode: bool = False) -> str:
