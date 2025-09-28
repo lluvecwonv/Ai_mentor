@@ -1,7 +1,7 @@
 import logging
 from typing import Dict, Any
 from utils.prompt_loader import load_prompt
-from utils.json_utils import extract_json_block
+from utils.json_utils import extract_json_block, robust_json_parse
 
 logger = logging.getLogger(__name__)
 
@@ -14,23 +14,13 @@ class ConversationContextAnalyzer:
     async def analyze_session_context(self, current_query: str, conversation_memory, session_id: str) -> Dict[str, Any]:
         """히스토리 사용 여부와 상세 활용 방식 분석"""
         try:
-            # 메모리나 히스토리가 없으면 새로운 검색
-            if not conversation_memory:
-                return {
-                    "is_continuation": False,
-                    "history_usage": {
-                        "reuse_previous": False,
-                        "relationship": "new_search",
-                        "context_integration": "메모리가 없어 새로운 검색 수행"
-                    }
-                }
-
             session_state = conversation_memory.get_state(session_id)
             history = session_state.get("conversation_history", [])
 
             if not history:
                 return {
                     "is_continuation": False,
+                    "reconstructed_query": current_query,
                     "history_usage": {
                         "reuse_previous": False,
                         "relationship": "new_search",
@@ -50,53 +40,37 @@ class ConversationContextAnalyzer:
             # LLM 호출
             response = await self.llm_handler.chat(prompt)
 
-            # JSON 파싱 (utils.json_utils 사용)
-            history_data = extract_json_block(response)
+            # JSON 파싱 (더 강화된 파싱 사용)
+            history_data = robust_json_parse(response)
 
-            if not history_data:
-                logger.warning("JSON 추출 실패, 응답 내용 확인")
-                logger.debug(f"LLM 응답: {response}")
-                # 폴백 로직으로 이동
-                is_continuation = "true" in response.lower() or "continuation" in response.lower()
-                return {
-                    "is_continuation": is_continuation,
-                    "history_usage": {
-                        "reuse_previous": is_continuation,
-                        "relationship": "new_search" if not is_continuation else "extension",
-                        "context_integration": "JSON 추출 실패로 기본값 사용"
+
+            if history_data and isinstance(history_data, dict):
+                if "history_usage" in history_data:
+                    # 정상적인 JSON 파싱 성공
+                    history_usage = history_data["history_usage"]
+                    is_continuation = history_usage.get("reuse_previous", False)
+
+                    result = {
+                        "is_continuation": is_continuation,
+                        "history_usage": history_usage
                     }
-                }
 
-            if "history_usage" in history_data:
-                # 정상적인 JSON 파싱 성공
-                history_usage = history_data["history_usage"]
-                is_continuation = history_usage.get("reuse_previous", False)
+                            # 연속대화일 경우 질의 재구성 수행
+                    if is_continuation:
+                        reconstructed_query = await self._reconstruct_query(current_query, history_context)
+                        result["reconstructed_query"] = reconstructed_query
+                    else:
+                        result["reconstructed_query"] = current_query
 
-                result = {
-                    "is_continuation": is_continuation,
-                    "history_usage": history_usage
-                }
-
-                logger.info(f"🎯 히스토리 분석 완료: 연속대화={is_continuation}, 관계={history_usage.get('relationship', 'unknown')}")
-                return result
-            else:
-                # JSON은 있지만 history_usage 키가 없음
-                logger.warning("JSON에 history_usage 키 없음, 폴백 방식 사용")
-                is_continuation = "true" in response.lower()
-                return {
-                    "is_continuation": is_continuation,
-                    "history_usage": {
-                        "reuse_previous": is_continuation,
-                        "relationship": "new_search" if not is_continuation else "extension",
-                        "context_integration": "JSON에 history_usage 키 없음"
-                    }
-                }
-
+                    logger.info(f"🎯 히스토리 분석 완료: 연속대화={is_continuation}, 관계={history_usage.get('relationship', 'unknown')}")
+                    return result
+                
         except Exception as e:
             logger.error(f"❌ 히스토리 분석 실패: {e}")
             # 예외 발생 시 폴백 - 기본값 반환
             return {
                 "is_continuation": False,
+                "reconstructed_query": current_query,
                 "history_usage": {
                     "reuse_previous": False,
                     "relationship": "new_search",
@@ -113,3 +87,17 @@ class ConversationContextAnalyzer:
             elif entry.get("role") == "assistant":
                 formatted.append(f"AI: {entry.get('content', '')[:100]}...")
         return " | ".join(formatted)
+    
+
+    async def _reconstruct_query(self, current_query: str, history_context: str) -> str:
+        # 질의 재구성 프롬프트 로드
+        reconstruction_prompt = load_prompt('query_reconstruction').format(
+            history_context=history_context,
+            current_query=current_query
+        )
+
+        reconstructed = await self.llm_handler.chat(reconstruction_prompt)
+        reconstructed = reconstructed.strip()
+
+        logger.info(f"🔧 질의 재구성: '{current_query}' → '{reconstructed}'")
+        return reconstructed

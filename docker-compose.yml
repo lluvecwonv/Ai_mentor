@@ -18,6 +18,9 @@ services:
       - TZ=Asia/Seoul
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - DB_HOST=${DB_HOST}
+      - DB_PORT=3311
+      - DB_USER=root
+      - DB_NAME=nll_third
       - DB_PASSWORD=${DB_PASSWORD}
     ports:
       - "7996:7996"
@@ -195,6 +198,13 @@ services:
       - ENABLE_TTS=false
       - SPEECH_TO_TEXT_ENABLED=false
       - TEXT_TO_SPEECH_ENABLED=false
+      - ENABLE_FOLLOW_UP_QUESTIONS=false
+      - SHOW_FOLLOW_UP_QUESTIONS=false
+      - ENABLE_AUTO_SUGGESTIONS=false
+      - SHOW_SUGGESTIONS=false
+      - ENABLE_SUGGESTION_PROMPTS=false
+      - ENABLE_RECOMMENDED_QUESTIONS=false
+      - SHOW_RECOMMENDED_QUESTIONS=false
     volumes:
       - ./openwebui_new:/app/backend/data
       - ./custom-fix.css:/app/backend/static/custom.css:ro

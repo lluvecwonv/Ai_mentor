@@ -38,8 +38,8 @@
    - **교수 + 주제**: 교수 필터만 적용, 주제는 벡터 검색으로 처리
 
 4. **SELECT 절**
-   - 항상 `c.id, c.vector`를 포함하여 FAISS 검색에 필수
-   - 예: `SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.vector FROM jbnu_class_gpt c`
+   - 항상 모든 필드 포함: `c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector`
+   - 예: `SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector FROM jbnu_class_gpt c`
 
 ## 학과명 매핑
 - "컴공" → "컴퓨터인공지능학부" (LIKE '%컴퓨터인공지능학부%')
@@ -60,27 +60,27 @@ SELECT ... FROM ... WHERE ...
 
 **쿼리**: "컴공에서 인공지능 관련 수업"
 ```sql
-SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.vector
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
 FROM jbnu_class_gpt c
 WHERE c.department LIKE '%컴퓨터%'
 ```
 
 **쿼리**: "송현제 교수님 수업"
 ```sql
-SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.vector
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
 FROM jbnu_class_gpt c
 WHERE c.professor LIKE '%송현제%'
 ```
 
 **쿼리**: "머신러닝 관련 수업 알려줘"
 ```sql
-SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
 FROM jbnu_class_gpt c
 ```
 
 **쿼리**: "전전 3학년 수업"
 ```sql
-SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.vector
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
 FROM jbnu_class_gpt c
 WHERE c.department LIKE '%전자%' AND c.target_grade = 3
 ```

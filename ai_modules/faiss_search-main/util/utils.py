@@ -98,7 +98,7 @@ def prepare_vectors(courses: List[Dict]) -> tuple:
             metadata.append({
                 'id': course['id'],
                 'name': course['name'],
-                'department': course.get('department_full_name', course.get('department', '')),
+                'department': course.get('department_name', course.get('department_full_name', course.get('department', ''))),
                 'professor': course.get('professor', '정보없음'),
                 'credits': course.get('credits', 0),
                 'schedule': course.get('schedule', '정보없음'),

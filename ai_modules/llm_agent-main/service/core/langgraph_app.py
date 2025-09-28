@@ -125,6 +125,7 @@ class LangGraphApp:
         initial_state["conversation_memory"] = self.conversation_memory
         initial_state["is_continuation"] = history_analysis.get("is_continuation", False)
         initial_state["history_usage"] = history_analysis.get("history_usage", {})
+        initial_state["reconstructed_query"] = history_analysis.get("reconstructed_query", user_message)
 
         # 그래프 실행
         result = await self.graph.ainvoke(initial_state)

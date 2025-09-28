@@ -58,7 +58,7 @@ def enhance_query(agent_name: str, user_message: str, context: Dict[str, Any]) -
         if dept:
             context_parts.append(f"학과: {dept}")
         if courses:
-            course_names = [c.get("course_name", "") for c in courses[:3]]
+            course_names = [c.get("name", "") for c in courses[:3] if c.get("name")]
             if course_names:
                 context_parts.append(f"관련 과목: {', '.join(course_names)}")
 

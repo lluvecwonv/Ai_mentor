@@ -36,23 +36,28 @@ class VectorSearchHandler(BaseQueryHandler):
                     query_text = f"{user_message} {' '.join(keywords)}"
 
             # API 호출
-            payload = {"query": query_text, "count": 10}
+            payload = {"query": query_text, "count": 3}
             response = await self.http_client.post(self.faiss_service_url, json=payload)
 
             if response.status_code == 200:
                 data = response.json()
                 results = data.get('results', []) if isinstance(data, dict) else data
 
-                # 결과가 있으면 course_name들을 추출해서 정규화
-                course_names = []
+                # 결과가 있으면 name과 department를 추출해서 정규화
+                course_info = []
                 if results:
-                    course_names = [item.get("course_name", "") for item in results[:5]]
+                    for item in results[:5]:
+                        name = item.get("name", "")
+                        department = item.get("department", "")
+                        if name:
+                            info = f"{name}" + (f" ({department})" if department else "")
+                            course_info.append(info)
 
                 return self.create_response(
                     agent_type="vector_search",
                     result=results,
-                    normalized=", ".join(course_names),  # 과목명 리스트로 정규화
-                    display=f"검색된 강의 {len(results)}개: {', '.join(course_names)} ",
+                    normalized=", ".join(course_info),  # 과목명과 학과명으로 정규화
+                    display=f"검색된 강의 {len(results)}개: {', '.join(course_info)} ",
                     metadata={
                         "count": len(results),
                         "query_text": query_text,

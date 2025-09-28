@@ -44,7 +44,8 @@ class DepartmentMappingHandler(BaseQueryHandler):
 
             if resp.status_code == 200:
                 data = resp.json()
-                dept_name = data.get("message", "학과를 찾을 수 없습니다.")
+                # 실제 /map 엔드포인트 응답 구조: {"department": "학과명"}
+                dept_name = data.get("department", "학과를 찾을 수 없습니다.")
 
                 return self.create_response(
                     agent_type="department_mapping",
@@ -52,7 +53,7 @@ class DepartmentMappingHandler(BaseQueryHandler):
                     normalized=dept_name,  # 정규화된 학과명
                     display=f"학과: {dept_name}",
                     metadata={
-                        "confidence": data.get("confidence", 1.0),
+                        "confidence": 1.0,  # 단일 결과이므로 1.0
                         "source": "mapping_service",
                         "original_query": user_message
                     },

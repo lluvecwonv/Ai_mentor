@@ -6,16 +6,19 @@ import os
 load_dotenv()  # .env 파일 자동 로드
 
 db_host = os.getenv("DB_HOST")
+db_port = int(os.getenv("DB_PORT", "3311"))  # 기본값 3311
+db_user = os.getenv("DB_USER", "root")  # 기본값 root
+db_name = os.getenv("DB_NAME", "nll_third")  # 기본값 nll_third
 db_password = os.getenv("DB_PASSWORD")
 
 class DbClient():
 
     def __init__(self):
         self.host = db_host
-        self.port = 3312
-        self.user = "root"
+        self.port = db_port
+        self.user = db_user
         self.password = db_password
-        self.database = "nll_third"
+        self.database = db_name
         self.connection = None
 
     def connect(self):

@@ -9,17 +9,12 @@ logger = logging.getLogger(__name__)
 
 
 async def analyze_routing_async(llm_client, query: str, contextual_prompt: str = None, history_context: str = None) -> Dict[str, Any]:
-    """라우팅 분석 - 간단 버전"""
+    """라우팅 분석 - 재구성된 질문만 사용 (히스토리 제거)"""
 
-    # 프롬프트 구성
+    # 프롬프트 구성 - 재구성된 질문만 사용
     router_prompt = load_prompt('router_prompt').replace('{query}', query)
 
-    # 히스토리 컨텍스트 추가
-    if history_context:
-        router_prompt = router_prompt.replace('{query}',
-            f"\n\n### 이전 대화:\n{history_context}\n\n### 현재 질문:\n{query}")
-
-    # 추가 컨텍스트
+    # 추가 컨텍스트만 적용 (히스토리 컨텍스트는 라우팅에서 제외)
     if contextual_prompt:
         router_prompt = f"{contextual_prompt}\n\n{router_prompt}"
 

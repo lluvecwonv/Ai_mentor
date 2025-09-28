@@ -2,6 +2,7 @@ import logging
 from typing import Dict, Any
 from ..base_node import BaseNode, NodeTimer
 from .heavy_route.heavy_utils import build_context, enhance_query, log_execution_info
+from ..utils import format_vector_search_result
 
 logger = logging.getLogger(__name__)
 
@@ -73,12 +74,24 @@ class HeavyNodes(BaseNode):
                         **{**state, "previous_context": context}
                     )
 
+                    logger.info(f"🔍 [HEAVY] {agent_name} 결과: success={result.get('success', 'N/A')}, display='{result.get('display', 'N/A')}'")
+                    logger.info(f"🔍 [HEAVY] {agent_name} 전체 결과: {result}")
+
                     if result and result.get("success", True):
-                        results.append(f"[{agent_name}] {result.get('display', str(result.get('result', '')))}")
+                        # utils.py의 함수 사용
+                        display_text = format_vector_search_result(result)
+                        results.append(f"[{agent_name}] {display_text}")
                         previous_results.append(result)
+                        logger.info(f"✅ [HEAVY] {agent_name} 결과 추가됨: {display_text[:100]}...")
+                    else:
+                        logger.warning(f"❌ [HEAVY] {agent_name} 결과 제외됨: success={result.get('success') if result else 'None'}")
+
+                final_result = "\n\n".join(results) if results else "처리 결과를 얻을 수 없었습니다."
+                logger.info(f"🏁 [HEAVY] 최종 결과: {len(results)}개 항목")
+                logger.info(f"🏁 [HEAVY] 최종 내용: {final_result[:200]}...")
 
                 return self.add_step_time(state, {
-                    "final_result": "\n\n".join(results) if results else "처리 결과를 얻을 수 없었습니다.",
+                    "final_result": final_result,
                     "processing_type": "heavy_sequential",
                     "steps_completed": len(results)
                 }, timer)

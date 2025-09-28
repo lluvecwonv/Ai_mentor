@@ -92,13 +92,14 @@ async def get_models():
     }
 
 
-@app.post("/v1/chat/completions")
-@app.post("/chat/completions")
-async def chat_completions(request: Request):
-    """OpenAI API 호환 채팅 완성"""
+@app.post("/api/v2/agent")
+async def agent_v2(request: Request):
+    """AI Mentor Agent API v2 (파이프라인용)"""
     try:
         data = await request.json()
         messages = data.get("messages", [])
+        session_id = data.get("session_id", "default")
+        model = data.get("model", "ai-mentor")
 
         # 사용자 메시지 추출
         user_message = "\n".join(msg.get("content", "") for msg in messages if msg.get("role") == "user")
@@ -106,9 +107,36 @@ async def chat_completions(request: Request):
         if not user_message.strip():
             return JSONResponse(status_code=400, content={"error": "No user message provided"})
 
-        # AI Mentor 서비스 호출
+        # AI Mentor 서비스 호출 (세션 ID 전달)
         global global_mentor_service
-        response = await global_mentor_service.run_agent(user_message.strip())
+        response = await global_mentor_service.run_agent(user_message.strip(), session_id)
+
+        # OpenAI 형식 응답 반환
+        return response
+
+    except Exception as e:
+        logger.error(f"Agent v2 오류: {e}")
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+
+@app.post("/v1/chat/completions")
+@app.post("/chat/completions")
+async def chat_completions(request: Request):
+    """OpenAI API 호환 채팅 완성"""
+    try:
+        data = await request.json()
+        messages = data.get("messages", [])
+        session_id = data.get("session_id", "default")
+
+        # 사용자 메시지 추출
+        user_message = "\n".join(msg.get("content", "") for msg in messages if msg.get("role") == "user")
+
+        if not user_message.strip():
+            return JSONResponse(status_code=400, content={"error": "No user message provided"})
+
+        # AI Mentor 서비스 호출 (세션 ID 전달)
+        global global_mentor_service
+        response = await global_mentor_service.run_agent(user_message.strip(), session_id)
 
         # 응답이 이미 dict 형태인지 확인하고 content만 추출
         if isinstance(response, dict) and 'choices' in response:

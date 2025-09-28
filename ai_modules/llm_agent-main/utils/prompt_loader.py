@@ -17,9 +17,20 @@ def load_prompt(prompt_name: str) -> str:
         FileNotFoundError: 프롬프트 파일을 찾을 수 없는 경우
     """
     current_dir = Path(__file__).parent.parent
-    prompt_path = current_dir / "handlers" / "prompts" / f"{prompt_name}.txt"  # 경로 수정
 
-    if not prompt_path.exists():
-        raise FileNotFoundError(f"프롬프트 파일을 찾을 수 없습니다: {prompt_path}")
+    # 다중 경로 지원: handlers/prompts와 service/memory/prompts
+    possible_paths = [
+        current_dir / "handlers" / "prompts" / f"{prompt_name}.txt",
+        current_dir / "service" / "memory" / "prompts" / f"{prompt_name}.txt"
+    ]
+
+    prompt_path = None
+    for path in possible_paths:
+        if path.exists():
+            prompt_path = path
+            break
+
+    if not prompt_path:
+        raise FileNotFoundError(f"프롬프트 파일을 찾을 수 없습니다. 확인한 경로: {[str(p) for p in possible_paths]}")
 
     return prompt_path.read_text(encoding='utf-8').strip()

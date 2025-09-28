@@ -14,14 +14,24 @@ class RoutingNodes(BaseNode):
     async def router_node(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """라우터 노드 - 복잡도 분석 및 라우팅"""
         with NodeTimer("Router") as timer:
-        
+
             user_message = self.get_user_message(state)
             session_id = state.get("session_id", "default")
 
-            # 쿼리 분석
+            # 연속대화 판단 및 재구성된 쿼리 사용
+            is_continuation = state.get("is_continuation", False)
+            if is_continuation:
+                query_for_analysis = state.get("reconstructed_query", user_message)
+                logger.info(f"🔄 연속대화: '{user_message}' → '{query_for_analysis}'")
+            else:
+                query_for_analysis = user_message
+                logger.info(f"🆕 새로운 대화: '{user_message}'")
+
+            # 쿼리 분석 - 연속대화일 경우 재구성된 쿼리 사용
             analysis_result = await self.query_analyzer.analyze_query_parallel(
-                user_message.strip(),
-                session_id=session_id
+                query_for_analysis.strip(),
+                session_id=session_id,
+                is_reconstructed=is_continuation
             )
 
             complexity = analysis_result.get('complexity', 'medium')

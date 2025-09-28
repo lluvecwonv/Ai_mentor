@@ -45,8 +45,12 @@ class MediumNodes(BaseNode):
                 state=state
             )
 
-            # handle 메서드는 문자열을 직접 반환
-            response = result if isinstance(result, str) else str(result)
+            # handle 메서드 결과 처리 - utils 함수 사용
+            if isinstance(result, dict) and result.get('agent_type') == 'vector_search':
+                from ..utils import format_vector_search_result
+                response = format_vector_search_result(result)
+            else:
+                response = result if isinstance(result, str) else str(result)
 
             return self.add_step_time(state, {
                 "final_result": response,
