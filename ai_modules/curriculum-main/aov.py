@@ -1,5 +1,5 @@
-import networkx as nx 
-import matplotlib.pyplot as plt 
+import networkx as nx
+import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from collections import defaultdict
 import os
@@ -10,6 +10,8 @@ import json
 from utils import save_sorted_courses_as_json, save_merged_json
 import seaborn as sns
 from pathlib import Path
+import base64
+import io
 
 # Font setup
 HERE = Path(__file__).resolve().parent
@@ -173,9 +175,20 @@ def visualize_graph_from_data(department_graphs, base_path, index, gt_department
     plt.title(f"{index} · {gt_department} 통합 선수과목 그래프", fontsize=18, fontweight='bold')
 
     plt.axis('off')
+
+    # 파일로 저장
     save_path = os.path.join(base_path, f"{index}_{gt_department}_graph.png")
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
+
+    # Base64 인코딩
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png', dpi=300, bbox_inches='tight')
+    buffer.seek(0)
+    graph_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
     plt.close()
+
+    return f"data:image/png;base64,{graph_base64}"
 
 
 
@@ -345,8 +358,8 @@ def visualize_and_sort_department_graphs(department_graphs, base_path="./graphs/
 
     save_merged_json(merged_data, base_path,index,gt_department)
     # visualize_graph_from_merged_data(merged_data,base_path,idx,gt_department)
-    
-    visualize_graph_from_data(department_graphs,base_path,index,gt_department)
-    
-    return all_departments_data 
+
+    graph_base64 = visualize_graph_from_data(department_graphs,base_path,index,gt_department)
+
+    return all_departments_data, graph_base64 
 

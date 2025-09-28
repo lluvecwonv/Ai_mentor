@@ -1,18 +1,14 @@
-import os 
-from typing import List, Dict 
-from transformers import DataCollatorWithPadding, DefaultDataCollator
+import os
+import logging
+from typing import List, Dict, Optional
 from torch.utils.data import DataLoader
-from tqdm import tqdm
-import torch
-import openai
 import numpy as np
 import pickle
-from typing import Union
 import faiss
 from dataset.data_collector import collect_goal, collect_class
-from rank_bm25 import BM25Okapi
 import tiktoken
-import json
+
+logger = logging.getLogger(__name__)
 
 class DenseRetriever:
     def __init__(self, client, args, dataset=None):
@@ -90,10 +86,9 @@ class DenseRetriever:
             )
 
             # Generate embeddings
-            for batch in tqdm(dataloader, desc="Generating embeddings"):            
+            for batch in dataloader:            
                 batch_embeddings = []
                 for text in batch["text"]:
-                    # print(text)
                     embedding = self.get_gpt_embedding(text)
                     batch_embeddings.append(embedding)
                     
@@ -105,16 +100,7 @@ class DenseRetriever:
                 )
                 self.lookup_index = lookup_index
                 
-            
-            #save embeddings as TSV
-            embeddings_files = os.path.join(self.args.save_path, 'goal_embeddings.tsv')
-            metadata_files = os.path.join(self.args.save_path, 'goal_metadata.tsv')
-            
-            np.savetxt(embeddings_files, embeddings_array, delimiter='\t')
-            with open(metadata_files, 'w') as f:
-                for item in lookup_index:
-                    f.write(f'{item["department_name"]}\n')
-            
+
             # Save embeddings
             save_file = os.path.join(self.args.save_path, "goal_Dataset.pkl")
             with open(save_file, "wb") as f:
@@ -195,11 +181,10 @@ class classRetriever(DenseRetriever):
                     collate_fn=collect_class
                 )
                 
-                for batch in tqdm(dataloader, desc="Generating class embddings"):
+                for batch in dataloader:
             
                     batch_embeddings = []
                     for text in batch['text']:
-                        print(text)
                         embeddings = self.get_gpt_embedding(text)
                         batch_embeddings.append(embeddings)
                     class_embeddings.extend(batch_embeddings)
@@ -222,10 +207,6 @@ class classRetriever(DenseRetriever):
                     ])
                 self.class_lookup_index = class_lookup_index
         
-                np.savetxt(os.path.join(self.args.save_path, 'class_embeddings.tsv'), embeddings_array, delimiter='\t') 
-                with open(os.path.join(self.args.save_path, 'class_metadata.tsv'), 'w') as f:
-                    for item in class_lookup_index:
-                        f.write(f'{item["class_name"]}\n')
                 # Save as Pickle
                 save_file = os.path.join(self.args.save_path, "class_Dataset.pkl")
                 with open(save_file, "wb") as f:
@@ -251,7 +232,7 @@ class classRetriever(DenseRetriever):
                 filtered_lookup_index.append(info)
         
         if len(filtered_embeddings) == 0:
-            print("⚠ No matching classes found for selected departments.")
+            logger.warning("선택된 학과에 매칭되는 과목이 없습니다.")
             return None, None
 
         # numpy array로 변환 후 정규화
@@ -276,13 +257,11 @@ class classRetriever(DenseRetriever):
         
         for dept in selected_depart_list:
             dept_name = dept["department_name"]
-            if dept['department_id']:
-                dept_id = dept["department_id"]
-                
-            # 2) filter_by_department() -> new index is stored in self.class_index
-            _index, _lookup = self.filter_by_department([dept],visited_class_ids)
+
+            # filter_by_department() -> new index is stored in self.class_index
+            _index, _lookup = self.filter_by_department([dept], visited_class_ids)
             if _index is None or _lookup is None:
-                print(f"⚠ {dept_name}에는 검색할 데이터가 없음")
+                logger.warning(f"{dept_name}에는 검색할 데이터가 없음")
                 results_dict[dept_name] = []
                 continue
             
@@ -325,12 +304,10 @@ class classRetriever(DenseRetriever):
         
         for dept in selected_depart_list:
             dept_name = dept["department_name"]
-            if dept['department_id']:
-                dept_id = dept["department_id"]
-                
-            _index, _lookup = self.filter_by_department([dept],visited_class_ids)
+
+            _index, _lookup = self.filter_by_department([dept], visited_class_ids)
             if _index is None or _lookup is None:
-                print(f"⚠ {dept_name}에는 검색할 데이터가 없음")
+                logger.warning(f"{dept_name}에는 검색할 데이터가 없음")
                 results_dict[dept_name] = []
                 continue
             
@@ -397,12 +374,10 @@ def retrieve_by_4grade(self, query_embedding, selected_depart_list, top_k=3, vis
 
     for dept in selected_depart_list:
         dept_name = dept["department_name"]
-        if dept['department_id']:
-            dept_id = dept["department_id"]
 
         _index, _lookup = self.filter_by_4grade([dept], visited_class_ids, filter_senior=True)
         if _index is None or _lookup is None:
-            print(f"⚠ {dept_name}에는 검색할 4학년 데이터가 없음")
+            logger.warning(f"{dept_name}에는 검색할 4학년 데이터가 없음")
             results_dict[dept_name] = []
             continue
 

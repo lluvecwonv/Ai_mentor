@@ -1,8 +1,3 @@
-"""
-결과 합성 노드 - 단순화 버전
-모든 에이전트 결과를 자연스러운 답변으로 통합
-"""
-
 import logging
 from typing import Dict, Any
 from langchain_core.messages import AIMessage
@@ -18,47 +13,25 @@ class SynthesisNodes(BaseNode):
         self.result_synthesizer = result_synthesizer
 
     async def synthesis_node(self, state: Dict[str, Any]) -> Dict[str, Any]:
-        """결과 합성 노드 - 간단하고 친화적인 답변 생성"""
+        """결과 합성 노드 - 실제 LLM 합성 수행"""
         with NodeTimer("합성") as timer:
             try:
-                user_message = self.get_user_message(state)
-                slots = state.get("slots", {})
+                final_result = state.get("final_result")
 
-                # 결과 수집
-                results = []
-                logger.info(f"🔍 [DEBUG] 슬롯 내용: {slots}")
-
-                # final_result 확인 (Medium 노드에서 사용)
-                final_result_from_state = state.get("final_result")
-                if final_result_from_state and str(final_result_from_state).strip():
-                    results.append(str(final_result_from_state))
-                    logger.info(f"✅ [DEBUG] final_result에서 결과 발견: {len(str(final_result_from_state))}자")
-
-                # slots에서 추가 결과 수집
-                for key, value in slots.items():
-                    if value and str(value).strip():
-                        results.append(str(value))
-                        logger.info(f"✅ [DEBUG] 슬롯 {key}에서 결과 발견: {len(str(value))}자")
-
-                logger.info(f"📊 [DEBUG] 총 {len(results)}개 결과 수집됨")
-                # 결과가 없으면 기본 메시지
-                if not results:
+                if not final_result:
                     final_result = "죄송합니다. 요청하신 정보를 찾지 못했습니다."
-                # 결과가 하나면 그대로 사용
-                elif len(results) == 1:
-                    final_result = results[0]
-                # 여러 결과가 있으면 ResultSynthesizer로 통합
                 else:
-                    combined_results = "\n\n".join(results)
-                    final_result = await self.result_synthesizer.synthesize_with_llm(
-                        user_message=user_message,
-                        found_results=combined_results,
-                        processing_type="unified",
-                        query_analysis={"complexity": state.get("complexity", "medium")},
-                        conversation_history=""
-                    )
+                    # 실제 합성 로직 수행
+                    user_message = state.get("user_message", "")
+                    processing_type = state.get("processing_type", "")
+                    query_analysis = state.get("query_analysis", {})
+                    conversation_history = state.get("conversation_history", "")
 
-                logger.info("✅ 합성 완료")
+                    # ResultSynthesizer를 사용한 실제 합성
+                    final_result = await self.result_synthesizer.synthesize_with_llm(
+                        user_message, final_result, processing_type,
+                        query_analysis, conversation_history
+                    )
 
                 return {
                     **state,

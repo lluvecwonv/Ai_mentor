@@ -1,36 +1,26 @@
-"""
-결과 종합기 - 에이전트가 찾은 결과를 LLM이 자연스러운 답변으로 변환
-"""
-
 import logging
-import asyncio
 from typing import Dict, Any
 from utils.prompt_loader import load_prompt
-from utils.logging import SynthesisLogger
 
 logger = logging.getLogger(__name__)
 
 class ResultSynthesizer:
-    """에이전트 결과를 LLM으로 종합하는 클래스"""
-
     def __init__(self, llm_handler):
         self.llm_handler = llm_handler
 
     async def synthesize_with_llm(self, user_message: str, found_results: str,
                                  processing_type: str, query_analysis: Dict[str, Any],
                                  conversation_history: str = "") -> str:
-        """LLM을 사용해서 에이전트가 찾은 결과를 자연스러운 답변으로 종합 (히스토리 포함)"""
+        """LLM을 사용해서 에이전트가 찾은 결과를 자연스러운 답변으로 종합"""
         try:
-            # 프롬프트 파일에서 템플릿 로드
+            # 프롬프트 로드 및 히스토리 섹션 구성
             synthesis_template = load_prompt("synthesis_prompt")
-
-            # 히스토리 섹션 구성
-            history_section = ""
+            history_section = f"### 이전 대화 맥락:\n{conversation_history}\n" if conversation_history else ""
+            
             if conversation_history:
-                history_section = f"### 이전 대화 맥락:\n{conversation_history}\n"
                 logger.info(f"📚 Synthesis에 히스토리 컨텍스트 추가: {len(conversation_history)}자")
 
-            # 프롬프트에 실제 값들 대입
+            # 프롬프트 구성
             synthesis_prompt = synthesis_template.format(
                 conversation_history=history_section,
                 user_message=user_message,
@@ -38,33 +28,25 @@ class ResultSynthesizer:
                 processing_type=processing_type
             )
 
-            # LLM 호출
-            SynthesisLogger.log_synthesis_start(len(synthesis_prompt))
+            logger.info(f"🚀 합성 시작: prompt_length={len(synthesis_prompt)}")
 
-            if self.llm_handler and hasattr(self.llm_handler, 'invoke_simple'):
-                # LangChain 방식
+            # LLM 호출 방식 결정
+            if hasattr(self.llm_handler, 'invoke_simple'):
                 synthesized = await self.llm_handler.invoke_simple(synthesis_prompt)
-            elif self.llm_handler and hasattr(self.llm_handler, 'chat'):
-                # 기본 chat 방식
+            elif hasattr(self.llm_handler, 'chat'):
                 synthesized = await self.llm_handler.chat(synthesis_prompt)
             else:
-                SynthesisLogger.log_handler_unavailable()
+                logger.warning("⚠️ 지원되지 않는 핸들러 타입")
                 return found_results
 
+            # 결과 검증 및 반환
             if isinstance(synthesized, str) and synthesized.strip():
-                SynthesisLogger.log_synthesis_success(len(synthesized))
+                logger.info(f"✅ 합성 성공: result_length={len(synthesized)}")
                 return synthesized.strip()
             else:
-                SynthesisLogger.log_synthesis_empty()
+                logger.warning("⚠️ 합성 결과 비어있음")
                 return found_results
 
         except Exception as e:
-            SynthesisLogger.log_synthesis_error(e)
+            logger.error(f"❌ 합성 오류: {e}")
             return found_results
-
-    def should_synthesize(self, processing_type: str) -> bool:
-        """해당 처리 타입에 대해 LLM 종합이 필요한지 판단"""
-        # llm_only, cache_only, curriculum_focused는 종합하지 않음 (이미 완전한 답변 생성됨)
-        should_synthesize = processing_type not in ['llm_only', 'cache_only', 'curriculum_focused']
-        SynthesisLogger.log_should_synthesize_decision(processing_type, should_synthesize)
-        return should_synthesize
