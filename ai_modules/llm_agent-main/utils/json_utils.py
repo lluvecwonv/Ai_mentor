@@ -126,7 +126,9 @@ def extract_json_block(text: str) -> Optional[Dict[str, Any]]:
 
 
 def to_router_decision(data: Dict[str, Any]) -> Dict[str, Any]:
-    """라우팅 결정 - 최단 버전"""
+    """라우팅 결정 - plan 정보 보존"""
+
+    logger.info(f"🔍 [to_router_decision] 입력 데이터: {data}")
 
     complexity = data.get('complexity', 'medium')
 
@@ -138,10 +140,13 @@ def to_router_decision(data: Dict[str, Any]) -> Dict[str, Any]:
         'curriculum': 'CURRICULUM_PLAN'
     }
 
+    # plan 정보 우선 추출
+    plans = data.get('plan', data.get('pipeline', []))
+    logger.info(f"🔍 [to_router_decision] 추출된 plans: {plans}")
+
     owner_hint = data.get('owner_hint', 'LLM_FALLBACK')
     if not owner_hint or owner_hint == 'LLM_FALLBACK':
         # 첫 번째 에이전트에서 추론
-        plans = data.get('plan', data.get('pipeline', []))
         if plans:
             agent = plans[0].get('agent', '').lower()
             for key, hint in hint_map.items():
@@ -149,14 +154,17 @@ def to_router_decision(data: Dict[str, Any]) -> Dict[str, Any]:
                     owner_hint = hint
                     break
 
-    return {
+    result = {
         'complexity': complexity,
         'is_complex': complexity in ('medium', 'heavy'),
         'category': data.get('category', complexity),
         'owner_hint': owner_hint,
-        'plan': plans if 'plans' in locals() else None,
+        'plan': plans,  # plan 정보 보존
         'reasoning': data.get('reasoning', '')
     }
+
+    logger.info(f"🔍 [to_router_decision] 결과: {result}")
+    return result
 
 
 def robust_json_parse(response: str) -> Optional[Dict[str, Any]]:

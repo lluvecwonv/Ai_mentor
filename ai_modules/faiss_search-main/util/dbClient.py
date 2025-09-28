@@ -14,7 +14,7 @@ class DbClient:
         self.port = int(os.getenv("DB_PORT", "3313"))
         self.user = os.getenv("DB_USER", "root")
         # VECTOR_DB_PASSWORD 우선 → DB_PASSWORD → 안전한 기본값
-        self.password = os.getenv("VECTOR_DB_PASSWORD")
+        self.password = os.getenv("VECTOR_DB_PASSWORD") or os.getenv("DB_PASSWORD")
         # 운영 기본 DB
         self.database = os.getenv("DB_NAME", "nll_third")
         self.connection = None
@@ -42,7 +42,12 @@ class DbClient:
             print("🔄 DB 연결이 끊어져 재연결 시도...")
             self.connection = None
             self.connect()
-        return self.connection is not None
+
+        result = self.connection is not None
+        print(f"🔍 ensure_connection 결과: {result}")
+        if not result:
+            print(f"🔍 연결 정보: host={self.host}, port={self.port}, user={self.user}, password={self.password[:5]}...")
+        return result
 
     # R
     def execute_query(self, query, params=None):

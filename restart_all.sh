@@ -7,6 +7,22 @@ set -euo pipefail
 #   --rebuild   이미지 재빌드 후 시작
 #   --logs      실행 후 로그 표시
 
+cleanup_project_containers() {
+    log_info "프로젝트 컨테이너 정리 중..."
+    local containers=("llm-agent" "vector-search" "curriculum" "tool-sql" "department-mapping" "llm-client")
+    
+    for container in "${containers[@]}"; do
+        if docker ps -q -f name="$container" | grep -q .; then
+            log_info "중지 중: $container"
+            docker stop "$container" 2>/dev/null || true
+        fi
+        if docker ps -aq -f name="$container" | grep -q .; then
+            log_info "제거 중: $container"
+            docker rm -f "$container" 2>/dev/null || true
+        fi
+    done
+}
+
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 COMPOSE_FILE="$PROJECT_DIR/docker-compose.yml"
 

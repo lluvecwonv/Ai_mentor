@@ -9,7 +9,19 @@ logger = logging.getLogger(__name__)
 class HeavyNodes(BaseNode):
 
     def __init__(self, **handlers):
-        self.handlers = {k: v for k, v in handlers.items() if v is not None}
+        # 핸들러 키 이름을 agent_mapping과 일치하도록 변환
+        self.handlers = {}
+        if handlers.get('dept_handler'):
+            self.handlers['dept'] = handlers['dept_handler']
+        if handlers.get('sql_handler'):
+            self.handlers['sql'] = handlers['sql_handler']
+        if handlers.get('vector_handler'):
+            self.handlers['vector'] = handlers['vector_handler']
+        if handlers.get('curriculum_handler'):
+            self.handlers['curriculum'] = handlers['curriculum_handler']
+        if handlers.get('llm_handler'):
+            self.handlers['llm'] = handlers['llm_handler']
+
         self.agent_mapping = {
             'Department-Mapping-Agent': 'dept',
             'SQL-Agent': 'sql',
@@ -23,7 +35,15 @@ class HeavyNodes(BaseNode):
         with NodeTimer("HeavySequential") as timer:
             try:
                 user_message = self.get_user_message(state)
-                plan = state.get("query_analysis", {}).get("plan", [])
+
+                # plan 정보를 올바른 경로에서 가져오기
+                plan = state.get("plan", [])
+
+                # 추가 안전장치: query_analysis에서도 확인
+                if not plan:
+                    plan = state.get("query_analysis", {}).get("plan", [])
+
+                logger.info(f"🔍 [HEAVY] plan 확인: {plan}")
 
                 if not plan:
                     logger.warning("[HEAVY] plan 없음 - 재라우팅")

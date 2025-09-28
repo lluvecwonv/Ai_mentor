@@ -31,9 +31,7 @@ class ResultSynthesizer:
             logger.info(f"🚀 합성 시작: prompt_length={len(synthesis_prompt)}")
 
             # LLM 호출 방식 결정
-            if hasattr(self.llm_handler, 'invoke_simple'):
-                synthesized = await self.llm_handler.invoke_simple(synthesis_prompt)
-            elif hasattr(self.llm_handler, 'chat'):
+            if hasattr(self.llm_handler, 'chat'):
                 synthesized = await self.llm_handler.chat(synthesis_prompt)
             else:
                 logger.warning("⚠️ 지원되지 않는 핸들러 타입")

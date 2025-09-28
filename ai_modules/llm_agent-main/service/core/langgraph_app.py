@@ -18,13 +18,11 @@ from handlers import (
     ResultSynthesizer,
     LlmClient
 )
-from service.memory.memory import ConversationMemory
+from ..memory.memory import ConversationMemory
+from ..memory.context_analyzer import ConversationContextAnalyzer
 from .langgraph_state import GraphState, create_initial_state
-from service.nodes import NodeManager
+from ..nodes import NodeManager
 
-# OpenAI 클라이언트 생성
-from openai import OpenAI
-from config.settings import settings
 
 logger = logging.getLogger(__name__)
 
@@ -43,15 +41,21 @@ class LangGraphApp:
         # 메모리 설정
         self.conversation_memory = conversation_memory
 
+        # LLM 핸들러 생성 (통합 사용)
+        self.llm_handler = LlmClient()
+
+        # 히스토리 분석기 초기화 (llm_handler 전달)
+        self.context_analyzer = ConversationContextAnalyzer(self.llm_handler)
+
         # NodeManager 초기화
         self.node_manager = NodeManager(
             query_analyzer=QueryAnalyzer(),
-            llm_handler=LlmClient(),
+            llm_handler=self.llm_handler,  # 같은 인스턴스 사용
             sql_handler=SqlQueryHandler(),
             vector_handler=VectorSearchHandler(),
             dept_handler=DepartmentMappingHandler(),
             curriculum_handler=CurriculumHandler(),
-            result_synthesizer=ResultSynthesizer(LlmClient())
+            result_synthesizer=ResultSynthesizer(self.llm_handler)  # 같은 인스턴스 사용
         )
 
         # 그래프 빌드
@@ -106,19 +110,42 @@ class LangGraphApp:
         return compiled_graph
 
     async def process_query(self, user_message: str, session_id: str = "default") -> Dict[str, Any]:
-        """통합 쿼리 처리"""
+        """통합 쿼리 처리 - 히스토리 분석 포함"""
         logger.info(f"🚀 통합 쿼리 처리 시작: '{user_message[:50]}...'")
+
+        # 히스토리 분석 수행 (context_analyzer에 완전 위임)
+        history_analysis = await self.context_analyzer.analyze_session_context(
+            user_message,
+            self.conversation_memory,
+            session_id
+        )
 
         # 상태 초기화
         initial_state = create_initial_state(user_message, session_id)
         initial_state["conversation_memory"] = self.conversation_memory
+        initial_state["is_continuation"] = history_analysis.get("is_continuation", False)
+        initial_state["history_usage"] = history_analysis.get("history_usage", {})
 
         # 그래프 실행
         result = await self.graph.ainvoke(initial_state)
 
+        # 응답 생성
+        response = result.get("final_result", "응답을 생성할 수 없습니다")
+
+        # 메모리에 대화 저장 (다음 턴을 위해)
+        if self.conversation_memory:
+            self.conversation_memory.add_exchange(
+                session_id=session_id,
+                user_message=user_message,
+                assistant_response=response
+            )
+            logger.info(f"💾 대화 저장 완료: session_id={session_id}")
+
         return {
-            "response": result.get("final_result", "응답을 생성할 수 없습니다"),
-            "complexity": result.get("complexity", "unknown")
+            "response": response,
+            "complexity": result.get("complexity", "unknown"),
+            "is_continuation": result.get("is_continuation", False),
+            "history_usage": result.get("history_usage", {})
         }
 
 

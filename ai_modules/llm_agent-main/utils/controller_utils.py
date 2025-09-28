@@ -1,10 +1,15 @@
 """
-커리큘럼 그래프 생성 유틸리티
+Controller 유틸리티 통합 모듈
+- 응답 포맷팅
+- 커리큘럼 파싱
+- 그래프 생성
 """
 import io
 import base64
 import re
+import json
 import logging
+from datetime import datetime
 from pathlib import Path
 
 import networkx as nx
@@ -15,7 +20,7 @@ import seaborn as sns
 
 logger = logging.getLogger(__name__)
 
-# 한글 폰트 설정
+# === 한글 폰트 설정 ===
 HERE = Path(__file__).resolve().parent.parent
 FONT_PATH = HERE / "NanumGothic-Regular.ttf"
 
@@ -29,8 +34,69 @@ else:
     font_prop = None
 
 
+# === 응답 포맷팅 ===
+def strip_markdown(md: str) -> str:
+    """마크다운 제거"""
+    if not isinstance(md, str):
+        return md
+
+    # Convert links [text](url) -> text (url)
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r"\1 (\2)", md)
+    # Remove images ![alt](url)
+    text = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", text)
+    # Bold/italic markers
+    text = re.sub(r"\*\*(.*?)\*\*", r"\1", text)
+    text = re.sub(r"__(.*?)__", r"\1", text)
+    text = re.sub(r"\*(.*?)\*", r"\1", text)
+    text = re.sub(r"_(.*?)_", r"\1", text)
+    # Inline code/backticks
+    text = re.sub(r"`([^`]+)`", r"\1", text)
+    # Code fences
+    text = text.replace("```", "")
+    # Headings and list markers
+    text = re.sub(r"^\s{0,3}#{1,6}\s*", "", text, flags=re.MULTILINE)
+    text = re.sub(r"^\s*[-*+]\s+", "", text, flags=re.MULTILINE)
+    text = re.sub(r"^\s*\d+\.\s+", "", text, flags=re.MULTILINE)
+    # Collapse excessive spaces
+    text = re.sub(r"[ \t]+", " ", text)
+    # Trim lines
+    text = "\n".join(line.rstrip() for line in text.splitlines())
+    return text.strip()
+
+
+# === 커리큘럼 파싱 ===
+def parse_course_sections_with_preamble(text: str) -> dict:
+    """과목 섹션 파싱"""
+    parts = re.split(r'^===\s*(.+?)\s*===\s*', text, flags=re.MULTILINE)
+    result = {"preamble": parts[0].strip()}
+
+    for i in range(1, len(parts), 2):
+        dept = parts[i].strip()
+        body = parts[i+1]
+        lines = [L.strip() for L in body.splitlines() if L.strip()]
+
+        courses = []
+        curr = {}
+        for L in lines:
+            if L.startswith("강좌명:"):
+                if curr:
+                    courses.append(curr)
+                curr = {"강좌명": L.split(":",1)[1].strip()}
+            elif re.match(r'^\d+학년\s*\d+학기', L):
+                curr["학년·학기"] = L
+            elif L.startswith("선수과목:"):
+                curr["선수과목"] = L.split(":",1)[1].strip()
+
+        if curr:
+            courses.append(curr)
+        result[dept] = courses
+
+    return result
+
+
+# === 그래프 생성 ===
 def assign_positions(G):
-    """그래프 위치 할당 - 임시 구현"""
+    """그래프 위치 할당"""
     try:
         pos = nx.spring_layout(G, seed=42)
         semester_labels = {}
@@ -43,7 +109,7 @@ def assign_positions(G):
 def generate_graph_base64(sections: dict) -> str:
     """커리큘럼 그래프 생성"""
     try:
-        # 1) DiGraph 생성
+        # DiGraph 생성
         G = nx.DiGraph()
         allowed = {c["강좌명"] for lst in sections.values() for c in lst}
 
@@ -63,7 +129,7 @@ def generate_graph_base64(sections: dict) -> str:
                     if p in allowed:
                         G.add_edge(p, tgt)
 
-        # 2) 위치 계산
+        # 위치 계산
         pos, semester_labels = assign_positions(G)
         missing = [n for n in G.nodes() if n not in pos]
         if missing:
@@ -71,13 +137,13 @@ def generate_graph_base64(sections: dict) -> str:
             for n in missing:
                 pos[n] = spring[n]
 
-        # 3) 색상 매핑
+        # 색상 매핑
         depts = sorted({G.nodes[n]["department"] for n in G.nodes()})
         palette = sns.color_palette("Set3", n_colors=len(depts))
         color_map = {d: palette[i] for i, d in enumerate(depts)}
         node_colors = [color_map[G.nodes[n]["department"]] for n in G.nodes()]
 
-        # 4) 그리기
+        # 그리기
         plt.figure(figsize=(12,8))
         nx.draw_networkx_nodes(
             G, pos,
@@ -107,7 +173,7 @@ def generate_graph_base64(sections: dict) -> str:
             horizontalalignment='center'
         )
 
-        # 5) 학기 레이블
+        # 학기 레이블
         if semester_labels:
             min_y = min(pos.values(), key=lambda v: v[1])[1]
             label_y = min_y - 0.4
@@ -122,7 +188,7 @@ def generate_graph_base64(sections: dict) -> str:
                     ha='center'
                 )
 
-        # 6) 범례
+        # 범례
         patches = [
             plt.Line2D([0],[0], marker='o', color='w',
                        markerfacecolor=color_map[d],
@@ -140,7 +206,7 @@ def generate_graph_base64(sections: dict) -> str:
         plt.axis('off')
         plt.tight_layout()
 
-        # 7) PNG → base64
+        # PNG → base64
         buf = io.BytesIO()
         plt.savefig(buf, format='png', dpi=150, bbox_inches='tight')
         plt.close()
@@ -150,3 +216,16 @@ def generate_graph_base64(sections: dict) -> str:
     except Exception as e:
         logger.error(f"그래프 생성 실패: {e}")
         raise Exception(f"그래프 생성 실패: {str(e)}")
+
+
+# === 커리큘럼 그래프 처리 ===
+def process_curriculum_graph(raw_content: str) -> str:
+    """커리큘럼 그래프 처리"""
+    try:
+        parsed = parse_course_sections_with_preamble(raw_content)
+        preamble = parsed.pop("preamble", "")
+        graph_b64 = generate_graph_base64(parsed)
+        return f"{preamble}\n\n![Curriculum Graph](data:image/png;base64,{graph_b64})"
+    except Exception as e:
+        logger.error(f"커리큘럼 그래프 생성 실패: {e}")
+        return raw_content

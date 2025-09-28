@@ -14,12 +14,13 @@ from controller.agentController import router as agent_router
 
 from service.core.mentor_service import HybridMentorService
 
-# 로그 디렉토리 확인 및 생성
-log_dir = Path("/app/logs")
+# 로그 디렉토리 확인 및 생성 (현재 디렉토리 기준)
+log_dir = Path("./logs")
 log_dir.mkdir(parents=True, exist_ok=True)
 
-# 커스텀 로깅 설정 적용
-logging.config.dictConfig(LOGGING_CONFIG)
+# 커스텀 로깅 설정 적용 (일시적으로 비활성화)
+# logging.config.dictConfig(LOGGING_CONFIG)
+logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 

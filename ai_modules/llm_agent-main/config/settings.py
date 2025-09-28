@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     
     # LLM 설정 (단순화)
     openai_api_key: Optional[str] = None
-    default_model: str = "gpt-4o-mini"
+    default_model: str = "gpt-4o"
     
     # 데이터베이스 설정
     db_host: Optional[str] = None
@@ -124,7 +124,7 @@ LOGGING_CONFIG = {
             "class": "logging.FileHandler",
             "level": "DEBUG",  # DEBUG 이상 파일 기록
             "formatter": "default",
-            "filename": "/app/logs/llm-agent.log",
+            "filename": "./logs/llm-agent.log",
             "mode": "a",
             "encoding": "utf-8",
         },

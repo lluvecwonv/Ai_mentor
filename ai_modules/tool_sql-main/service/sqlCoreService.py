@@ -47,7 +47,7 @@ class SqlService:
         if not sql.endswith(';'):
             sql += ';'
 
-        logger.info(f"✅ SQL 변환: {sql}")
+        logger.debug(f"✅ SQL 변환: {sql}")
         return sql
 
 

@@ -19,7 +19,13 @@ class NodeManager:
         self.routing = RoutingNodes(query_analyzer)
         self.light = LightNodes(llm_handler)
         self.medium = MediumNodes(sql_handler, vector_handler, dept_handler, curriculum_handler)
-        self.heavy = HeavyNodes(sql_handler, vector_handler, dept_handler, curriculum_handler, llm_handler)
+        self.heavy = HeavyNodes(
+            sql_handler=sql_handler,
+            vector_handler=vector_handler,
+            dept_handler=dept_handler,
+            curriculum_handler=curriculum_handler,
+            llm_handler=llm_handler
+        )
         self.synthesis = SynthesisNodes(result_synthesizer)
         self.utility = UtilityNodes()
 

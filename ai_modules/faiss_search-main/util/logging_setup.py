@@ -27,6 +27,7 @@ def init_logging(service_name: str = "faiss_search",
 
     # 콘솔 핸들러
     console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.DEBUG)
 
     # 포맷터 설정 (LLM-Agent와 동일한 형식)
     formatter = logging.Formatter(
@@ -45,6 +46,7 @@ def init_logging(service_name: str = "faiss_search",
             backupCount=5,
             encoding='utf-8'
         )
+        file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
 
@@ -55,6 +57,7 @@ def init_logging(service_name: str = "faiss_search",
             backupCount=3,
             encoding='utf-8'
         )
+        faiss_file_handler.setLevel(logging.DEBUG)
         faiss_file_handler.setFormatter(formatter)
         logger.addHandler(faiss_file_handler)
     except PermissionError:
