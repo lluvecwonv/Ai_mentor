@@ -69,10 +69,25 @@ class CurriculumService:
         """Retriever 준비"""
         logger.info("📚 Retriever 초기화 시작")
 
-        dept_retriever = DenseRetriever(self.openai_client, None)
+        # args 객체 생성 (필요한 속성들을 가진 간단한 클래스)
+        class Args:
+            def __init__(self):
+                # 기존 파일이 있는지 확인해서 경로 설정
+                data_path = "./data"
+                goal_file = os.path.join(data_path, "goal_Dataset.pkl")
+                class_file = os.path.join(data_path, "class_Dataset.pkl")
+
+                self.goal_index_path = goal_file if os.path.exists(goal_file) else None
+                self.class_index_path = class_file if os.path.exists(class_file) else None
+                self.save_path = data_path
+                self.batch_size = 1
+
+        args = Args()
+
+        dept_retriever = DenseRetriever(self.openai_client, args)
         dept_retriever.doc_embedding()
 
-        class_retriever = classRetriever(self.openai_client, None)
+        class_retriever = classRetriever(self.openai_client, args)
         class_retriever.doc_embedding()
 
         logger.info("✅ Retriever 초기화 완료")

@@ -25,10 +25,14 @@ class SqlQueryHandler(BaseQueryHandler):
                 success=False
             )
 
+        # enhanced_query가 있으면 사용, 없으면 원본 user_message 사용
+        query_to_use = query_analysis.get("enhanced_query", user_message)
+        self.logger.info(f"🔍 SQL 쿼리 사용: '{query_to_use}'")
+
         try:
             response = await self.http_client.post(
                 self.sql_service_url,
-                json={"query": user_message}
+                json={"query": query_to_use}
             )
 
             if response.status_code == 200:

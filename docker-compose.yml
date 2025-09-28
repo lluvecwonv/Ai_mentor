@@ -22,6 +22,9 @@ services:
       - DB_USER=root
       - DB_NAME=nll_third
       - DB_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./ai_modules/curriculum-main:/app
+      - ./ai_modules/department_mapping-main/data:/app/data
     ports:
       - "7996:7996"
     restart: unless-stopped
@@ -127,7 +130,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./ai_modules/curriculum-main/result:/app/data
+      - ./ai_modules/department_mapping-main/data:/app/data
     restart: unless-stopped
 
   # Simple AI Mentor Frontend - DISABLED

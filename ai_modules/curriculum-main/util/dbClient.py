@@ -55,6 +55,81 @@ class DbClient():
         except pymysql.MySQLError:
             self.connection.rollback()
 
+    def fetch_prerequisites(self, class_id):
+        """
+        Fetch prerequisite classes for a given class ID.
+        """
+        try:
+            if not self.connection:
+                self.connect()
+
+            sql_query = """
+             SELECT
+                prereq.id AS class_id,
+                prereq.name AS class_name,
+                prereq.student_grade,
+                prereq.semester,
+                prereq.description,
+                prereq.language,
+                prereq.prerequisite AS prerequisite,
+                jd.name AS department_name,
+                jco.name AS college_name
+            FROM jbnu_class main_class
+            JOIN jbnu_class prereq
+                ON FIND_IN_SET(TRIM(prereq.name), REPLACE(main_class.prerequisite, ' ', '')) > 0
+                AND main_class.department_id = prereq.department_id
+            JOIN jbnu_department jd ON prereq.department_id = jd.id
+            JOIN jbnu_college jco ON jd.college_id = jco.id
+            WHERE main_class.id = %s
+            ORDER BY prereq.student_grade, prereq.id;
+            """
+
+            with self.connection.cursor() as cursor:
+                cursor.execute(sql_query, (class_id,))
+                rows = cursor.fetchall()
+                return rows
+
+        except pymysql.MySQLError as e:
+            print(f"Error executing fetch_prerequisites: {e}")
+            return []
+
+    def fetch_postrequisites(self, department_name, class_name):
+        """
+        Fetch postrequisite courses for a specific course in a given department.
+        """
+        try:
+            if not self.connection:
+                self.connect()
+
+            sql_query = """
+            SELECT
+                main_class.id AS class_id,
+                main_class.name AS class_name,
+                main_class.student_grade,
+                main_class.semester,
+                main_class.description,
+                main_class.language,
+                main_class.prerequisite AS prerequisite,
+                jd.id AS department_id,
+                jd.name AS department_name,
+                jco.name AS college_name
+            FROM jbnu_class main_class
+            JOIN jbnu_department jd ON main_class.department_id = jd.id
+            JOIN jbnu_college jco ON jd.college_id = jco.id
+            WHERE jd.name = %s
+            AND main_class.prerequisite REGEXP CONCAT('(^|,\\\\s*)', %s, '(\\\\s*,|$)')
+            ORDER BY main_class.student_grade, main_class.id;
+            """
+
+            with self.connection.cursor() as cursor:
+                cursor.execute(sql_query, (department_name, class_name))
+                rows = cursor.fetchall()
+                return rows
+
+        except pymysql.MySQLError as e:
+            print(f"Error executing fetch_postrequisites: {e}")
+            return []
+
     def close(self):
         if self.connection:
             self.connection.close()

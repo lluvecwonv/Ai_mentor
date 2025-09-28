@@ -10,10 +10,16 @@ class MappingRequest(BaseModel):
 
 @router.post("/map")
 async def map_department(request: MappingRequest):
-    """학과명 매핑 - 학과명만 반환"""
-    result = mapping_service.find_similar_departments(request.query)
-    
+    """학과 설명 조회 - 학과명과 설명을 함께 반환"""
+    result = mapping_service.find_department_with_description(request.query)
+
     if result["departments"]:
-        return {"department": result["departments"][0]["department_name"]}
+        return {
+            "department": result["departments"][0]["department_name"],
+            "description": result["departments"][0]["description"]
+        }
     else:
-        return {"department": None}
+        return {
+            "department": None,
+            "description": "해당 학과를 찾을 수 없습니다."
+        }

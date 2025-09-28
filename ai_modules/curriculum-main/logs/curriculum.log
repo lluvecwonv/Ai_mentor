@@ -1,0 +1,892 @@
+2025-09-29 03:10:54 | INFO | root | === curriculum 서비스 시작 ===
+2025-09-29 03:10:54 | INFO | root | 공통 로그 파일: ./logs/curriculum.log
+2025-09-29 03:10:54 | INFO | root | Curriculum 전용 로그 파일: ./curriculum.log
+2025-09-29 03:11:19 | INFO | controller.curriculumController | 📨 API 요청 수신: '반도체와 인공지능을 결합한 커리큘럼을 짜줘
+
+[확장정보] 배경정보: Looking for curriculum that combines semiconductor technology ...' (요구 과목 수: 30)
+2025-09-29 03:11:19 | INFO | service.curriculumService | 쿼리 처리 시작: 반도체와 인공지능을 결합한 커리큘럼을 짜줘
+
+[확장정보] 배경정보: Looking for ...
+2025-09-29 03:11:19 | INFO | service.curriculumService | 📚 Retriever 초기화 시작
+2025-09-29 03:11:23 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:23 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:24 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:25 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:26 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:27 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:28 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:28 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:29 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:30 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:31 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:31 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:32 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:32 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:34 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:35 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:36 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:37 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:38 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:38 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:39 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:39 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:40 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:41 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:41 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:42 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:43 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:43 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:44 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:44 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:45 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:45 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:46 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:46 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:47 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:47 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:48 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:48 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:49 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:49 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:50 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:51 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:51 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:52 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:52 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:53 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:53 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:54 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:54 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:55 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:56 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:56 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:57 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:57 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:57 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:58 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:58 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:59 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:11:59 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:00 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:01 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:01 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:01 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:02 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:03 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:03 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:04 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:04 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:04 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:05 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:05 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:06 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:06 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:07 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:07 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:08 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:08 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:09 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:09 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:10 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:10 | INFO | service.curriculumService | ✅ Retriever 초기화 완료
+2025-09-29 03:12:31 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 03:12:31 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:12:31 | INFO | service.curriculumService | Visited nodes total: 0
+2025-09-29 03:12:31 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:12:31 | ERROR | service.curriculumService | ❌ 쿼리 처리 실패: 'DbClient' object has no attribute 'fetch_prerequisites'
+2025-09-29 03:12:31 | ERROR | controller.curriculumController | ❌ API 요청 처리 오류: 'DbClient' object has no attribute 'fetch_prerequisites'
+2025-09-29 03:15:00 | INFO | root | === curriculum 서비스 시작 ===
+2025-09-29 03:15:00 | INFO | root | 공통 로그 파일: ./logs/curriculum.log
+2025-09-29 03:15:00 | INFO | root | Curriculum 전용 로그 파일: ./curriculum.log
+2025-09-29 03:15:31 | INFO | root | === curriculum 서비스 시작 ===
+2025-09-29 03:15:31 | INFO | root | 공통 로그 파일: ./logs/curriculum.log
+2025-09-29 03:15:31 | INFO | root | Curriculum 전용 로그 파일: ./curriculum.log
+2025-09-29 03:15:56 | INFO | controller.curriculumController | 📨 API 요청 수신: '반도체와 컴퓨터인공지능을 결합한 융합 커리큘럼을 생성해줘
+
+[확장정보] 배경정보: Looking to create an integrated curriculum combining s...' (요구 과목 수: 30)
+2025-09-29 03:15:56 | INFO | service.curriculumService | 쿼리 처리 시작: 반도체와 컴퓨터인공지능을 결합한 융합 커리큘럼을 생성해줘
+
+[확장정보] 배경정보: Look...
+2025-09-29 03:15:56 | INFO | service.curriculumService | 📚 Retriever 초기화 시작
+2025-09-29 03:15:56 | INFO | service.curriculumService | ✅ Retriever 초기화 완료
+2025-09-29 03:16:15 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 03:16:17 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 0
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 4
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 6
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 8
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 10
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 12
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 14
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 16
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 18
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | Visited nodes total: 20
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:17 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:16:17 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:17 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | Visited nodes total: 22
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | Visited nodes total: 24
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | Visited nodes total: 26
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | Visited nodes total: 28
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 기초RFIC설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 초급양자역학
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | Visited nodes total: 30
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 인공지능
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 아날로그집적회로설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털논리공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 시스템및메모리반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 딥러닝
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 알고리즘
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: IT융복합종합설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 마이크로프로세서및실험
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체물리전자
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 로봇비전
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 영상처리
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 기초RFIC설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공학개론
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 응용수학 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자설계
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체연구특론 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디지털공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체공정실험 2
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 전자회로 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 반도체소자 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}, {'class_id': 'class_id', 'class_name': 'class_name', 'student_grade': 'student_grade', 'semester': 'semester', 'description': 'description', 'language': 'language', 'prerequisite': 'prerequisite', 'department_name': 'department_name', 'college_name': 'college_name'}]
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 선행과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: class_name
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 센서반도체
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 회로이론 1
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 디스플레이공학
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | INFO | service.curriculumService | 현재과목: 초급양자역학
+2025-09-29 03:16:18 | INFO | service.curriculumService | fetcehd prerequisites: []
+2025-09-29 03:16:18 | ERROR | service.curriculumService | ❌ 쿼리 처리 실패: Node 'class_id' has no position.
+2025-09-29 03:16:18 | ERROR | controller.curriculumController | ❌ API 요청 처리 오류: Node 'class_id' has no position.
+2025-09-29 03:19:45 | INFO | root | === curriculum 서비스 시작 ===
+2025-09-29 03:19:45 | INFO | root | 공통 로그 파일: ./logs/curriculum.log
+2025-09-29 03:19:45 | INFO | root | Curriculum 전용 로그 파일: ./curriculum.log
+2025-09-29 03:20:21 | INFO | controller.curriculumController | 📨 API 요청 수신: '컴퓨터공학부 운영체제 수업 계획' (요구 과목 수: 5)
+2025-09-29 03:20:21 | INFO | service.curriculumService | 쿼리 처리 시작: 컴퓨터공학부 운영체제 수업 계획...
+2025-09-29 03:20:21 | INFO | service.curriculumService | 📚 Retriever 초기화 시작
+2025-09-29 03:20:21 | INFO | service.curriculumService | ✅ Retriever 초기화 완료
+2025-09-29 03:20:34 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 03:20:34 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 03:20:34 | INFO | service.curriculumService | Visited nodes total: 0
+2025-09-29 03:20:34 | INFO | service.curriculumService | 현재과목: 운영체제
+2025-09-29 03:20:34 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:34 | INFO | service.curriculumService | 현재과목: 운영체제
+2025-09-29 03:20:34 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 2594, 'class_name': '컴퓨터구조', 'student_grade': 2, 'semester': 2, 'description': '해당 강의는 프로세서, 메모리 등 컴퓨터 시스템을 구성하는 주요 요소 및 동작 원리를 이해하고, 동작 과정에서 거치는 소프트웨어/하드웨어 간 상호작용에 대한 이해를 목적으로 한다.\n(전반부) 컴퓨터 시스템을 구성하는 주요 구성요소, 성능 및, 컴퓨터를 구동하는 기본적인 연산,로직 구조 및 이를 활용한 인스트럭션 동작에 대해 이해한다.\n(후반부) 전반부의 내용을 바탕으로 컴퓨터 내의 연산 프로세서, 메모리의 동작을 분석하거나, 프로세서 혹은 클러스터 컴퓨팅에서의 병렬 동작을 이해한다.\n', 'language': '한국어', 'prerequisite': '논리설계 ', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:34 | INFO | service.curriculumService | 선행과목: 컴퓨터구조
+2025-09-29 03:20:34 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:20:34 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1554, 'class_name': '논리설계', 'student_grade': 2, 'semester': 1, 'description': '해당 강의는 컴퓨터 시스템을 구성하는 디지털 회로의 기초 구성을 이해한다. 이를 바탕으로, 디지털 회로의 최적화 알고리즘, 주요 구성을 학습한다, 프로그래밍 언어를 통해 목적에 맞는 디지털 회로를 설계하는 방법을 알아본다.\n', 'language': '한국어', 'prerequisite': '', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:34 | INFO | service.curriculumService | 선행과목: 논리설계
+2025-09-29 03:20:34 | INFO | service.curriculumService | 현재과목: 논리설계
+2025-09-29 03:20:34 | INFO | service.curriculumService | Visited nodes total: 2
+2025-09-29 03:20:34 | INFO | service.curriculumService | 현재과목: 운영체제
+2025-09-29 03:20:34 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:34 | INFO | service.curriculumService | 현재과목: 소프트웨어시스템분석및설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3154, 'class_name': 'C++프로그래밍', 'student_grade': 1, 'semester': 2, 'description': 'C언어의 응용, C++의 기본적인 지식에서 부터 객체지향언어의 전반적인 내용을 숙지하고(특히, 캡슐화, 정보은닉, 다형성, 상속과 같은 객체 지향의 핵심적인 개념을 완벽하게 이해하고) 충분한 프로그래밍 실습을 통하여 객체지향 언어로서의 응용력을 기른다.  객체지향 언어(MFC, JAVA, .Net 등)를 배우기 위한 기본을 다지며, Object 중심의 프로그래밍 기법에 대해 익힌다.\n\n(사전 이해도에 따라 강의 내용과 방향이 조정될 수 있음.)', 'language': '한국어', 'prerequisite': 'C언어', 'department_name': '소프트웨어공학과', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: C++프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: C++프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 운영체제
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 2594, 'class_name': '컴퓨터구조', 'student_grade': 2, 'semester': 2, 'description': '해당 강의는 프로세서, 메모리 등 컴퓨터 시스템을 구성하는 주요 요소 및 동작 원리를 이해하고, 동작 과정에서 거치는 소프트웨어/하드웨어 간 상호작용에 대한 이해를 목적으로 한다.\n(전반부) 컴퓨터 시스템을 구성하는 주요 구성요소, 성능 및, 컴퓨터를 구동하는 기본적인 연산,로직 구조 및 이를 활용한 인스트럭션 동작에 대해 이해한다.\n(후반부) 전반부의 내용을 바탕으로 컴퓨터 내의 연산 프로세서, 메모리의 동작을 분석하거나, 프로세서 혹은 클러스터 컴퓨팅에서의 병렬 동작을 이해한다.\n', 'language': '한국어', 'prerequisite': '논리설계 ', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 컴퓨터구조
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1554, 'class_name': '논리설계', 'student_grade': 2, 'semester': 1, 'description': '해당 강의는 컴퓨터 시스템을 구성하는 디지털 회로의 기초 구성을 이해한다. 이를 바탕으로, 디지털 회로의 최적화 알고리즘, 주요 구성을 학습한다, 프로그래밍 언어를 통해 목적에 맞는 디지털 회로를 설계하는 방법을 알아본다.\n', 'language': '한국어', 'prerequisite': '', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 논리설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 논리설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 소프트웨어공학
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 2402, 'class_name': '객체지향프로그래밍', 'student_grade': 2, 'semester': 1, 'description': '객체 지향 프로그래밍에 대한 개요를 배우고 JAVA 언어를 기반으로 하여 객체 지향 프로그램 개발을 수행한다.', 'language': '한국어', 'prerequisite': '컴퓨터과학과코딩, C언어기초', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 객체지향프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 객체지향프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | Visited nodes total: 4
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 운영체제
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 소프트웨어시스템분석및설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3154, 'class_name': 'C++프로그래밍', 'student_grade': 1, 'semester': 2, 'description': 'C언어의 응용, C++의 기본적인 지식에서 부터 객체지향언어의 전반적인 내용을 숙지하고(특히, 캡슐화, 정보은닉, 다형성, 상속과 같은 객체 지향의 핵심적인 개념을 완벽하게 이해하고) 충분한 프로그래밍 실습을 통하여 객체지향 언어로서의 응용력을 기른다.  객체지향 언어(MFC, JAVA, .Net 등)를 배우기 위한 기본을 다지며, Object 중심의 프로그래밍 기법에 대해 익힌다.\n\n(사전 이해도에 따라 강의 내용과 방향이 조정될 수 있음.)', 'language': '한국어', 'prerequisite': 'C언어', 'department_name': '소프트웨어공학과', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: C++프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: C++프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 자료구조
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 운영체제
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 2594, 'class_name': '컴퓨터구조', 'student_grade': 2, 'semester': 2, 'description': '해당 강의는 프로세서, 메모리 등 컴퓨터 시스템을 구성하는 주요 요소 및 동작 원리를 이해하고, 동작 과정에서 거치는 소프트웨어/하드웨어 간 상호작용에 대한 이해를 목적으로 한다.\n(전반부) 컴퓨터 시스템을 구성하는 주요 구성요소, 성능 및, 컴퓨터를 구동하는 기본적인 연산,로직 구조 및 이를 활용한 인스트럭션 동작에 대해 이해한다.\n(후반부) 전반부의 내용을 바탕으로 컴퓨터 내의 연산 프로세서, 메모리의 동작을 분석하거나, 프로세서 혹은 클러스터 컴퓨팅에서의 병렬 동작을 이해한다.\n', 'language': '한국어', 'prerequisite': '논리설계 ', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 컴퓨터구조
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1554, 'class_name': '논리설계', 'student_grade': 2, 'semester': 1, 'description': '해당 강의는 컴퓨터 시스템을 구성하는 디지털 회로의 기초 구성을 이해한다. 이를 바탕으로, 디지털 회로의 최적화 알고리즘, 주요 구성을 학습한다, 프로그래밍 언어를 통해 목적에 맞는 디지털 회로를 설계하는 방법을 알아본다.\n', 'language': '한국어', 'prerequisite': '', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 논리설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 논리설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 소프트웨어공학
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 2402, 'class_name': '객체지향프로그래밍', 'student_grade': 2, 'semester': 1, 'description': '객체 지향 프로그래밍에 대한 개요를 배우고 JAVA 언어를 기반으로 하여 객체 지향 프로그램 개발을 수행한다.', 'language': '한국어', 'prerequisite': '컴퓨터과학과코딩, C언어기초', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 객체지향프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 객체지향프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 리눅스프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | Visited nodes total: 6
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 운영체제
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 소프트웨어시스템분석및설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 3154, 'class_name': 'C++프로그래밍', 'student_grade': 1, 'semester': 2, 'description': 'C언어의 응용, C++의 기본적인 지식에서 부터 객체지향언어의 전반적인 내용을 숙지하고(특히, 캡슐화, 정보은닉, 다형성, 상속과 같은 객체 지향의 핵심적인 개념을 완벽하게 이해하고) 충분한 프로그래밍 실습을 통하여 객체지향 언어로서의 응용력을 기른다.  객체지향 언어(MFC, JAVA, .Net 등)를 배우기 위한 기본을 다지며, Object 중심의 프로그래밍 기법에 대해 익힌다.\n\n(사전 이해도에 따라 강의 내용과 방향이 조정될 수 있음.)', 'language': '한국어', 'prerequisite': 'C언어', 'department_name': '소프트웨어공학과', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: C++프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: C++프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 자료구조
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 운영체제
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 2594, 'class_name': '컴퓨터구조', 'student_grade': 2, 'semester': 2, 'description': '해당 강의는 프로세서, 메모리 등 컴퓨터 시스템을 구성하는 주요 요소 및 동작 원리를 이해하고, 동작 과정에서 거치는 소프트웨어/하드웨어 간 상호작용에 대한 이해를 목적으로 한다.\n(전반부) 컴퓨터 시스템을 구성하는 주요 구성요소, 성능 및, 컴퓨터를 구동하는 기본적인 연산,로직 구조 및 이를 활용한 인스트럭션 동작에 대해 이해한다.\n(후반부) 전반부의 내용을 바탕으로 컴퓨터 내의 연산 프로세서, 메모리의 동작을 분석하거나, 프로세서 혹은 클러스터 컴퓨팅에서의 병렬 동작을 이해한다.\n', 'language': '한국어', 'prerequisite': '논리설계 ', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 컴퓨터구조
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 컴퓨터구조
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 1554, 'class_name': '논리설계', 'student_grade': 2, 'semester': 1, 'description': '해당 강의는 컴퓨터 시스템을 구성하는 디지털 회로의 기초 구성을 이해한다. 이를 바탕으로, 디지털 회로의 최적화 알고리즘, 주요 구성을 학습한다, 프로그래밍 언어를 통해 목적에 맞는 디지털 회로를 설계하는 방법을 알아본다.\n', 'language': '한국어', 'prerequisite': '', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 논리설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 논리설계
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 소프트웨어공학
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: [{'class_id': 2402, 'class_name': '객체지향프로그래밍', 'student_grade': 2, 'semester': 1, 'description': '객체 지향 프로그래밍에 대한 개요를 배우고 JAVA 언어를 기반으로 하여 객체 지향 프로그램 개발을 수행한다.', 'language': '한국어', 'prerequisite': '컴퓨터과학과코딩, C언어기초', 'department_name': '컴퓨터인공지능학부', 'college_name': '공과대학'}]
+2025-09-29 03:20:35 | INFO | service.curriculumService | 선행과목: 객체지향프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 객체지향프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | fetcehd prerequisites: ()
+2025-09-29 03:20:35 | INFO | service.curriculumService | 현재과목: 리눅스프로그래밍
+2025-09-29 03:20:35 | INFO | service.curriculumService | ✅ 쿼리 처리 완료: 2개 학과 결과
+2025-09-29 03:20:35 | INFO | controller.curriculumController | ✅ API 응답 완료: 2100자

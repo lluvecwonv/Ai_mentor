@@ -13,10 +13,10 @@ class NodeManager:
     def __init__(self, query_analyzer=None, llm_handler=None,
                  sql_handler=None, vector_handler=None,
                  dept_handler=None, curriculum_handler=None,
-                 result_synthesizer=None):
+                 result_synthesizer=None, conversation_memory=None):
 
         # Node categories 초기화
-        self.routing = RoutingNodes(query_analyzer)
+        self.routing = RoutingNodes(query_analyzer, conversation_memory)
         self.light = LightNodes(llm_handler)
         self.medium = MediumNodes(sql_handler, vector_handler, dept_handler, curriculum_handler)
         self.heavy = HeavyNodes(

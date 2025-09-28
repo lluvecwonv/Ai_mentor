@@ -31,6 +31,21 @@ class HybridMentorService:
         """메인 처리 함수"""
         logger.info(f"🤖 질문 처리: {user_message}...")
 
+        # Follow-up 질문 생성 요청 완전 차단
+        if "### Task:" in user_message and "follow-up questions" in user_message:
+            logger.info("🚫 Follow-up 질문 생성 요청 차단")
+            return {
+                "id": "chatcmpl-ai-mentor",
+                "object": "chat.completion",
+                "created": int(datetime.now().timestamp()),
+                "model": "ai-mentor",
+                "choices": [{
+                    "index": 0,
+                    "message": {"role": "assistant", "content": ""},
+                    "finish_reason": "stop"
+                }]
+            }
+
         try:
             result = await self.langgraph_app.process_query(user_message, session_id)
 

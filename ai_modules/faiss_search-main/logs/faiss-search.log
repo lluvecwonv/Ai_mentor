@@ -2727,3 +2727,576 @@ FROM jbnu_class_gpt c
 WHERE c.department LIKE '%컴퓨터%' AND c.professor LIKE '%정종욱%'
 2025-09-28 23:35:03 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
 2025-09-28 23:35:03 | INFO | service.searchService | 검색 완료: 2개 결과
+2025-09-28 23:53:43 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 23:53:43 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 23:53:43 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 23:56:19 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-28 23:56:19 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-28 23:56:19 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-28 23:57:33 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-28 23:57:35 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 23:57:35 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-28 23:57:35 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-28 23:57:35 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-28 23:57:37 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-28 23:57:37 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-28 23:57:57 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련된 수업을 찾아줘
+정종욱 교수님은 또 뭐 가르치셔?'
+2025-09-28 23:57:59 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 23:57:59 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%' AND c.professor LIKE '%정종욱%'
+```
+2025-09-28 23:57:59 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%' AND c.professor LIKE '%정종욱%'
+2025-09-28 23:57:59 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%' AND c.professor LIKE '%정종욱%'
+2025-09-28 23:58:00 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-28 23:58:00 | INFO | service.searchService | 검색 완료: 2개 결과
+2025-09-28 23:59:11 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련된 수업을 찾아줘
+정종욱 교수님은 또 뭐 가르치셔?
+근데 나는 인공지능을 공부하고 싶은데 인공지능과 반도체를 결합한 융합공부를 하고싶어 커리큘럼을 짜줄래?'
+2025-09-28 23:59:15 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 23:59:15 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+
+```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.professor LIKE '%정종욱%'
+```
+
+```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+```
+2025-09-28 23:59:15 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-28 23:59:15 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-28 23:59:17 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-28 23:59:17 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 00:39:18 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 00:39:18 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 00:39:18 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 00:42:45 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 00:42:45 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 00:42:45 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 00:43:10 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 00:43:12 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 00:43:12 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 00:43:12 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 00:43:12 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 00:43:14 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 00:43:14 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 01:13:41 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 01:13:41 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 01:13:41 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 01:17:41 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 01:17:41 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 01:17:41 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 01:18:06 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-29 01:18:08 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:18:08 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 01:18:08 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:18:08 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:18:11 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 01:18:11 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 01:18:31 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련된 수업을 찾아줘
+그러면 정종욱 교수님은 또 무슨수업 가르치셔?'
+2025-09-29 01:18:34 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:18:34 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+
+```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.professor LIKE '%정종욱%'
+```
+2025-09-29 01:18:34 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:18:34 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:18:35 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 01:18:35 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 01:33:23 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 01:33:23 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 01:33:23 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 01:34:42 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 01:34:42 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 01:34:42 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 01:35:06 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 01:35:09 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:35:09 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 01:35:09 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:35:09 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:35:12 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 01:35:12 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 01:38:56 | INFO | service.searchService | 검색 시작: '컴퓨터공학과 관련 강의 추천해주세요'
+2025-09-29 01:38:58 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:38:58 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+```
+2025-09-29 01:38:58 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-09-29 01:38:58 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-09-29 01:38:59 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 01:38:59 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 01:41:02 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 01:41:02 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 01:41:02 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 01:41:31 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 01:41:33 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:41:33 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+```
+2025-09-29 01:41:33 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-09-29 01:41:33 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-09-29 01:41:36 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 01:41:36 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 01:41:47 | INFO | service.searchService | 검색 시작: '### Task:
+Suggest 3-5 relevant follow-up questions or prompts that the user might naturally ask next in this conversation as a **user**, based on the chat history, to help continue or deepen the discussion.
+### Guidelines:
+- Write all follow-up questions from the user’s point of view, directed to the assistant.
+- Make questions concise, clear, and directly related to the discussed topic(s).
+- Only suggest follow-ups that make sense given the chat content and do not repeat what was already covered.
+- If the conversation is very short or not specific, suggest more general (but relevant) follow-ups the user might ask.
+- Use the conversation's primary language; default to English if multilingual.
+- Response must be a JSON array of strings, no extra text or formatting.
+### Output:
+JSON format: { "follow_ups": ["Question 1?", "Question 2?", "Question 3?"] }
+### Chat History:
+<chat_history>
+USER: 컴공에서 인공지능 관련 수업을 찾아줘
+ASSISTANT: 사용자 질문에 대한 답변을 드리겠습니다. 컴퓨터인공지능학부에서 제공하는 과목들에 대한 정보를 아래와 같이 정리했습니다.
+
+**1. 인공지능**
+- 학과: 컴퓨터인공지능학부
+- 교수: 나승훈
+- 강의실: 전주:공과대학 7호관 301
+- 시간표: 화 8-A, 화 8-B, 목 6-A, 목 6-B, 목 7-A, 목 7-B
+- 학점: 3학점
+- 기타: 본 강의에서는 인공지능의 이론적 기초를 다루며, 탐색 기반 문제 해결, Symbolic AI, 베이지안 네트워크, 기계 학습, 딥러닝, 강화학습 등을 포함합니다.
+
+**2. 정보검색**
+- 학과: 컴퓨터인공지능학부
+- 교수: 이경순
+- 강의실: 전주:공과대학 7호관 301
+- 시간표: 화 8-A, 화 8-B, 화 9-A, 목 6-B, 목 7-A, 목 7-B
+- 학점: 3학점
+- 기타: 서치엔진 시스템의 기본 아키텍처와 관련 이론을 다루며, 웹크롤러, 색인구조, 질의어 표현, 검색 모델 및 성능 평가 방법 등을 학습합니다.
+
+**3. 인간-컴퓨터상호작용**
+- 학과: 컴퓨터인공지능학부
+- 교수: 정종욱
+- 강의실: 전주:공과대학 3호관 311
+- 시간표: 월 3-A, 월 3-B, 월 4-A, 월 4-B, 수 3-A, 수 3-B
+- 학점: 3학점
+- 기타: 인간-컴퓨터 상호작용의 기본 원리를 학습하며, 사용자 중심 디자인(UCD), 사용성의 원리와 평가 방법, 인터페이스 설계 등을 다룹니다.
+
+추가적인 정보가 필요하시면 언제든지 말씀해 주세요!
+</chat_history>'
+2025-09-29 01:41:50 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:41:50 | INFO | service.searchService | LLM 응답: {
+  "follow_ups": [
+    "이 강의들의 수업 방식은 어떻게 되나요?",
+    "각 강의의 선수과목은 무엇인가요?",
+    "이 강의들을 듣기 위한 추천 학년은 어떻게 되나요?",
+    "교수님들에 대한 더 많은 정보가 있을까요?",
+    "다른 관련 과목들도 추천해 줄 수 있나요?"
+  ]
+}
+2025-09-29 01:41:50 | INFO | service.searchService | 추출된 SQL: None
+2025-09-29 01:41:50 | WARNING | service.searchService | SQL 생성 실패, 빈 결과 반환: ### Task:
+Suggest 3-5 relevant follow-up questions or prompts that the user might naturally ask next in this conversation as a **user**, based on the chat history, to help continue or deepen the discussion.
+### Guidelines:
+- Write all follow-up questions from the user’s point of view, directed to the assistant.
+- Make questions concise, clear, and directly related to the discussed topic(s).
+- Only suggest follow-ups that make sense given the chat content and do not repeat what was already covered.
+- If the conversation is very short or not specific, suggest more general (but relevant) follow-ups the user might ask.
+- Use the conversation's primary language; default to English if multilingual.
+- Response must be a JSON array of strings, no extra text or formatting.
+### Output:
+JSON format: { "follow_ups": ["Question 1?", "Question 2?", "Question 3?"] }
+### Chat History:
+<chat_history>
+USER: 컴공에서 인공지능 관련 수업을 찾아줘
+ASSISTANT: 사용자 질문에 대한 답변을 드리겠습니다. 컴퓨터인공지능학부에서 제공하는 과목들에 대한 정보를 아래와 같이 정리했습니다.
+
+**1. 인공지능**
+- 학과: 컴퓨터인공지능학부
+- 교수: 나승훈
+- 강의실: 전주:공과대학 7호관 301
+- 시간표: 화 8-A, 화 8-B, 목 6-A, 목 6-B, 목 7-A, 목 7-B
+- 학점: 3학점
+- 기타: 본 강의에서는 인공지능의 이론적 기초를 다루며, 탐색 기반 문제 해결, Symbolic AI, 베이지안 네트워크, 기계 학습, 딥러닝, 강화학습 등을 포함합니다.
+
+**2. 정보검색**
+- 학과: 컴퓨터인공지능학부
+- 교수: 이경순
+- 강의실: 전주:공과대학 7호관 301
+- 시간표: 화 8-A, 화 8-B, 화 9-A, 목 6-B, 목 7-A, 목 7-B
+- 학점: 3학점
+- 기타: 서치엔진 시스템의 기본 아키텍처와 관련 이론을 다루며, 웹크롤러, 색인구조, 질의어 표현, 검색 모델 및 성능 평가 방법 등을 학습합니다.
+
+**3. 인간-컴퓨터상호작용**
+- 학과: 컴퓨터인공지능학부
+- 교수: 정종욱
+- 강의실: 전주:공과대학 3호관 311
+- 시간표: 월 3-A, 월 3-B, 월 4-A, 월 4-B, 수 3-A, 수 3-B
+- 학점: 3학점
+- 기타: 인간-컴퓨터 상호작용의 기본 원리를 학습하며, 사용자 중심 디자인(UCD), 사용성의 원리와 평가 방법, 인터페이스 설계 등을 다룹니다.
+
+추가적인 정보가 필요하시면 언제든지 말씀해 주세요!
+</chat_history>
+2025-09-29 01:41:50 | WARNING | service.searchService | LLM 원본 응답: {
+  "follow_ups": [
+    "이 강의들의 수업 방식은 어떻게 되나요?",
+    "각 강의의 선수과목은 무엇인가요?",
+    "이 강의들을 듣기 위한 추천 학년은 어떻게 되나요?",
+    "교수님들에 대한 더 많은 정보가 있을까요?",
+    "다른 관련 과목들도 추천해 줄 수 있나요?"
+  ]
+}
+2025-09-29 01:41:50 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-29 01:42:29 | INFO | service.searchService | 검색 시작: '### Task:
+Suggest 3-5 relevant follow-up questions or prompts that the user might naturally ask next in this conversation as a **user**, based on the chat history, to help continue or deepen the discussion.
+### Guidelines:
+- Write all follow-up questions from the user’s point of view, directed to the assistant.
+- Make questions concise, clear, and directly related to the discussed topic(s).
+- Only suggest follow-ups that make sense given the chat content and do not repeat what was already covered.
+- If the conversation is very short or not specific, suggest more general (but relevant) follow-ups the user might ask.
+- Use the conversation's primary language; default to English if multilingual.
+- Response must be a JSON array of strings, no extra text or formatting.
+### Output:
+JSON format: { "follow_ups": ["Question 1?", "Question 2?", "Question 3?"] }
+### Chat History:
+<chat_history>
+USER: 컴공에서 인공지능 관련 수업을 찾아줘
+ASSISTANT: 사용자 질문에 대한 답변을 드리겠습니다. 컴퓨터인공지능학부에서 제공하는 과목들에 대한 정보를 아래와 같이 정리했습니다.
+
+**1. 인공지능**
+- 학과: 컴퓨터인공지능학부
+- 교수: 나승훈
+- 강의실: 전주:공과대학 7호관 301
+- 시간표: 화 8-A, 화 8-B, 목 6-A, 목 6-B, 목 7-A, 목 7-B
+- 학점: 3학점
+- 기타: 본 강의에서는 인공지능의 이론적 기초를 다루며, 탐색 기반 문제 해결, Symbolic AI, 베이지안 네트워크, 기계 학습, 딥러닝, 강화학습 등을 포함합니다.
+
+**2. 정보검색**
+- 학과: 컴퓨터인공지능학부
+- 교수: 이경순
+- 강의실: 전주:공과대학 7호관 301
+- 시간표: 화 8-A, 화 8-B, 화 9-A, 목 6-B, 목 7-A, 목 7-B
+- 학점: 3학점
+- 기타: 서치엔진 시스템의 기본 아키텍처와 관련 이론을 다루며, 웹크롤러, 색인구조, 질의어 표현, 검색 모델 및 성능 평가 방법 등을 학습합니다.
+
+**3. 인간-컴퓨터상호작용**
+- 학과: 컴퓨터인공지능학부
+- 교수: 정종욱
+- 강의실: 전주:공과대학 3호관 311
+- 시간표: 월 3-A, 월 3-B, 월 4-A, 월 4-B, 수 3-A, 수 3-B
+- 학점: 3학점
+- 기타: 인간-컴퓨터 상호작용의 기본 원리를 학습하며, 사용자 중심 디자인(UCD), 사용성의 원리와 평가 방법, 인터페이스 설계 등을 다룹니다.
+
+추가적인 정보가 필요하시면 언제든지 말씀해 주세요!
+USER: 정종욱 교수님은 무슨 수업을 가르쳐?
+ASSISTANT: 사용자 질문에 대한 검색 결과를 확인한 결과, 현재 컴퓨터공학과에서 인공지능 관련 수업이나 정종욱 교수님이 가르치는 수업에 대한 정보는 제공되지 않았습니다. 
+
+**1. [과목명]**
+- 학과: 컴퓨터공학과
+- 교수: 정종욱 (정보 없음)
+- 강의실: 정보 없음
+- 시간표: 정보 없음
+- 학점: 정보 없음
+- 기타: 정보 없음
+
+추가적인 정보가 필요하시거나 다른 질문이 있으시면 언제든지 말씀해 주세요. 도움이 될 수 있도록 최선을 다하겠습니다.
+</chat_history>'
+2025-09-29 01:42:31 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:42:31 | INFO | service.searchService | LLM 응답: {
+  "follow_ups": [
+    "정종욱 교수님이 가르치는 다른 과목은 무엇인가요?",
+    "정종욱 교수님의 강의 시간표를 알 수 있을까요?",
+    "정종욱 교수님의 연구 분야는 어떤 것인가요?",
+    "정종욱 교수님 수업의 선수과목은 무엇인가요?",
+    "정종욱 교수님과 관련된 다른 교수님들은 누구인가요?"
+  ]
+}
+2025-09-29 01:42:31 | INFO | service.searchService | 추출된 SQL: None
+2025-09-29 01:42:31 | WARNING | service.searchService | SQL 생성 실패, 빈 결과 반환: ### Task:
+Suggest 3-5 relevant follow-up questions or prompts that the user might naturally ask next in this conversation as a **user**, based on the chat history, to help continue or deepen the discussion.
+### Guidelines:
+- Write all follow-up questions from the user’s point of view, directed to the assistant.
+- Make questions concise, clear, and directly related to the discussed topic(s).
+- Only suggest follow-ups that make sense given the chat content and do not repeat what was already covered.
+- If the conversation is very short or not specific, suggest more general (but relevant) follow-ups the user might ask.
+- Use the conversation's primary language; default to English if multilingual.
+- Response must be a JSON array of strings, no extra text or formatting.
+### Output:
+JSON format: { "follow_ups": ["Question 1?", "Question 2?", "Question 3?"] }
+### Chat History:
+<chat_history>
+USER: 컴공에서 인공지능 관련 수업을 찾아줘
+ASSISTANT: 사용자 질문에 대한 답변을 드리겠습니다. 컴퓨터인공지능학부에서 제공하는 과목들에 대한 정보를 아래와 같이 정리했습니다.
+
+**1. 인공지능**
+- 학과: 컴퓨터인공지능학부
+- 교수: 나승훈
+- 강의실: 전주:공과대학 7호관 301
+- 시간표: 화 8-A, 화 8-B, 목 6-A, 목 6-B, 목 7-A, 목 7-B
+- 학점: 3학점
+- 기타: 본 강의에서는 인공지능의 이론적 기초를 다루며, 탐색 기반 문제 해결, Symbolic AI, 베이지안 네트워크, 기계 학습, 딥러닝, 강화학습 등을 포함합니다.
+
+**2. 정보검색**
+- 학과: 컴퓨터인공지능학부
+- 교수: 이경순
+- 강의실: 전주:공과대학 7호관 301
+- 시간표: 화 8-A, 화 8-B, 화 9-A, 목 6-B, 목 7-A, 목 7-B
+- 학점: 3학점
+- 기타: 서치엔진 시스템의 기본 아키텍처와 관련 이론을 다루며, 웹크롤러, 색인구조, 질의어 표현, 검색 모델 및 성능 평가 방법 등을 학습합니다.
+
+**3. 인간-컴퓨터상호작용**
+- 학과: 컴퓨터인공지능학부
+- 교수: 정종욱
+- 강의실: 전주:공과대학 3호관 311
+- 시간표: 월 3-A, 월 3-B, 월 4-A, 월 4-B, 수 3-A, 수 3-B
+- 학점: 3학점
+- 기타: 인간-컴퓨터 상호작용의 기본 원리를 학습하며, 사용자 중심 디자인(UCD), 사용성의 원리와 평가 방법, 인터페이스 설계 등을 다룹니다.
+
+추가적인 정보가 필요하시면 언제든지 말씀해 주세요!
+USER: 정종욱 교수님은 무슨 수업을 가르쳐?
+ASSISTANT: 사용자 질문에 대한 검색 결과를 확인한 결과, 현재 컴퓨터공학과에서 인공지능 관련 수업이나 정종욱 교수님이 가르치는 수업에 대한 정보는 제공되지 않았습니다. 
+
+**1. [과목명]**
+- 학과: 컴퓨터공학과
+- 교수: 정종욱 (정보 없음)
+- 강의실: 정보 없음
+- 시간표: 정보 없음
+- 학점: 정보 없음
+- 기타: 정보 없음
+
+추가적인 정보가 필요하시거나 다른 질문이 있으시면 언제든지 말씀해 주세요. 도움이 될 수 있도록 최선을 다하겠습니다.
+</chat_history>
+2025-09-29 01:42:31 | WARNING | service.searchService | LLM 원본 응답: {
+  "follow_ups": [
+    "정종욱 교수님이 가르치는 다른 과목은 무엇인가요?",
+    "정종욱 교수님의 강의 시간표를 알 수 있을까요?",
+    "정종욱 교수님의 연구 분야는 어떤 것인가요?",
+    "정종욱 교수님 수업의 선수과목은 무엇인가요?",
+    "정종욱 교수님과 관련된 다른 교수님들은 누구인가요?"
+  ]
+}
+2025-09-29 01:42:31 | INFO | service.searchService | 검색 완료: 0개 결과
+2025-09-29 01:49:01 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 01:49:01 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 01:49:01 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 01:49:43 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 01:49:46 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:49:46 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 01:49:46 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:49:46 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:49:48 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 01:49:48 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 01:53:25 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 01:53:25 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 01:53:25 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 01:53:47 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 01:53:49 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 01:53:49 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 01:53:49 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:53:49 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 01:53:52 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 01:53:52 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 02:01:56 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 02:01:56 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 02:01:56 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 02:02:28 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 02:02:30 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 02:02:30 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 02:02:30 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:02:30 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:02:32 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 02:02:32 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 02:05:28 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 02:05:28 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 02:05:28 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 02:05:48 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 02:05:50 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 02:05:50 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 02:05:50 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:05:50 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:05:54 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 02:05:54 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 02:16:09 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 02:16:09 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 02:16:09 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 02:16:36 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 02:16:37 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 02:16:37 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 02:16:37 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:16:37 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:16:40 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 02:16:40 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 02:21:21 | INFO | service.searchService | 검색 시작: '반도체 관련 커리큘럼 추천해줘'
+2025-09-29 02:21:23 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 02:21:23 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+```
+2025-09-29 02:21:23 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-09-29 02:21:23 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-09-29 02:21:36 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 02:21:36 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 02:24:46 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 02:24:46 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 02:24:46 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 02:25:06 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련 수업을 찾아줘'
+2025-09-29 02:25:08 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 02:25:08 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 02:25:08 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:25:08 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:25:10 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 02:25:10 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 02:33:50 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 02:33:50 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 02:33:50 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 02:38:09 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 02:38:09 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 02:38:09 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 02:46:06 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 02:46:06 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 02:46:06 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 02:52:24 | INFO | service.searchService | 검색 시작: '컴퓨터인공지능학부 컴공에서 인공지능 관련된 수업을 찾아줘'
+2025-09-29 02:52:26 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 02:52:26 | INFO | service.searchService | LLM 응답: ```sql
+SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+```
+2025-09-29 02:52:26 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:52:26 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터인공지능학부%'
+2025-09-29 02:52:29 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 02:52:29 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 02:59:48 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 02:59:48 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 02:59:48 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 03:07:31 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 03:07:31 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 03:07:31 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 03:10:52 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 03:10:52 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 03:10:52 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 03:15:29 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 03:15:29 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 03:15:29 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log

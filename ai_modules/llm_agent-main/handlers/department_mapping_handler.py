@@ -34,12 +34,21 @@ class DepartmentMappingHandler(BaseQueryHandler):
             # previous_context 확인 (첫 번째 단계라서 보통 비어있음)
             previous_context = kwargs.get("previous_context", {})
 
-            # Department-Mapping은 첫 번째 단계이므로 원본 쿼리 사용
-            # 하지만 이전 컨텍스트가 있다면 로깅
+            # state에서 전달받은 확장된 쿼리 정보 활용
+            query_to_use = query_analysis.get("enhanced_query", user_message)
+            expanded_query = query_analysis.get("expanded_query", user_message)
+
+            # expanded_query가 더 구체적이면 그것을 사용, 아니면 원본 사용
+            final_query = expanded_query if expanded_query != user_message else query_to_use
+
+            self.logger.info(f"[DEPT] 원본 쿼리: '{user_message}'")
+            self.logger.info(f"[DEPT] 사용할 쿼리: '{final_query}'")
+
+            # 이전 컨텍스트가 있다면 로깅
             if previous_context.get("step_count", 0) > 0:
                 self.logger.info(f"[DEPT] 이전 컨텍스트 존재: {previous_context}")
 
-            payload = {"query": user_message, "top_k": 1}
+            payload = {"query": final_query, "top_k": 1}
             resp = await self.http.post(self.mapping_service_url, json=payload)
 
             if resp.status_code == 200:

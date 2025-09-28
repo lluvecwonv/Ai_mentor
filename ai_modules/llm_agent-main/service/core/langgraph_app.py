@@ -5,7 +5,6 @@ LangGraph 애플리케이션
 
 import logging
 from typing import Dict, Any
-from langchain_core.messages import HumanMessage
 from langgraph.graph import StateGraph, START, END
 
 # 핵심 컴포넌트만 import
@@ -49,13 +48,14 @@ class LangGraphApp:
 
         # NodeManager 초기화
         self.node_manager = NodeManager(
-            query_analyzer=QueryAnalyzer(),
+            query_analyzer=QueryAnalyzer(conversation_memory=self.conversation_memory),
             llm_handler=self.llm_handler,  # 같은 인스턴스 사용
             sql_handler=SqlQueryHandler(),
             vector_handler=VectorSearchHandler(),
             dept_handler=DepartmentMappingHandler(),
             curriculum_handler=CurriculumHandler(),
-            result_synthesizer=ResultSynthesizer(self.llm_handler)  # 같은 인스턴스 사용
+            result_synthesizer=ResultSynthesizer(self.llm_handler),  # 같은 인스턴스 사용
+            conversation_memory=self.conversation_memory  # 메모리 전달
         )
 
         # 그래프 빌드
@@ -93,12 +93,13 @@ class LangGraphApp:
                         "medium_sql": "medium_sql",
                         "medium_vector": "medium_vector",
                         "medium_curriculum": "medium_curriculum",
+                        "medium_department": "medium_department",
                         "heavy_sequential": "heavy_sequential"
                     }
                 )
 
         # 모든 처리 노드 → synthesis → finalize → END
-        for node in ["light", "medium_sql", "medium_vector", "medium_curriculum", "heavy_sequential"]:
+        for node in ["light", "medium_sql", "medium_vector", "medium_curriculum", "medium_department", "heavy_sequential"]:
             graph.add_edge(node, "synthesis")
 
         graph.add_edge("synthesis", "finalize")
@@ -111,21 +112,53 @@ class LangGraphApp:
 
     async def process_query(self, user_message: str, session_id: str = "default") -> Dict[str, Any]:
         """통합 쿼리 처리 - 히스토리 분석 포함"""
-        logger.info(f"🚀 통합 쿼리 처리 시작: '{user_message[:50]}...'")
+        logger.info(f"🚀 통합 쿼리 처리 시작: '{user_message}...'")
 
-        # 히스토리 분석 수행 (context_analyzer에 완전 위임)
-        history_analysis = await self.context_analyzer.analyze_session_context(
-            user_message,
-            self.conversation_memory,
-            session_id
-        )
+        # Follow-up 질문 생성 요청 차단 (이중 안전장치)
+        if "### Task:" in user_message and "follow-up questions" in user_message:
+            logger.warning("🚫 Follow-up 질문 생성 요청 차단 (LangGraph)")
+            return {
+                "response": "Follow-up 질문 생성 요청은 처리하지 않습니다.",
+                "complexity": "blocked",
+                "is_continuation": False,
+                "history_usage": {}
+            }
+
+        # 히스토리 분석 수행
+        default_result = {
+            "is_continuation": False,
+            "reconstructed_query": user_message,
+            "history_usage": {
+                "reuse_previous": False,
+                "relationship": "new_search"
+            }
+        }
+
+    
+        if not self.context_analyzer or not self.conversation_memory:
+            logger.info("컨텍스트 분석기 또는 메모리가 없습니다. 기본값 반환")
+            history_analysis = default_result
+        else:
+            history_analysis = await self.context_analyzer.analyze_session_context(
+                user_message,
+                self.conversation_memory,
+                session_id
+            )
+            
 
         # 상태 초기화
         initial_state = create_initial_state(user_message, session_id)
         initial_state["conversation_memory"] = self.conversation_memory
         initial_state["is_continuation"] = history_analysis.get("is_continuation", False)
         initial_state["history_usage"] = history_analysis.get("history_usage", {})
-        initial_state["reconstructed_query"] = history_analysis.get("reconstructed_query", user_message)
+
+        # 연속대화 여부에 따라 쿼리 설정
+        if history_analysis.get("is_continuation", False):
+            initial_state["reconstructed_query"] = history_analysis.get("reconstructed_query", user_message)
+            logger.info(f"🔄 연속대화: 재구성된 쿼리 사용")
+        else:
+            initial_state["original_query"] = user_message
+            logger.info(f"🆕 새로운 질문: 원본 쿼리 사용")
 
         # 그래프 실행
         result = await self.graph.ainvoke(initial_state)
@@ -133,7 +166,7 @@ class LangGraphApp:
         # 응답 생성
         response = result.get("final_result", "응답을 생성할 수 없습니다")
 
-        # 메모리에 대화 저장 (다음 턴을 위해)
+        # 메모리에 대화 저장
         if self.conversation_memory:
             self.conversation_memory.add_exchange(
                 session_id=session_id,
@@ -147,6 +180,4 @@ class LangGraphApp:
             "complexity": result.get("complexity", "unknown"),
             "is_continuation": result.get("is_continuation", False),
             "history_usage": result.get("history_usage", {})
-        }
-
-
+    }
