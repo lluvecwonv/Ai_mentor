@@ -18,8 +18,9 @@ def load_prompt(prompt_name: str) -> str:
     """
     current_dir = Path(__file__).parent.parent
 
-    # 다중 경로 지원: handlers/prompts와 service/memory/prompts
+    # 다중 경로 지원: service/handlers/prompts, handlers/prompts, service/memory/prompts
     possible_paths = [
+        current_dir / "service" / "handlers" / "prompts" / f"{prompt_name}.txt",
         current_dir / "handlers" / "prompts" / f"{prompt_name}.txt",
         current_dir / "service" / "memory" / "prompts" / f"{prompt_name}.txt"
     ]

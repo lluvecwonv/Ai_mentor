@@ -24,13 +24,10 @@ class SynthesisNodes(BaseNode):
                     # 실제 합성 로직 수행
                     user_message = state.get("user_message", "")
                     processing_type = state.get("processing_type", "")
-                    query_analysis = state.get("query_analysis", {})
-                    conversation_history = state.get("conversation_history", "")
-
+                    
                     # ResultSynthesizer를 사용한 실제 합성
                     final_result = await self.result_synthesizer.synthesize_with_llm(
-                        user_message, final_result, processing_type,
-                        query_analysis, conversation_history
+                        user_message, final_result, processing_type
                     )
 
                 return {

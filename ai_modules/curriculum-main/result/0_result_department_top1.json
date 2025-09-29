@@ -11,24 +11,6 @@
                 "prerequisites": "데이터구조및프로그래밍실습"
             },
             {
-                "course_id": 356,
-                "course_name": "아날로그집적회로설계",
-                "department": "전자공학부",
-                "student_grade": 4,
-                "semester": 1,
-                "description": "아날로그집적회로설계,1.아날로그 반도체 제작 및 집적회로를 설계하기 위한 과정을 이해     \n2. 아날로그 집적회로 설계에 있어서 가장 대표적인 연산증폭기, 전류미러, 바이어스제너레이터 동작원리, 해석, 설계방법, 설계 , \n3, 이를 기반으로  아날로그 집적회로 시스템 응용인 PD(Photo Diode) ROIC 를 분석하고 설계방법을\n    학습하여 앞으로의 아날로그 집적회로 설계에 준비하고 아날로그 반도체 제작과정에 대하여 이해하고자 한다.   ",
-                "prerequisites": "전자회로 2"
-            },
-            {
-                "course_id": 3385,
-                "course_name": "창의적공학설계입문",
-                "department": "전자공학부",
-                "student_grade": 1,
-                "semester": 2,
-                "description": "공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양",
-                "prerequisites": ""
-            },
-            {
                 "course_id": 3211,
                 "course_name": "반도체소자",
                 "department": "전자공학부",
@@ -45,6 +27,24 @@
                 "semester": 1,
                 "description": "본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  ",
                 "prerequisites": "일반물리학\n대학수학"
+            },
+            {
+                "course_id": 356,
+                "course_name": "아날로그집적회로설계",
+                "department": "전자공학부",
+                "student_grade": 4,
+                "semester": 1,
+                "description": "아날로그집적회로설계,1.아날로그 반도체 제작 및 집적회로를 설계하기 위한 과정을 이해     \n2. 아날로그 집적회로 설계에 있어서 가장 대표적인 연산증폭기, 전류미러, 바이어스제너레이터 동작원리, 해석, 설계방법, 설계 , \n3, 이를 기반으로  아날로그 집적회로 시스템 응용인 PD(Photo Diode) ROIC 를 분석하고 설계방법을\n    학습하여 앞으로의 아날로그 집적회로 설계에 준비하고 아날로그 반도체 제작과정에 대하여 이해하고자 한다.   ",
+                "prerequisites": "전자회로 2"
+            },
+            {
+                "course_id": 3385,
+                "course_name": "창의적공학설계입문",
+                "department": "전자공학부",
+                "student_grade": 1,
+                "semester": 2,
+                "description": "공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양",
+                "prerequisites": ""
             },
             {
                 "course_id": 4575,
@@ -65,15 +65,6 @@
                 "prerequisites": "디지털논리공학"
             },
             {
-                "course_id": 1134,
-                "course_name": "디지털논리공학",
-                "department": "전자공학부",
-                "student_grade": 2,
-                "semester": 1,
-                "description": "디지털논리공학,Digital 회로 설계에 필요한 논리회로의 개념과 해석 능력 및 simulation tool를 습득한다.\n\n이를 토대로 digital 논리 소자를 사용하여 shift 레지스터, 카운터,메모리, 마이크로프로세서를 비롯한 각종 논리 회로를 설계할 수 있는 지식을 습득한다. ",
-                "prerequisites": ""
-            },
-            {
                 "course_id": 4093,
                 "course_name": "시스템및메모리반도체",
                 "department": "전자공학부",
@@ -81,6 +72,15 @@
                 "semester": 2,
                 "description": "시스템및메모리반도체,본 과목에서는 시스템 반도체 및 메모리 반도체의 기본 개념에 대하여 학습하고, FPGA 보드를 이용하여 실습을 진행한다.  ",
                 "prerequisites": "반도체소자"
+            },
+            {
+                "course_id": 1134,
+                "course_name": "디지털논리공학",
+                "department": "전자공학부",
+                "student_grade": 2,
+                "semester": 1,
+                "description": "디지털논리공학,Digital 회로 설계에 필요한 논리회로의 개념과 해석 능력 및 simulation tool를 습득한다.\n\n이를 토대로 digital 논리 소자를 사용하여 shift 레지스터, 카운터,메모리, 마이크로프로세서를 비롯한 각종 논리 회로를 설계할 수 있는 지식을 습득한다. ",
+                "prerequisites": ""
             },
             {
                 "course_id": 3315,
@@ -101,6 +101,15 @@
                 "prerequisites": "영상처리"
             },
             {
+                "course_id": 4635,
+                "course_name": "IT융복합종합설계",
+                "department": "전자공학부",
+                "student_grade": 4,
+                "semester": 2,
+                "description": "IT융복합종합설계,This lecture is designed for providing the capability of problem solving by letting the students select, analyze, design, and implement a subject of the project, based on the knowledge gained from lectures of Electronics Engineering Program.  ",
+                "prerequisites": ""
+            },
+            {
                 "course_id": 2330,
                 "course_name": "컴퓨터구조",
                 "department": "전자공학부",
@@ -110,12 +119,12 @@
                 "prerequisites": "디지털 논리 회로, C언어기초"
             },
             {
-                "course_id": 4635,
-                "course_name": "IT융복합종합설계",
+                "course_id": 2857,
+                "course_name": "산업수요맞춤형현장실습프로젝트",
                 "department": "전자공학부",
                 "student_grade": 4,
                 "semester": 2,
-                "description": "IT융복합종합설계,This lecture is designed for providing the capability of problem solving by letting the students select, analyze, design, and implement a subject of the project, based on the knowledge gained from lectures of Electronics Engineering Program.  ",
+                "description": "산업수요맞춤형현장실습프로젝트, - 전자공학 전공에서 습득한 이론내용을 산업현장에 적용하면서 실무능력 및 창의력을 배양\n - 과목 담당교수 및 참여기업 멘토의 지도로 산업수요맞춤형 일통합 교육을 수행\n - 대학과 산업체 간의 산학협력 체계 구축 및 강화 ",
                 "prerequisites": ""
             },
             {
@@ -128,13 +137,22 @@
                 "prerequisites": "인공지능"
             },
             {
-                "course_id": 2857,
-                "course_name": "산업수요맞춤형현장실습프로젝트",
+                "course_id": 1267,
+                "course_name": "전력전자공학",
                 "department": "전자공학부",
                 "student_grade": 4,
-                "semester": 2,
-                "description": "산업수요맞춤형현장실습프로젝트, - 전자공학 전공에서 습득한 이론내용을 산업현장에 적용하면서 실무능력 및 창의력을 배양\n - 과목 담당교수 및 참여기업 멘토의 지도로 산업수요맞춤형 일통합 교육을 수행\n - 대학과 산업체 간의 산학협력 체계 구축 및 강화 ",
-                "prerequisites": ""
+                "semester": 1,
+                "description": "전력전자공학,- 학부에서 배운 기초 전공 이론 (반도체, 회로, 시스템 등)을 활용할 수 있는 내용을 강의할 계획입니다. \n- 학부 전공 이론의 Review와 함께, 전력 (Electric Power)을 다루는 전자 (Electronics) 기술을 공부합니다. \n- 다양한 산업 사례 (전기발전, 전기자동차, 에너지변환 등)를 소개하며, 학생들의 이해가 쉽도록 진행합니다. ",
+                "prerequisites": "전자회로 2"
+            },
+            {
+                "course_id": 1199,
+                "course_name": "기초RFIC설계",
+                "department": "전자공학부",
+                "student_grade": 4,
+                "semester": 1,
+                "description": "기초RFIC설계,- Introduction to modern wireless systems\n\n- Understanding of microwave theory and radio freqeuncy (RF) integrated circuits \n\n- Design of RF building blocks\n\n- Design of modern wireless systems ",
+                "prerequisites": "전자회로 2, 전자기학 2"
             },
             {
                 "course_id": 2143,
@@ -155,13 +173,13 @@
                 "prerequisites": ""
             },
             {
-                "course_id": 1267,
-                "course_name": "전력전자공학",
+                "course_id": 4720,
+                "course_name": "회로이론 2",
                 "department": "전자공학부",
-                "student_grade": 4,
-                "semester": 1,
-                "description": "전력전자공학,- 학부에서 배운 기초 전공 이론 (반도체, 회로, 시스템 등)을 활용할 수 있는 내용을 강의할 계획입니다. \n- 학부 전공 이론의 Review와 함께, 전력 (Electric Power)을 다루는 전자 (Electronics) 기술을 공부합니다. \n- 다양한 산업 사례 (전기발전, 전기자동차, 에너지변환 등)를 소개하며, 학생들의 이해가 쉽도록 진행합니다. ",
-                "prerequisites": "전자회로 2"
+                "student_grade": 2,
+                "semester": 2,
+                "description": "회로이론 2,전자, 제어, 정보통신 등의 전공심화를 위하여, 전기/전자회로, 신호처리, 시스템해석, 시스템합성 등에 필요한 기본지식을 습득한다. \nRLC DC 해석 / 정현파정상상태해석 / 교류 정상상태전력 / 3상회로 / 주파수응답 / 라플라스변환 / 푸리에급수와 변환 / 필터회로 / 2포트 회로망 등의 문제해결 역량을 배양한다. ",
+                "prerequisites": "회로이론 1"
             },
             {
                 "course_id": 3955,
@@ -173,24 +191,6 @@
                 "prerequisites": "회로이론 1"
             },
             {
-                "course_id": 1199,
-                "course_name": "기초RFIC설계",
-                "department": "전자공학부",
-                "student_grade": 4,
-                "semester": 1,
-                "description": "기초RFIC설계,- Introduction to modern wireless systems\n\n- Understanding of microwave theory and radio freqeuncy (RF) integrated circuits \n\n- Design of RF building blocks\n\n- Design of modern wireless systems ",
-                "prerequisites": "전자회로 2, 전자기학 2"
-            },
-            {
-                "course_id": 4720,
-                "course_name": "회로이론 2",
-                "department": "전자공학부",
-                "student_grade": 2,
-                "semester": 2,
-                "description": "회로이론 2,전자, 제어, 정보통신 등의 전공심화를 위하여, 전기/전자회로, 신호처리, 시스템해석, 시스템합성 등에 필요한 기본지식을 습득한다. \nRLC DC 해석 / 정현파정상상태해석 / 교류 정상상태전력 / 3상회로 / 주파수응답 / 라플라스변환 / 푸리에급수와 변환 / 필터회로 / 2포트 회로망 등의 문제해결 역량을 배양한다. ",
-                "prerequisites": "회로이론 1"
-            },
-            {
                 "course_id": 1637,
                 "course_name": "디지털시스템설계",
                 "department": "전자공학부",
@@ -198,15 +198,6 @@
                 "semester": 1,
                 "description": "디지털시스템설계,디지털시스템의 디자인 원리를 logic 및 register 수준에서 이해하고, 이를 구현하기 위한 도구로써 HDL(Verilog)의 사용법과 응용을 배운다. 프로젝트수행을 통해 주어진 topic의 전체 디자인 과정을 이해한다. ",
                 "prerequisites": "디지털논리공학"
-            },
-            {
-                "course_id": 4606,
-                "course_name": "컴퓨터네트워크",
-                "department": "전자공학부",
-                "student_grade": 3,
-                "semester": 2,
-                "description": "컴퓨터네트워크,컴퓨터와 네트워크의 결합에 의한 컴퓨터 상호간 통신을 목적으로 구성된 컴퓨터 네트워크를 프로토콜(소프트웨어) 중심으로 학습한다.  ",
-                "prerequisites": "컴퓨터구조"
             },
             {
                 "course_id": 1449,
@@ -227,13 +218,13 @@
                 "prerequisites": ""
             },
             {
-                "course_id": 3982,
-                "course_name": "기초회로실험",
+                "course_id": 4606,
+                "course_name": "컴퓨터네트워크",
                 "department": "전자공학부",
-                "student_grade": 2,
+                "student_grade": 3,
                 "semester": 2,
-                "description": "기초회로실험,전자공학 입문 학생들을 위한 오실로스코프, 파워 서플라이 등의 기초 장비 교육부터 회로이론 및 디지털 논리 회로와 관련된 기초 회로 실험을 순차적으로 진행한다. ",
-                "prerequisites": "디지털논리공학, 회로이론 1"
+                "description": "컴퓨터네트워크,컴퓨터와 네트워크의 결합에 의한 컴퓨터 상호간 통신을 목적으로 구성된 컴퓨터 네트워크를 프로토콜(소프트웨어) 중심으로 학습한다.  ",
+                "prerequisites": "컴퓨터구조"
             },
             {
                 "course_id": 3076,
@@ -245,40 +236,13 @@
                 "prerequisites": "통신공학"
             },
             {
-                "course_id": 3322,
-                "course_name": "임베디드시스템",
-                "department": "전자공학부",
-                "student_grade": 3,
-                "semester": 2,
-                "description": "임베디드시스템,임베디드 리눅스 환경에서의 소프트웨어 개발을 학습한다. 이를 위하여 먼저 가상환경에서 리눅스를 설치하고 운용하는 방법을 학습한다. 이후 리눅스 환경에서의 프로그래밍에 대하여 학습한다. ",
-                "prerequisites": "데이터구조및프로그래밍실습"
-            },
-            {
-                "course_id": 2417,
-                "course_name": "전자회로실험",
-                "department": "전자공학부",
-                "student_grade": 3,
-                "semester": 1,
-                "description": "전자회로실험,전자회로에서 학습한 이론을 실험을 통하여 확인함으로써 이론에 대한 이해를 깊게 하며, 이론과 측정치의 차이를 규명함으로써 간략화된 이론 및 측정 오차 등의 한계를 인식하도록 한다. 또한 피측정 회로의 설계 방법 및 구현 방법, 부품에 대한 이해, 측정 장비의 사용법 등을 익혀 전자회로의 구현 능력을 배양한다. ",
-                "prerequisites": "전자회로 1"
-            },
-            {
-                "course_id": 1248,
-                "course_name": "회로이론 1",
+                "course_id": 3982,
+                "course_name": "기초회로실험",
                 "department": "전자공학부",
                 "student_grade": 2,
-                "semester": 1,
-                "description": "회로이론 1,회로 이론은 전자정보공학 모든 분야의 기본이 되는 기초 학문으로서 이에 대한 확고한 개념을 파악하고 있어야만 더욱\n\n심화된 전공 분야를 이해할 수 있다. 이를 위해 본 과정에서는 전기의 흐름 및 회로 해석에 대한 기본 개념과 회로에 관\n\n한 정리 등의 이론을 습득한다. ",
-                "prerequisites": ""
-            },
-            {
-                "course_id": 1139,
-                "course_name": "광전자공학",
-                "department": "전자공학부",
-                "student_grade": 4,
-                "semester": 1,
-                "description": "광전자공학,- 빛의 기본 특성(간섭, 회절, 편광 등)을 이해하고 이를 간단한 수학식으로 표현할 수 있다.\n- 레이저, PD(photo-diode), 광섬유, 광증폭기 등 광전자 및 광통신 주요 소자의 구조, 동작원리와 특성을 이해한다.\n- 공부한 내용을 광통신, 광계측, 광신호처리, 디스플레이, 반도체 등에 사용되는 광학적 응용에 적용하여 관련 시스템 전반의 이해를 도모한다. ",
-                "prerequisites": ""
+                "semester": 2,
+                "description": "기초회로실험,전자공학 입문 학생들을 위한 오실로스코프, 파워 서플라이 등의 기초 장비 교육부터 회로이론 및 디지털 논리 회로와 관련된 기초 회로 실험을 순차적으로 진행한다. ",
+                "prerequisites": "디지털논리공학, 회로이론 1"
             },
             {
                 "course_id": 3540,
@@ -290,6 +254,42 @@
                 "prerequisites": "전자기학 2"
             },
             {
+                "course_id": 4021,
+                "course_name": "RF응용시스템",
+                "department": "전자공학부",
+                "student_grade": 4,
+                "semester": 2,
+                "description": "RF응용시스템,사물인터넷과 차세대 이동통신의 기반이 되는 RF 시스템 및 안테나의 기초를 설명하고, RFID/NFC, 무선전력전송, 실내위치추적 등 다양한 실제 응용 사례를 살펴본다. ",
+                "prerequisites": "기초RFIC설계"
+            },
+            {
+                "course_id": 1139,
+                "course_name": "광전자공학",
+                "department": "전자공학부",
+                "student_grade": 4,
+                "semester": 1,
+                "description": "광전자공학,- 빛의 기본 특성(간섭, 회절, 편광 등)을 이해하고 이를 간단한 수학식으로 표현할 수 있다.\n- 레이저, PD(photo-diode), 광섬유, 광증폭기 등 광전자 및 광통신 주요 소자의 구조, 동작원리와 특성을 이해한다.\n- 공부한 내용을 광통신, 광계측, 광신호처리, 디스플레이, 반도체 등에 사용되는 광학적 응용에 적용하여 관련 시스템 전반의 이해를 도모한다. ",
+                "prerequisites": ""
+            },
+            {
+                "course_id": 3322,
+                "course_name": "임베디드시스템",
+                "department": "전자공학부",
+                "student_grade": 3,
+                "semester": 2,
+                "description": "임베디드시스템,임베디드 리눅스 환경에서의 소프트웨어 개발을 학습한다. 이를 위하여 먼저 가상환경에서 리눅스를 설치하고 운용하는 방법을 학습한다. 이후 리눅스 환경에서의 프로그래밍에 대하여 학습한다. ",
+                "prerequisites": "데이터구조및프로그래밍실습"
+            },
+            {
+                "course_id": 1248,
+                "course_name": "회로이론 1",
+                "department": "전자공학부",
+                "student_grade": 2,
+                "semester": 1,
+                "description": "회로이론 1,회로 이론은 전자정보공학 모든 분야의 기본이 되는 기초 학문으로서 이에 대한 확고한 개념을 파악하고 있어야만 더욱\n\n심화된 전공 분야를 이해할 수 있다. 이를 위해 본 과정에서는 전기의 흐름 및 회로 해석에 대한 기본 개념과 회로에 관\n\n한 정리 등의 이론을 습득한다. ",
+                "prerequisites": ""
+            },
+            {
                 "course_id": 654,
                 "course_name": "선형대수학",
                 "department": "전자공학부",
@@ -299,13 +299,13 @@
                 "prerequisites": ""
             },
             {
-                "course_id": 4021,
-                "course_name": "RF응용시스템",
+                "course_id": 2417,
+                "course_name": "전자회로실험",
                 "department": "전자공학부",
-                "student_grade": 4,
-                "semester": 2,
-                "description": "RF응용시스템,사물인터넷과 차세대 이동통신의 기반이 되는 RF 시스템 및 안테나의 기초를 설명하고, RFID/NFC, 무선전력전송, 실내위치추적 등 다양한 실제 응용 사례를 살펴본다. ",
-                "prerequisites": "기초RFIC설계"
+                "student_grade": 3,
+                "semester": 1,
+                "description": "전자회로실험,전자회로에서 학습한 이론을 실험을 통하여 확인함으로써 이론에 대한 이해를 깊게 하며, 이론과 측정치의 차이를 규명함으로써 간략화된 이론 및 측정 오차 등의 한계를 인식하도록 한다. 또한 피측정 회로의 설계 방법 및 구현 방법, 부품에 대한 이해, 측정 장비의 사용법 등을 익혀 전자회로의 구현 능력을 배양한다. ",
+                "prerequisites": "전자회로 1"
             },
             {
                 "course_id": 249,
@@ -326,15 +326,6 @@
                 "prerequisites": "회로이론 1, 선형대수학"
             },
             {
-                "course_id": 50,
-                "course_name": "통신공학",
-                "department": "전자공학부",
-                "student_grade": 3,
-                "semester": 1,
-                "description": "통신공학,통신공학의 기본이론을 학습하고, Matlab을 이용한 실습을 통해 이론을 확인한다. 신호해석의 기본이 되는 Fourier 변환을 복습하고, 변조 및 복조의 개념, 잡음해석, 진폭변조, 주파수변조, 위상변조에 대해 학습하고 실험장치를 이용하여 실습한다. 디지털 통신이론의 개요을 소개한다. ",
-                "prerequisites": "신호및시스템"
-            },
-            {
                 "course_id": 1863,
                 "course_name": "전자기학 1",
                 "department": "전자공학부",
@@ -342,6 +333,15 @@
                 "semester": 1,
                 "description": "전자기학 1,모든 전기전자공학의 기본이 되는 전기 및 자기에 대한 자세한 이론을 공부한다. 구체적인 내용으로는 기초적인 벡터 해석, 전계의 세기, 전속밀도, 에너지와 전위, 도체와 유전체, 정전용량, Laplace's Equation의 해석과 풀이 등이며, 3차원의 좌표변환과 미분 적분의 응용, 선적분과 면적적분, 미분방정식의 해법 등에 대한 지식도 겸하여 얻어진다. 원서강의를 통하여 외국 전문기술서적을 읽고 이해하는 능력도 얻게 된다. ",
                 "prerequisites": ""
+            },
+            {
+                "course_id": 50,
+                "course_name": "통신공학",
+                "department": "전자공학부",
+                "student_grade": 3,
+                "semester": 1,
+                "description": "통신공학,통신공학의 기본이론을 학습하고, Matlab을 이용한 실습을 통해 이론을 확인한다. 신호해석의 기본이 되는 Fourier 변환을 복습하고, 변조 및 복조의 개념, 잡음해석, 진폭변조, 주파수변조, 위상변조에 대해 학습하고 실험장치를 이용하여 실습한다. 디지털 통신이론의 개요을 소개한다. ",
+                "prerequisites": "신호및시스템"
             },
             {
                 "course_id": 2492,
@@ -353,24 +353,6 @@
                 "prerequisites": "신호및시스템"
             },
             {
-                "course_id": 4164,
-                "course_name": "제어시스템설계",
-                "department": "전자공학부",
-                "student_grade": 3,
-                "semester": 2,
-                "description": "제어시스템설계,Root Locus와 주파수 응답의 원리를 배우고, 제어 이론을 적용하여 실제 제어기를 설계하는 방법을 배운다. ",
-                "prerequisites": "제어공학기초"
-            },
-            {
-                "course_id": 1899,
-                "course_name": "운영체제",
-                "department": "전자공학부",
-                "student_grade": 4,
-                "semester": 1,
-                "description": "운영체제,운영체제의 기본 이론과 이와 관련한 응용 구조 및 이론을 학습한다.\n컴퓨터의 운영원리 및 이를 기반으로 한 자원관리, 프로세스, 메모리 관리 등의 이론을 학습한다. ",
-                "prerequisites": "컴퓨터구조"
-            },
-            {
                 "course_id": 3632,
                 "course_name": "디지털통신시스템",
                 "department": "전자공학부",
@@ -380,6 +362,15 @@
                 "prerequisites": "통신공학"
             },
             {
+                "course_id": 4164,
+                "course_name": "제어시스템설계",
+                "department": "전자공학부",
+                "student_grade": 3,
+                "semester": 2,
+                "description": "제어시스템설계,Root Locus와 주파수 응답의 원리를 배우고, 제어 이론을 적용하여 실제 제어기를 설계하는 방법을 배운다. ",
+                "prerequisites": "제어공학기초"
+            },
+            {
                 "course_id": 943,
                 "course_name": "전파및안테나",
                 "department": "전자공학부",
@@ -387,6 +378,15 @@
                 "semester": 1,
                 "description": "전파및안테나,전자기학의 기본 지식을 바탕으로 전파의 생성, 안테나의 주요 특성, 안테나 설계에 관한 내용을 학습한다. ",
                 "prerequisites": "전자기학 2"
+            },
+            {
+                "course_id": 1899,
+                "course_name": "운영체제",
+                "department": "전자공학부",
+                "student_grade": 4,
+                "semester": 1,
+                "description": "운영체제,운영체제의 기본 이론과 이와 관련한 응용 구조 및 이론을 학습한다.\n컴퓨터의 운영원리 및 이를 기반으로 한 자원관리, 프로세스, 메모리 관리 등의 이론을 학습한다. ",
+                "prerequisites": "컴퓨터구조"
             },
             {
                 "course_id": 350,
@@ -409,6 +409,14 @@
         ],
         "edges": [
             {
+                "from": 1360,
+                "to": 3211
+            },
+            {
+                "from": 1360,
+                "to": 1199
+            },
+            {
                 "from": 3385,
                 "to": 356
             },
@@ -419,14 +427,6 @@
             {
                 "from": 3385,
                 "to": 3540
-            },
-            {
-                "from": 1360,
-                "to": 3211
-            },
-            {
-                "from": 1360,
-                "to": 1199
             },
             {
                 "from": 2330,
@@ -453,15 +453,6 @@
     "반도체과학기술학과": {
         "nodes": [
             {
-                "course_id": 33,
-                "course_name": "응용수학 1",
-                "department": "반도체과학기술학과",
-                "student_grade": 2,
-                "semester": 1,
-                "description": "응용수학 1,반도체과학기술학을 배우는데 기초가 되는 수학개념과 내용을 공부한다. ",
-                "prerequisites": ""
-            },
-            {
                 "course_id": 1755,
                 "course_name": "반도체공학개론",
                 "department": "반도체과학기술학과",
@@ -471,6 +462,15 @@
                 "prerequisites": "물리전자"
             },
             {
+                "course_id": 33,
+                "course_name": "응용수학 1",
+                "department": "반도체과학기술학과",
+                "student_grade": 2,
+                "semester": 1,
+                "description": "응용수학 1,반도체과학기술학을 배우는데 기초가 되는 수학개념과 내용을 공부한다. ",
+                "prerequisites": ""
+            },
+            {
                 "course_id": 4703,
                 "course_name": "응용수학 2",
                 "department": "반도체과학기술학과",
@@ -478,15 +478,6 @@
                 "semester": 2,
                 "description": "응용수학 2,반도체과학기술학을 배우는데 기초가 되는 수학개념과 내용을 공부한다. ",
                 "prerequisites": "응용수학 1"
-            },
-            {
-                "course_id": 1650,
-                "course_name": "반도체연구특론 1",
-                "department": "반도체과학기술학과",
-                "student_grade": 4,
-                "semester": 1,
-                "description": "반도체연구특론 1,반도체과학기술의 (1) 기존 연구와 새로운 이론 학습, 혹은 (2) 반도체 공정 실험, 실습을 통한 연구 진행. 학습과 연구를 통한 결과물 제출과 발표   ",
-                "prerequisites": "반도체공정실험 1"
             },
             {
                 "course_id": 97,
@@ -505,6 +496,15 @@
                 "semester": 1,
                 "description": "반도체소자설계,반도체소자의 이론과 실습을 학습함\n\n이론: BJT, MOSFET, Schottky Diode, JFET, PIN, HEMT, Memory Devices, LDMOS\n실습: Silvaco를 이용한 소자시뮬레이션 ",
                 "prerequisites": "반도체소자 2"
+            },
+            {
+                "course_id": 1650,
+                "course_name": "반도체연구특론 1",
+                "department": "반도체과학기술학과",
+                "student_grade": 4,
+                "semester": 1,
+                "description": "반도체연구특론 1,반도체과학기술의 (1) 기존 연구와 새로운 이론 학습, 혹은 (2) 반도체 공정 실험, 실습을 통한 연구 진행. 학습과 연구를 통한 결과물 제출과 발표   ",
+                "prerequisites": "반도체공정실험 1"
             },
             {
                 "course_id": 1239,
@@ -534,33 +534,6 @@
                 "prerequisites": ""
             },
             {
-                "course_id": 1241,
-                "course_name": "전자회로 1",
-                "department": "반도체과학기술학과",
-                "student_grade": 3,
-                "semester": 1,
-                "description": "전자회로 1,반도체전자회로를 구성하는 MOSFET, BJT, Diode 등 기본 반도체소자들의 동작특성을 이해하고, 이들을 이용한 기본회로의 구성과 특성, 해석방법에 대하여 공부한다. ",
-                "prerequisites": "회로이론 1"
-            },
-            {
-                "course_id": 812,
-                "course_name": "초급양자역학",
-                "department": "반도체과학기술학과",
-                "student_grade": 3,
-                "semester": 1,
-                "description": "초급양자역학,양자역학의 기본개념에 대하여 공부하여 반도체연구에 응용할 수 있는 능력을 기른다. ",
-                "prerequisites": "현대물리학"
-            },
-            {
-                "course_id": 3661,
-                "course_name": "디스플레이공학",
-                "department": "반도체과학기술학과",
-                "student_grade": 3,
-                "semester": 2,
-                "description": "디스플레이공학,인간과 각종 전자기기를 이어주는 가교 역할을 하는 디스플레이 기술은  21세기 미래기술로 반도체에 이은 산업의 쌀로 불리어진다. 따라서 본 강의에서는 color science 시작으로 CRT, LCD, LED, OLED, 마이크로 LED 디스플레이와 같은 다양한 디스플레이 기술의 구동 원리와 공정 기술을 소개하려고 한다. 특히, TFT 기술 및 동작 원리를 구동 원리를 이해시키는 것이 중요하며 미래의 디스플레이 개발에 따른 우리 생활의 변화를 소개하고자 한다. ",
-                "prerequisites": "반도체소자 1"
-            },
-            {
                 "course_id": 3678,
                 "course_name": "반도체소자 1",
                 "department": "반도체과학기술학과",
@@ -588,6 +561,42 @@
                 "prerequisites": "전자기학"
             },
             {
+                "course_id": 3661,
+                "course_name": "디스플레이공학",
+                "department": "반도체과학기술학과",
+                "student_grade": 3,
+                "semester": 2,
+                "description": "디스플레이공학,인간과 각종 전자기기를 이어주는 가교 역할을 하는 디스플레이 기술은  21세기 미래기술로 반도체에 이은 산업의 쌀로 불리어진다. 따라서 본 강의에서는 color science 시작으로 CRT, LCD, LED, OLED, 마이크로 LED 디스플레이와 같은 다양한 디스플레이 기술의 구동 원리와 공정 기술을 소개하려고 한다. 특히, TFT 기술 및 동작 원리를 구동 원리를 이해시키는 것이 중요하며 미래의 디스플레이 개발에 따른 우리 생활의 변화를 소개하고자 한다. ",
+                "prerequisites": "반도체소자 1"
+            },
+            {
+                "course_id": 1241,
+                "course_name": "전자회로 1",
+                "department": "반도체과학기술학과",
+                "student_grade": 3,
+                "semester": 1,
+                "description": "전자회로 1,반도체전자회로를 구성하는 MOSFET, BJT, Diode 등 기본 반도체소자들의 동작특성을 이해하고, 이들을 이용한 기본회로의 구성과 특성, 해석방법에 대하여 공부한다. ",
+                "prerequisites": "회로이론 1"
+            },
+            {
+                "course_id": 812,
+                "course_name": "초급양자역학",
+                "department": "반도체과학기술학과",
+                "student_grade": 3,
+                "semester": 1,
+                "description": "초급양자역학,양자역학의 기본개념에 대하여 공부하여 반도체연구에 응용할 수 있는 능력을 기른다. ",
+                "prerequisites": "현대물리학"
+            },
+            {
+                "course_id": 3496,
+                "course_name": "센서반도체",
+                "department": "반도체과학기술학과",
+                "student_grade": 4,
+                "semester": 2,
+                "description": "센서반도체,반도체센서에 대한 전반적인 이해를 통하여 반도체공정을 응용한 센서를 설계 및 제작하는 능력을 키운다. \n특히 반도체물질을 이용한 Thermal sensor, Optical sensor, Mechanical sensor, Magnetic sensor, Chemical sensor 등의 재료, 제작방법, 작동원리에 대하여 이해한다. ",
+                "prerequisites": "반도체공정"
+            },
+            {
                 "course_id": 466,
                 "course_name": "회로이론 1",
                 "department": "반도체과학기술학과",
@@ -604,33 +613,6 @@
                 "semester": 2,
                 "description": "반도체공정실험 1,본 반도체공정실험1 수업을 통하여, GaN 화합물 반도체 발광다이오드 전극 공정 실습 및 LED 소자특성 평가 진행\n- 현재까지배운 p-n junction 소자의 실제 응용에 대한 기초 이론 학습\n- 화합물반도체 기초 공정 이론 및 TLM 공정 실습 (Cleaning, Photolithography, Dry etching, Metallization, Electrical and Optical characterization)\n- 발광다이오드 소자 특성 평가 ",
                 "prerequisites": "반도체공정"
-            },
-            {
-                "course_id": 3496,
-                "course_name": "센서반도체",
-                "department": "반도체과학기술학과",
-                "student_grade": 4,
-                "semester": 2,
-                "description": "센서반도체,반도체센서에 대한 전반적인 이해를 통하여 반도체공정을 응용한 센서를 설계 및 제작하는 능력을 키운다. \n특히 반도체물질을 이용한 Thermal sensor, Optical sensor, Mechanical sensor, Magnetic sensor, Chemical sensor 등의 재료, 제작방법, 작동원리에 대하여 이해한다. ",
-                "prerequisites": "반도체공정"
-            },
-            {
-                "course_id": 4058,
-                "course_name": "반도체소자 2",
-                "department": "반도체과학기술학과",
-                "student_grade": 3,
-                "semester": 2,
-                "description": "반도체소자 2,Modern device electronics: Unipolar devices with the MOS field effect transistor as a logic device and circuit considerations; basic concepts of generation-recombination and the P-N junction as capacitors and current rectifier with applications in photonics; bipolar transistors as amplifiers and switching three-terminal devices. ",
-                "prerequisites": "반도체소자 1"
-            },
-            {
-                "course_id": 4841,
-                "course_name": "회로이론 2",
-                "department": "반도체과학기술학과",
-                "student_grade": 2,
-                "semester": 2,
-                "description": "회로이론 2,회로의 해석을 위한 개념들을 공부하고 저항과 인덕터, 커패시터를 포함한 회로들의 동작을 이해하며 회로의 스위칭에 따른 천이과정 등 다양한 회로를 해석하거나 설계에 필요한 지식을 쌓는다. ",
-                "prerequisites": "회로이론 1"
             },
             {
                 "course_id": 380,
@@ -651,6 +633,15 @@
                 "prerequisites": "반도체공학개론"
             },
             {
+                "course_id": 4058,
+                "course_name": "반도체소자 2",
+                "department": "반도체과학기술학과",
+                "student_grade": 3,
+                "semester": 2,
+                "description": "반도체소자 2,Modern device electronics: Unipolar devices with the MOS field effect transistor as a logic device and circuit considerations; basic concepts of generation-recombination and the P-N junction as capacitors and current rectifier with applications in photonics; bipolar transistors as amplifiers and switching three-terminal devices. ",
+                "prerequisites": "반도체소자 1"
+            },
+            {
                 "course_id": 393,
                 "course_name": "반도체재료성장",
                 "department": "반도체과학기술학과",
@@ -658,6 +649,15 @@
                 "semester": 1,
                 "description": "반도체재료성장,This course covers how solar cells convert light into electricity, how solar cells are manufactured, how solar cells are evaluated, what technologies are currently on the market, and how to evaluate the risk and potential of existing and emerging solar cell technologies. We examine the potential & drawbacks of currently manufactured technologies (single- and multi-crystalline silicon, micromorph tandem cells, CdTe, CIGS, CPV, PVT), as well as pre-commercial technologies (organics, biomimetic, organic/inorganic hybrid, and nanostructure-based solar cells).  ",
                 "prerequisites": "반도체재료학개론"
+            },
+            {
+                "course_id": 4841,
+                "course_name": "회로이론 2",
+                "department": "반도체과학기술학과",
+                "student_grade": 2,
+                "semester": 2,
+                "description": "회로이론 2,회로의 해석을 위한 개념들을 공부하고 저항과 인덕터, 커패시터를 포함한 회로들의 동작을 이해하며 회로의 스위칭에 따른 천이과정 등 다양한 회로를 해석하거나 설계에 필요한 지식을 쌓는다. ",
+                "prerequisites": "회로이론 1"
             },
             {
                 "course_id": 4922,

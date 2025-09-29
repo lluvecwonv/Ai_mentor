@@ -37,15 +37,9 @@ class SearchService:
         full_prompt = f"{prompt}\n\n사용자 쿼리: {query_text}"
         response = self.llm_client.get_llm().invoke(full_prompt)
 
-        logger.info(f"LLM 응답: {response.content}")
         sql_query = extract_sql_from_response(response.content)
         logger.info(f"추출된 SQL: {sql_query}")
 
-        # SQL이 None이면 빈 결과 반환 (재라우팅 비활성화로 순환 참조 방지)
-        if sql_query is None:
-            logger.warning(f"SQL 생성 실패, 빈 결과 반환: {query_text}")
-            logger.warning(f"LLM 원본 응답: {response.content}")
-            return []
 
         # 2. SQL 실행
         with self.db_client.connection.cursor() as cursor:

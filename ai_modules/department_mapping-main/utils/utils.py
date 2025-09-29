@@ -6,20 +6,20 @@ import faiss
 from typing import Dict, Any, List, Optional
 from langchain_openai import OpenAIEmbeddings
 
-def load_config() -> Dict[str, str]:
-    """JSON 설정 파일에서 키워드 매핑 로드"""
+def load_config() -> Dict[str, Any]:
+    """JSON 설정 파일에서 키워드 매핑 로드 (중첩 구조 유지)"""
     try:
-        config_path = os.path.join(os.path.dirname(__file__), "../config/department_mapping.json")
+        config_path = os.path.join(os.path.dirname(__file__), "../data/department_mapping.json")
         with open(config_path, 'r', encoding='utf-8') as f:
-            config = json.load(f)
-
-        keyword_mapping = {}
-        for mappings in config.values():
-            keyword_mapping.update(mappings)
-        return keyword_mapping
-    except:
-        return {"컴공": "컴퓨터인공지능학부", "ai": "컴퓨터인공지능학부"}
-
+            return json.load(f)  # ✅ 중첩 구조 그대로 반환
+    except Exception as e:
+        print(f"키워드 매핑 로드 오류: {str(e)}")
+        return {
+            "컴퓨터_관련": {
+                "컴공": "컴퓨터인공지능학부",
+                "ai": "컴퓨터인공지능학부"
+            }
+        }
 def load_data() -> List[Dict[str, Any]]:
     """PKL 파일에서 학과 데이터 로드"""
     try:

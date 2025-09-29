@@ -86,7 +86,6 @@ class DatabaseHandler:
             columns = [col[0] for col in self.cursor.description]
             rows = self.cursor.fetchall()
             results = [dict(zip(columns, row)) for row in rows]
-            print(f"{len(rows)} departments fetched.")
             return results
 
         except pymysql.MySQLError as e:

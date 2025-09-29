@@ -35,7 +35,6 @@ class ClassRetriever:
             self.index.add(embeddings_array)
 
             self.is_loaded = True
-            logger.info(f"과목 데이터 로드 완료: {len(self.lookup_index)}개 과목")
 
         except Exception as e:
             logger.error(f"과목 데이터 로드 실패: {e}")

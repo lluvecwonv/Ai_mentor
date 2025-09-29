@@ -16,7 +16,7 @@ class QueryAnalyzer:
     """Query 복잡도 분석 및 분류 - LangChain LLM + 규칙 결합 (v3)"""
 
     def __init__(self, conversation_memory=None):
-        self.llm_client = LlmClient()
+        self.llm_client = LlmClient(max_tokens=256)
         self.conversation_memory = conversation_memory
 
     async def analyze_query_parallel(self, query: str, session_id: str = "default", contextual_prompt: str = None, is_reconstructed: bool = False, history_context: str = None) -> Dict[str, Any]:

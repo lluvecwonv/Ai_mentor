@@ -119,4 +119,4 @@ Example 4: "문정과에서 가르치는 과목을 찾아줘"
 [USER QUERY]
 {query}
 
-Expand the query and output JSON only.ㅇ
+Expand the query and output JSON only.

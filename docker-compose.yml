@@ -61,13 +61,8 @@ services:
       - SEARCH_SERVICE_URL=http://vector-search:7997/search
       - CURRICULUM_SERVICE_URL=http://curriculum:7996/chat
       - MAPPING_SERVICE_URL=http://department-mapping:8000/map
-      # - LLM_SERVICE_URL=http://llm-client:7998/agent  # llm-client service removed
     volumes:
-      - ./ai_modules/llm_agent-main/logs:/app/logs
-      - ./ai_modules/tool_sql-main:/app/tool_sql-main
-      - ./ai_modules/llm_agent-main/processors:/app/processors
-      - ./ai_modules/llm_agent-main/service:/app/service
-      - ./ai_modules/llm_agent-main/tot:/app/tot
+        - ./ai_modules/llm_agent-main:/app
     ports:
       - "8001:8001"
     depends_on:

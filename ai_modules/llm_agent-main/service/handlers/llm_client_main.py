@@ -4,7 +4,7 @@ import os
 import asyncio
 
 class LlmClient:
-    def __init__(self, model: str = "gpt-4o"):
+    def __init__(self, model: str = "gpt-4o", max_tokens: int = 4000):
         self.llm = ChatOpenAI(
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             model=model,

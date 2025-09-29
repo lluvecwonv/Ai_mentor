@@ -25,10 +25,15 @@ class HeavyNodes(BaseNode):
 
         self.agent_mapping = {
             'Department-Mapping-Agent': 'dept',
+            'DEPARTMENT_MAPPING': 'dept',  # 라우터에서 사용하는 이름
             'SQL-Agent': 'sql',
+            'SQL_QUERY': 'sql',  # 라우터에서 사용하는 이름
             'FAISS-Search-Agent': 'vector',
+            'VECTOR_SEARCH': 'vector',  # 라우터에서 사용하는 이름
             'Curriculum-Agent': 'curriculum',
-            'LLM-Fallback-Agent': 'llm'
+            'CURRICULUM': 'curriculum',  # 라우터에서 사용하는 이름
+            'LLM-Fallback-Agent': 'llm',
+            'LLM_FALLBACK': 'llm'  # 라우터에서 사용하는 이름
         }
 
     async def heavy_sequential_executor(self, state: Dict[str, Any]) -> Dict[str, Any]:
@@ -55,9 +60,15 @@ class HeavyNodes(BaseNode):
 
                 for step in plan:
                     agent_name = step.get("agent")
+                    logger.info(f"🔍 [HEAVY] 처리 중인 단계: {step}")
+                    logger.info(f"🔍 [HEAVY] Agent name: {agent_name}")
+                    logger.info(f"🔍 [HEAVY] 매핑된 handler key: {self.agent_mapping.get(agent_name)}")
+                    logger.info(f"🔍 [HEAVY] 사용 가능한 handlers: {list(self.handlers.keys())}")
+
                     handler = self.handlers.get(self.agent_mapping.get(agent_name))
-                    
+
                     if not handler:
+                        logger.warning(f"❌ [HEAVY] Handler not found for agent: {agent_name}")
                         continue
 
                     # 컨텍스트 구성 및 쿼리 개선 (유틸리티 함수 사용)

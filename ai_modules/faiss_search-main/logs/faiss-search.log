@@ -3324,3 +3324,42 @@ WHERE c.department LIKE '%컴퓨터인공지능학부%'
 2025-09-29 18:08:06 | INFO | root | === faiss-search 서비스 시작 ===
 2025-09-29 18:08:06 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
 2025-09-29 18:08:06 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 18:22:11 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 18:22:11 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 18:22:11 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 18:29:33 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 18:29:33 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 18:29:33 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 19:24:29 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 19:24:29 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 19:24:29 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 19:40:40 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 19:40:40 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 19:40:40 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 19:54:23 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 19:54:23 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 19:54:23 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 20:03:22 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 20:03:22 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 20:03:22 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 20:08:30 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 20:08:30 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 20:08:30 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 20:11:16 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 20:11:16 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 20:11:16 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 20:25:48 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 20:25:48 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 20:25:48 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 20:27:37 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 20:27:37 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 20:27:37 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 20:39:37 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 20:39:37 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 20:39:37 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 20:58:47 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 20:58:47 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 20:58:47 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 21:02:56 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 21:02:56 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 21:02:56 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log

@@ -29,19 +29,13 @@ class LangGraphApp:
     """LangGraph 애플리케이션"""
 
     def __init__(self, conversation_memory: ConversationMemory = None):
-        """
-        통합 그래프 초기화
-
-        Args:
-            conversation_memory: 대화 메모리 (기존 시스템과 공유)
-        """
         logger.info("🏗️ 통합 LangGraph 아키텍처 초기화 시작")
 
         # 메모리 설정
         self.conversation_memory = conversation_memory
 
         # LLM 핸들러 생성 (통합 사용)
-        self.llm_handler = LlmClient()
+        self.llm_handler = LlmClient(max_tokens=10000)
 
         # 히스토리 분석기 초기화 (llm_handler 전달)
         self.context_analyzer = ConversationContextAnalyzer(self.llm_handler)
@@ -114,8 +108,16 @@ class LangGraphApp:
         """통합 쿼리 처리 - 히스토리 분석 포함"""
         logger.info(f"🚀 통합 쿼리 처리 시작: '{user_message}...'")
 
-        # Follow-up 질문 생성 요청 차단 (이중 안전장치)
-        if "### Task:" in user_message and "follow-up questions" in user_message:
+        # Follow-up 질문 생성 요청 차단 (강화된 안전장치)
+        follow_up_patterns = [
+            "### Task:",
+            "follow-up questions",
+            "follow-up prompts",
+            "Suggest 3-5 relevant",
+            "continue or deepen the discussion"
+        ]
+
+        if any(pattern in user_message for pattern in follow_up_patterns):
             logger.warning("🚫 Follow-up 질문 생성 요청 차단 (LangGraph)")
             return {
                 "response": "Follow-up 질문 생성 요청은 처리하지 않습니다.",
@@ -127,7 +129,7 @@ class LangGraphApp:
         # 히스토리 분석 수행
         default_result = {
             "is_continuation": False,
-            "reconstructed_query": user_message,
+            "query": user_message,
             "history_usage": {
                 "reuse_previous": False,
                 "relationship": "new_search"
@@ -154,10 +156,10 @@ class LangGraphApp:
 
         # 연속대화 여부에 따라 쿼리 설정
         if history_analysis.get("is_continuation", False):
-            initial_state["reconstructed_query"] = history_analysis.get("reconstructed_query", user_message)
+            initial_state["query"] = history_analysis.get("query", user_message)
             logger.info(f"🔄 연속대화: 재구성된 쿼리 사용")
         else:
-            initial_state["original_query"] = user_message
+            initial_state["query"] = user_message
             logger.info(f"🆕 새로운 질문: 원본 쿼리 사용")
 
         # 그래프 실행

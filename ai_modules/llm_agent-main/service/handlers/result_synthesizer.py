@@ -9,7 +9,7 @@ class ResultSynthesizer:
         self.llm_handler = llm_handler
 
     async def synthesize_with_llm(self, user_message: str, found_results: str,
-                                 processing_type: str, conversation_history: str = "") -> str:
+                                 processing_type: str) -> str:
         """LLM을 사용해서 에이전트가 찾은 결과를 자연스러운 답변으로 종합"""
         try:
             # 프롬프트 로드 및 히스토리 섹션 구성
@@ -19,7 +19,7 @@ class ResultSynthesizer:
             synthesis_prompt = synthesis_template.format(
                 user_message=user_message,
                 found_results=found_results,
-                processing_type=processing_type
+                processing_type=processing_type,
             )
 
             logger.info(f"🚀 합성 시작: prompt_length={len(synthesis_prompt)}")

@@ -43,7 +43,7 @@ class RoutingNodes(BaseNode):
             is_continuation = state.get("is_continuation", False)
             if is_continuation:
                 # 연속대화면 재구성된 쿼리 사용
-                query_for_analysis = state.get("reconstructed_query", clean_message)
+                query_for_analysis = state.get("query", clean_message)
                 logger.info(f"🔄 연속대화: '{clean_message}' → '{query_for_analysis}'")
             else:
                 # 새로운 질문이면 원본 쿼리 사용
@@ -74,7 +74,7 @@ class RoutingNodes(BaseNode):
                 "owner_hint": analysis_result.get('owner_hint', ''),
                 "routing_reason": analysis_result.get('reasoning', ''),
                 "plan": plan,
-                "user_message": user_message,  # 원본 메시지 추가
+                "user_message": query_for_analysis,  # 원본 메시지 추가
                 "expanded_query": analysis_result.get('enhanced_query', query_for_analysis),  # 확장된 쿼리
                 "keywords": analysis_result.get('expansion_keywords', ''),
                 "step_times": self.update_step_time(state, "router", timer.duration)

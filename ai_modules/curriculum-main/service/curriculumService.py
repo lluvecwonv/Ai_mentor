@@ -50,8 +50,6 @@ class CurriculumService:
                 graph, "result", 0, "result_department_top1"
             )
 
-            logger.info(f"처리 완료: {len(dept_results)}개 학과")
-
             return {
                 "expanded_query": query_info,
                 "all_results_json": all_results_json,

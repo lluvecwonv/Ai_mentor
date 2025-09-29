@@ -43,7 +43,6 @@ class DepartmentRetriever:
             self.index.add(embeddings_array)
 
             self.is_loaded = True
-            logger.info(f"학과 데이터 로드 완료: {len(self.lookup_index)}개 학과")
 
         except Exception as e:
             logger.error(f"학과 데이터 로드 실패: {e}")

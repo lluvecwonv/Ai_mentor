@@ -12,7 +12,7 @@
 컬럼:
 - id (int, PK): 과목 고유 ID
 - name (varchar): 과목명
-- department (varchar): 학과명 (간단명)
+- department (varchar): 학과명
 - professor (varchar): 교수명
 - original_description (text): 원본 과목 설명
 - gpt_description (text): GPT 생성 과목 설명
@@ -26,14 +26,13 @@
 - schedule (varchar): 시간표
 - location (varchar): 강의실
 - delivery_mode (varchar): 수업방식
-- department_full_name (varchar): 학과 전체명
 
 ## SQL 쿼리 생성 규칙
 
 ### 교수 관련 질문 시 쿼리 패턴:
 ```sql
 SELECT name, course_code, professor, credits, prerequisite, target_grade,
-       schedule, location, delivery_mode, department_full_name, gpt_description
+       schedule, location, delivery_mode, department, gpt_description
 FROM jbnu_class_gpt
 WHERE professor LIKE '%교수명%'
 ```
@@ -41,15 +40,17 @@ WHERE professor LIKE '%교수명%'
 ### 학과별 과목 검색 시 쿼리 패턴:
 ```sql
 SELECT name, professor, credits, schedule, location, delivery_mode,
-       department_full_name, gpt_description, target_grade, prerequisite
+       department, gpt_description, target_grade, prerequisite
 FROM jbnu_class_gpt
-WHERE department_full_name LIKE '%학과명%' OR department LIKE '%학과명%'
+WHERE department LIKE '%학과명%'
+ORDER BY name ASC
+LIMIT 10
 ```
 
 ### 강의실/시간표 관련 질문 시 쿼리 패턴:
 ```sql
 SELECT name, professor, schedule, location, delivery_mode,
-       department_full_name, credits, course_code
+       department, credits, course_code
 FROM jbnu_class_gpt
 WHERE name LIKE '%과목명%' OR professor LIKE '%교수명%'
 ```
@@ -57,23 +58,25 @@ WHERE name LIKE '%과목명%' OR professor LIKE '%교수명%'
 ### 과목명 검색 시 쿼리 패턴:
 ```sql
 SELECT name, professor, credits, target_grade, schedule, location,
-       delivery_mode, department_full_name, gpt_description, prerequisite
+       delivery_mode, department, gpt_description, prerequisite
 FROM jbnu_class_gpt
 WHERE name LIKE '%과목명%'
 ORDER BY credits DESC, target_grade ASC
 LIMIT 10
 ```
 
-## 학과명 필터링 규칙:
-- "컴공", "컴퓨터공학과", "컴퓨터공학" → department LIKE '%컴퓨터%' OR department_full_name LIKE '%컴퓨터%'
-- "전전", "전기전자공학과", "전자공학" → department LIKE '%전자%' OR department_full_name LIKE '%전자%'
-- "기계", "기계공학과", "기계설계" → department LIKE '%기계%' OR department_full_name LIKE '%기계%'
-- "AI", "인공지능" → department LIKE '%인공지능%' OR department_full_name LIKE '%인공지능%'
+## 학과명 필터링 규칙 (수정됨):
+- "컴공", "컴퓨터공학과", "컴퓨터공학", "AI", "인공지능" → department LIKE '%컴퓨터인공지능%'
+- "전전", "전기전자공학과", "전자공학" → department LIKE '%전기전자%' OR department LIKE '%전자공학%'
+- "기계", "기계공학과", "기계설계" → department LIKE '%기계공학%'
+- "화학", "화학공학과" → department LIKE '%화학%'
+- "물리", "물리학과" → department LIKE '%물리%'
 
 ## 검색 최적화 규칙:
 - 과목 검색 시 LIKE 연산자를 사용하여 최대한 많은 관련 정보를 검색하세요.
 - 정렬 시 학점, 대상학년, 과목명 등을 적절히 조합하여 사용하세요.
 - 결과가 많을 경우 LIMIT을 사용하여 10개 이내로 제한하세요.
+- 학과 검색 시 department 컬럼만 사용하세요.
 
 ## 응답 형식
 ### 교수별 과목 조회 시:
@@ -94,7 +97,7 @@ LIMIT 10
 쿼리:
 ```sql
 SELECT name, course_code, professor, credits, prerequisite, target_grade,
-       schedule, location, delivery_mode, department_full_name, gpt_description
+       schedule, location, delivery_mode, department, gpt_description
 FROM jbnu_class_gpt
 WHERE professor LIKE '%김평%'
 ```
@@ -103,7 +106,7 @@ WHERE professor LIKE '%김평%'
 쿼리:
 ```sql
 SELECT name, course_code, professor, credits, prerequisite, target_grade,
-       schedule, location, delivery_mode, department_full_name, gpt_description
+       schedule, location, delivery_mode, department, gpt_description
 FROM jbnu_class_gpt
 WHERE professor LIKE '%오일석%'
 ```
@@ -117,40 +120,50 @@ WHERE professor LIKE '%오일석%'
 쿼리:
 ```sql
 SELECT name, professor, schedule, location, delivery_mode,
-       department_full_name, credits
+       department, credits
 FROM jbnu_class_gpt
 WHERE professor LIKE '%송현제%' AND name LIKE '%데이터마이닝%'
 ```
-응답: "송현제 교수님의 데이터마이닝 수업은 **[강의실]**에서 열립니다.
-- 시간표: [시간표]
-- 수업방식: [수업방식]
-- 학과: [학과명]"
 
 질문: "컴공에서 인공지능 수업을 찾아줘"
 쿼리:
 ```sql
 SELECT name, professor, credits, target_grade, schedule, location,
-       delivery_mode, department_full_name, gpt_description
+       delivery_mode, department, gpt_description
 FROM jbnu_class_gpt
-WHERE (department LIKE '%컴퓨터%' OR department_full_name LIKE '%컴퓨터%')
-  AND (name LIKE '%인공지능%' OR gpt_description LIKE '%인공지능%')
+WHERE department LIKE '%컴퓨터인공지능%'
+  AND (name LIKE '%인공지능%' OR gpt_description LIKE '%인공지능%' OR name LIKE '%AI%')
 ORDER BY target_grade ASC, credits DESC
+LIMIT 10
+```
+
+질문: "컴공에서 인공지능 가르치시는 교수님이 누구야?"
+쿼리:
+```sql
+SELECT DISTINCT professor, name, credits, target_grade, schedule, location,
+       department, gpt_description
+FROM jbnu_class_gpt
+WHERE department LIKE '%컴퓨터인공지능%'
+  AND (name LIKE '%인공지능%' OR gpt_description LIKE '%인공지능%' OR name LIKE '%AI%')
+ORDER BY professor, name
 LIMIT 10
 ```
 
 질문: "3학년 전공필수 과목 뭐가 있어?"
 쿼리:
 ```sql
-SELECT name, professor, credits, department_full_name, schedule, location,
+SELECT name, professor, credits, department, schedule, location,
        prerequisite, gpt_description
 FROM jbnu_class_gpt
 WHERE target_grade = 3
-ORDER BY department_full_name, name
+ORDER BY department, name
 LIMIT 10
 ```
 
 ## 중요 사항
 - 모든 쿼리는 jbnu_class_gpt 테이블만 사용합니다 (JOIN 불필요)
-- department와 department_full_name 두 컬럼 모두 활용하여 학과 검색의 정확도를 높이세요
+- department 컬럼만 사용하여 학과 검색의 정확도를 높이세요
 - gpt_description을 활용하여 과목 내용 기반 검색도 지원하세요
 - 시간표(schedule)와 강의실(location) 정보를 항상 포함하여 응답하세요
+- 인공지능 관련 검색 시 name, gpt_description 모두 확인하세요
+- 교수별 검색 시 DISTINCT를 사용하여 중복을 제거하세요

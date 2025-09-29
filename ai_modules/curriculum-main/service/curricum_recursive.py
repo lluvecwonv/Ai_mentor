@@ -23,7 +23,6 @@ def recursive_top1_selection(client, db_handler, query, selected_dept_list,
 
     # Retrieve candidate courses using search_class_by_departments
     candidate_dict = class_retriever.search_class_by_departments(query, selected_dept_list, exclude_class_ids=list(visited_ids))
-    logger.info(f"Candidate dict retrieved: {candidate_dict}")
 
     candidate_list = []
     for dept_name, dept_results in candidate_dict.items():
@@ -62,8 +61,6 @@ def recursive_top1_selection(client, db_handler, query, selected_dept_list,
             continue
 
         already_selected_classes.append(candidate)
-        logger.info(f"Added candidate: {candidate_id} (total: {len(already_selected_classes)})")
-        logger.info(f'already_selected_classes: {already_selected_classes}')
 
     # Update graph
     G, graph_visited_ids = build_prereq_postreq(already_selected_classes, db_handler, logger=logger, existing_visited_ids=graph_visited_ids)
