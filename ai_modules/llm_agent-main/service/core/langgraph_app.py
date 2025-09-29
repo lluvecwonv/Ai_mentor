@@ -8,7 +8,7 @@ from typing import Dict, Any
 from langgraph.graph import StateGraph, START, END
 
 # 핵심 컴포넌트만 import
-from handlers import (
+from ..handlers import (
     VectorSearchHandler,
     SqlQueryHandler,
     DepartmentMappingHandler,

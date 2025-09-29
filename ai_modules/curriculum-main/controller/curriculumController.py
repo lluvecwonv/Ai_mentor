@@ -5,6 +5,7 @@ import logging
 
 from service.curriculumService import CurriculumService
 from util.dbClient import DbClient
+from util.utils import format_curriculum_response
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -34,14 +35,11 @@ def chat_get():
 async def process_query_endpoint(request: QueryRequest):
     """커리큘럼 추천 쿼리 처리 API"""
     try:
-        logger.info(f"📨 API 요청 수신: '{request.query[:100]}{'...' if len(request.query) > 100 else ''}' "
-                   f"(요구 과목 수: {request.required_dept_count})")
-
         # 서비스 호출
         result = curriculum_service.process_query(request.query, request.required_dept_count)
 
         # 응답 포맷팅
-        message_text = curriculum_service.format_response(result)
+        message_text = format_curriculum_response(result)
 
         logger.info(f"✅ API 응답 완료: {len(message_text)}자")
 

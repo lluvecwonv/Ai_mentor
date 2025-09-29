@@ -1,8 +1,3 @@
-"""
-Medium 복잡도 노드들
-데이터베이스 검색, 벡터 검색, 커리큘럼 처리 등
-"""
-
 import logging
 from typing import Dict, Any, Optional
 from ..base_node import BaseNode, NodeTimer

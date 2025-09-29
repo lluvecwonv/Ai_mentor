@@ -1,10 +1,3 @@
-# force_cleanup() {
-#     log_info "강제 컨테이너 정리 중..."
-#     docker stop llm-agent vector-search curriculum tool-sql department-mapping llm-client 2>/dev/null || true
-#     docker rm -f llm-agent vector-search curriculum tool-sql department-mapping llm-client 2>/dev/null || true
-#     docker network prune -f 2>/dev/null || true
-# }
-
 version: '3.3'
 
 services:
@@ -24,7 +17,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./ai_modules/curriculum-main:/app
-      - ./ai_modules/department_mapping-main/data:/app/data
+      - ./ai_modules/curriculum-main/data:/app/data  
     ports:
       - "7996:7996"
     restart: unless-stopped

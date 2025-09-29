@@ -3306,3 +3306,21 @@ WHERE c.department LIKE '%컴퓨터인공지능학부%'
 2025-09-29 03:26:19 | INFO | root | === faiss-search 서비스 시작 ===
 2025-09-29 03:26:19 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
 2025-09-29 03:26:19 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 17:25:37 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 17:25:37 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 17:25:37 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 17:31:40 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 17:31:40 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 17:31:40 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 17:38:03 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 17:38:03 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 17:38:03 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 17:55:31 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 17:55:31 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 17:55:31 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 18:01:00 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 18:01:00 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 18:01:00 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 18:08:06 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 18:08:06 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 18:08:06 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
