@@ -25,7 +25,7 @@ class LightNodes(BaseNode):
             # Light 노드용 LLM 설정 (빠른 응답을 위해 작은 모델 사용)
             light_llm = LlmClient.create_with_config(
                 model="gpt-4.1",  # 빠른 응답을 위한 작은 모델
-                max_tokens=16000  # 간단한 응답을 위한 적은 토큰
+                max_tokens=400  # 간단한 응답을 위한 적은 토큰
             )
 
             response = await light_llm.chat(user_message)

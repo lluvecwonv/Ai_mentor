@@ -179,6 +179,27 @@ header > div > div:not(:first-child) * {
   pointer-events: none !important;
 }
 
+/* ========== 채팅 알림/토스트 메시지 모두 숨김 ========== */
+.sonner,
+.sonner *,
+[data-sonner-toaster],
+[data-sonner-toaster] *,
+.toast,
+.toast *,
+[role="status"],
+[role="alert"]:not(.error),
+.notification,
+.notification *,
+[class*="toast"],
+[class*="Toast"],
+[class*="notification"],
+[class*="Notification"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* ========== 추가 보험: !important 체인 ========== */
 /* Tailwind의 높은 specificity를 이기기 위한 추가 규칙 */
 header * {

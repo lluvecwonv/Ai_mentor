@@ -26,7 +26,7 @@ class NodeManager:
             curriculum_handler=curriculum_handler,
             llm_handler=llm_handler
         )
-        self.synthesis = SynthesisNodes(result_synthesizer)
+        self.synthesis = SynthesisNodes(result_synthesizer, llm_handler)
         self.utility = UtilityNodes()
 
     def get_all_nodes(self) -> dict:

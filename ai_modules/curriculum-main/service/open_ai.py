@@ -27,13 +27,16 @@ def load_txt(file_path: str) -> str:
         return f.read()
 
 
-def get_llm_client(model: str = "gpt-4o-mini", temperature: float = 0.1) -> ChatOpenAI:
+def get_llm_client(model: str = "gpt-4o-mini", temperature: float = 0.1, max_tokens: int = None) -> ChatOpenAI:
     """LangChain LLM 클라이언트 생성"""
-    return ChatOpenAI(
-        model=model,
-        temperature=temperature,
-        openai_api_key=os.getenv("OPENAI_API_KEY")
-    )
+    kwargs = {
+        "model": model,
+        "temperature": temperature,
+        "openai_api_key": os.getenv("OPENAI_API_KEY")
+    }
+    if max_tokens is not None:
+        kwargs["max_tokens"] = max_tokens
+    return ChatOpenAI(**kwargs)
 
 
 def query_expansion(client, query: str, load_path: str) -> str:
@@ -41,7 +44,7 @@ def query_expansion(client, query: str, load_path: str) -> str:
     prompt_template = load_txt(load_path)
     formatted_prompt = prompt_template.replace("{input_query}", query)
 
-    llm = get_llm_client("gpt-4o")
+    llm = get_llm_client("gpt-4o-mini")
 
     messages = [
         SystemMessage(content="당신은 교육 전문가입니다. 사용자의 쿼리를 확장하여 더 나은 검색 결과를 제공하세요."),
@@ -237,7 +240,7 @@ def is_consecutive_semester(course1: Dict, course2: Dict) -> bool:
 
 def select_courses_by_llm(query: str, departments: List[str], courses: List[Dict]) -> str:
     """LLM을 사용한 과목 선택"""
-    llm = get_llm_client("gpt-4o")
+    llm = get_llm_client("gpt-4o-mini")
 
     dept_str = ", ".join(departments)
     course_info = json.dumps(courses, ensure_ascii=False, indent=2)

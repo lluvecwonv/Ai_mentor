@@ -12,7 +12,7 @@ db_host = os.getenv("DB_HOST")
 class LangchainLlmClient():
 
     def __init__(self):
-        self.model = "gpt-4.1-mini"
+        self.model = "gpt-4o-mini"
         self.api_key = api_key
         self.temperature = 0.05
         self.seed = 42

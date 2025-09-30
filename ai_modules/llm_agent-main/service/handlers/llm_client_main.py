@@ -35,6 +35,18 @@ class LlmClient:
         )
         return response.content
 
+    async def chat_stream(self, message: str, context: str = None):
+        """스트리밍 채팅 응답 생성"""
+        messages = []
+        if context:
+            messages.append(SystemMessage(content=context))
+        messages.append(HumanMessage(content=message))
+        
+        # 🔥 LangChain astream 사용
+        async for chunk in self.llm.astream(messages):
+            if hasattr(chunk, 'content') and chunk.content:
+                yield chunk.content
+
     def chat_completion(self, messages, model: str = None, **kwargs) -> str:
         """OpenAI 스타일 chat completion - chat 메서드를 동기로 래핑"""
         user_content = ""

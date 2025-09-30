@@ -41,17 +41,17 @@ class HeavyNodes(BaseNode):
 
         # 핸들러 타입별 LLM 설정
         self.handler_llm_configs = {
-            'dept': {'model': 'gpt-4o', 'max_tokens': 16000},
-            'sql': {'model': 'gpt-4o', 'max_tokens': 16000},
-            'vector': {'model': 'gpt-3.5-turbo', 'max_tokens': 16000},
+            'dept': {'model': 'gpt-4o', 'max_tokens': 4000},
+            'sql': {'model': 'gpt-4o', 'max_tokens': 4000},
+            'vector': {'model': 'gpt-3.5-turbo', 'max_tokens': 4000},
             'curriculum': {'model': 'gpt-4o', 'max_tokens': 16000},
-            'llm': {'model': 'gpt-4o', 'max_tokens': 16000}
+            'llm': {'model': 'gpt-4o', 'max_tokens': 600}
         }
 
     def _get_llm_for_agent(self, agent_name: str) -> LlmClient:
         """에이전트별로 적절한 LLM 설정 반환"""
         handler_key = self.agent_mapping.get(agent_name, 'llm')
-        config = self.handler_llm_configs.get(handler_key, {'model': 'gpt-4o', 'max_tokens': 2000})
+        config = self.handler_llm_configs.get(handler_key, {'model': 'gpt-4.1-mini', 'max_tokens': 2000})
         return LlmClient.create_with_config(**config)
 
     async def heavy_sequential_executor(self, state: Dict[str, Any]) -> Dict[str, Any]:

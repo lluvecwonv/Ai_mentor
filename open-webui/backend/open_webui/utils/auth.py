@@ -168,7 +168,20 @@ def get_current_user(
     if token is None and "token" in request.cookies:
         token = request.cookies.get("token")
 
+    # Allow anonymous access if WEBUI_AUTH is disabled
     if token is None:
+        # Check if authentication is disabled
+        if hasattr(request.app.state, 'config') and hasattr(request.app.state.config, 'WEBUI_AUTH'):
+            if not request.app.state.config.WEBUI_AUTH:
+                # Create anonymous user
+                from open_webui.apps.webui.models.users import UserModel
+                return UserModel(
+                    id="anonymous",
+                    name="Anonymous",
+                    email="anonymous@localhost",
+                    role="user",
+                    profile_image_url="",
+                )
         raise HTTPException(status_code=403, detail="Not authenticated")
 
     # auth by api key

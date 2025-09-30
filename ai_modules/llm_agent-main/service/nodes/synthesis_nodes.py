@@ -9,11 +9,16 @@ logger = logging.getLogger(__name__)
 class SynthesisNodes(BaseNode):
     """결과 합성 관련 노드들"""
 
-    def __init__(self, result_synthesizer):
+    def __init__(self, result_synthesizer, llm_handler=None):
         self.result_synthesizer = result_synthesizer
+        self.llm_handler = llm_handler
+
+        # ResultSynthesizer에 llm_handler 전달
+        if self.result_synthesizer and llm_handler:
+            self.result_synthesizer.set_llm_handler(llm_handler)
 
     async def synthesis_node(self, state: Dict[str, Any]) -> Dict[str, Any]:
-        """결과 합성 노드 - 실제 LLM 합성 수행"""
+        """결과 합성 노드 - 실제 LLM 합성 수행 (LangGraph 스트리밍)"""
         with NodeTimer("합성") as timer:
             try:
                 final_result = state.get("final_result")
@@ -24,7 +29,7 @@ class SynthesisNodes(BaseNode):
                     # 실제 합성 로직 수행
                     user_message = state.get("user_message", "")
                     processing_type = state.get("processing_type", "")
-                    
+
                     # ResultSynthesizer를 사용한 실제 합성
                     final_result = await self.result_synthesizer.synthesize_with_llm(
                         user_message, final_result, processing_type

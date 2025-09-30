@@ -693,10 +693,18 @@ def convert_to_azure_payload(
 @router.post("/chat/completions")
 async def generate_chat_completion(
     request: Request,
-    form_data: dict,
+    form_data: dict = None,
     user=Depends(get_verified_user),
     bypass_filter: Optional[bool] = False,
 ):
+    # Get form data from request body if not provided
+    if form_data is None:
+        form_data = await request.json()
+    log.info(f"=== Chat completions request ===")
+    log.info(f"User: {user.id if user else 'None'}")
+    log.info(f"Model: {form_data.get('model')}")
+    log.info(f"Messages count: {len(form_data.get('messages', []))}")
+
     if BYPASS_MODEL_ACCESS_CONTROL:
         bypass_filter = True
 
@@ -706,7 +714,9 @@ async def generate_chat_completion(
     metadata = payload.pop("metadata", None)
 
     model_id = form_data.get("model")
+    log.info(f"Looking for model_id: {model_id}")
     model_info = Models.get_model_by_id(model_id)
+    log.info(f"Model info: {model_info}")
 
     # Check model info and override the payload
     if model_info:

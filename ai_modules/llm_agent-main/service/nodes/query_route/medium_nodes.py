@@ -44,6 +44,9 @@ class MediumNodes(BaseNode):
             if isinstance(result, dict) and result.get('agent_type') == 'vector_search':
                 from ..utils import format_vector_search_result
                 response = format_vector_search_result(result)
+            elif isinstance(result, dict) and result.get('agent_type') == 'curriculum':
+                # Curriculum 결과에서 display 또는 result 추출
+                response = result.get('display') or result.get('result', str(result))
             else:
                 response = result if isinstance(result, str) else str(result)
 

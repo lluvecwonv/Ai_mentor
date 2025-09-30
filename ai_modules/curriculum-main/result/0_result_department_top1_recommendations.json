@@ -1,659 +1,335 @@
 [
     {
-        "course_id": 915,
-        "course_name": "인공지능",
-        "department": "전자공학부",
+        "course_id": 358,
+        "course_name": "창의적종합설계",
+        "department": "융합기술공학부(IT융합기전공학)",
         "semester": 1,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "인공지능,이 과정은 기계 학습(Machine Learning)의 입문 학부 과정이다. 기계 학습은 이미지, 비디오, 음성을 포함한 데이터에서 예측 또는 결정을 내리는 수학적 모델 및 알고리즘을 개발하는 것을 목표로 한다. \n우리가 주로 다룰 주제는 선형 회귀, 로지스틱 회귀, 의사 결정 트리, 앙상블 학습, 차원 축소, 클러스터링과 같은 기계 학습 기초 알고리즘이다. 또한, 이미지, 시계열 데이터 처리 방법과 이를 CNN, RNN, 강화학습과 같은 다양한 딥러닝 알고리즘에 적용하는 방법을 습득한다. \n이 과정을 통해 4차 산업혁명의 기초인 인공지능의 최첨단 기계 학습 및 딥러닝 방법에 대해 이해할 수 있다. "
+        "description": "창의적종합설계,스마트제조고급인력양성을 위해서 창의적 종합설계 입문 과정과 전공지식을 바탕으로 창의공학 사고 기법 활용, 제품디자인 설계과정 이해, 제품설계 개발을 위한 기술개발계획서 작성, 기술자료 및 특허 조사를 통해 창의적 종합설계 능력을 배양하고 산업현장에서의 적응력을 향상시킨다.  "
     },
     {
-        "course_id": 1360,
-        "course_name": "반도체물리전자",
-        "department": "전자공학부",
+        "course_id": 252,
+        "course_name": "일반수학",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 1,
+        "student_grade": 1,
+        "is_mandatory_for_major": "Unknown",
+        "description": "일반수학,수학은 수량 및 공간의 성질에 관하여 연구하는 학문으로 공학을 전공하는 공학도에게는 필수불가결한 분야이다. 융합기술공학을 전공하는 학생들은 기초적인 물리학과 역학 교과목을 수강하여야 하며 이를 위해 수학의 기초가 필요하고 또한 이들 교과목의 실제적인 해석을 위하여 다양한 분야의 수학이 필요하다. 이를 위해 본 교과목은 수학의 초보적인 내용에서부터 대학수학까지를 아우르는 내용을 공부한다. 또한,  '스마트제조고급인력양성'을 위한 이론지식을 배양하도록 한다. "
+    },
+    {
+        "course_id": 2483,
+        "course_name": "프로젝트랩종합설계 1",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 1,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "프로젝트랩종합설계 1,프로젝트에 관련된 산업현장의 주제를 선정하고 그에 대한 이론적 지식을 바탕으로 설계 및 제작에 필요한 내용을 학습한다. 또한 관련된 기업체 및 기관과 협업을 조직하고 산학협력 연구를 수행한다. 주어진 프로젝트를 수행할 수 있도록 자료조사, 계획, 실행, 설계, 제작 등 다양한 실습을 병행한다.  또한  '스마트제조고급인력양성'을 위한 이론지식을 배양하도록 한다. "
+    },
+    {
+        "course_id": 3562,
+        "course_name": "프로젝트랩종합설계 2",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 2,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "프로젝트랩종합설계 2,프로젝트에 관련된 산업현장의 주제를 선정하고 그에 대한 이론적 지식을 바탕으로 설계 및 제작에 필요한 내용을 학습한다. 또한 관련된 기업체 및 기관과 협업을 조직하고 산학협력 연구를 수행한다. 주어진 프로젝트를 수행할 수 있도록 자료조사, 계획, 실행, 설계, 제작 등 다양한 실습을 병행한다. 또한  '스마트제조고급인력양성'을 위한 이론지식을 배양하도록 한다. "
+    },
+    {
+        "course_id": 673,
+        "course_name": "프로젝트랩응용종합설계",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 1,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "프로젝트랩응용종합설계,프로젝트에 관련된 산업현장의 주제를 선정하고 그에 대한 이론적 지식을 바탕으로 설계 및 제작에 필요한 내용을 학습한다. 또한 관련된 기업체 및 기관과 협업을 조직하고 산학협력 연구를 수행한다. 주어진 프로젝트를 수행할 수 있도록 자료조사, 계획, 실행, 설계, 제작 등 다양한 실습을 병행한다.  또한  '스마트제조고급인력양성'을 위한 이론지식을 배양하도록 한다. "
+    },
+    {
+        "course_id": 1885,
+        "course_name": "고체역학",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 1,
+        "student_grade": 2,
+        "is_mandatory_for_major": "Unknown",
+        "description": "고체역학은 기계장치나 구조물을 설계하는데 있어서 부재의 강도 및 변형과 관련된 기본적인 정보를 제공한다. 기계장치나 구조물의 부재들은 다양한 형식의 하중에 의해 변형을 일으킨다. 재료의 변형은 사용소재의 종류에 따라 다르므로 구조부재의 안전성은 해당 소재의 응력-변형률 관계를 명확하게 정립하는 것으로부터 시작된다. 본 교과목은 하중조건에 따른 응력-변형률 관계를 설정하여 설계의 기본지식 확립을 목표로 하고 있다. 또한  '스마트제조고급인력양성'을 위한 이론지식을 배양하도록 한다."
+    },
+    {
+        "course_id": 3918,
+        "course_name": "프로젝트랩기초종합설계",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 2,
+        "student_grade": 3,
+        "is_mandatory_for_major": "Unknown",
+        "description": "프로젝트랩기초종합설계,이 교과목은 스마트제조고급인력양성을 위한 필요과목으로 프로젝트랩기초종합설계에 관한 능력을 향상시키기 위한 방안으로 기초설계 및 전공설계를 바탕으로 설계구성요소와 현실적 설계제한조건을 고려한 창의적인 종합설계 능력을 배양하며 실생활에서 응용가능한 지식의 함양과 실물을 제작하여 직접 시연할 수 있는 능력배양에 기초를 두는 강의를 목표로 함. "
+    },
+    {
+        "course_id": 3498,
+        "course_name": "현장실습",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 2,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "현장실습,이 교과목은 스마트제조고급인력양성을 위한 실습으로 기계 자동차 관련 산업체 및 유관기관의 실무현장 방문을 통하여 전공지식의 이해와 졸업 후 진로설계의 기회를 갖는다. 폭넓고 다양한 지식체험의 경험을 쌓아 사회진출의 밑거름이 되도록한다. "
+    },
+    {
+        "course_id": 2855,
+        "course_name": "기계공작법및실습",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 2,
+        "student_grade": 2,
+        "is_mandatory_for_major": "Unknown",
+        "description": "기계공작법및실습,기계 공작법은 기계 공학 분야에서 기본이 되는 학문으로서 공학적 기초와 주조, 소성가공, 용접, 열처리, 절삭 가공 등 다양한 전문 지식을 학습하여 현장 실무 및 산업 현장에서 다양하게 응용할 수 있고 또한 스마트 제조 고급 인력 양성을 위하여 전문 지식과 이론을 학습하여 생산 공정의 자동화와 전문화에 기여할 수 있으며, 이론적 지식 내용을 공대  실습관에서 밀링, 선반, 용접, CNC 등 장비를 다루어 직접 가공 및 용접을 직접 체험하여 문제 해결 능력을 배양 할 수 있다. 또한  '스마트제조고급인력양성'을 위한 이론지식 및 Coding능력을 배양하도록 한다.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n "
+    },
+    {
+        "course_id": 4735,
+        "course_name": "자동차ICT융합사례연구",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 2,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "자동차ICT융합사례연구,스마트 제조 고급인력양성을 위하여 자동차ICT 융합 사례에 대해 기본 개념에 대해 알아보고 전기차, 인공지능, 자율주행자동차의 개념에 대해 알아보고 이해하며 자율주행자동차 및 ICT 사례에 대한 다양한 자료를 검색, 활용 방법에 대해 알아보고 습득 및 활용할 수 있도록 한다. "
+    },
+    {
+        "course_id": 3879,
+        "course_name": "기계공작법",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 2,
+        "student_grade": 2,
+        "is_mandatory_for_major": "Unknown",
+        "description": "기계공작법,기계 공작법은 기계 공학 분야에서 기본이 되는 학문으로서 공학적 기초와 주조, 소성가공, 용접, 열처리, 절삭 가공 등 다양한 전문 지식을 학습하여 현장 실무 및 산업 현장에서 다양하게 응용할 수 있고 또한 스마트 제조 고급 인력 양성을 위하여 전문 지식과 이론을 학습하여 생산 공정의 자동화와 전문화에 기여할 수 있으며, 이론적 지식 내용을 공대  실습관에서 밀링, 선반, 용접, CNC 등 장비를 다루어 직접 가공 및 용접을 직접 체험하여 문제 해결 능력을 배양 할 수 있다. 또한  '스마트제조고급인력양성'을 위한 이론지식 및 Coding능력을 배양하도록 한다.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n "
+    },
+    {
+        "course_id": 4814,
+        "course_name": "차량용임베디드시스템",
+        "department": "융합기술공학부(IT융합기전공학)",
+        "semester": 2,
+        "student_grade": 3,
+        "is_mandatory_for_major": "Unknown",
+        "description": "차량용임베디드시스템,스마트제조고급인력의 양성을 위한 전자 공학, 기계공학, 컴퓨터 공학의 기초를 배우고  4차 산업혁명의 중심이 되는 메카트로닉스의 전반적인 내용에 대해 이해한다. "
+    },
+    {
+        "course_id": 146,
+        "course_name": "기전공학",
+        "department": "융합기술공학부(IT융합기전공학)",
         "semester": 1,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "본 과목의 궁극적 목표는 반도체 소자 동작의 이해이다. 이를 위하여 먼저 고체물리의 기본 개념을 공부한다. 이어서 에너지 밴드 이론, 캐리어 농도와 이동, 생성과 재결합, 연속 방정식을 이해한다. 이를 기초로 가장 기본적인 반도체 소자인 pn 접합의 동작 원리와 수학적 모델을 이해한다.  "
+        "description": "기전공학,기전공학 기술은 4차산업의 핵심기술로 공학에서는 필수적으로 배워야할 학문으로 기초적인 개념과 산업현장에 응용되는 메카트로닉스의 새로운 기능등을 응용 스마트 제조  고급인력 양성을위한 체계적 학습에 그 목표를 두고있다. "
     },
     {
-        "course_id": 3385,
-        "course_name": "창의적공학설계입문",
-        "department": "전자공학부",
+        "course_id": 3161,
+        "course_name": "공업수학",
+        "department": "융합기술공학부(IT융합기전공학)",
         "semester": 2,
         "student_grade": 1,
         "is_mandatory_for_major": "Unknown",
-        "description": "공학적 문제를 인식하고 창의적으로 해결할 수 있는 설계능력 배양"
+        "description": "공업수학, 공업수학은 수량 및 공간의 성질에 관하여 연구하는 학문으로 공학을 전공하는 공학도에게는  반드시 필요한 분야이다. 융합기술공학를 전공하는 학생들은 기초적인 물리학과 역학 교과목을 수강하여야 하며, 이들 교과목의 실제적인 해석을 위하여 다양한 수학이 필요하다. 이를 위해 본 교과목은 일반수학을 이수한 학생들을 대상으로 공학적 실제 현상의 이론적 접근을 위한 수학적 개념을 숙지하게 하고 공학관련 분야에 적용되는 예제를 이해하고 훈련시키는 것을 목적으로 한다. "
     },
     {
-        "course_id": 4575,
-        "course_name": "딥러닝",
-        "department": "전자공학부",
+        "course_id": 2572,
+        "course_name": "기계공학및실험",
+        "department": "융합기술공학부(IT융합기전공학)",
         "semester": 2,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "딥러닝,본 교과목에서는 딥러닝 개론에 해당하는 기초이론을 배우고 파이썬 프로그래밍 및 인공지능 기술 관련 역량강화를 목표로 한다.  뉴럴네트워크의 구조, 손실함수, 최적화기법, 정규화기법 등의 딥러닝 핵심 요소기술에 대하여 배우고, 파이썬과 파이토치를 활용하여 프로그래밍을 실습한다. 인공지능 개발관련 실무능력 강화를 위하여 CNN(convolutional neural network)과 FCN(fully convolutional network)에 대하여 배우고, 이를 활용하여 영상 분류(image classification), 물체 검출(object detection), 세그멘테이션(segmentation)등의 전반적인 딥러닝 기법들에 대하여 다룰 예정이다. "
+        "description": "기계공학및실험,기계공학 전공과 관련된 다양한 기초 실험을 수행함으로서 실험 수행 능력과 실험 결과를 해석하는 능력을 향상시킨고, 이를 통해 전공과목에서 배운 다양한 이론에 대한 이론의 이해를 높인다. 특히 현업에서 발생하는 다양한 예를 통해 이론과 실험이 실제 산업 현장에서 어떻게 적용이 되는지를 다양하게 이해 한다. 또한  '스마트제조고급인력양성'을 위한 이론지식을 배양하도록 한다. "
     },
     {
-        "course_id": 956,
-        "course_name": "마이크로프로세서및실험",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "마이크로프로세서및실험,- 1) 기초 전자공학 지식 Review 및 2) 프로그램 실습을 통한 수업 진행 및 학습 평가를 계획합니다.\n- 2) 전자공학의 응용 및 활용을 위한 '마이크로컨트롤러' (Micro-Controller) 기술을 소개하고 실습합니다.\n "
-    },
-    {
-        "course_id": 4093,
-        "course_name": "시스템및메모리반도체",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "시스템및메모리반도체,본 과목에서는 시스템 반도체 및 메모리 반도체의 기본 개념에 대하여 학습하고, FPGA 보드를 이용하여 실습을 진행한다.  "
-    },
-    {
-        "course_id": 1134,
-        "course_name": "디지털논리공학",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "디지털논리공학,Digital 회로 설계에 필요한 논리회로의 개념과 해석 능력 및 simulation tool를 습득한다.\n\n이를 토대로 digital 논리 소자를 사용하여 shift 레지스터, 카운터,메모리, 마이크로프로세서를 비롯한 각종 논리 회로를 설계할 수 있는 지식을 습득한다. "
-    },
-    {
-        "course_id": 3315,
-        "course_name": "알고리즘",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "알고리즘,전자공학 전공에서 필요한 알고리즘에 대한 기본 지식을 익히고, 간단한 예제에 응용할 수 있는 능력을 배양한다.\n(첫 시간 사전이해도의 결과에 따라 강의 방향과 내용이 조정될 수 있음.) "
-    },
-    {
-        "course_id": 3952,
-        "course_name": "로봇비전",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "로봇비전,로봇비전은 영상기술을 로봇에 응용하는 학문으로서 영상으로부터 많은 정보를 추출할 수 있기 때문에 로봇지능 분야에 많이 활용되고 있다. 본 로봇비전 과목에서는 컴퓨터 프로그래밍 기술, 영상처리 기초기술 및 로봇 응용기술 등 다양한 지식을 다루는 것을 목표로 한다. 이를 위해서, 이미지 및 3차원 포인트클라우드 데이터를 활용한 프로그래밍 기초 기술을 학습한 후, 지능 로봇의 자율 이동 및 작업을 위한 데이터 전처리 및 변환 방법을 습득한다. 또한, 이동 로봇의 자율주행을 위한 위치인식 및 지도구축 기술과 로봇 센서 정보를 이용하여 주변의 3차원 정보를 복원하는 방법에 대하여 배우고, 이러한 방법이 최신 딥러닝 기법을 통해 어떻게 구현되는지 다룬다. "
-    },
-    {
-        "course_id": 4635,
-        "course_name": "IT융복합종합설계",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "IT융복합종합설계,This lecture is designed for providing the capability of problem solving by letting the students select, analyze, design, and implement a subject of the project, based on the knowledge gained from lectures of Electronics Engineering Program.  "
-    },
-    {
-        "course_id": 2330,
-        "course_name": "컴퓨터구조",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "본 과정은  현대의 디지털컴퓨터의 구성요소를 소개하며, 각 요소들의 기능과 상호동작을 이해하는데 중점을 두어 컴퓨터 프로그래머로서 프로그래밍 환경을 잘 이해할 수 있도록 하고, 하드웨어 설계개념을 습득하여 고성능 컴퓨터 설계를 위한 기본 개념과 기술들을 접할 수 있도록 한다."
-    },
-    {
-        "course_id": 2857,
-        "course_name": "산업수요맞춤형현장실습프로젝트",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "산업수요맞춤형현장실습프로젝트, - 전자공학 전공에서 습득한 이론내용을 산업현장에 적용하면서 실무능력 및 창의력을 배양\n - 과목 담당교수 및 참여기업 멘토의 지도로 산업수요맞춤형 일통합 교육을 수행\n - 대학과 산업체 간의 산학협력 체계 구축 및 강화 "
-    },
-    {
-        "course_id": 1252,
-        "course_name": "영상처리",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "영상처리,본 교과목에서는 영상데이터에 대하여 이해하고 영상인식을 위한 인공지능 기법에 대하여 학습하는 것을 목표로 한다. 이를 위해 디지털 영상처리의 핵심 이론에 대하여 배우고, 파이썬과 OpenCV를 기반으로 영상처리 프로그래밍을 실습한다. "
-    },
-    {
-        "course_id": 1267,
-        "course_name": "전력전자공학",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "전력전자공학,- 학부에서 배운 기초 전공 이론 (반도체, 회로, 시스템 등)을 활용할 수 있는 내용을 강의할 계획입니다. \n- 학부 전공 이론의 Review와 함께, 전력 (Electric Power)을 다루는 전자 (Electronics) 기술을 공부합니다. \n- 다양한 산업 사례 (전기발전, 전기자동차, 에너지변환 등)를 소개하며, 학생들의 이해가 쉽도록 진행합니다. "
-    },
-    {
-        "course_id": 2143,
-        "course_name": "전자회로 2",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "전자회로 2,전자회로1에서 배운 OP Amp, Diode, BJT 및 FET등의 내용을 기초로 하여, 더 복잡하고 심화된 고급 전자회로를 집적회로 구현을 목표로 하여 학습한다.  이를 위해서, FET를 기반으로하는 증폭기들의 주파수 특성, 차동 증폭기, 궤환회로, OP amp의 내부회로 및 아날로그 필터회로를 배우며, 이들 회로의 해석과 설계능력을 배양한다.  "
-    },
-    {
-        "course_id": 354,
-        "course_name": "데이터구조및프로그래밍실습",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "데이터구조및프로그래밍실습,본 수업에서는 프로그래밍 기초와 데이터 구조 및 알고리즘을 학습한다.\n우리가 다룰 내용은 데이터 처리를 위한 다양한 자료구조 설계, 알고리즘 설계 방법, 알고리즘 구현, 프로그램 동작 분석 방법, 문제 해결 방법이다.\n이를 위한 알고리즘 분석 기법, 기본 데이터 구조, 재귀, 동적 프로그래밍, 정렬, 검색, 트리 및 그래프에 대해 학습한다.\n프로그래밍을 위한 일부 도구(MarkDown, Github, Jupyter 노트북, Visual Studio, etc.)의 사용법을 배운다.  "
-    },
-    {
-        "course_id": 4720,
-        "course_name": "회로이론 2",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "회로이론 2,전자, 제어, 정보통신 등의 전공심화를 위하여, 전기/전자회로, 신호처리, 시스템해석, 시스템합성 등에 필요한 기본지식을 습득한다. \nRLC DC 해석 / 정현파정상상태해석 / 교류 정상상태전력 / 3상회로 / 주파수응답 / 라플라스변환 / 푸리에급수와 변환 / 필터회로 / 2포트 회로망 등의 문제해결 역량을 배양한다. "
-    },
-    {
-        "course_id": 3955,
-        "course_name": "전자회로 1",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "전자회로 1,전자회로에 관한 학습은 전자회로1 과 전자회로2 및 실험으로 이루어져 있다. 그러므로 이번학기에 다룰 전자회로 1은 전자회로로 이루어진 용용회로를 다룰 수 있도록 밑바탕을 마련하는 과정으로써 전자회로에 관한 개론 및 p형과 n형 반도체를 접합하여 만든 기본적인 전자회로 관련소자인 다이오드, BJT, MOSFET 구조, 특성, 동작원리와 해석을 위한 등가회로를 학습한 다음 이를 토대로 응용회로의 기본이 되는 증폭기 회로를 해석하고 설계할 수 있는 능력을 함양하는데 있다. "
-    },
-    {
-        "course_id": 1449,
-        "course_name": "로봇공학",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "로봇공학,최근 각광받고 있는 로봇공학에 대해 설명하고 산업 발전에 큰 공헌을 한 Manipulator 제어를 위한 공간 표현 및 변환, 기구학, 궤적 생성 등에 대해 배운다. 또한, 최신 연구 동향에 따라 이동 로봇 시스템을 소개하고  자율 주행 제어를 위한 이동 경로 생성 기법에 대해 배운다. 이론으로 배운 내용을 이동로봇 주행제어에 적용해 보며 실제적인 활용 능력을 배양한다. "
-    },
-    {
-        "course_id": 1331,
-        "course_name": "확률및통계",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "확률및통계,전자정보공학 엔지니어를 위한 확률 및 통계 이론을 다룬다. 주요 내용은 확률, 조합, 랜덤 변수, 모멘트, 각종 부등식, 파라미터 추정 및 신뢰구간을 포함한다. "
-    },
-    {
-        "course_id": 3076,
-        "course_name": "무선통신개론",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "무선통신개론,- Understanding the characteristics of wireless channel and analysis \n\n- Understanding basic operational principles of wireless communication systems and their components \n\n- Understanding the characteristics of the recent wireless communication systems  "
-    },
-    {
-        "course_id": 3982,
-        "course_name": "기초회로실험",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "기초회로실험,전자공학 입문 학생들을 위한 오실로스코프, 파워 서플라이 등의 기초 장비 교육부터 회로이론 및 디지털 논리 회로와 관련된 기초 회로 실험을 순차적으로 진행한다. "
-    },
-    {
-        "course_id": 4021,
-        "course_name": "RF응용시스템",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "RF응용시스템,사물인터넷과 차세대 이동통신의 기반이 되는 RF 시스템 및 안테나의 기초를 설명하고, RFID/NFC, 무선전력전송, 실내위치추적 등 다양한 실제 응용 사례를 살펴본다. "
-    },
-    {
-        "course_id": 1139,
-        "course_name": "광전자공학",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "광전자공학,- 빛의 기본 특성(간섭, 회절, 편광 등)을 이해하고 이를 간단한 수학식으로 표현할 수 있다.\n- 레이저, PD(photo-diode), 광섬유, 광증폭기 등 광전자 및 광통신 주요 소자의 구조, 동작원리와 특성을 이해한다.\n- 공부한 내용을 광통신, 광계측, 광신호처리, 디스플레이, 반도체 등에 사용되는 광학적 응용에 적용하여 관련 시스템 전반의 이해를 도모한다. "
-    },
-    {
-        "course_id": 3322,
-        "course_name": "임베디드시스템",
-        "department": "전자공학부",
+        "course_id": 4192,
+        "course_name": "기계공학실험",
+        "department": "융합기술공학부(IT융합기전공학)",
         "semester": 2,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "임베디드시스템,임베디드 리눅스 환경에서의 소프트웨어 개발을 학습한다. 이를 위하여 먼저 가상환경에서 리눅스를 설치하고 운용하는 방법을 학습한다. 이후 리눅스 환경에서의 프로그래밍에 대하여 학습한다. "
+        "description": "기계공학실험,기계공학 전공과 관련된 다양한 기초 실험을 수행함으로서 실험 수행 능력과 실험 결과를 해석하는 능력을 향상시킨고, 이를 통해 전공과목에서 배운 다양한 이론에 대한 이론의 이해를 높인다. 특히 현업에서 발생하는 다양한 예를 통해 이론과 실험이 실제 산업 현장에서 어떻게 적용이 되는지를 다양하게 이해 한다. 또한  '스마트제조고급인력양성'을 위한 이론지식을 배양하도록 한다. "
     },
     {
-        "course_id": 1248,
-        "course_name": "회로이론 1",
-        "department": "전자공학부",
+        "course_id": 3723,
+        "course_name": "산학실전캡스톤 1",
+        "department": "컴퓨터인공지능학부",
+        "semester": 2,
+        "student_grade": 3,
+        "is_mandatory_for_major": "Unknown",
+        "description": "산학실전캡스톤 1,- 기업/산업 현장에서 도출된 기술적 문제를 프로젝트를 통해 연구/배발하여 실무 경험과 문제해결 능력을 배양\n- 산업 현장에서 요구되는 기술 스택 및 배경 지식을 구체적으로 파악하고, 해당 기술/지식에 대한 습득 동기를 부여\n- 우수 프로젝트 결과물은 SW 등록, 논문발표, 특허 등록을 지원 "
+    },
+    {
+        "course_id": 1352,
+        "course_name": "산학실전캡스톤 2",
+        "department": "컴퓨터인공지능학부",
+        "semester": 1,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "산학실전캡스톤 2,- 기업 및 산업 현장에서 도출된 기술적 문제를 프로젝트를 통해 연구/개발하여 실무 경험과 문제해결 능력을 배양\n- 산업 현장에서 요구되는 기술 스택 및 배경 지식을 구체적으로 파악하고, 해당 기술/지식에 대한 습득 동기를 부여\n- 우수 프로젝트 결과물은 SW등록, 논문 발표, 특허 등록을 지원 "
+    },
+    {
+        "course_id": 3379,
+        "course_name": "산학실전캡스톤 3",
+        "department": "컴퓨터인공지능학부",
+        "semester": 2,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "산학실전캡스톤 3,- 기업 및 산업 현장에서 도출된 기술적 문제를 프로젝트를 통해 연구/개발하여 실무 경험과 문제해결 능력을 배양\n- 산업 현장에서 요구되는 기술 스택 및 배경 지식을 구체적으로 파악하고, 해당 기술/지식에 대한 습득 동기를 부여\n- 우수 프로젝트 결과물은 SW등록, 논문 발표, 특허 등록을 지원 "
+    },
+    {
+        "course_id": 3978,
+        "course_name": "창업특강",
+        "department": "컴퓨터인공지능학부",
+        "semester": 2,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "창업특강,이미 진행되고 있는  미래사회에 적합한 학생들의 진로 개발과 창업을 위해 강의와 실습을 통해 필요한 창의성과 창의경영에 관해 배우며 \n새롭게 부상할 산업 분야가 무엇 인지에 관한 예측, 고찰 방법을 배운다.\n아울러 새롭게 재조명 되고있는 기업가정신 함양과 문제 해결 능력 향상도 중요한 목적으로 한다. "
+    },
+    {
+        "course_id": 3796,
+        "course_name": "C++프로그래밍",
+        "department": "컴퓨터인공지능학부",
+        "semester": 2,
+        "student_grade": 1,
+        "is_mandatory_for_major": "Unknown",
+        "description": "- C++ 언어의 기본 문법과 활용에 대해 학습한다. \n- 객체지향 프로그래밍의 원리를 이해하고 객체지향 개념을 적절히 활용하여 프로그램을 구현할 수 있다.\n- 다양한 문제를 해결하는 프로그래밍 실습을 통해 문제 해결 능력을 키우고 효율적인 C++ 프로그램 구현 능력을 배양한다."
+    },
+    {
+        "course_id": 2402,
+        "course_name": "객체지향프로그래밍",
+        "department": "컴퓨터인공지능학부",
         "semester": 1,
         "student_grade": 2,
         "is_mandatory_for_major": "Unknown",
-        "description": "회로이론 1,회로 이론은 전자정보공학 모든 분야의 기본이 되는 기초 학문으로서 이에 대한 확고한 개념을 파악하고 있어야만 더욱\n\n심화된 전공 분야를 이해할 수 있다. 이를 위해 본 과정에서는 전기의 흐름 및 회로 해석에 대한 기본 개념과 회로에 관\n\n한 정리 등의 이론을 습득한다. "
+        "description": "객체 지향 프로그래밍에 대한 개요를 배우고 JAVA 언어를 기반으로 하여 객체 지향 프로그램 개발을 수행한다."
     },
     {
-        "course_id": 654,
+        "course_id": 818,
+        "course_name": "리눅스프로그래밍",
+        "department": "컴퓨터인공지능학부",
+        "semester": 1,
+        "student_grade": 2,
+        "is_mandatory_for_major": "Unknown",
+        "description": "리눅스 시스템에서의 프로그래밍을 학습한다. 본 수업의 목표는 다음과 같다. \n1) 리눅스 환경에서 CLI 사용 능력 배양, 2) 리눅스 OS 사용 능력 및 시스템 이해, 3) 리눅스 환경에서의 네트워크 서비스 관리"
+    },
+    {
+        "course_id": 26,
+        "course_name": "인간-컴퓨터상호작용",
+        "department": "컴퓨터인공지능학부",
+        "semester": 1,
+        "student_grade": 4,
+        "is_mandatory_for_major": "Unknown",
+        "description": "인간-컴퓨터상호작용,인간-컴퓨터 상호작용(Human-Computer Interaction)의 기본 원리에 대해 학습한다. 본 수업의 주요 목표는 다음과 같다. \n1)사용자 및 사용자 중심 디자인(UCD)에 대한 이해, 2)사용성의 원리와 평가에 대한 이해, 3)인터페이스 설계 및 사용자 관점의 시스템 평가에 대한 경험 배양 "
+    },
+    {
+        "course_id": 1954,
         "course_name": "선형대수학",
-        "department": "전자공학부",
+        "department": "컴퓨터인공지능학부",
         "semester": 1,
         "student_grade": 2,
         "is_mandatory_for_major": "Unknown",
-        "description": "선형대수학,선형대수는 전기, 전자공학의 기초가 되는 과목으로 회로이론, 신호 및 시스템, 디지털신호처리, 통신, 제어공학 등을 배우는데 필수적으로 필요한 과목이다. 벡터, 선형방정식, 행렬과 이에 관한 이론, 선형 변환, 차원과 구조 등에 대해 공부한다. "
+        "description": "선형대수학은 벡터 공간에서의 선형 변환과 행렬 등에 대해 연구하는 대수학의 한 분야로, 자연과학, 공학, 경제학 등 다양한 분야에 널리 적용되고 있다. 본 강좌에서는 선형대수학의 기본 요소인 벡터, 행렬, 선형 변환 등에 대한 개념을 이해하고, 관련 분야의 문제를 해결하는 방법을 학습하여 향후 실제 응용 문제들을 해결해나가는 능력을 기르는 것을 목표로 한다."
     },
     {
-        "course_id": 2417,
-        "course_name": "전자회로실험",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "전자회로실험,전자회로에서 학습한 이론을 실험을 통하여 확인함으로써 이론에 대한 이해를 깊게 하며, 이론과 측정치의 차이를 규명함으로써 간략화된 이론 및 측정 오차 등의 한계를 인식하도록 한다. 또한 피측정 회로의 설계 방법 및 구현 방법, 부품에 대한 이해, 측정 장비의 사용법 등을 익혀 전자회로의 구현 능력을 배양한다. "
-    },
-    {
-        "course_id": 4842,
-        "course_name": "신호및시스템",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "신호및시스템,아날로그 및 디지털 신호의 종류와 성질, 이들 신호를 편리하게 다루기 위한 각종 변환, 시스템의 성질에 대하여 학습한다. "
-    },
-    {
-        "course_id": 1863,
-        "course_name": "전자기학 1",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "전자기학 1,모든 전기전자공학의 기본이 되는 전기 및 자기에 대한 자세한 이론을 공부한다. 구체적인 내용으로는 기초적인 벡터 해석, 전계의 세기, 전속밀도, 에너지와 전위, 도체와 유전체, 정전용량, Laplace's Equation의 해석과 풀이 등이며, 3차원의 좌표변환과 미분 적분의 응용, 선적분과 면적적분, 미분방정식의 해법 등에 대한 지식도 겸하여 얻어진다. 원서강의를 통하여 외국 전문기술서적을 읽고 이해하는 능력도 얻게 된다. "
-    },
-    {
-        "course_id": 3632,
-        "course_name": "디지털통신시스템",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "디지털통신시스템,This course is a continuation of “Analog Communications Systems” taught in the spring semester. The area of digital communications systems can involve variety of topics extending over several layers OSI. In fact, two more courses are required to discuss them all. In this course, however, the topics are selected so that it can be limited to physical layer aspects such as modulation techniques, channel effect, and signal detection. In addition, the basic concepts of Fourier transform and probability theory are also reviewed so that students can utilize them when working on sampling, bandwidth, power spectral density, bit error probability, signal to noise ratio and such. Also, in order to grasp the current development in the related study area, the digital communications systems like OFDM, CDMA, QAM, are also investigated.  Recall that this course is taught in English only.   "
-    },
-    {
-        "course_id": 943,
-        "course_name": "전파및안테나",
-        "department": "전자공학부",
+        "course_id": 84,
+        "course_name": "게임및혼합현실",
+        "department": "컴퓨터인공지능학부",
         "semester": 1,
         "student_grade": 4,
         "is_mandatory_for_major": "Unknown",
-        "description": "전파및안테나,전자기학의 기본 지식을 바탕으로 전파의 생성, 안테나의 주요 특성, 안테나 설계에 관한 내용을 학습한다. "
+        "description": "게임및혼합현실,- 혼합현실(가상+증강현실) 기술에 대한 기본 개념과 원리를 이해함\n- 게임 및 혼합현실 개발에 활용되는 게임 엔진의 기본 개념과 사용 방법을 학습함\n- 학습한 내용을 바탕으로 프로젝트를 통해 결과물을 구현하고 분석함 "
     },
     {
-        "course_id": 1899,
-        "course_name": "운영체제",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "운영체제,운영체제의 기본 이론과 이와 관련한 응용 구조 및 이론을 학습한다.\n컴퓨터의 운영원리 및 이를 기반으로 한 자원관리, 프로세스, 메모리 관리 등의 이론을 학습한다. "
-    },
-    {
-        "course_id": 350,
-        "course_name": "정보이론",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "정보이론,디지털 데이터의 압축을 다루는 소스부호화 (source coding)를 학습한 후, 디지털 통신 환경에서 오류 없이 최대로 전송할 수 있는 채널 용량을 학습한다. 소스부호화는 고정길이 부호, 가변길이 부호, Huffman 부호화 등을 학습하고, 채널 용량은 간단한 이진 채널과 가우시안 채널에 대해 분석한다. "
-    },
-    {
-        "course_id": 4256,
-        "course_name": "전자기학 2",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "전자기학 2,전자기장의 해석에 필요한 벡터 해석을 토대로 자유공간과 물체에서의 전계와 자계의 형성을 표현한 관련 이론 및 시변계에서의 전계와 자계가 상호 연관되어 동작하는 원리를 이해한다. "
-    },
-    {
-        "course_id": 3211,
-        "course_name": "반도체소자",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "반도체소자,본 교과에서는 전자회로의 기초가 되는 반도체 물성 이론과 기본적인 양자역학의 개념을 복습하고 이를 통해 다양한 반도체 소자(금속-반도체 접합, BJT, MOSFET)의 특성을 학습하는 것을 목표로 한다. 나아가 집적회로에서의 전자소자(MOSFET)의 스케일링에 따른 물리적 현상과 이를 극복하기 위한 FinFET, Nanosheet FET 신기술 내용을 학습하고 TCAD 시뮬레이션을 활용한 MOSFET 설계 실습을 수행한다.\n1. 반도체 물성의 이해\n2. 반도체 접합 및 금속-반도체 접합의 물성 및 동작 특성 이해\n3. MOS 캐피시터와 MOSFET의 물성 및 동작 특성 이해\n4. 집적회로에서의 MOSFET 축소화와 멀티게이트 MOSFET 소개 "
-    },
-    {
-        "course_id": 1199,
-        "course_name": "기초RFIC설계",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "기초RFIC설계,- Introduction to modern wireless systems\n\n- Understanding of microwave theory and radio freqeuncy (RF) integrated circuits \n\n- Design of RF building blocks\n\n- Design of modern wireless systems "
-    },
-    {
-        "course_id": 356,
-        "course_name": "아날로그집적회로설계",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "아날로그집적회로설계,1.아날로그 반도체 제작 및 집적회로를 설계하기 위한 과정을 이해     \n2. 아날로그 집적회로 설계에 있어서 가장 대표적인 연산증폭기, 전류미러, 바이어스제너레이터 동작원리, 해석, 설계방법, 설계 , \n3, 이를 기반으로  아날로그 집적회로 시스템 응용인 PD(Photo Diode) ROIC 를 분석하고 설계방법을\n    학습하여 앞으로의 아날로그 집적회로 설계에 준비하고 아날로그 반도체 제작과정에 대하여 이해하고자 한다.   "
-    },
-    {
-        "course_id": 1637,
-        "course_name": "디지털시스템설계",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "디지털시스템설계,디지털시스템의 디자인 원리를 logic 및 register 수준에서 이해하고, 이를 구현하기 위한 도구로써 HDL(Verilog)의 사용법과 응용을 배운다. 프로젝트수행을 통해 주어진 topic의 전체 디자인 과정을 이해한다. "
-    },
-    {
-        "course_id": 3540,
-        "course_name": "초고주파공학",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "초고주파공학,Maxwell 방정식을 토대로 전자기파의 자유공간 및 물질 내에서의 파동방정식을 이해하고, 초고주파 전송선로에서의 파동방정식에 의한 전류와 전압, 임피던스 정합의 해석, Smith chart의 활용, 초고주파 전송을 위한 도파관 해석, 결합선로의 해석에 대해 이해한다. 아울러 초고주파 수동회로들의 컴퓨터 설계, 제작, 시험, 측정결과 발표 등을 통해 초고주파 회로설계과정을 익힌다. "
-    },
-    {
-        "course_id": 4606,
-        "course_name": "컴퓨터네트워크",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "컴퓨터네트워크,컴퓨터와 네트워크의 결합에 의한 컴퓨터 상호간 통신을 목적으로 구성된 컴퓨터 네트워크를 프로토콜(소프트웨어) 중심으로 학습한다.  "
-    },
-    {
-        "course_id": 249,
-        "course_name": "제어공학기초",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "동역학 시스템의 미분방정식으로의 모델링을 시작으로 이를 Laplace변환을 통한 전달함수로의 모델링을 배운다. 전달함수 모델을 기반으로 하여 시스템의 해석 및 시간/주파수 영역 특성, 안정성 등 을 분석하는 방법을 배운다. 주파수 영역에서의 대표적인 제어시스템 해석 기법인 근궤적법, 나이퀴스트 방법, 보드선도 방법을 배운다."
-    },
-    {
-        "course_id": 50,
-        "course_name": "통신공학",
-        "department": "전자공학부",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "통신공학,통신공학의 기본이론을 학습하고, Matlab을 이용한 실습을 통해 이론을 확인한다. 신호해석의 기본이 되는 Fourier 변환을 복습하고, 변조 및 복조의 개념, 잡음해석, 진폭변조, 주파수변조, 위상변조에 대해 학습하고 실험장치를 이용하여 실습한다. 디지털 통신이론의 개요을 소개한다. "
-    },
-    {
-        "course_id": 2492,
-        "course_name": "디지털신호처리",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "디지털신호처리,디지털신호처리는 신호및시스템 과목을 먼저 수강해야 한다. 먼저 이산시간 신호와 시스템, Z변환 등을 복습하고, 연속시간 신호의 샘플링에 대한 이론, 시스템의 주파수 해석, 이산시간 시스템의 구조, 필터 설계 방법, 이산 푸리에 변환, 고속 푸리에 변환 등을 배운다. "
-    },
-    {
-        "course_id": 4164,
-        "course_name": "제어시스템설계",
-        "department": "전자공학부",
-        "semester": 2,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "제어시스템설계,Root Locus와 주파수 응답의 원리를 배우고, 제어 이론을 적용하여 실제 제어기를 설계하는 방법을 배운다. "
-    },
-    {
-        "course_id": 1755,
-        "course_name": "반도체공학개론",
-        "department": "반도체과학기술학과",
+        "course_id": 764,
+        "course_name": "자료구조",
+        "department": "컴퓨터인공지능학부",
         "semester": 1,
         "student_grade": 2,
         "is_mandatory_for_major": "Unknown",
-        "description": "-. 반도체 소자의 기본 지식 함양.\n-. 에너지 밴드에 대한 이해.\n-. 접합영역 분석과 예측능력 \n"
+        "description": "1. 컴퓨터공학에서 효율적인 프로그램 작성을 위한 적합한 자료 구조를 선택할 수 있는 능력 함양\n2. 컴퓨터공학에서 주로 활용하는 여러 자료구조(배열, 리스트, 스택, 큐, 트리, 그래프 등)에 대한 이해 증진\n3. 컴퓨터공학에서 주로 활용하는 여러 자료구조를 다양한 언어(C++ 및 Python)를 활용하여 구현할 수 있는 능력 함양"
     },
     {
-        "course_id": 33,
-        "course_name": "응용수학 1",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "응용수학 1,반도체과학기술학을 배우는데 기초가 되는 수학개념과 내용을 공부한다. "
-    },
-    {
-        "course_id": 4703,
-        "course_name": "응용수학 2",
-        "department": "반도체과학기술학과",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "응용수학 2,반도체과학기술학을 배우는데 기초가 되는 수학개념과 내용을 공부한다. "
-    },
-    {
-        "course_id": 97,
-        "course_name": "반도체공정",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "The purpose of this course is to provide students with technical background on silicon process technology."
-    },
-    {
-        "course_id": 1403,
-        "course_name": "반도체소자설계",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "반도체소자설계,반도체소자의 이론과 실습을 학습함\n\n이론: BJT, MOSFET, Schottky Diode, JFET, PIN, HEMT, Memory Devices, LDMOS\n실습: Silvaco를 이용한 소자시뮬레이션 "
-    },
-    {
-        "course_id": 1239,
-        "course_name": "반도체공정실험 2",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "반도체공정실험 2,화합물계 반도체 소자를 설계하고, 제작, 측정을 진행해 봄으로써 반도체 공정 실무 능력을 배양시키고자 함\n\n한 학기 동안 팀별로 화합물 반도체 소자를 선정하여 제작, 측정, 평가함\n소자종류: Schottky diode, LED, HFET "
-    },
-    {
-        "course_id": 2299,
-        "course_name": "디지털공학",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "디지털공학,디지털의 개념에 대한 온전한 이해를 통하여 디바이스와 시스템의 계층구조를 이해하고 디지털 회로를 설계하는 능력을 배양한다.\n디지털 회로설계 및 응용력 향상에 목표를 둔다. "
-    },
-    {
-        "course_id": 320,
-        "course_name": "반도체재료학개론",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "반도체재료학개론,태양광을 포괄하는 반도체 산업의 기초가 되는 재료의 구조, 특성 및 응용에 대해 학습한다.\n특히 금속/세라믹/고분자 3대 재료에 대한 체계적인 학습을 목표로 한다. "
-    },
-    {
-        "course_id": 4618,
-        "course_name": "현대물리학",
-        "department": "반도체과학기술학과",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "현대물리학,고전물리학은 경이스런 성공을 보였으나 19세기 말 그리고 20세기 초에 고전물리학이 설명할 수 없는 \n\n\n\n여러현상의 발견과 실험 결과들이 알려지게 된다. 이에 따라 새롭고 혁명적인 아이디어가 요구되는 가운데,\n\n\n\n그 첫 열매가 (특수) 상대성 이론이고, 두 번째로는 양자이론이다. 현대물리학은 이 두 이론을 말한다. \n\n\n\n상대성이론, 입자의 파동성, 파동의 입자성, 양자이론, 원자구조, 등을 다룬다. "
-    },
-    {
-        "course_id": 3661,
-        "course_name": "디스플레이공학",
-        "department": "반도체과학기술학과",
+        "course_id": 2819,
+        "course_name": "소프트웨어공학",
+        "department": "컴퓨터인공지능학부",
         "semester": 2,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "디스플레이공학,인간과 각종 전자기기를 이어주는 가교 역할을 하는 디스플레이 기술은  21세기 미래기술로 반도체에 이은 산업의 쌀로 불리어진다. 따라서 본 강의에서는 color science 시작으로 CRT, LCD, LED, OLED, 마이크로 LED 디스플레이와 같은 다양한 디스플레이 기술의 구동 원리와 공정 기술을 소개하려고 한다. 특히, TFT 기술 및 동작 원리를 구동 원리를 이해시키는 것이 중요하며 미래의 디스플레이 개발에 따른 우리 생활의 변화를 소개하고자 한다. "
+        "description": "소프트웨어공학,1. 소프트웨어 개발 주기 이해: 소프트웨어 개발 주기와 공학적 접근 방법을 이해하고, 요구사항 분석, 설계, 구현, 테스트, 배포 및 유지보수 단계를 포괄적으로 학습한다.\n2. 소프트웨어 요구사항 관리: 요구사항의 수집, 분석, 문서화, 추적 및 관리 기법을 학습하여 효율적이고 명확한 요구사항 정의의 중요성을 이해하고 실제 프로젝트에 적용한다.\n3. 소프트웨어 설계 기술: 소프트웨어 설계의 다양한 기법과 원칙에 대해 학습하고, 소프트웨어 아키텍처의 중요성과 올바른 설계 결정이 전체 개발 프로세스에 미치는 영향을 이해한다.\n4. 소프트웨어 테스트: 테스트 기법, 테스트 케이스 작성, 오류 추적 및 수정 등 소프트웨어 품질 향상을 위한 테스트 기법과 전략을 배우고, 실제 프로젝트에서 테스트 수행 능력을 향상시킨다.\n5. 소프트웨어 프로젝트 관리: 프로젝트 계획, 일정 관리, 리스크 관리, 팀 협업 등 소프트웨어 프로젝트 관리 기술을 습득하여 프로젝트의 성공적인 완수를 목표로 한다.\n6. 실무적인 소프트웨어 프로젝트 경험: 수강생들은 팀 프로젝트를 통해 실제 소프트웨어 개발 경험을 쌓고, 현업에서 요구되는 협업 능력과 문제 해결 능력을 향상시킨다. "
     },
     {
-        "course_id": 1241,
-        "course_name": "전자회로 1",
-        "department": "반도체과학기술학과",
-        "semester": 1,
+        "course_id": 3363,
+        "course_name": "웹서비스설계",
+        "department": "컴퓨터인공지능학부",
+        "semester": 2,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "전자회로 1,반도체전자회로를 구성하는 MOSFET, BJT, Diode 등 기본 반도체소자들의 동작특성을 이해하고, 이들을 이용한 기본회로의 구성과 특성, 해석방법에 대하여 공부한다. "
+        "description": "웹서비스설계,1. 웹 서비스 구조에 대한 이해를 바탕으로 Front-End/ Back-End 개발자로서의 역량을 기르도록 함.\n2. AGI (Artificial General Intelligence) 시대에 맞춰 이를 활용한 개발 역량을 기르도록 함.\n3. Back-End의 구조와 HTTP 통신에 대한 이해를 기반으로 REST API를 개발/활용하는 역량을 기르도록 함.\n4. Front-End/ Back-End의 여러 프레임워크에 대한 이해를 바탕으로, 학생 본인만의 개발 역량을 기르도록 함. "
     },
     {
-        "course_id": 812,
-        "course_name": "초급양자역학",
-        "department": "반도체과학기술학과",
-        "semester": 1,
+        "course_id": 4094,
+        "course_name": "알고리즘",
+        "department": "컴퓨터인공지능학부",
+        "semester": 2,
+        "student_grade": 2,
+        "is_mandatory_for_major": "Unknown",
+        "description": "Computer science에서 자주 활용되는 알고리즘을 학습하는 것을 최 우선적으로 목표로 함.\n이를 바탕으로, 학생들이 학습한 알고리즘을 활용하여 문제를 풀 수 있는 사고력을 기를 수 있도록 함.\n단순히 알고리즘 코드 암기가 아닌, 상황에 맞는 알고리즘을 떠올리고 적절한 자료구조를 활용하여 문제를 해결할 수 있는 사고력을 기르는 것을 목표로 함."
+    },
+    {
+        "course_id": 3166,
+        "course_name": "데이터마이닝",
+        "department": "컴퓨터인공지능학부",
+        "semester": 2,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "초급양자역학,양자역학의 기본개념에 대하여 공부하여 반도체연구에 응용할 수 있는 능력을 기른다. "
+        "description": "데이터마이닝,1. 대규모로 저장된 데이터안에서 체계적으로 정보를 분석하는 과정과 이론에 대한 학습\n2. 산업현장에서 활용되는 다양한 주제의 문제와 알고리즘을 학습하며 구체적으로는 finding similar items, mining frequent itemsets, clustering, dimensionality reduction, web advertising, link analysis, recommender systems, regression, classification, decision tree, time series prediction 등을 공부\n3. 실질적인 데이터마이닝 활용 능력을 키우기 위해 Python 언어를 활용한 데이터마이닝 알고리즘 구현 및 데이터 분석\n4. This syllabus may change depending on situation. "
     },
     {
-        "course_id": 3496,
-        "course_name": "센서반도체",
-        "department": "반도체과학기술학과",
+        "course_id": 3261,
+        "course_name": "센서공학",
+        "department": "융합기술공학부(IT응용시스템공학)",
         "semester": 2,
         "student_grade": 4,
         "is_mandatory_for_major": "Unknown",
-        "description": "센서반도체,반도체센서에 대한 전반적인 이해를 통하여 반도체공정을 응용한 센서를 설계 및 제작하는 능력을 키운다. \n특히 반도체물질을 이용한 Thermal sensor, Optical sensor, Mechanical sensor, Magnetic sensor, Chemical sensor 등의 재료, 제작방법, 작동원리에 대하여 이해한다. "
+        "description": "센서공학,전기자기학,회로이론,전기기기,전력공학등 여러분야의 전기학습을 했는데 전기설비설계를 통해 한과목으로 집대성하며,\n현장에서도 필요한 지식을 쌓고 또한, 취업을 위해 필요한 전기자격증 실기도 대비할수 있도록 전반적인 전기지식을 학습한다.   "
     },
     {
-        "course_id": 466,
-        "course_name": "회로이론 1",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "회로이론 1,반도체 전자회로, 또는 회로망을 이해하기 위한 기초과목으로 회로의 기본 해석방법을 습득함 "
-    },
-    {
-        "course_id": 2888,
-        "course_name": "에너지융합개론",
-        "department": "반도체과학기술학과",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "에너지융합개론,본 강의는 현재 직면한 환경 및 화석연료 고갈에 따른 신재생에너지원 개발의 중요성을 인식시키고, 에너지의 정의, 기초 원리, 적용 , 대기오염과 에너지 사용, 지구온난화에 대하여 학습한다. 주요 내용은 신재생에너지로 태양에너지, 화석 연료 에너지, 수력전기에너지, 원자력에너지, 바이오에너지, 지열 등에 대하여 학습한다. 또한  에너지문제와 첨단과학 접목및 환경문제등이 결합된 enegy convergence 에 대하여 공부한다.\n\n\n\n의 한 구성원의 역할을 해 낼 수 있는 능력을 배양하도록 한다. "
-    },
-    {
-        "course_id": 4058,
-        "course_name": "반도체소자 2",
-        "department": "반도체과학기술학과",
-        "semester": 2,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "반도체소자 2,Modern device electronics: Unipolar devices with the MOS field effect transistor as a logic device and circuit considerations; basic concepts of generation-recombination and the P-N junction as capacitors and current rectifier with applications in photonics; bipolar transistors as amplifiers and switching three-terminal devices. "
-    },
-    {
-        "course_id": 393,
-        "course_name": "반도체재료성장",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "반도체재료성장,This course covers how solar cells convert light into electricity, how solar cells are manufactured, how solar cells are evaluated, what technologies are currently on the market, and how to evaluate the risk and potential of existing and emerging solar cell technologies. We examine the potential & drawbacks of currently manufactured technologies (single- and multi-crystalline silicon, micromorph tandem cells, CdTe, CIGS, CPV, PVT), as well as pre-commercial technologies (organics, biomimetic, organic/inorganic hybrid, and nanostructure-based solar cells).  "
-    },
-    {
-        "course_id": 4841,
-        "course_name": "회로이론 2",
-        "department": "반도체과학기술학과",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "회로이론 2,회로의 해석을 위한 개념들을 공부하고 저항과 인덕터, 커패시터를 포함한 회로들의 동작을 이해하며 회로의 스위칭에 따른 천이과정 등 다양한 회로를 해석하거나 설계에 필요한 지식을 쌓는다. "
-    },
-    {
-        "course_id": 860,
-        "course_name": "전자기학",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "전자기학,전자기 장비와 기계들의 동작 원리를 이해하는 데 필수적인 전기장과 자기장의 법칙에 대한 이해, 전자기파의 기본적인 이론을 이해하여 전자기학의 기초지식을 습득하고 그 기술적 응용 능력을 배양한다. "
-    },
-    {
-        "course_id": 4000,
-        "course_name": "전자회로 2",
-        "department": "반도체과학기술학과",
-        "semester": 2,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "전자회로 2,MOSFET, BJT의 전자부품을 이용한 증폭기 회로의 구성과, 소신호 특성, 주파수 응답 등을 공부하여 전자회로의 개념을 이해한다.  "
-    },
-    {
-        "course_id": 1085,
-        "course_name": "광학및실험",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 3,
-        "is_mandatory_for_major": "Unknown",
-        "description": "광학및실험, 전자기 이론을 이용하여 전자기파인 빛의 기본적인 성질을 이해하고,  빛과 물질의 상호관계를 기하광학, 파동광학, 양자광학의 측면에서 공부한다. "
-    },
-    {
-        "course_id": 4634,
-        "course_name": "열역학",
-        "department": "반도체과학기술학과",
-        "semester": 2,
-        "student_grade": 2,
-        "is_mandatory_for_major": "Unknown",
-        "description": "열역학,열역학의 기본 개념과 이를 확장한 응용 범위에 대한 이해를 도모함 "
-    },
-    {
-        "course_id": 4111,
-        "course_name": "반도체연구특론 2",
-        "department": "반도체과학기술학과",
+        "course_id": 3203,
+        "course_name": "멀티미디어시스템",
+        "department": "융합기술공학부(IT응용시스템공학)",
         "semester": 2,
         "student_grade": 4,
         "is_mandatory_for_major": "Unknown",
-        "description": "반도체연구특론 2,반도체 실습분야의 연구과제 수행을 통한 학습으로 학기초에 부여받은 테마에 대한 졸업논문을 작성하여 학기말에 제출함. 반도체 물리, 소자, 공정분야 중에서 하나의 테마에 대해 심도 있게 연구하고 논문작성의 과정에서 논문의 작성법, Plagiarism의 문제, 기술의 현황과 미래에 대해 고찰하는데 학습목표가 있음. "
+        "description": "멀티미디어시스템,네트워크를 제대로 알 수 있도록 학습하여 공학도로서 기본적인 네트워크 활용 및 응용 능력을 배양토록 한다.\n인터넷에서 TCP/IP 프로토콜에 대한 전반적인 내용을 학습하여 다양한 응용을 지원하는 네트워크 통신 기술을 습득 한다. \n멀티미디어 정의 및 특성에 대해 이해하고, 멀티미디어 시스템의 주요 데이터인 이미지와 그래픽 기술, 사운드 처리 기술, 비디오 처리 기술을 학습하는 것을 목표로 한다. "
     },
     {
-        "course_id": 1650,
-        "course_name": "반도체연구특론 1",
-        "department": "반도체과학기술학과",
-        "semester": 1,
-        "student_grade": 4,
-        "is_mandatory_for_major": "Unknown",
-        "description": "반도체연구특론 1,반도체과학기술의 (1) 기존 연구와 새로운 이론 학습, 혹은 (2) 반도체 공정 실험, 실습을 통한 연구 진행. 학습과 연구를 통한 결과물 제출과 발표   "
-    },
-    {
-        "course_id": 3821,
-        "course_name": "반도체공정실험 1",
-        "department": "반도체과학기술학과",
+        "course_id": 2627,
+        "course_name": "표준조명공학",
+        "department": "융합기술공학부(IT응용시스템공학)",
         "semester": 2,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "반도체공정실험 1,본 반도체공정실험1 수업을 통하여, GaN 화합물 반도체 발광다이오드 전극 공정 실습 및 LED 소자특성 평가 진행\n- 현재까지배운 p-n junction 소자의 실제 응용에 대한 기초 이론 학습\n- 화합물반도체 기초 공정 이론 및 TLM 공정 실습 (Cleaning, Photolithography, Dry etching, Metallization, Electrical and Optical characterization)\n- 발광다이오드 소자 특성 평가 "
+        "description": "표준조명공학,반도체 및 조며에 관한 일반적인 지식을 습득하고 전공분야에 있어서 표준화 프로세스를 이해하고 자신의 전공에 표준을 적용 시킬 수 잇는 표준화 마인드를 확립하여 전공 분야의 미래와 표준에 대한 연계성을 이해하도록 하여 전문 지식을 습득함으로써 경쟁력 있고 준비된 표준 전문가로 성장할 수 있는 기틀을 마련하는데 그 목표가 있다 "
     },
     {
-        "course_id": 4922,
-        "course_name": "광전자소자",
-        "department": "반도체과학기술학과",
+        "course_id": 3656,
+        "course_name": "창의적공학설계입문",
+        "department": "융합기술공학부(IT응용시스템공학)",
         "semester": 2,
-        "student_grade": 4,
+        "student_grade": 1,
         "is_mandatory_for_major": "Unknown",
-        "description": "광전자소자,광전자소자의 종류, 구동원리, 응용을 이해한다.\n광전소자를 이해하기 위해 반도체기초, 광학기초, 반도체내에서 일어나는 광프로세스 메카니즘을 먼저 학습한다. "
+        "description": "창의적공학설계입문,공학설계 능력에 필수적인 창의적 사고, 팀 활동, 의사소통능력을 통한 창의적 문제해결 능력을 증진시킨다. "
     },
     {
-        "course_id": 3678,
-        "course_name": "반도체소자 1",
-        "department": "반도체과학기술학과",
-        "semester": 2,
-        "student_grade": 2,
+        "course_id": 1987,
+        "course_name": "생명자원산업론",
+        "department": "생명자원융합학과",
+        "semester": 1,
+        "student_grade": 1,
         "is_mandatory_for_major": "Unknown",
-        "description": "반도체소자 1,• Understanding the basics of semiconductor physics (energy bands,\ncharge carriers, doping, conductivity and mobility).\n• Application of this knowledge to understand the operating principles\nof key semiconductor devices (e.g. p-n junction diode). "
+        "description": "생명자원산업론,생명자원의 산업적 개발 및 이용에 따른 다양한 생물적 자원문제와 산업경제적 생산문제를 경제학적 관점에서 규명. 1908년대부터 신개념의 성장동력 사업으로 등장한 생물산업 및 생명산업에 대한 이해. 생명산업 발전과정과 미래 비젼을 모색. 미시경제학적 관점에서 생명자원의 합리적 개발과 이용에 관한 이론을 습득하여 바이오경제시대의 중심축인 생명기술의 혁신, 생물산업 발전. 생명산업의 성장잠재력 등에 관한 경제적 함축성을 이해. 특히 생명자원융합학의 의미와 현실 적용 범위를 파악하고, 향후 다양한 교과 내용을 파악함. "
     },
     {
-        "course_id": 380,
-        "course_name": "태양광반도체",
-        "department": "반도체과학기술학과",
+        "course_id": 573,
+        "course_name": "선진농식품가공사례연구",
+        "department": "생명자원융합학과",
         "semester": 1,
         "student_grade": 3,
         "is_mandatory_for_major": "Unknown",
-        "description": "태양광반도체,Understanding on the photovoltaic semiconductor technology  "
+        "description": "선진농식품가공사례연구,선진 농식품 가공사례, 즉 식품클러스터, 농공단지, 마을단위 가공 등의 사례, 식품의 성공과 실패 원인분석, 미래식품 기술 및 식품의 발전을 위해 개발된 연구성과 등을 살펴보고 각 개인 스스로 미래의 삶에 적용  "
     }
 ]

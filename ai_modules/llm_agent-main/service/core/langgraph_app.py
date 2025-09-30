@@ -88,7 +88,7 @@ class LangGraphApp:
                 )
 
         # 모든 처리 노드 → synthesis → finalize → END
-        for node in ["light", "medium_sql", "medium_vector", "medium_curriculum", "medium_department", "heavy_sequential"]:
+        for node in ["light", "medium_sql", "medium_vector",  "medium_department", "heavy_sequential"]:
             graph.add_edge(node, "synthesis")
 
         graph.add_edge("synthesis", "finalize")
@@ -149,13 +149,14 @@ class LangGraphApp:
         initial_state["is_continuation"] = history_analysis.get("is_continuation", False)
         initial_state["history_usage"] = history_analysis.get("history_usage", {})
 
-        # 연속대화 여부에 따라 쿼리 설정
+        # 재구성된 쿼리 사용 (연속대화든 새 질문이든 항상 reconstructed_query 사용)
+        reconstructed_query = history_analysis.get("reconstructed_query", user_message)
+        initial_state["query"] = reconstructed_query
+
         if history_analysis.get("is_continuation", False):
-            initial_state["query"] = history_analysis.get("query", user_message)
-            logger.info(f"🔄 연속대화: 재구성된 쿼리 사용")
+            logger.info(f"🔄 연속대화 감지: '{user_message}' → '{reconstructed_query}'")
         else:
-            initial_state["query"] = user_message
-            logger.info(f"🆕 새로운 질문: 원본 쿼리 사용")
+            logger.info(f"🆕 새로운 질문: '{reconstructed_query}'")
 
         # 그래프 실행
         result = await self.graph.ainvoke(initial_state)

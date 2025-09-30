@@ -3450,3 +3450,95 @@ FROM jbnu_class_gpt c
 WHERE c.department LIKE '%컴퓨터%'
 2025-09-30 19:58:17 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
 2025-09-30 19:58:17 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-30 22:06:46 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 22:06:46 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 22:06:46 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 23:10:10 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 23:10:10 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 23:10:10 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 23:11:49 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 23:11:49 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 23:11:49 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 23:16:59 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 23:16:59 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 23:16:59 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 23:19:09 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 23:19:09 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 23:19:09 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 23:21:58 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 23:21:58 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 23:21:58 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 23:36:38 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 23:36:38 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 23:36:38 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 23:44:16 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 23:44:16 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 23:44:16 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 23:51:13 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 23:51:13 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 23:51:13 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 00:01:32 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 00:01:32 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 00:01:32 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 00:02:12 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 00:02:12 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 00:02:12 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 00:18:51 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 00:18:51 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 00:18:51 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 00:49:02 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 00:49:02 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 00:49:02 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 00:52:47 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 00:52:47 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 00:52:47 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 01:12:34 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 01:12:34 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 01:12:34 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 01:32:51 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 01:32:51 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 01:32:51 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 02:02:21 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 02:02:21 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 02:02:21 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 02:14:00 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 02:14:00 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 02:14:00 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 02:45:50 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 02:45:50 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 02:45:50 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 02:50:43 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 02:50:43 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 02:50:43 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 03:51:34 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 03:51:34 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 03:51:34 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 03:53:44 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 03:53:44 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 03:53:44 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 04:00:12 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 04:00:12 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 04:00:12 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 04:16:12 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 04:16:12 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 04:16:12 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 04:28:20 | INFO | service.searchService | 검색 시작: '안녕
+컴공에서 인공지능 관련 수업을 찾아줘'
+2025-10-01 04:28:22 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-01 04:28:22 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-10-01 04:28:22 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-10-01 04:28:24 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-01 04:28:24 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-10-01 04:50:13 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 04:50:13 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 04:50:13 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 05:18:35 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 05:18:35 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 05:18:35 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-10-01 05:24:18 | INFO | root | === faiss-search 서비스 시작 ===
+2025-10-01 05:24:18 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-10-01 05:24:18 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log

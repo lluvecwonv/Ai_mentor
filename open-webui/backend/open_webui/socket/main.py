@@ -45,19 +45,19 @@ if WEBSOCKET_MANAGER == "redis":
     else:
         mgr = socketio.AsyncRedisManager(WEBSOCKET_REDIS_URL)
     sio = socketio.AsyncServer(
-        cors_allowed_origins=[],
+        cors_allowed_origins="*",
         async_mode="asgi",
-        transports=(["websocket"] if ENABLE_WEBSOCKET_SUPPORT else ["polling"]),
-        allow_upgrades=ENABLE_WEBSOCKET_SUPPORT,
+        transports=["polling", "websocket"],
+        allow_upgrades=True,
         always_connect=True,
         client_manager=mgr,
     )
 else:
     sio = socketio.AsyncServer(
-        cors_allowed_origins=[],
+        cors_allowed_origins="*",
         async_mode="asgi",
-        transports=(["websocket"] if ENABLE_WEBSOCKET_SUPPORT else ["polling"]),
-        allow_upgrades=ENABLE_WEBSOCKET_SUPPORT,
+        transports=["polling", "websocket"],
+        allow_upgrades=True,
         always_connect=True,
     )
 

@@ -84,6 +84,7 @@
 	export let imageGenerationEnabled = false;
 	export let webSearchEnabled = false;
 	export let codeInterpreterEnabled = false;
+	export let isProcessing = false;
 
 	$: onChange({
 		prompt,
@@ -595,12 +596,19 @@
 						/>
 					{:else}
 						<form
-							class="w-full flex gap-1.5"
+							class="w-full flex gap-1.5 relative"
 							on:submit|preventDefault={() => {
 								// check if selectedModels support image input
 								dispatch('submit', prompt);
 							}}
 						>
+							<!-- AI 멘토: 생각중입니다 로딩 메시지 -->
+							{#if isProcessing}
+							<div class="loading-container">
+								<div class="loading-text">생각중입니다...</div>
+							</div>
+							{/if}
+
 							<div
 								class="flex-1 flex flex-col relative w-full shadow-lg rounded-3xl border border-gray-50 dark:border-gray-850 hover:border-gray-100 focus-within:border-gray-100 hover:dark:border-gray-800 focus-within:dark:border-gray-800 transition px-1 bg-white/90 dark:bg-gray-400/5 dark:text-gray-100"
 								dir={$settings?.chatDirection ?? 'auto'}
@@ -1527,3 +1535,34 @@
 		</div>
 	</div>
 {/if}
+
+<style>
+.loading-container {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 8px 16px;
+	margin-bottom: 8px;
+	background-color: rgba(59, 130, 246, 0.1);
+	border-radius: 8px;
+	pointer-events: none;
+	z-index: 50;
+}
+
+.loading-text {
+	color: #3b82f6;
+	font-size: 14px;
+	font-weight: 500;
+	animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+</style>

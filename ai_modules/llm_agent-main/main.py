@@ -149,6 +149,7 @@ async def agent_v2(request: Request):
 
 @app.post("/v1/chat/completions")
 @app.post("/chat/completions")
+@app.post("/api/chat/completions")
 async def chat_completions(request: Request):
     """OpenAI API 호환 채팅 완성"""
     try:

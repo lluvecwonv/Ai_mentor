@@ -43,11 +43,23 @@ class CurriculumHandler(BaseQueryHandler):
             if response.status_code == 200:
                 result = response.json()
                 message = result.get("message", "커리큘럼 정보를 찾을 수 없습니다.")
+                graph_base64 = result.get("graph")
+
+                # 그래프 이미지를 메시지에 임베드
+                if graph_base64:
+                    display_message = f"{message}\n\n![커리큘럼 그래프]({graph_base64})"
+                else:
+                    display_message = message
+
                 return self.create_response(
                     agent_type="curriculum",
                     result=message,
-                    display=message,
-                    metadata={"source": "curriculum_service", "response_length": len(message)},
+                    display=display_message,
+                    metadata={
+                        "source": "curriculum_service",
+                        "response_length": len(message),
+                        "graph": graph_base64
+                    },
                     success=True
                 )
             else:

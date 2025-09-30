@@ -80,31 +80,34 @@ def save_merged_json(merged_data, base_path,idx, gt_department):
 
 
 def format_curriculum_response(result: Dict[str, Any]) -> str:
-    """LLM이 바로 답변하는 것처럼 포맷팅"""
+    """JSON 데이터를 사람이 읽기 편한 텍스트로 변환"""
 
-    expanded_query = result.get('expanded_query', '')
+    recommended_courses = result.get('recommended_courses', [])
 
-    response = f"'{expanded_query}'에 대한 커리큘럼을 추천해드리겠습니다.\n\n"
+    # 텍스트 응답 생성
+    response = "과목을 추천해드리겠습니다.\n\n"
 
-    for dept_name, dept_data in result["all_results_json"].items():
-        if dept_data.get("nodes"):
-            response += f"**{dept_name}** 관련 과목들:\n"
+    for idx, course in enumerate(recommended_courses, 1):
+        name = course.get('name', '')
+        department = course.get('department', '')
+        grade = course.get('student_grade', '')
+        semester = course.get('semester', '')
+        description = course.get('description', '').strip()
 
-            for node in dept_data.get("nodes", []):
-                course_name = node.get('course_name', '')
-                grade = node.get('student_grade', '')
-                semester = node.get('semester', '')
-                prerequisites = node.get('prerequisites', '')
+        # 과목명을 볼드체로 (마크다운 형식)
+        response += f"{idx}. **{name}**\n"
+        response += f"   - 학과: {department}\n"
 
-                response += f"• {course_name} ({grade}학년 {semester}학기)"
-                if prerequisites:
-                    response += f" - 선수과목: {prerequisites}"
-                response += "\n"
+        if grade and semester:
+            response += f"   - 권장 이수: {grade}학년 {semester}학기\n"
 
-            response += "\n"
+        if description:
+            # 설명 전체 출력 (잘리지 않게)
+            response += f"   - 설명: {description}\n"
 
-    response += "이 과목들을 통해 원하시는 학습을 진행하실 수 있습니다!"
-    print(f"🔍 커리큘럼 응답 포맷팅 완료: {(response)}자")
+        response += "\n"
+
+    print(f"커리큘럼 응답 포맷팅 완료: {len(response)}자")
 
     return response
 

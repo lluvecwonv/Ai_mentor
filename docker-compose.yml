@@ -133,7 +133,7 @@ services:
     environment:
       - TZ=Asia/Seoul
       - PUBLIC_MODE=true
-      - ENABLE_ADMIN_PANEL=false
+      - ENABLE_ADMIN_PANEL=true
       - RATE_LIMIT_RPM=60
       - WEBUI_AUTH=false
       - AUTHENTICATION=false
@@ -143,10 +143,13 @@ services:
       - DISABLE_AUTH=true
       - BYPASS_MODEL_VALIDATION=true
       - DEFAULT_USER_ROLE=user
-      - OPENAI_API_BASE_URL=http://llm-agent:8001/v1
-      - OPENAI_API_KEY=sk-dummy
+      - ENABLE_OPENAI_API=true
+      - OPENAI_API_BASE_URLS=http://llm-agent:8001/v1
+      - OPENAI_API_KEYS=${OPENAI_API_KEY}
       - DEFAULT_MODELS=ai-mentor
       - MODEL_FILTER_LIST=ai-mentor
+      - ENABLE_MODEL_FILTER=true
+      - SHOW_ADMIN_DETAILS=true
       - OLLAMA_BASE_URL=
       - ENABLE_OLLAMA_API=false
       - USE_OLLAMA_DOCKER=false
@@ -154,7 +157,6 @@ services:
       - ENABLE_TAGS_GENERATION=false
       - ENABLE_SEARCH=false
       - ENABLE_ADMIN=false
-      - ENABLE_MODEL_FILTER=true
       - ENABLE_COMMUNITY_SHARING=false
       - ENABLE_USER_IMPORT=false
       - ENABLE_MESSAGE_RATING=false

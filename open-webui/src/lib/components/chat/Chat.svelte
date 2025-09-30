@@ -704,9 +704,37 @@
 	//////////////////////////
 
 	const initNewChat = async () => {
+		console.log('=== initNewChat START ===');
+		console.log('DEBUG: $models count:', $models?.length ?? 0);
+		console.log('DEBUG: $models raw:', $models);
+
+		// Emergency fallback: if models is empty, inject default model
+		if (!$models || $models.length === 0) {
+			console.warn('WARN: $models is empty! Injecting emergency fallback model');
+			const emergencyModel = {
+				id: 'ai-mentor',
+				name: '전북대학교 AI Mentor',
+				object: 'model',
+				owned_by: 'ai-mentor',
+				info: {
+					meta: {
+						name: '전북대학교 AI Mentor',
+						description: '전북대학교 학사 정보 및 커리큘럼 안내를 도와드립니다'
+					}
+				}
+			};
+			models.set([emergencyModel]);
+			await tick(); // Wait for store update
+			console.log('DEBUG: Emergency model injected:', emergencyModel);
+			console.log('DEBUG: $models after injection:', $models);
+		}
+
 		const availableModels = $models
 			.filter((m) => !(m?.info?.meta?.hidden ?? false))
 			.map((m) => m.id);
+
+		console.log('DEBUG: availableModels', availableModels);
+		console.log('DEBUG: availableModels count:', availableModels.length);
 
 		if ($page.url.searchParams.get('models') || $page.url.searchParams.get('model')) {
 			const urlModels = (
@@ -747,18 +775,26 @@
 			} else {
 				if ($settings?.models) {
 					selectedModels = $settings?.models;
+					console.log('DEBUG: selectedModels from settings', selectedModels);
 				} else if ($config?.default_models) {
+					console.log('DEBUG: $config?.default_models', $config?.default_models);
 					console.log($config?.default_models.split(',') ?? '');
 					selectedModels = $config?.default_models.split(',');
 				}
 			}
+			console.log('DEBUG: selectedModels before filter', selectedModels);
 			selectedModels = selectedModels.filter((modelId) => availableModels.includes(modelId));
+			console.log('DEBUG: selectedModels after filter', selectedModels);
 		}
 
-		if (selectedModels.length === 0 || (selectedModels.length === 1 && selectedModels[0] === '')) {
+		// Ensure we always have a valid model selected
+		if (!selectedModels || selectedModels.length === 0 || (selectedModels.length === 1 && selectedModels[0] === '')) {
+			console.log('DEBUG: No valid model selected, using first available model');
 			if (availableModels.length > 0) {
-				selectedModels = [availableModels?.at(0) ?? ''];
+				selectedModels = [availableModels[0]];
+				console.log('DEBUG: Auto-selected model:', selectedModels[0]);
 			} else {
+				console.error('ERROR: No available models found!');
 				selectedModels = [''];
 			}
 		}
@@ -826,9 +862,13 @@
 			}
 		}
 
-		selectedModels = selectedModels.map((modelId) =>
-			$models.map((m) => m.id).includes(modelId) ? modelId : ''
-		);
+		// Only validate selectedModels if $models is not empty
+		if ($models && $models.length > 0) {
+			selectedModels = selectedModels.map((modelId) =>
+				$models.map((m) => m.id).includes(modelId) ? modelId : ''
+			);
+		}
+		console.log('DEBUG: selectedModels after validation:', selectedModels);
 
 		const userSettings = await getUserSettings(localStorage.token);
 
@@ -1313,9 +1353,12 @@
 	//////////////////////////
 
 	const submitPrompt = async (userPrompt, { _raw = false } = {}) => {
-		console.log('submitPrompt', userPrompt, $chatId);
+		console.log('submitPrompt START', userPrompt, $chatId);
+		console.log('DEBUG: selectedModels', selectedModels);
+		console.log('DEBUG: files', files);
 
 		const messages = createMessagesList(history, history.currentId);
+		console.log('DEBUG: messages.length', messages.length);
 		const _selectedModels = selectedModels.map((modelId) =>
 			$models.map((m) => m.id).includes(modelId) ? modelId : ''
 		);
@@ -1324,23 +1367,26 @@
 		}
 
 		if (userPrompt === '' && files.length === 0) {
+			console.log('DEBUG: Empty prompt');
 			toast.error($i18n.t('Please enter a prompt'));
 			return;
 		}
 		if (selectedModels.includes('')) {
+			console.log('DEBUG: No model selected');
 			toast.error($i18n.t('Model not selected'));
 			return;
 		}
 
 		if (messages.length != 0 && messages.at(-1).done != true) {
-			// Response not done
+			console.log('DEBUG: Previous response not done', messages.at(-1));
 			return;
 		}
 		if (messages.length != 0 && messages.at(-1).error && !messages.at(-1).content) {
-			// Error in response
+			console.log('DEBUG: Error in previous response');
 			toast.error($i18n.t(`Oops! There was an error in the previous response.`));
 			return;
 		}
+		console.log('DEBUG: All checks passed, continuing...');
 		if (
 			files.length > 0 &&
 			files.filter((file) => file.type !== 'image' && file.status === 'uploading').length > 0
@@ -2090,6 +2136,7 @@
 									transparentBackground={$settings?.backgroundImageUrl ?? false}
 									{stopResponse}
 									{createMessagePair}
+										isProcessing={processing !== ""}
 									onChange={(input) => {
 										if (input.prompt !== null) {
 											localStorage.setItem(

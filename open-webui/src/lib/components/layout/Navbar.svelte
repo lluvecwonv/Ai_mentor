@@ -50,7 +50,25 @@
 	></div>
 
 	<div class=" flex max-w-full w-full mx-auto px-1 pt-0.5 bg-transparent">
-		<div class="flex items-center w-full max-w-full">
+		<div class="flex items-center w-full max-w-full gap-2">
+			<!-- AI 멘토: 새 채팅 버튼 -->
+			<div class="flex flex-none items-center">
+				<Tooltip content="새 채팅">
+					<button
+						id="new-chat-button"
+						class="flex cursor-pointer px-3 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition shadow-md"
+						on:click={() => {
+							window.location.href = '/';
+						}}
+						aria-label="New Chat"
+					>
+						<div class="m-auto self-center">
+							<Plus className="size-5" strokeWidth="2.5" />
+						</div>
+					</button>
+				</Tooltip>
+			</div>
+
 			<!-- AI 멘토: 사이드바 토글 버튼 제거 -->
 
 			<div
@@ -61,24 +79,6 @@
 				{#if showModelSelector}
 					<ModelSelector bind:selectedModels showSetDefault={!shareEnabled} />
 				{/if}
-			</div>
-
-			<!-- AI 멘토: 새 채팅 버튼만 유지 -->
-			<div class="self-start flex flex-none items-center">
-				<Tooltip content={$i18n.t('New Chat')}>
-					<button
-						id="new-chat-button"
-						class="flex cursor-pointer px-2 py-2 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-850 transition"
-						on:click={() => {
-							initNewChat();
-						}}
-						aria-label="New Chat"
-					>
-						<div class="m-auto self-center">
-							<Plus className="size-5" strokeWidth="2" />
-						</div>
-					</button>
-				</Tooltip>
 			</div>
 
 		</div>

@@ -12,7 +12,7 @@ class ConversationContextAnalyzer:
         self.llm_handler = llm_handler
 
     async def analyze_session_context(self, current_query: str, conversation_memory, session_id: str) -> Dict[str, Any]:
-        """히스토리 사용 여부와 상세 활용 방식 분석"""
+        """히스토리 분석 + 질의 재구성 통합 (1번의 LLM 호출)"""
         try:
             session_state = conversation_memory.get_state(session_id)
             history = session_state.get("conversation_history", [])
@@ -31,42 +31,57 @@ class ConversationContextAnalyzer:
             # 히스토리 포맷팅
             history_context = self._format_history(history)
 
-            # 프롬프트 로드 및 구성
-            prompt = load_prompt('history_aware_query_analyzer').format(
+            # 통합 프롬프트 로드 및 구성 (히스토리 분석 + 질의 재구성)
+            prompt = load_prompt('integrated_history_analyzer').format(
                 history_context=history_context,
                 current_query=current_query
             )
 
-            # LLM 호출
+            logger.info(f"🚀 통합 분석 시작 (히스토리 분석 + 질의 재구성)")
+
+            # 1번의 LLM 호출로 모든 것 처리
             response = await self.llm_handler.chat(prompt)
 
-            # JSON 파싱 (더 강화된 파싱 사용)
-            history_data = robust_json_parse(response)
+            # JSON 파싱
+            analysis_data = robust_json_parse(response)
 
+            if analysis_data and isinstance(analysis_data, dict):
+                is_continuation = analysis_data.get("is_continuation", False)
+                reconstructed_query = analysis_data.get("reconstructed_query", current_query)
 
-            if history_data and isinstance(history_data, dict):
-                if "history_usage" in history_data:
-                    # 정상적인 JSON 파싱 성공
-                    history_usage = history_data["history_usage"]
-                    is_continuation = history_usage.get("reuse_previous", False)
+                # 'None' 문자열이나 None이 반환되면 원본 쿼리 사용
+                if not reconstructed_query or reconstructed_query == "None" or reconstructed_query.strip() == "":
+                    reconstructed_query = current_query
 
-                    result = {
-                        "is_continuation": is_continuation,
-                        "history_usage": history_usage
+                history_usage = analysis_data.get("history_usage", {
+                    "reuse_previous": is_continuation,
+                    "relationship": "continuation" if is_continuation else "new_search",
+                    "context_integration": analysis_data.get("context_integration", "")
+                })
+
+                result = {
+                    "is_continuation": is_continuation,
+                    "reconstructed_query": reconstructed_query,
+                    "history_usage": history_usage
+                }
+
+                logger.info(f"✅ 통합 분석 완료: 연속대화={is_continuation}, 재구성='{reconstructed_query}'")
+                return result
+            else:
+                # 파싱 실패 시 기본값
+                logger.warning("⚠️ JSON 파싱 실패, 기본값 반환")
+                return {
+                    "is_continuation": False,
+                    "reconstructed_query": current_query,
+                    "history_usage": {
+                        "reuse_previous": False,
+                        "relationship": "new_search",
+                        "context_integration": "파싱 실패로 새로운 검색"
                     }
+                }
 
-                            # 연속대화일 경우 질의 재구성 수행
-                    if is_continuation:
-                        reconstructed_query = await self._reconstruct_query(current_query, history_context)
-                        result["reconstructed_query"] = reconstructed_query
-                    else:
-                        result["reconstructed_query"] = current_query
-
-                    logger.info(f"🎯 히스토리 분석 완료: 연속대화={is_continuation}, 관계={history_usage.get('relationship', 'unknown')}")
-                    return result
-                
         except Exception as e:
-            logger.error(f"❌ 히스토리 분석 실패: {e}")
+            logger.error(f"❌ 통합 분석 실패: {e}")
             # 예외 발생 시 폴백 - 기본값 반환
             return {
                 "is_continuation": False,
@@ -86,18 +101,4 @@ class ConversationContextAnalyzer:
                 formatted.append(f"사용자: {entry.get('content', '')}")
             elif entry.get("role") == "assistant":
                 formatted.append(f"AI: {entry.get('content', '')[:100]}...")
-        return " | ".join(formatted)
-    
-
-    async def _reconstruct_query(self, current_query: str, history_context: str) -> str:
-        # 질의 재구성 프롬프트 로드
-        reconstruction_prompt = load_prompt('query_reconstruction').format(
-            history_context=history_context,
-            current_query=current_query
-        )
-
-        reconstructed = await self.llm_handler.chat(reconstruction_prompt)
-        reconstructed = reconstructed.strip()
-
-        logger.info(f"🔧 질의 재구성: '{current_query}' → '{reconstructed}'")
-        return reconstructed
+        return "\n".join(formatted)

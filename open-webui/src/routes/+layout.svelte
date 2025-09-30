@@ -75,7 +75,7 @@
 			reconnectionDelayMax: 5000,
 			randomizationFactor: 0.5,
 			path: '/ws/socket.io',
-			transports: enableWebsocket ? ['websocket'] : ['polling', 'websocket'],
+			transports: ['polling', 'websocket'],
 			auth: { token: localStorage.token }
 		});
 
@@ -281,26 +281,27 @@
 						});
 					}
 
-					if ($isLastActiveTab) {
-						if ($settings?.notificationEnabled ?? false) {
-							new Notification(`${title} • Open WebUI`, {
-								body: content,
-								icon: `${WEBUI_BASE_URL}/static/favicon.png`
-							});
-						}
-					}
+					// AI 멘토: 다른 세션 알림 제거
+					// if ($isLastActiveTab) {
+					// 	if ($settings?.notificationEnabled ?? false) {
+					// 		new Notification(`${title} • Open WebUI`, {
+					// 			body: content,
+					// 			icon: `${WEBUI_BASE_URL}/static/favicon.png`
+					// 		});
+					// 	}
+					// }
 
-					toast.custom(NotificationToast, {
-						componentProps: {
-							onClick: () => {
-								goto(`/c/${event.chat_id}`);
-							},
-							content: content,
-							title: title
-						},
-						duration: 15000,
-						unstyled: true
-					});
+					// toast.custom(NotificationToast, {
+					// 	componentProps: {
+					// 		onClick: () => {
+					// 			goto(`/c/${event.chat_id}`);
+					// 		},
+					// 		content: content,
+					// 		title: title
+					// 	},
+					// 	duration: 15000,
+					// 	unstyled: true
+					// });
 				}
 			} else if (type === 'chat:title') {
 				currentChatPage.set(1);
@@ -429,28 +430,29 @@
 			const type = event?.data?.type ?? null;
 			const data = event?.data?.data ?? null;
 
-			if (type === 'message') {
-				if ($isLastActiveTab) {
-					if ($settings?.notificationEnabled ?? false) {
-						new Notification(`${data?.user?.name} (#${event?.channel?.name}) • Open WebUI`, {
-							body: data?.content,
-							icon: data?.user?.profile_image_url ?? `${WEBUI_BASE_URL}/static/favicon.png`
-						});
-					}
-				}
+			// AI 멘토: 채널 알림도 제거
+			// if (type === 'message') {
+			// 	if ($isLastActiveTab) {
+			// 		if ($settings?.notificationEnabled ?? false) {
+			// 			new Notification(`${data?.user?.name} (#${event?.channel?.name}) • Open WebUI`, {
+			// 				body: data?.content,
+			// 				icon: data?.user?.profile_image_url ?? `${WEBUI_BASE_URL}/static/favicon.png`
+			// 			});
+			// 		}
+			// 	}
 
-				toast.custom(NotificationToast, {
-					componentProps: {
-						onClick: () => {
-							goto(`/channels/${event.channel_id}`);
-						},
-						content: data?.content,
-						title: event?.channel?.name
-					},
-					duration: 15000,
-					unstyled: true
-				});
-			}
+			// 	toast.custom(NotificationToast, {
+			// 		componentProps: {
+			// 			onClick: () => {
+			// 				goto(`/channels/${event.channel_id}`);
+			// 		},
+			// 			content: data?.content,
+			// 			title: event?.channel?.name
+			// 		},
+			// 		duration: 15000,
+			// 		unstyled: true
+			// 	});
+			// }
 		}
 	};
 
@@ -623,6 +625,14 @@
 							// 사용자 정보 저장
 							await user.set(anonymousUser);
 							await config.set(await getBackendConfig());
+
+							// 🔥 기본 모델 설정 (localStorage에 저장)
+							const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+							if (!settings.models) {
+								settings.models = ['ai-mentor'];
+								localStorage.setItem('settings', JSON.stringify(settings));
+								console.log('✅ 기본 모델 설정: ai-mentor');
+							}
 
 							// 홈으로 리다이렉트 (auth 페이지 건너뜀)
 							if ($page.url.pathname === '/auth') {

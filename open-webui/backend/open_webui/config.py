@@ -943,31 +943,24 @@ except Exception as e:
 if default_prompt_suggestions == []:
     default_prompt_suggestions = [
         {
-            "title": ["Help me study", "vocabulary for a college entrance exam"],
-            "content": "Help me study vocabulary: write a sentence for me to fill in the blank, and I'll try to pick the correct option.",
+            "title": ["커리큘럼 추천", "맞춤형 수업 계획을 제안해드려요"],
+            "content": "저는 인공지능과 반도체를 융합한 전문가가 되고 싶은데, 어떤 수업들을 들으면 좋을까요?"
         },
         {
-            "title": ["Give me ideas", "for what to do with my kids' art"],
-            "content": "What are 5 creative things I could do with my kids' art? I don't want to throw them away, but it's also so much clutter.",
+            "title": ["교수님 검색", "관심 있는 교수님의 연구분야를 찾아드려요"],
+            "content": "인공지능 관련 연구를 하시는 전북대 교수님은 누구인가요?"
         },
         {
-            "title": ["Tell me a fun fact", "about the Roman Empire"],
-            "content": "Tell me a random fun fact about the Roman Empire",
+            "title": ["학과 정보", "융합학과 및 타학과 커리큘럼을 비교해드려요"],
+            "content": "컴퓨터인공지능학부는 무슨 학과인가요?"
         },
         {
-            "title": ["Show me a code snippet", "of a website's sticky header"],
-            "content": "Show me a code snippet of a website's sticky header in CSS and JavaScript.",
+            "title": ["진로 추천", "졸업 후 경로를 분석해드려요"],
+            "content": "융합학과 복수전공을 마친 후 어떤 진로로 나아갈 수 있을까요?"
         },
         {
-            "title": [
-                "Explain options trading",
-                "if I'm familiar with buying and selling stocks",
-            ],
-            "content": "Explain options trading in simple terms if I'm familiar with buying and selling stocks.",
-        },
-        {
-            "title": ["Overcome procrastination", "give me tips"],
-            "content": "Could you start by asking me about instances when I procrastinate the most and then give me some suggestions to overcome it?",
+            "title": ["수업 추천", "관심사 기반으로 강의를 추천해드려요"],
+            "content": "데이터 과학에 관심이 있는데, 관련된 전북대 수업을 추천해주세요."
         },
     ]
 

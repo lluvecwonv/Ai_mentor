@@ -106,14 +106,44 @@
 				settings.set(localStorageSettings);
 			}
 
-			models.set(
-				await getModels(
+			try {
+				console.log('DEBUG: Fetching models...');
+				const fetchedModels = await getModels(
 					localStorage.token,
 					$config?.features?.enable_direct_connections && ($settings?.directConnections ?? null)
-				)
-			);
+				);
+				console.log('DEBUG: Fetched models:', fetchedModels);
+				models.set(fetchedModels);
+			} catch (error) {
+				console.error('ERROR: Failed to fetch models:', error);
+				// Fallback: Create default model if API fails
+				const fallbackModel = {
+					id: 'ai-mentor',
+					name: '전북대학교 AI Mentor',
+					object: 'model',
+					owned_by: 'ai-mentor',
+					info: {
+						meta: {
+							name: '전북대학교 AI Mentor',
+							description: '전북대학교 학사 정보 및 커리큘럼 안내를 도와드립니다'
+						}
+					}
+				};
+				console.log('DEBUG: Using fallback model:', fallbackModel);
+				models.set([fallbackModel]);
+			}
 
 			banners.set(await getBanners(localStorage.token));
+
+			try {
+				const fetchedPrompts = await getPrompts(localStorage.token);
+				console.log('DEBUG: Fetched prompts:', fetchedPrompts);
+				prompts.set(fetchedPrompts);
+			} catch (error) {
+				console.error('ERROR: Failed to fetch prompts:', error);
+				prompts.set([]);
+			}
+
 			tools.set(await getTools(localStorage.token));
 			toolServers.set(await getToolServersData($i18n, $settings?.toolServers ?? []));
 
