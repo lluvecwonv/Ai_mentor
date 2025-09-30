@@ -34,7 +34,7 @@
 	import { Toaster, toast } from 'svelte-sonner';
 
 	import { executeToolServer, getBackendConfig } from '$lib/apis';
-	import { getSessionUser, userSignOut } from '$lib/apis/auths';
+	import { getSessionUser, userSignOut, createAnonymousUser } from '$lib/apis/auths';
 
 	import '../tailwind.css';
 	import '../app.css';
@@ -605,10 +605,39 @@
 						await goto(`/auth?redirect=${encodedUrl}`);
 					}
 				} else {
-					// Don't redirect if we're already on the auth page
-					// Needed because we pass in tokens from OAuth logins via URL fragments
-					if ($page.url.pathname !== '/auth') {
-						await goto(`/auth?redirect=${encodedUrl}`);
+					// 🔥 익명 사용자 자동 생성 (토큰 없을 때)
+					console.log('토큰이 없습니다. 익명 사용자 자동 생성 시도...');
+
+					try {
+						const anonymousUser = await createAnonymousUser();
+
+						if (anonymousUser && anonymousUser.token) {
+							console.log('✅ 익명 사용자 생성 성공:', anonymousUser.email);
+
+							// localStorage에 토큰 저장
+							localStorage.token = anonymousUser.token;
+
+							// 소켓 연결
+							$socket.emit('user-join', { auth: { token: anonymousUser.token } });
+
+							// 사용자 정보 저장
+							await user.set(anonymousUser);
+							await config.set(await getBackendConfig());
+
+							// 홈으로 리다이렉트 (auth 페이지 건너뜀)
+							if ($page.url.pathname === '/auth') {
+								await goto('/');
+							}
+						} else {
+							throw new Error('익명 사용자 생성 실패');
+						}
+					} catch (error) {
+						console.error('익명 사용자 생성 중 오류:', error);
+
+						// 실패 시에만 auth 페이지로 리다이렉트
+						if ($page.url.pathname !== '/auth') {
+							await goto(`/auth?redirect=${encodedUrl}`);
+						}
 					}
 				}
 			}

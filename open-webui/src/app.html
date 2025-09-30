@@ -25,6 +25,45 @@
 		/>
 		<script src="/static/loader.js" defer></script>
 
+		<!-- AI 멘토 커스텀 CSS -->
+		<link rel="stylesheet" href="/static/custom.css" />
+
+		<!-- AI 멘토: F5로 채팅 히스토리만 초기화 (인증 토큰 보호) -->
+		<script>
+			// F5 새로고침 시 채팅 히스토리만 초기화
+			window.addEventListener('beforeunload', function() {
+				// 인증 관련 키들을 보호
+				const protectedKeys = [
+					'theme',
+					'token',
+					'auth',
+					'user',
+					'session',
+					'openai_api_key',
+					'api_key',
+					'access_token',
+					'refresh_token'
+				];
+
+				const keysToRemove = [];
+				for (let i = 0; i < localStorage.length; i++) {
+					const key = localStorage.key(i);
+					// 보호된 키가 포함되어 있지 않은 경우만 삭제
+					const shouldProtect = protectedKeys.some(protected =>
+						key.toLowerCase().includes(protected.toLowerCase())
+					);
+
+					if (!shouldProtect) {
+						keysToRemove.push(key);
+					}
+				}
+				keysToRemove.forEach(key => localStorage.removeItem(key));
+
+				// SessionStorage는 전체 삭제 (인증 정보는 localStorage에 있음)
+				sessionStorage.clear();
+			});
+		</script>
+
 		<script>
 			function resizeIframe(obj) {
 				obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';

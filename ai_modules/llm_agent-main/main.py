@@ -87,7 +87,35 @@ async def get_models():
         "data": [{
             "id": "ai-mentor",
             "object": "model",
-            "owned_by": "ai-mentor"
+            "owned_by": "ai-mentor",
+            "name": "전북대학교 AI Mentor",
+            "info": {
+                "meta": {
+                    "name": "전북대학교 AI Mentor",
+                    "description": "전북대학교 학사 정보 및 커리큘럼 안내를 도와드립니다"
+                }
+            }
+        }]
+    }
+
+
+# Ollama 호환 API (OpenWebUI 자동 인식용)
+@app.get("/api/tags")
+async def get_ollama_tags():
+    """Ollama 호환 모델 목록 - OpenWebUI가 자동으로 인식"""
+    return {
+        "models": [{
+            "name": "ai-mentor",
+            "model": "ai-mentor",
+            "modified_at": "2025-01-01T00:00:00Z",
+            "size": 0,
+            "digest": "ai-mentor-digest",
+            "details": {
+                "format": "gguf",
+                "family": "ai-mentor",
+                "parameter_size": "7B",
+                "quantization_level": "Q4_0"
+            }
         }]
     }
 
@@ -126,7 +154,12 @@ async def chat_completions(request: Request):
     try:
         data = await request.json()
         messages = data.get("messages", [])
-        session_id = data.get("session_id", "default")
+
+        # 🔥 chat_id를 session_id로 우선 사용 (각 채팅마다 독립적인 세션)
+        chat_id = data.get("chat_id")
+        session_id = chat_id if chat_id else data.get("session_id", "default")
+
+        logger.info(f"📌 채팅 요청 - chat_id: {chat_id}, session_id: {session_id}")
 
         # 사용자 메시지 추출
         user_message = "\n".join(msg.get("content", "") for msg in messages if msg.get("role") == "user")

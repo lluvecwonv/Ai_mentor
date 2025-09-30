@@ -1,0 +1,231 @@
+/* ===== AI 멘토 - 핵폭탄 UI 완전 제거 (공개 키오스크 모드) ===== */
+
+/* ========== 핵심 전략: 모든 헤더 버튼을 기본으로 숨기고, 필요한 것만 예외 처리 ========== */
+
+/* 1단계: 헤더 내 모든 버튼/링크/SVG를 무조건 숨김 (핵폭탄) */
+header button,
+header button *,
+header a:not([href="/"]):not([class*="logo"]),
+header a:not([href="/"]):not([class*="logo"]) *,
+header svg:not([class*="logo"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 2단계: 왼쪽 사이드바/히스토리 완전 제거 */
+aside,
+aside *,
+[data-id="sidebar"],
+[data-id="sidebar"] *,
+.sidebar,
+.sidebar *,
+#sidebar,
+#sidebar *,
+[id*="sidebar" i],
+[id*="sidebar" i] *,
+[class*="sidebar" i],
+[class*="sidebar" i] *,
+[class*="side-panel" i],
+[class*="side-panel" i] *,
+[class*="history" i],
+[class*="history" i] *,
+[class*="conversation" i],
+[class*="conversation" i] *,
+nav[role="navigation"],
+nav[role="navigation"] * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -99999px !important;
+  top: -99999px !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+/* 3단계: 모든 네비게이션 바 제거 */
+nav,
+nav *,
+.navbar,
+.navbar *,
+[class*="nav" i]:not(main):not([role="main"]),
+[class*="Nav" i]:not(main):not([role="main"]),
+[role="navigation"],
+[role="navigation"] * {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 4단계: 드롭다운/메뉴 제거 */
+.dropdown,
+.dropdown *,
+[role="menu"],
+[role="menu"] *,
+[class*="dropdown" i],
+[class*="dropdown" i] *,
+[class*="menu" i]:not(.message):not([class*="content"]),
+[class*="menu" i]:not(.message):not([class*="content"]) * {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 5단계: 아바타/프로필 제거 */
+.avatar,
+.avatar *,
+[class*="avatar" i],
+[class*="avatar" i] *,
+[class*="profile" i] img,
+img[src*="profile"],
+img[alt*="profile" i] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 6단계: 설정/관리자 링크 제거 */
+a[href*="/admin"],
+a[href*="/settings"],
+a[href*="/workspace"],
+a[href*="/models"],
+button[data-action*="settings"],
+button[data-action*="admin"] {
+  display: none !important;
+}
+
+/* 7단계: Tailwind flex 컨테이너 중 헤더 우측 영역 강제 숨김 */
+header .self-start.flex.flex-none,
+header .self-start.flex.flex-none * {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 8단계: z-index 높은 순서로 오버라이드 */
+header button[class*="cursor-pointer"],
+header button[class*="cursor-pointer"] * {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -99999px !important;
+}
+
+/* 9단계: 메인 콘텐츠 확장 */
+main,
+.main,
+.content,
+.main-content,
+[role="main"] {
+  margin-left: 0 !important;
+  padding-left: 20px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* 10단계: 채팅 영역 확장 */
+.chat-container,
+.message-container,
+[class*="chat"]:not(button):not([class*="sidebar"]),
+[class*="message"]:not(button) {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+/* 11단계: 헤더 최소화 (로고 영역만 남김) */
+header {
+  height: 60px !important;
+  min-height: 60px !important;
+  max-height: 60px !important;
+  padding: 10px 20px !important;
+}
+
+/* 헤더의 모든 자식 div 중 첫 번째(로고 컨테이너)만 제외하고 숨김 */
+header > div > div:not(:first-child),
+header > div > div:not(:first-child) * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* 12단계: Svelte 동적 클래스 대응 */
+[class^="s-"][class*="sidebar" i],
+[class^="s-"][class*="menu" i],
+[class^="s-"][class*="nav" i],
+[class*=" s-"][class*="sidebar" i],
+[class*=" s-"][class*="menu" i],
+[class*=" s-"][class*="nav" i] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* ========== 패치 확인 마커 ========== */
+body::before {
+  content: "☢️ NUCLEAR v4";
+  position: fixed;
+  top: 4px;
+  left: 8px;
+  font-size: 12px;
+  z-index: 99999;
+  background: #dc2626;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+}
+
+/* ========== 반응형 대응 ========== */
+@media (max-width: 768px) {
+  body::before {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+}
+
+/* ========== 추가 보험: !important 체인 ========== */
+/* Tailwind의 높은 specificity를 이기기 위한 추가 규칙 */
+header * {
+  --tw-ring-shadow: none !important;
+}
+
+header button[aria-label] {
+  display: none !important;
+}
+
+header button[class] {
+  display: none !important;
+}
+
+header a[class] {
+  display: none !important;
+}
+
+/* ModelSelector는 보이게 해야 하므로 예외 처리 */
+header [class*="model"],
+header [class*="Model"],
+header [id*="model"],
+header [id*="Model"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* 입력창은 보이게 */
+header input,
+header textarea,
+header select {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

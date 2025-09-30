@@ -355,6 +355,155 @@ async def ldap_auth(request: Request, response: Response, form_data: LdapForm):
 
 
 ############################
+# Anonymous User Creation
+############################
+
+
+@router.post("/anonymous", response_model=SessionUserResponse)
+async def create_anonymous_user(request: Request, response: Response):
+    """
+    브라우저별 익명 사용자 자동 생성
+    - 쿠키에 session_id가 있으면 기존 사용자 반환
+    - 없으면 새로운 익명 사용자 생성
+    """
+    log.info("익명 사용자 생성 요청")
+
+    # 1. 쿠키에서 기존 session_id 확인
+    existing_session_id = request.cookies.get("anonymous_session_id")
+
+    if existing_session_id:
+        # 기존 익명 사용자 확인
+        anonymous_email = f"anonymous_{existing_session_id}@localhost"
+        user = Users.get_user_by_email(anonymous_email.lower())
+
+        if user:
+            log.info(f"기존 익명 사용자 반환: {user.id}")
+
+            # JWT 토큰 재생성
+            expires_delta = parse_duration(request.app.state.config.JWT_EXPIRES_IN)
+            expires_at = None
+            if expires_delta:
+                expires_at = int(time.time()) + int(expires_delta.total_seconds())
+
+            token = create_token(
+                data={"id": user.id},
+                expires_delta=expires_delta,
+            )
+
+            datetime_expires_at = (
+                datetime.datetime.fromtimestamp(expires_at, datetime.timezone.utc)
+                if expires_at
+                else None
+            )
+
+            # 쿠키 설정
+            response.set_cookie(
+                key="token",
+                value=token,
+                expires=datetime_expires_at,
+                httponly=True,
+                samesite=WEBUI_AUTH_COOKIE_SAME_SITE,
+                secure=WEBUI_AUTH_COOKIE_SECURE,
+            )
+
+            user_permissions = get_permissions(
+                user.id, request.app.state.config.USER_PERMISSIONS
+            )
+
+            return {
+                "token": token,
+                "token_type": "Bearer",
+                "expires_at": expires_at,
+                "id": user.id,
+                "email": user.email,
+                "name": user.name,
+                "role": user.role,
+                "profile_image_url": user.profile_image_url,
+                "permissions": user_permissions,
+            }
+
+    # 2. 새로운 익명 사용자 생성
+    session_id = str(uuid.uuid4())[:16]  # 16자리 랜덤 ID
+    anonymous_email = f"anonymous_{session_id}@localhost"
+    anonymous_password = str(uuid.uuid4())  # 랜덤 비밀번호 (사용 안 함)
+    anonymous_name = f"익명사용자 {session_id[:8]}"
+
+    log.info(f"새 익명 사용자 생성: {anonymous_email}")
+
+    # DB에 사용자 생성 (admin이 있으면 user 역할, 없으면 admin)
+    if Users.get_num_users() == 0:
+        role = "admin"
+    else:
+        role = "user"
+
+    hashed_password = get_password_hash(anonymous_password)
+    user = Auths.insert_new_auth(
+        email=anonymous_email,
+        password=hashed_password,
+        name=anonymous_name,
+        role=role,
+    )
+
+    if not user:
+        raise HTTPException(500, detail=ERROR_MESSAGES.CREATE_USER_ERROR)
+
+    # JWT 토큰 생성
+    expires_delta = parse_duration(request.app.state.config.JWT_EXPIRES_IN)
+    expires_at = None
+    if expires_delta:
+        expires_at = int(time.time()) + int(expires_delta.total_seconds())
+
+    token = create_token(
+        data={"id": user.id},
+        expires_delta=expires_delta,
+    )
+
+    datetime_expires_at = (
+        datetime.datetime.fromtimestamp(expires_at, datetime.timezone.utc)
+        if expires_at
+        else None
+    )
+
+    # 쿠키 설정
+    response.set_cookie(
+        key="token",
+        value=token,
+        expires=datetime_expires_at,
+        httponly=True,
+        samesite=WEBUI_AUTH_COOKIE_SAME_SITE,
+        secure=WEBUI_AUTH_COOKIE_SECURE,
+    )
+
+    # 익명 세션 ID 쿠키 (영구 저장)
+    response.set_cookie(
+        key="anonymous_session_id",
+        value=session_id,
+        max_age=31536000,  # 1년
+        httponly=False,  # 자바스크립트 접근 가능
+        samesite=WEBUI_AUTH_COOKIE_SAME_SITE,
+        secure=WEBUI_AUTH_COOKIE_SECURE,
+    )
+
+    user_permissions = get_permissions(
+        user.id, request.app.state.config.USER_PERMISSIONS
+    )
+
+    log.info(f"익명 사용자 생성 완료: {user.id}")
+
+    return {
+        "token": token,
+        "token_type": "Bearer",
+        "expires_at": expires_at,
+        "id": user.id,
+        "email": user.email,
+        "name": user.name,
+        "role": user.role,
+        "profile_image_url": user.profile_image_url,
+        "permissions": user_permissions,
+    }
+
+
+############################
 # SignIn
 ############################
 

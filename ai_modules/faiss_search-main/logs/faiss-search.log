@@ -3363,3 +3363,90 @@ WHERE c.department LIKE '%컴퓨터인공지능학부%'
 2025-09-29 21:02:56 | INFO | root | === faiss-search 서비스 시작 ===
 2025-09-29 21:02:56 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
 2025-09-29 21:02:56 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 23:32:34 | INFO | service.searchService | 검색 시작: '비료를 다루는 과목이 있을가/'
+2025-09-29 23:32:36 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 23:32:36 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-09-29 23:32:36 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-09-29 23:32:52 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 23:32:52 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 23:33:52 | INFO | service.searchService | 검색 시작: '반도체 관련된 수업이 뭐있어?'
+2025-09-29 23:33:53 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-29 23:33:53 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-09-29 23:33:53 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-09-29 23:34:08 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-29 23:34:08 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-29 23:39:13 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 23:39:13 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 23:39:13 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-29 23:49:14 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-29 23:49:14 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-29 23:49:14 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 11:32:41 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 11:32:41 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 11:32:41 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 15:20:31 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 15:20:31 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 15:20:31 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 15:29:30 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 15:29:30 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 15:29:30 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 15:38:06 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 15:38:06 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 15:38:06 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 15:58:47 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 15:58:47 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 15:58:47 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 16:09:17 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 16:09:17 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 16:09:17 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 16:09:49 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 16:09:49 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 16:09:49 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 17:30:56 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 17:30:56 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 17:30:56 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 18:28:55 | INFO | service.searchService | 검색 시작: '컴공에서 인공지능 수업을 찾아줘'
+2025-09-30 18:28:56 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-30 18:28:56 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-09-30 18:28:56 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-09-30 18:28:59 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-30 18:28:59 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-09-30 18:40:43 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 18:40:43 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 18:40:43 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 18:49:59 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 18:49:59 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 18:49:59 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 19:10:49 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 19:10:49 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 19:10:49 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 19:16:28 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 19:16:28 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 19:16:28 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 19:24:23 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 19:24:23 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 19:24:23 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 19:39:47 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 19:39:47 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 19:39:47 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 19:49:22 | INFO | root | === faiss-search 서비스 시작 ===
+2025-09-30 19:49:22 | INFO | root | 공통 로그 파일: ./logs/faiss-search.log
+2025-09-30 19:49:22 | INFO | root | FAISS 전용 로그 파일: ./faiss-search.log
+2025-09-30 19:58:12 | INFO | service.searchService | 검색 시작: '안녕 컴공에서 인공지능 관련 수업좀 찾아줄래?'
+2025-09-30 19:58:14 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-30 19:58:14 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-09-30 19:58:14 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+WHERE c.department LIKE '%컴퓨터%'
+2025-09-30 19:58:17 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-30 19:58:17 | INFO | service.searchService | 검색 완료: 3개 결과

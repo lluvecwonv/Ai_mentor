@@ -121,23 +121,12 @@ services:
       - ./ai_modules/department_mapping-main/data:/app/data
     restart: unless-stopped
 
-  # Simple AI Mentor Frontend - DISABLED
-  # simple_frontend:
-  #   build:
-  #     context: ./simple-frontend
-  #     dockerfile: Dockerfile
-  #   container_name: simple-frontend
-  #   ports:
-  #     - "8080:80"
-  #   environment:
-  #     - TZ=Asia/Seoul
-  #   depends_on:
-  #     - llm_agent
-  #   restart: unless-stopped
 
   # OpenWebUI (Main AI Mentor Interface)
   openwebui:
-    image: ghcr.io/open-webui/open-webui:main
+    build:
+      context: ./open-webui
+      dockerfile: Dockerfile
     container_name: openwebui
     ports:
       - "8080:8080"  # Direct external access
@@ -154,8 +143,10 @@ services:
       - DISABLE_AUTH=true
       - BYPASS_MODEL_VALIDATION=true
       - DEFAULT_USER_ROLE=user
-      - OPENAI_API_BASE_URL=http://llm-agent:8001
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_BASE_URL=http://llm-agent:8001/v1
+      - OPENAI_API_KEY=sk-dummy
+      - DEFAULT_MODELS=ai-mentor
+      - MODEL_FILTER_LIST=ai-mentor
       - OLLAMA_BASE_URL=
       - ENABLE_OLLAMA_API=false
       - USE_OLLAMA_DOCKER=false
@@ -163,7 +154,7 @@ services:
       - ENABLE_TAGS_GENERATION=false
       - ENABLE_SEARCH=false
       - ENABLE_ADMIN=false
-      - ENABLE_MODEL_FILTER=false
+      - ENABLE_MODEL_FILTER=true
       - ENABLE_COMMUNITY_SHARING=false
       - ENABLE_USER_IMPORT=false
       - ENABLE_MESSAGE_RATING=false

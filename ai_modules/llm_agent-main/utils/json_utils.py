@@ -140,8 +140,8 @@ def to_router_decision(data: Dict[str, Any]) -> Dict[str, Any]:
         'curriculum': 'CURRICULUM_PLAN'
     }
 
-    # plan 정보 우선 추출
-    plans = data.get('plan', data.get('pipeline', []))
+    # plan 정보 우선 추출 (None이면 pipeline, 둘 다 없으면 빈 리스트)
+    plans = data.get('plan') or data.get('pipeline') or []
     logger.info(f"🔍 [to_router_decision] 추출된 plans: {plans}")
 
     owner_hint = data.get('owner_hint', 'LLM_FALLBACK')

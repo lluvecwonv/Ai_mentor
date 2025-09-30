@@ -51,24 +51,7 @@
 
 	<div class=" flex max-w-full w-full mx-auto px-1 pt-0.5 bg-transparent">
 		<div class="flex items-center w-full max-w-full">
-			<div
-				class="{$showSidebar
-					? 'md:hidden'
-					: ''} mr-1 self-start flex flex-none items-center text-gray-600 dark:text-gray-400"
-			>
-				<button
-					id="sidebar-toggle-button"
-					class="cursor-pointer px-2 py-2 flex rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"
-					on:click={() => {
-						showSidebar.set(!$showSidebar);
-					}}
-					aria-label="Toggle Sidebar"
-				>
-					<div class=" m-auto self-center">
-						<MenuLines />
-					</div>
-				</button>
-			</div>
+			<!-- AI 멘토: 사이드바 토글 버튼 제거 -->
 
 			<div
 				class="flex-1 overflow-hidden max-w-full py-0.5
@@ -80,117 +63,24 @@
 				{/if}
 			</div>
 
-			<div class="self-start flex flex-none items-center text-gray-600 dark:text-gray-400">
-				<!-- <div class="md:hidden flex self-center w-[1px] h-5 mx-2 bg-gray-300 dark:bg-stone-700" /> -->
-				{#if shareEnabled && chat && (chat.id || $temporaryChatEnabled)}
-					<Menu
-						{chat}
-						{shareEnabled}
-						shareHandler={() => {
-							showShareChatModal = !showShareChatModal;
-						}}
-						downloadHandler={() => {
-							showDownloadChatModal = !showDownloadChatModal;
-						}}
-					>
-						<button
-							class="flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"
-							id="chat-context-menu-button"
-						>
-							<div class=" m-auto self-center">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke-width="1.5"
-									stroke="currentColor"
-									class="size-5"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-									/>
-								</svg>
-							</div>
-						</button>
-					</Menu>
-				{:else if $mobile}
-					<Tooltip content={$i18n.t('Controls')}>
-						<button
-							class=" flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"
-							on:click={async () => {
-								await showControls.set(!$showControls);
-							}}
-							aria-label="Controls"
-						>
-							<div class=" m-auto self-center">
-								<AdjustmentsHorizontal className=" size-5" strokeWidth="0.5" />
-							</div>
-						</button>
-					</Tooltip>
-				{/if}
-
-				{#if !$mobile}
-					<Tooltip content={$i18n.t('Controls')}>
-						<button
-							class=" flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"
-							on:click={async () => {
-								await showControls.set(!$showControls);
-							}}
-							aria-label="Controls"
-						>
-							<div class=" m-auto self-center">
-								<AdjustmentsHorizontal className=" size-5" strokeWidth="0.5" />
-							</div>
-						</button>
-					</Tooltip>
-				{/if}
-
+			<!-- AI 멘토: 새 채팅 버튼만 유지 -->
+			<div class="self-start flex flex-none items-center">
 				<Tooltip content={$i18n.t('New Chat')}>
 					<button
 						id="new-chat-button"
-						class=" flex {$showSidebar
-							? 'md:hidden'
-							: ''} cursor-pointer px-2 py-2 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-850 transition"
+						class="flex cursor-pointer px-2 py-2 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-850 transition"
 						on:click={() => {
 							initNewChat();
 						}}
 						aria-label="New Chat"
 					>
-						<div class=" m-auto self-center">
-							<PencilSquare className=" size-5" strokeWidth="2" />
+						<div class="m-auto self-center">
+							<Plus className="size-5" strokeWidth="2" />
 						</div>
 					</button>
 				</Tooltip>
-
-				{#if $user !== undefined}
-					<UserMenu
-						className="max-w-[240px]"
-						role={$user?.role}
-						help={true}
-						on:show={(e) => {
-							if (e.detail === 'archived-chat') {
-								showArchivedChats.set(true);
-							}
-						}}
-					>
-						<button
-							class="select-none flex rounded-xl p-1.5 w-full hover:bg-gray-50 dark:hover:bg-gray-850 transition"
-							aria-label="User Menu"
-						>
-							<div class=" self-center">
-								<img
-									src={$user?.profile_image_url}
-									class="size-6 object-cover rounded-full"
-									alt="User profile"
-									draggable="false"
-								/>
-							</div>
-						</button>
-					</UserMenu>
-				{/if}
 			</div>
+
 		</div>
 	</div>
 </div>

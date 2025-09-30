@@ -142,7 +142,7 @@
 					{#if models[selectedModelIdx]?.name}
 						{models[selectedModelIdx]?.name}
 					{:else}
-						{$i18n.t('Hello, {{name}}', { name: $user?.name })}
+						안녕하세요, 전북대학교 AI Mentor입니다
 					{/if}
 				</div>
 			</div>

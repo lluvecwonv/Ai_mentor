@@ -3,6 +3,7 @@ from typing import Dict, Any
 from ..base_node import BaseNode, NodeTimer
 from .heavy_route.heavy_utils import build_context, enhance_query, log_execution_info
 from ..utils import format_vector_search_result
+from ...handlers.llm_client_main import LlmClient
 
 logger = logging.getLogger(__name__)
 
@@ -23,18 +24,35 @@ class HeavyNodes(BaseNode):
         if handlers.get('llm_handler'):
             self.handlers['llm'] = handlers['llm_handler']
 
+        # 에이전트 → 핸들러 매핑
         self.agent_mapping = {
             'Department-Mapping-Agent': 'dept',
-            'DEPARTMENT_MAPPING': 'dept',  # 라우터에서 사용하는 이름
+            'DEPARTMENT_MAPPING': 'dept',
             'SQL-Agent': 'sql',
-            'SQL_QUERY': 'sql',  # 라우터에서 사용하는 이름
+            'SQL_QUERY': 'sql',
             'FAISS-Search-Agent': 'vector',
-            'VECTOR_SEARCH': 'vector',  # 라우터에서 사용하는 이름
+            'VECTOR_SEARCH': 'vector',
+            'FAISS_SEARCH': 'vector',
             'Curriculum-Agent': 'curriculum',
-            'CURRICULUM': 'curriculum',  # 라우터에서 사용하는 이름
+            'CURRICULUM': 'curriculum',
             'LLM-Fallback-Agent': 'llm',
-            'LLM_FALLBACK': 'llm'  # 라우터에서 사용하는 이름
+            'LLM_FALLBACK': 'llm'
         }
+
+        # 핸들러 타입별 LLM 설정
+        self.handler_llm_configs = {
+            'dept': {'model': 'gpt-4o', 'max_tokens': 16000},
+            'sql': {'model': 'gpt-4o', 'max_tokens': 16000},
+            'vector': {'model': 'gpt-3.5-turbo', 'max_tokens': 16000},
+            'curriculum': {'model': 'gpt-4o', 'max_tokens': 16000},
+            'llm': {'model': 'gpt-4o', 'max_tokens': 16000}
+        }
+
+    def _get_llm_for_agent(self, agent_name: str) -> LlmClient:
+        """에이전트별로 적절한 LLM 설정 반환"""
+        handler_key = self.agent_mapping.get(agent_name, 'llm')
+        config = self.handler_llm_configs.get(handler_key, {'model': 'gpt-4o', 'max_tokens': 2000})
+        return LlmClient.create_with_config(**config)
 
     async def heavy_sequential_executor(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """Heavy 순차 실행기"""
@@ -42,12 +60,12 @@ class HeavyNodes(BaseNode):
             try:
                 user_message = self.get_user_message(state)
 
-                # plan 정보를 올바른 경로에서 가져오기
-                plan = state.get("plan", [])
+                # plan 정보를 올바른 경로에서 가져오기 (query_analysis 우선)
+                plan = state.get("query_analysis", {}).get("plan", [])
 
-                # 추가 안전장치: query_analysis에서도 확인
+                # 추가 안전장치: state에서도 확인
                 if not plan:
-                    plan = state.get("query_analysis", {}).get("plan", [])
+                    plan = state.get("plan", [])
 
                 logger.info(f"🔍 [HEAVY] plan 확인: {plan}")
 
@@ -78,11 +96,18 @@ class HeavyNodes(BaseNode):
                     # 실행 정보 로깅
                     log_execution_info(agent_name, user_message, enhanced_query, context)
 
+                    # 핸들러에 에이전트별 LLM 설정 전달
+                    handler_state = {
+                        **state,
+                        "previous_context": context,
+                        "agent_llm": self._get_llm_for_agent(agent_name)  # 에이전트별 LLM 추가
+                    }
+
                     # 핸들러 실행 (컨텍스트 직접 추가)
                     result = await handler.handle(
                         enhanced_query,
                         state.get("query_analysis", {}),
-                        **{**state, "previous_context": context}
+                        **handler_state
                     )
 
                     logger.info(f"🔍 [HEAVY] {agent_name} 결과: success={result.get('success', 'N/A')}, display='{result.get('display', 'N/A')}'")

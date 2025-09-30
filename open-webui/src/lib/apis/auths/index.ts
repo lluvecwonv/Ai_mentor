@@ -1,5 +1,37 @@
 import { WEBUI_API_BASE_URL } from '$lib/constants';
 
+/**
+ * 익명 사용자 자동 생성
+ * - 쿠키에 session_id가 있으면 기존 사용자 반환
+ * - 없으면 새로운 익명 사용자 생성
+ */
+export const createAnonymousUser = async () => {
+	let error = null;
+
+	const res = await fetch(`${WEBUI_API_BASE_URL}/auths/anonymous`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		credentials: 'include' // 쿠키 포함
+	})
+		.then(async (res) => {
+			if (!res.ok) throw await res.json();
+			return res.json();
+		})
+		.catch((err) => {
+			console.error('익명 사용자 생성 실패:', err);
+			error = err.detail;
+			return null;
+		});
+
+	if (error) {
+		throw error;
+	}
+
+	return res;
+};
+
 export const getAdminDetails = async (token: string) => {
 	let error = null;
 
