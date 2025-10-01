@@ -71,6 +71,23 @@ class HybridMentorService:
             logger.error(f"❌ 처리 실패: {e}")
             raise AIMentorException(f"처리 중 오류: {str(e)}")
 
+    async def run_agent_stream(self, user_message: str, session_id: str = "default"):
+        """스트리밍 모드 메인 처리 함수"""
+        logger.info(f"🤖 스트리밍 질문 처리: {user_message}...")
+
+        # Follow-up 질문 생성 요청 차단
+        if "### Task:" in user_message and "follow-up questions" in user_message:
+            logger.info("🚫 Follow-up 질문 생성 요청 차단")
+            return
+
+        try:
+            async for chunk in self.langgraph_app.process_query_stream(user_message, session_id):
+                yield chunk
+
+        except Exception as e:
+            logger.error(f"❌ 스트리밍 처리 실패: {e}")
+            yield f"\n\n오류가 발생했습니다: {str(e)}"
+
     def get_health_status(self) -> Dict[str, Any]:
         """헬스 체크"""
         return {

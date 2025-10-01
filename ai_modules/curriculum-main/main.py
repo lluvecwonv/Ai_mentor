@@ -25,4 +25,4 @@ app.add_middleware(
 app.include_router(curriculum_router)
 
 if __name__ == "__main__":
-    uvicorn.run("main_mvc:app", host="0.0.0.0", port=7996)
+    uvicorn.run("main:app", host="0.0.0.0", port=7996)

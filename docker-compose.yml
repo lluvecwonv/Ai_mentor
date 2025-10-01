@@ -135,6 +135,8 @@ services:
       - PUBLIC_MODE=true
       - ENABLE_ADMIN_PANEL=true
       - RATE_LIMIT_RPM=60
+      - LOG_LEVEL=DEBUG
+      - WEBUI_LOG_LEVEL=DEBUG
       - WEBUI_AUTH=false
       - AUTHENTICATION=false
       - ENABLE_LOGIN=false
@@ -142,7 +144,11 @@ services:
       - ALLOW_ANONYMOUS=true
       - DISABLE_AUTH=true
       - BYPASS_MODEL_VALIDATION=true
-      - DEFAULT_USER_ROLE=user
+      - BYPASS_MODEL_ACCESS_CONTROL=true
+      - DEFAULT_USER_ROLE=admin
+      - USER_PERMISSIONS_CHAT_FILE_UPLOAD=true
+      - USER_PERMISSIONS_CHAT_DELETE=true
+      - USER_PERMISSIONS_CHAT_EDIT=true
       - ENABLE_OPENAI_API=true
       - OPENAI_API_BASE_URLS=http://llm-agent:8001/v1
       - OPENAI_API_KEYS=${OPENAI_API_KEY}
@@ -192,6 +198,8 @@ services:
     volumes:
       - ./openwebui_new:/app/backend/data
       - ./custom-fix.css:/app/backend/static/custom.css:ro
+      - ./open-webui/src:/app/src  # 소스 코드 마운트 추가
+      - ./open-webui/static:/app/static  # 정적 파일 마운트 추가
     depends_on:
       - llm_agent
       - curriculum

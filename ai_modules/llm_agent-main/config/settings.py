@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     
     # LLM 설정 (단순화)
     openai_api_key: Optional[str] = None
-    default_model: str = "gpt-4o"
+    default_model: str = "gpt-4o-mini"
     
     # 데이터베이스 설정
     db_host: Optional[str] = None

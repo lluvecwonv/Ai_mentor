@@ -13,10 +13,11 @@ class NodeManager:
     def __init__(self, query_analyzer=None, llm_handler=None,
                  sql_handler=None, vector_handler=None,
                  dept_handler=None, curriculum_handler=None,
-                 result_synthesizer=None, conversation_memory=None):
+                 result_synthesizer=None, conversation_memory=None,
+                 llm_client=None):
 
         # Node categories 초기화
-        self.routing = RoutingNodes(query_analyzer, conversation_memory)
+        self.routing = RoutingNodes(query_analyzer, conversation_memory, llm_client)
         self.light = LightNodes(llm_handler)
         self.medium = MediumNodes(sql_handler, vector_handler, dept_handler, curriculum_handler)
         self.heavy = HeavyNodes(
@@ -34,6 +35,7 @@ class NodeManager:
         nodes = {
             # Routing nodes
             "router": self.routing.router_node,
+            "light_validator": self.routing.light_validator_node,
 
             # Light node
             "light": self.light.light_node,
@@ -51,6 +53,7 @@ class NodeManager:
             "synthesis": self.synthesis.synthesis_node,
 
             # Utility nodes
+            "rejection": self.utility.rejection_node,
             "finalize": self.utility.finalize_node,
             "error_handling": self.utility.error_handling_node,
             "health_check": self.utility.health_check_node,

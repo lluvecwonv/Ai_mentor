@@ -58,7 +58,14 @@ class HeavyNodes(BaseNode):
         """Heavy 순차 실행기"""
         with NodeTimer("HeavySequential") as timer:
             try:
-                user_message = self.get_user_message(state)
+                # 원본 메시지 가져오기 (로깅용)
+                original_message = self.get_user_message(state)
+
+                # state에서 재구성된 쿼리 가져오기 (연속대화 처리됨)
+                query_for_handlers = state.get("query_for_handlers", original_message)
+                user_message = state.get("user_message", query_for_handlers)  # user_message는 routing에서 재구성된 쿼리
+
+                logger.info(f"🔍 [HEAVY] 원본: '{original_message}' → 사용: '{user_message}'")
 
                 # plan 정보를 올바른 경로에서 가져오기 (query_analysis 우선)
                 plan = state.get("query_analysis", {}).get("plan", [])
@@ -86,7 +93,7 @@ class HeavyNodes(BaseNode):
                     handler = self.handlers.get(self.agent_mapping.get(agent_name))
 
                     if not handler:
-                        logger.warning(f"❌ [HEAVY] Handler not found for agent: {agent_name}")
+                        logger.warning(f"[HEAVY] Handler not found for agent: {agent_name}")
                         continue
 
                     # 컨텍스트 구성 및 쿼리 개선 (유틸리티 함수 사용)
@@ -118,9 +125,9 @@ class HeavyNodes(BaseNode):
                         display_text = format_vector_search_result(result)
                         results.append(f"[{agent_name}] {display_text}")
                         previous_results.append(result)
-                        logger.info(f"✅ [HEAVY] {agent_name} 결과 추가됨: {display_text[:100]}...")
+                        logger.info(f"[HEAVY] {agent_name} 결과 추가됨: {display_text[:100]}...")
                     else:
-                        logger.warning(f"❌ [HEAVY] {agent_name} 결과 제외됨: success={result.get('success') if result else 'None'}")
+                        logger.warning(f"[HEAVY] {agent_name} 결과 제외됨: success={result.get('success') if result else 'None'}")
 
                 final_result = "\n\n".join(results) if results else "처리 결과를 얻을 수 없었습니다."
                 logger.info(f"🏁 [HEAVY] 최종 결과: {len(results)}개 항목")

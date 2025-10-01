@@ -88,13 +88,27 @@ def extract_last_question(user_message: str) -> str:
             logger.info(f"🔀 히스토리 태그 제거: '{clean_message}'")
             user_message = clean_message
 
+    # 물음표로 구분된 복합 질문 처리 (새로운 로직)
+    if '?' in user_message:
+        # 물음표로 분리된 질문들 찾기
+        questions = [q.strip() + '?' for q in user_message.split('?') if q.strip()]
+        if len(questions) > 1:
+            # 마지막 질문이 시스템 태그가 아닌지만 확인 (길이 제한 없음)
+            last_q = questions[-1].replace('?', '').strip()
+            if not last_q.startswith('</') and not last_q.startswith('['):
+                logger.info(f"🔀 물음표로 구분된 복합 질문에서 마지막 질문만 사용: '{questions[-1]}'")
+                return questions[-1]
+
     # 여러 줄인 경우 마지막 라인만 사용
     lines = [line.strip() for line in user_message.split('\n') if line.strip()]
     if len(lines) > 1:
         last_question = lines[-1]
-        # 태그가 아닌 실제 질문인지 확인
-        if not last_question.startswith('</') and len(last_question) > 3:
-            logger.info(f"🔀 복합 질문에서 마지막 질문만 사용: '{last_question}'")
+        # 시스템 태그가 아닌 실제 질문인지만 확인 (길이 제한 없음)
+        if (not last_question.startswith('</') and
+            not last_question.startswith('[') and
+            not last_question.startswith('USER:') and
+            not last_question.startswith('AI:')):
+            logger.info(f"🔀 여러 줄 질문에서 마지막 질문만 사용: '{last_question}'")
             return last_question
 
     return user_message

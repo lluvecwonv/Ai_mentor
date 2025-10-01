@@ -41,7 +41,7 @@ Output MUST be a single JSON object — no free-form text outside of JSON.
 - 예: "송현제 교수님 수업" → "송현제,컴퓨터공학과" (프로그래밍,데이터구조 등 추가 금지)
 
 **학문 도메인 확장**: 학과의 핵심 학문 영역도 키워드에 포함하되, **교수명이 명시된 경우에는 과도한 확장을 피하세요**:
-- 문헌정보학과 → "도서관학, 정보관리, 아카이브, 메타데이터, 정보검색, 분류체계"
+- 문헌정보학과 → "도서관학, 정보관리, 아카이브, 메타데이터, 분류체계"
 - 컴퓨터공학과 → "프로그래밍, 알고리즘, 데이터구조, AI, 머신러닝, 소프트웨어"
 - 전자공학과 → "회로설계, 신호처리, 통신, 반도체, 임베디드"
 - 경영학과 → "마케팅, 재무, 인사, 전략, 회계, 조직"
@@ -103,7 +103,7 @@ Example 4: "김철수 교수님 데이터구조 수업 시간표"
 
 Example 5: "문정과에서 가르치는 과목을 찾아줘"
 → expansion_context: "Looking for courses offered in the Department of Library and Information Science (문헌정보학과)."
-→ expansion_keywords: "문정과,문헌정보학과,도서관학,정보관리,아카이브,메타데이터,정보검색,분류체계"
+→ expansion_keywords: "문정과,문헌정보학과,도서관학,정보관리,아카이브,메타데이터,분류체계"
 → expansion_augmentation: "(Definition: Library and information science courses, Topic: Information Management, Outcome: Library science skills, Department: Library and Information Science)"
 → entities: {"professor": null, "course": null, "department": "문헌정보학과", "course_code": null}
 

@@ -28,8 +28,8 @@ else:
     font_prop = None
 
 def assign_positions(G):
-    # 기본 학기 순서
-    base_semester_order = ["1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"]
+    # 기본 학기 순서 (5학년까지 확장)
+    base_semester_order = ["1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2", "5-1", "5-2"]
     semester_dict = {semester: i for i, semester in enumerate(base_semester_order)}
 
     semester_nodes = defaultdict(list)
@@ -50,8 +50,8 @@ def assign_positions(G):
                 last_key = max(semester_nodes.keys(), key=lambda k: semester_dict.get(k, 0))
                 semester_nodes[last_key].append(node)
 
-    # 1.5단계: 7개 이상인 학기의 과목을 재배치
-    MAX_COURSES_PER_SEMESTER = 7
+    # 1.5단계: 6개 초과 시 과목을 재배치 (마지막 노드들을 다음 학년 같은 학기로 이동)
+    MAX_COURSES_PER_SEMESTER = 6
 
     # 연결된 노드 찾기
     def get_connected_nodes(node_id):
@@ -63,61 +63,82 @@ def assign_positions(G):
                 connected.add(source)
         return connected
 
-    for key in list(semester_nodes.keys()):
-        nodes = semester_nodes[key]
-        if len(nodes) > MAX_COURSES_PER_SEMESTER:
-            grade, sem = key.split('-')
-            next_grade = str(int(grade) + 1)
-            next_key = f"{next_grade}-{sem}"
+    # 🔥 여러 번 반복하여 모든 학기가 7개 이하가 될 때까지 처리
+    max_iterations = 10  # 무한 루프 방지
+    for iteration in range(max_iterations):
+        moved_any = False
 
-            # 연결되지 않은 노드 찾기
-            unconnected_nodes = []
-            connected_nodes = []
+        for key in sorted(semester_nodes.keys(), key=lambda k: semester_dict.get(k, 0)):  # 학기 순서대로
+            nodes = semester_nodes[key]
+            if len(nodes) > MAX_COURSES_PER_SEMESTER:
+                # +1학년 이동 (예: 4-1 -> 5-1, 4-2 -> 5-2)
+                grade, sem = key.split('-')
+                next_grade = str(int(grade) + 1)
+                next_key = f"{next_grade}-{sem}"
 
-            for node in nodes:
-                connections = get_connected_nodes(node)
-                if len(connections) == 0:
-                    unconnected_nodes.append(node)
-                else:
-                    connected_nodes.append(node)
+                # 연결되지 않은 노드 찾기
+                unconnected_nodes = []
+                connected_nodes = []
 
-            # 7개를 초과하는 연결되지 않은 노드를 다음 학년으로 이동
-            to_move = len(nodes) - MAX_COURSES_PER_SEMESTER
-            moved_nodes = unconnected_nodes[:to_move]
+                for node in nodes:
+                    connections = get_connected_nodes(node)
+                    if len(connections) == 0:
+                        unconnected_nodes.append(node)
+                    else:
+                        connected_nodes.append(node)
 
-            if moved_nodes:
-                # 다음 학기 그룹에 추가
-                if next_key not in semester_nodes:
-                    semester_nodes[next_key] = []
-                semester_nodes[next_key].extend(moved_nodes)
+                # 7개를 초과하는 노드들을 마지막부터 다음 학년 같은 학기로 이동
+                to_move = len(nodes) - MAX_COURSES_PER_SEMESTER
+                # 우선순위: 연결되지 않은 노드 마지막부터
+                moved_nodes = unconnected_nodes[-to_move:] if len(unconnected_nodes) >= to_move else unconnected_nodes + connected_nodes[-(to_move - len(unconnected_nodes)):]
 
-                # 원래 학기에서 제거
-                semester_nodes[key] = connected_nodes + unconnected_nodes[to_move:]
+                if moved_nodes:
+                    # 다음 학기 그룹에 추가
+                    if next_key not in semester_nodes:
+                        semester_nodes[next_key] = []
+                    semester_nodes[next_key].extend(moved_nodes)
 
-                logger.info(f"📦 {key}에서 {len(moved_nodes)}개 과목을 {next_key}로 이동")
+                    # 원래 학기에서 제거
+                    remaining = [n for n in nodes if n not in moved_nodes]
+                    semester_nodes[key] = remaining
 
-    # 2단계: 간단한 위치 배치 (학기별 x, 순서대로 y)
+                    logger.info(f"📦 [반복{iteration+1}] {key}에서 {len(moved_nodes)}개 과목을 {next_key}로 이동")
+                    moved_any = True
+
+        # 더 이상 이동할 것이 없으면 종료
+        if not moved_any:
+            break
+
+    # 2단계: 간단한 위치 배치 (학기별 x, 순서대로 y - 간격 조정)
     positions = {}
 
     for key, nodes in semester_nodes.items():
         x_pos = semester_dict.get(key, 0)
         num_nodes = len(nodes)
 
-        # 노드들을 세로로 균등 배치
-        y_start = -(num_nodes // 2)
+        # 노드들을 세로로 균등 배치 (간격을 1.5배로)
+        y_start = -(num_nodes // 2) * 1.5
         for i, node in enumerate(nodes):
-            y_pos = y_start + i
+            y_pos = y_start + i * 1.5
             positions[node] = (x_pos, y_pos)
 
-    # 3단계: 학기 라벨 생성 (실제 사용된 학기만)
+    # 3단계: 학기 라벨 생성 (실제 사용된 학기만) - 노드들의 맨 아래에 배치
     semester_labels = {}
-    max_y = max([pos[1] for pos in positions.values()]) if positions else 0
-    label_y = max_y + 3  # 노드들 위쪽에 배치
+
+    # 각 학기별로 해당 학기의 최소 y값 계산
+    semester_min_y = {}
+    for key, nodes in semester_nodes.items():
+        if nodes:
+            x_pos = semester_dict.get(key, 0)
+            min_y_in_semester = min([positions[node][1] for node in nodes])
+            semester_min_y[key] = min_y_in_semester
 
     for semester, x_pos in semester_dict.items():
         if semester in semester_nodes:  # 실제로 과목이 있는 학기만
             year, sem = semester.split('-')
             label_text = f"{year}학년 {sem}학기"
+            # 해당 학기 노드들의 최소 y값 - 2 (노드 바로 아래)
+            label_y = semester_min_y.get(semester, 0) - 2
             semester_labels[label_text] = (x_pos, label_y)
 
     logger.info(f"✅ 학기별 분포: {dict({k: len(v) for k, v in semester_nodes.items()})}")
@@ -125,6 +146,9 @@ def assign_positions(G):
     return positions, semester_labels
 
 def visualize_graph_from_data(department_graphs, base_path, index, gt_department):
+    # 기본 학기 순서 정의
+    base_semester_order = ["1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2", "5-1", "5-2"]
+
     font_name = None
 
     font_path = FONT_PATH
@@ -139,9 +163,9 @@ def visualize_graph_from_data(department_graphs, base_path, index, gt_department
         font_name = None
 
     combined_graph = nx.DiGraph()
-    node_department_map = {} 
+    node_department_map = {}
 
-    unique_departments = set()  
+    unique_departments = set()
     for department, G in department_graphs.items():
         for node, node_data in G.nodes(data=True):
             unique_departments.add(node_data.get("department", "Unknown Department"))
@@ -189,54 +213,51 @@ def visualize_graph_from_data(department_graphs, base_path, index, gt_department
     pos, semester_labels = assign_positions(combined_graph)
 
 
-    plt.figure(figsize=(20, 14), facecolor='white')
+    # 🔥 그래프 크기를 더 크게, 여백 추가
+    plt.figure(figsize=(24, 16), facecolor='white')
     ax = plt.gca()
-    ax.set_facecolor('#FAFAFA')
+    ax.set_facecolor('#F8F9FA')
 
-    # 1) 엣지 먼저 그리기 (반듯한 선)
+    # 🔥 여백 설정 (노드가 잘리지 않도록)
+    ax.margins(0.15)
+
+    # 1) 엣지 먼저 그리기 (직선으로)
     nx.draw_networkx_edges(
         combined_graph, pos,
         edgelist=combined_graph.edges(),
         arrowstyle='-|>',
-        arrowsize=20,
-        width=3,
-        edge_color='#BDBDBD',
-        alpha=0.8,
-        connectionstyle='arc3,rad=0'  # 반듯한 직선
+        arrowsize=25,
+        width=2.5,
+        edge_color='#90A4AE',
+        alpha=0.6,
+        connectionstyle='arc3,rad=0'  # 🔥 직선
     )
 
-    # 2) 노드 그리기
+    # 2) 노드 그리기 (그림자 효과)
     nx.draw_networkx_nodes(
         combined_graph, pos,
         node_shape='o',
-        node_size=4000,
+        node_size=5000,  # 🔥 조금 더 크게
         node_color=[department_colors[node_department_map[n]] for n in combined_graph.nodes()],
         edgecolors='white',
-        linewidths=4
+        linewidths=5,  # 🔥 테두리 더 두껍게
+        alpha=0.95
     )
 
-    # 3) 과목명: 노드 중앙에 (흰색 텍스트로 대비)
+    # 3) 과목명: 노드 중앙에 (더 읽기 쉽게)
     name_labels = {n: combined_graph.nodes[n]['class_name'] for n in combined_graph.nodes()}
     nx.draw_networkx_labels(
         combined_graph, pos,
         labels=name_labels,
-        font_size=11,
+        font_size=13,  # 🔥 조금 작게 (긴 과목명 대응)
         font_weight='bold',
         font_family=font_name,
-        font_color='white',
+        font_color='#1A1A1A',
         verticalalignment='center',
         horizontalalignment='center'
     )
 
-    # 4) 학기 라벨 추가 (위쪽에 깔끔하게)
-    for label_text, label_pos in semester_labels.items():
-        plt.text(label_pos[0], label_pos[1], label_text,
-                fontsize=16, fontweight='bold', ha='center', va='bottom',
-                fontfamily=font_name, color='#424242',
-                bbox=dict(boxstyle='round,pad=0.8', facecolor='#E3F2FD',
-                         edgecolor='#2196F3', linewidth=2))
-
-    # 4) 범례, 제목, 저장 등 나머지
+    # 범례
     legend_patches = [
         plt.Line2D([0], [0], marker='s', color='w',
                 markerfacecolor=department_colors[d],
@@ -246,18 +267,35 @@ def visualize_graph_from_data(department_graphs, base_path, index, gt_department
     ]
     plt.legend(handles=legend_patches, title="학과", loc="upper right",
                fontsize=12, title_fontsize=14, frameon=True, fancybox=True, shadow=True)
-    plt.title("커리큘럼 추천 그래프", fontsize=22, fontweight='bold', pad=20, color='#212121')
+
+    # 제목: 학과 이름들 포함 (더 크게, 아래로 내림)
+    department_list = list(unique_departments)[:2]  # 최대 2개 학과만
+    department_names = "_".join(department_list)
+    max_y_global = max([pos[1] for pos in pos.values()]) if pos else 0
+    # 🔥 제목 크기 증가 (22 → 28), 위치 조정 (+5 → +3)
+    plt.text(len(base_semester_order) / 2 - 0.5, max_y_global + 3,
+             f"{department_names} 커리큘럼 추천 그래프",
+             fontsize=28, fontweight='heavy', ha='center', va='bottom',
+             fontfamily=font_name, color='black')  # 🔥 검은색, 더 진하게
+
+    # 학기 라벨 추가 (노드들 아래)
+    for label_text, label_pos in semester_labels.items():
+        plt.text(label_pos[0], label_pos[1], label_text,
+                fontsize=16, fontweight='bold', ha='center', va='top',
+                fontfamily=font_name, color='#212121')
 
     plt.axis('off')
-    plt.tight_layout()
+    # 🔥 tight_layout 제거 (margins와 충돌)
+    # plt.tight_layout()
 
     # 파일로 저장
     save_path = os.path.join(base_path, f"{index}_{gt_department}_graph.png")
-    plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white')
+    # 🔥 pad_inches 추가로 여백 확보
+    plt.savefig(save_path, dpi=300, bbox_inches='tight', pad_inches=0.3, facecolor='white')
 
     # Base64 인코딩
     buffer = io.BytesIO()
-    plt.savefig(buffer, format='png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.savefig(buffer, format='png', dpi=300, bbox_inches='tight', pad_inches=0.3, facecolor='white')
     buffer.seek(0)
     graph_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
 
@@ -379,13 +417,12 @@ def build_prereq_postreq(selected_list, db_handler, logger=None,
 
 
 def visualize_and_sort_department_graphs(department_graphs, base_path="./graphs/", index=None, gt_department=None):
-    """그래프 시각화 및 데이터 정렬 - D3.js HTML 반환"""
+    """그래프 시각화 및 데이터 정렬 - PNG 이미지 반환"""
 
     os.makedirs(base_path, exist_ok=True)
 
-    # D3.js 인터랙티브 그래프 HTML 생성
-    from service.interactive_graph import create_interactive_graph_html
-    graph_html = create_interactive_graph_html(department_graphs)
+    # PNG 그래프 이미지 생성
+    graph_base64 = visualize_graph_from_data(department_graphs, base_path, index, gt_department)
 
     # 기존 JSON 데이터 생성 로직 유지
     merged_data = []
@@ -439,6 +476,6 @@ def visualize_and_sort_department_graphs(department_graphs, base_path="./graphs/
 
     save_merged_json(merged_data, base_path, index, gt_department)
 
-    # D3.js HTML 반환 (기존 PNG 대신)
-    return all_departments_data, graph_html 
+    # PNG base64 이미지 반환
+    return all_departments_data, graph_base64 
 

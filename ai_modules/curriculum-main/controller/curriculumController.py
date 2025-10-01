@@ -45,19 +45,18 @@ async def process_query_endpoint(request: QueryRequest):
         logger.info(f"✅ API 응답 완료: {len(message_text)}자")
 
         # 텍스트 + 그래프 이미지 URL JSON 응답
-        graph_url = "http://localhost:7996/graph"
-        graph_image_url = "http://localhost:7996/graph-image"
+        # 브라우저에서 접근 가능한 절대 URL 필요 (환경변수 또는 서버 IP)
+        server_host = os.getenv("SERVER_HOST", "210.117.181.110")
+        graph_image_url = f"http://{server_host}:7996/graph-image"
+        graph_base64 = result.get("graph", "")  # "data:image/png;base64,..." 형식
 
-        # Open WebUI에서 마크다운 이미지로 렌더링
-        message_with_graph = f"{message_text}\n\n📊 **커리큘럼 로드맵**\n\n![커리큘럼 그래프]({graph_image_url})"
-
+        # 메시지는 텍스트만 (이미지는 별도로 처리)
         return JSONResponse(
             status_code=200,
             content={
-                "message": message_with_graph,
-                "graph_html": result.get("graph"),  # D3.js 인터랙티브 HTML
-                "graph_url": graph_url,  # 인터랙티브 그래프 링크
-                "graph_image_url": graph_image_url  # PNG 이미지 링크
+                "message": message_text,  # 텍스트만 반환
+                "graph_base64": graph_base64,  # PNG base64 이미지
+                "graph_image_url": graph_image_url  # PNG 이미지 URL
             }
         )
 
@@ -66,24 +65,6 @@ async def process_query_endpoint(request: QueryRequest):
         return JSONResponse(
             status_code=500,
             content={"error": str(e)}
-        )
-
-
-@router.get("/graph")
-async def show_latest_graph():
-    """최근 생성된 그래프를 HTML로 직접 반환"""
-    try:
-        # 가장 최근 요청의 그래프를 보여주기 위한 기본 쿼리
-        result = curriculum_service.process_query("컴퓨터과학과 추천해줘", 30)
-        graph_html = result.get("graph", "<h1>그래프를 생성할 수 없습니다</h1>")
-
-        return HTMLResponse(content=graph_html, status_code=200)
-
-    except Exception as e:
-        logger.error(f"❌ 그래프 표시 오류: {e}")
-        return HTMLResponse(
-            content=f"<h1>오류 발생</h1><p>{str(e)}</p>",
-            status_code=500
         )
 
 

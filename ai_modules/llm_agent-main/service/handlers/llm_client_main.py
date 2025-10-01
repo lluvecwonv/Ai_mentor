@@ -2,9 +2,14 @@ from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
 import os
 import asyncio
+import json
+import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 class LlmClient:
-    def __init__(self, model: str = "gpt-4o", max_tokens: int = 4000):
+    def __init__(self, model: str = "gpt-4o-mini", max_tokens: int = 4000):
         self.model = model
         self.max_tokens = max_tokens
         self.llm = ChatOpenAI(
@@ -67,3 +72,73 @@ class LlmClient:
             return result
         except Exception as e:
             return f"Error in chat_completion: {str(e)}"
+
+    async def validate_light_query(self, query: str) -> dict:
+        """
+        Light 라우팅 검증 - 질문이 정말 일반 대화인지 확인
+
+        Returns:
+            {
+                "is_general_chat": bool,
+                "reason": str,
+                "success": bool
+            }
+        """
+        try:
+            # 프롬프트 로드
+            prompt_path = os.path.join(
+                os.path.dirname(__file__),
+                "prompts",
+                "light_validator_prompt.txt"
+            )
+
+            with open(prompt_path, "r", encoding="utf-8") as f:
+                prompt_template = f.read()
+
+            # 쿼리 삽입
+            prompt = prompt_template.format(query=query)
+
+            # LLM 호출 (JSON 모드)
+            response = await self.chat(prompt, json_mode=True)
+
+            logger.info(f"🔍 [Light Validator] LLM 응답: {response}")
+
+            # JSON 파싱
+            result = json.loads(response)
+
+            return {
+                "is_general_chat": result.get("is_general_chat", False),
+                "reason": result.get("reason", ""),
+                "success": True
+            }
+
+        except json.JSONDecodeError as e:
+            logger.error(f"❌ Light Validator JSON 파싱 실패: {e}")
+            # 파싱 실패 시 정규식으로 재시도
+            try:
+                json_match = re.search(r'\{.*\}', response, re.DOTALL)
+                if json_match:
+                    result = json.loads(json_match.group())
+                    return {
+                        "is_general_chat": result.get("is_general_chat", False),
+                        "reason": result.get("reason", ""),
+                        "success": True
+                    }
+            except:
+                pass
+
+            # 완전 실패 시 안전하게 통과
+            return {
+                "is_general_chat": True,
+                "reason": "JSON 파싱 실패로 기본 통과",
+                "success": False
+            }
+
+        except Exception as e:
+            logger.error(f"❌ Light Validator 실패: {e}")
+            # 에러 시 안전하게 통과
+            return {
+                "is_general_chat": True,
+                "reason": f"검증 실패: {str(e)}",
+                "success": False
+            }

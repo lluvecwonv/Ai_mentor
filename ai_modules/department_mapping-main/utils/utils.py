@@ -21,15 +21,22 @@ def load_config() -> Dict[str, Any]:
             }
         }
 def load_data() -> List[Dict[str, Any]]:
-    """PKL 파일에서 학과 데이터 로드"""
+    """JSON 파일에서 학과 데이터 로드 (FAISS 인덱스와 동기화)"""
     try:
-        data_path = os.path.join(os.path.dirname(__file__), "../data/goal_Dataset.pkl")
-        with open(data_path, 'rb') as f:
-            data = pickle.load(f)
-        return data.get('lookup_index', [])
+        data_path = os.path.join(os.path.dirname(__file__), "../data/depart_info.json")
+        with open(data_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data
     except Exception as e:
         print(f"데이터 로드 중 오류 발생: {str(e)}")
-        return []
+        # Fallback to PKL file
+        try:
+            pkl_path = os.path.join(os.path.dirname(__file__), "../data/goal_Dataset.pkl")
+            with open(pkl_path, 'rb') as f:
+                pkl_data = pickle.load(f)
+            return pkl_data.get('lookup_index', [])
+        except:
+            return []
 
 def load_embeddings() -> Optional[np.ndarray]:
     """실제 임베딩 데이터 로드"""

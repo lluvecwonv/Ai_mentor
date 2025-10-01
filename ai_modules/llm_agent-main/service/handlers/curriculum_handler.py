@@ -43,11 +43,11 @@ class CurriculumHandler(BaseQueryHandler):
             if response.status_code == 200:
                 result = response.json()
                 message = result.get("message", "커리큘럼 정보를 찾을 수 없습니다.")
-                graph_base64 = result.get("graph")
+                graph_image_url = result.get("graph_image_url", "")
 
-                # 그래프 이미지를 메시지에 임베드
-                if graph_base64:
-                    display_message = f"{message}\n\n![커리큘럼 그래프]({graph_base64})"
+                # 그래프 이미지 URL을 Markdown 형식으로 추가
+                if graph_image_url:
+                    display_message = f"{message}\n\n📊 **커리큘럼 로드맵**\n\n![커리큘럼 그래프]({graph_image_url})"
                 else:
                     display_message = message
 
@@ -58,7 +58,7 @@ class CurriculumHandler(BaseQueryHandler):
                     metadata={
                         "source": "curriculum_service",
                         "response_length": len(message),
-                        "graph": graph_base64
+                        "graph_url": graph_image_url
                     },
                     success=True
                 )

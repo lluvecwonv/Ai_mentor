@@ -47,7 +47,7 @@ class CurriculumService:
                 gt_department=None,
                 already_selected_classes=already_selected_classes,
                 graph_visited_ids=graph_visited_ids,
-                max_total_courses=30,
+                max_total_courses=28,
                 depth=0
             )
 

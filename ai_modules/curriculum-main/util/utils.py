@@ -80,32 +80,49 @@ def save_merged_json(merged_data, base_path,idx, gt_department):
 
 
 def format_curriculum_response(result: Dict[str, Any]) -> str:
-    """JSON 데이터를 사람이 읽기 편한 텍스트로 변환"""
+    """JSON 데이터를 사람이 읽기 편한 텍스트로 변환 - 학년-학기 순서대로 정렬"""
 
     recommended_courses = result.get('recommended_courses', [])
 
-    # 텍스트 응답 생성
+    # 학년-학기 순으로 정렬
+    def sort_key(course):
+        grade = course.get('student_grade', 99)
+        semester = course.get('semester', 99)
+        return (grade, semester)
+
+    sorted_courses = sorted(recommended_courses, key=sort_key)
+
+    # 텍스트 응답 생성 - 학년-학기별로 그룹화
     response = "과목을 추천해드리겠습니다.\n\n"
 
-    for idx, course in enumerate(recommended_courses, 1):
+    current_grade = None
+    current_semester = None
+    course_number = 1
+
+    for course in sorted_courses:
         name = course.get('name', '')
         department = course.get('department', '')
         grade = course.get('student_grade', '')
         semester = course.get('semester', '')
         description = course.get('description', '').strip()
 
-        # 과목명을 볼드체로 (마크다운 형식)
-        response += f"{idx}. **{name}**\n"
-        response += f"   - 학과: {department}\n"
+        # 학년-학기가 바뀔 때마다 헤더 출력 (더 크고 진하게)
+        if grade != current_grade or semester != current_semester:
+            current_grade = grade
+            current_semester = semester
+            if grade and semester:
+                response += f"\n## **📚 {grade}학년 {semester}학기**\n\n"
 
-        if grade and semester:
-            response += f"   - 권장 이수: {grade}학년 {semester}학기\n"
+        # 과목명을 볼드체로 (마크다운 형식)
+        response += f"{course_number}. **{name}**\n"
+        response += f"   - 학과: {department}\n"
 
         if description:
             # 설명 전체 출력 (잘리지 않게)
             response += f"   - 설명: {description}\n"
 
         response += "\n"
+        course_number += 1
 
     print(f"커리큘럼 응답 포맷팅 완료: {len(response)}자")
 

@@ -17,17 +17,27 @@ class MediumNodes(BaseNode):
     async def _handle_medium_request(self, state: Dict[str, Any], handler: Optional[Any],
                                     handler_type: str, timer: NodeTimer) -> Dict[str, Any]:
         try:
-            user_message = self.get_user_message(state)
+            # 원본 메시지 가져오기 (로깅용)
+            original_message = self.get_user_message(state)
+
+            # state에서 재구성된 쿼리 가져오기 (연속대화 처리됨)
+            query_for_handlers = state.get("query_for_handlers", original_message)
+            user_message = state.get("user_message", query_for_handlers)  # user_message는 routing에서 재구성된 쿼리
+
             # state에서 분석된 정보들 가져오기
             expanded_query = state.get("expanded_query", user_message)
+            enhanced_query = state.get("enhanced_query", user_message)  # enhanced_query도 가져옴
             keywords = state.get("keywords", "")
             plan = state.get("plan", [])
             entities = state.get("entities", {})
             analysis = state.get("analysis", {})
 
+            logger.info(f"🔍 [{handler_type.upper()}] 원본: '{original_message}' → 사용: '{user_message}'")
+
             # query_analysis 딕셔너리로 분석 정보 전달
             query_analysis = {
-                "enhanced_query": expanded_query,
+                "enhanced_query": enhanced_query or expanded_query,  # enhanced_query 우선 사용
+                "expanded_query": expanded_query,
                 "keywords": keywords,
                 "plan": plan,
                 "entities": entities,
@@ -35,7 +45,7 @@ class MediumNodes(BaseNode):
             }
 
             result = await handler.handle(
-                user_message=user_message,
+                user_message=user_message,  # 재구성된 쿼리 전달
                 query_analysis=query_analysis,
                 state=state
             )
@@ -46,7 +56,11 @@ class MediumNodes(BaseNode):
                 response = format_vector_search_result(result)
             elif isinstance(result, dict) and result.get('agent_type') == 'curriculum':
                 # Curriculum 결과에서 display 또는 result 추출
-                response = result.get('display') or result.get('result', str(result))
+                display = result.get('display', '')
+                result_text = result.get('result', '')
+                logger.info(f"📊 [CURRICULUM] display 길이: {len(display)}, result 길이: {len(result_text)}")
+                logger.info(f"📊 [CURRICULUM] display 포함 여부 - 'data:image': {'data:image' in display}")
+                response = display or result_text or str(result)
             else:
                 response = result if isinstance(result, str) else str(result)
 

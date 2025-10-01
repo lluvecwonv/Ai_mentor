@@ -7,8 +7,8 @@ logger = logging.getLogger(__name__)
 def recursive_top1_selection(client, db_handler, query, selected_dept_list,
                             class_retriever, graph_path, gt_department,
                             already_selected_classes=None, graph_visited_ids=None,
-                            max_total_courses=30, depth=0):
-    """재귀적으로 과목을 선택하는 함수 (전체 최대 30과목)"""
+                            max_total_courses=28, depth=0):
+    """재귀적으로 과목을 선택하는 함수 (전체 최대 28과목)"""
 
     # Initialize parameters
     if already_selected_classes is None or not isinstance(already_selected_classes, list):

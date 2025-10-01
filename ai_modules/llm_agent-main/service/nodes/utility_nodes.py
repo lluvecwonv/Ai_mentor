@@ -17,6 +17,16 @@ class UtilityNodes(BaseNode):
     def __init__(self):
         pass
 
+    async def rejection_node(self, state: Dict[str, Any]) -> Dict[str, Any]:
+        """거절 노드 - Light 검증 실패 시 즉시 응답"""
+        with NodeTimer("Rejection") as timer:
+            logger.warning("🚫 거절 응답 생성: 학사정보 질문 요청")
+
+            return self.add_step_time(state, {
+                "final_result": "죄송합니다. 응답을 생성할 수 없습니다. 학사정보에 관한 질문을 해주세요.",
+                "status": "rejected"
+            }, timer)
+
     async def finalize_node(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """최종 완료 노드 - 결과 정리 및 마무리"""
         with NodeTimer("Finalize") as timer:

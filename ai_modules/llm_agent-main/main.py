@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 
 from config.settings import settings, LOGGING_CONFIG
 from controller.agentController import router as agent_router
@@ -151,16 +151,17 @@ async def agent_v2(request: Request):
 @app.post("/chat/completions")
 @app.post("/api/chat/completions")
 async def chat_completions(request: Request):
-    """OpenAI API 호환 채팅 완성"""
+    """OpenAI API 호환 채팅 완성 (스트리밍 지원)"""
     try:
         data = await request.json()
         messages = data.get("messages", [])
+        stream = data.get("stream", False)
 
         # 🔥 chat_id를 session_id로 우선 사용 (각 채팅마다 독립적인 세션)
         chat_id = data.get("chat_id")
         session_id = chat_id if chat_id else data.get("session_id", "default")
 
-        logger.info(f"📌 채팅 요청 - chat_id: {chat_id}, session_id: {session_id}")
+        logger.info(f"📌 채팅 요청 - chat_id: {chat_id}, session_id: {session_id}, stream: {stream}")
 
         # 사용자 메시지 추출
         user_message = "\n".join(msg.get("content", "") for msg in messages if msg.get("role") == "user")
@@ -168,27 +169,76 @@ async def chat_completions(request: Request):
         if not user_message.strip():
             return JSONResponse(status_code=400, content={"error": "No user message provided"})
 
-        # AI Mentor 서비스 호출 (세션 ID 전달)
         global global_mentor_service
-        response = await global_mentor_service.run_agent(user_message.strip(), session_id)
 
-        # 응답이 이미 dict 형태인지 확인하고 content만 추출
-        if isinstance(response, dict) and 'choices' in response:
-            content = response['choices'][0]['message']['content']
+        # 스트리밍 모드
+        if stream:
+            async def generate_stream():
+                import json
+                try:
+                    async for chunk in global_mentor_service.run_agent_stream(user_message.strip(), session_id):
+                        # OpenAI 스트리밍 형식
+                        stream_data = {
+                            "id": "chatcmpl-ai-mentor",
+                            "object": "chat.completion.chunk",
+                            "model": "ai-mentor",
+                            "choices": [{
+                                "index": 0,
+                                "delta": {"content": chunk},
+                                "finish_reason": None
+                            }]
+                        }
+                        yield f"data: {json.dumps(stream_data, ensure_ascii=False)}\n\n"
+
+                    # 스트리밍 종료
+                    end_data = {
+                        "id": "chatcmpl-ai-mentor",
+                        "object": "chat.completion.chunk",
+                        "model": "ai-mentor",
+                        "choices": [{
+                            "index": 0,
+                            "delta": {},
+                            "finish_reason": "stop"
+                        }]
+                    }
+                    yield f"data: {json.dumps(end_data)}\n\n"
+                    yield "data: [DONE]\n\n"
+                except Exception as e:
+                    logger.error(f"스트리밍 오류: {e}")
+                    error_data = {"error": str(e)}
+                    yield f"data: {json.dumps(error_data)}\n\n"
+
+            return StreamingResponse(
+                generate_stream(),
+                media_type="text/event-stream",
+                headers={
+                    "Cache-Control": "no-cache",
+                    "Connection": "keep-alive",
+                    "X-Accel-Buffering": "no"
+                }
+            )
+
+        # 일반 모드 (비스트리밍)
         else:
-            content = str(response)
+            response = await global_mentor_service.run_agent(user_message.strip(), session_id)
 
-        # OpenAI 형식 응답
-        return {
-            "id": "chatcmpl-ai-mentor",
-            "object": "chat.completion",
-            "model": "ai-mentor",
-            "choices": [{
-                "index": 0,
-                "message": {"role": "assistant", "content": content},
-                "finish_reason": "stop"
-            }]
-        }
+            # 응답이 이미 dict 형태인지 확인하고 content만 추출
+            if isinstance(response, dict) and 'choices' in response:
+                content = response['choices'][0]['message']['content']
+            else:
+                content = str(response)
+
+            # OpenAI 형식 응답
+            return {
+                "id": "chatcmpl-ai-mentor",
+                "object": "chat.completion",
+                "model": "ai-mentor",
+                "choices": [{
+                    "index": 0,
+                    "message": {"role": "assistant", "content": content},
+                    "finish_reason": "stop"
+                }]
+            }
 
     except Exception as e:
         logger.error(f"채팅 완성 오류: {e}")

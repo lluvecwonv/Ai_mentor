@@ -55,6 +55,9 @@ class GraphState(TypedDict):
     # 병렬 태스크
     parallel_tasks: List[str]
 
+    # 스트리밍 콜백
+    stream_callback: Optional[Any]
+
 
 def create_initial_state(
     user_message: str,
@@ -77,7 +80,8 @@ def create_initial_state(
         final_result=None,
         step_times={},
         retry_count=0,
-        parallel_tasks=[]
+        parallel_tasks=[],
+        stream_callback=None
     )
 
 
