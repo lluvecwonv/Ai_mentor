@@ -2,7 +2,9 @@
 
 An AI-powered academic mentoring system for Jeonbuk National University students, providing personalized curriculum recommendations, course information, and academic guidance.
 
-![AI Mentor Interface](./Ai_mentor.png)
+<p align="center">
+  <img src="./Ai_mentor.png" alt="AI Mentor Interface" width="600"/>
+</p>
 
 ## System Architecture
 
