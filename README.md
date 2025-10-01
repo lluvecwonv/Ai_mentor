@@ -1,15 +1,34 @@
 # JBNU AI Mentor
 
-## 실행 순서
+An AI-powered academic mentoring system for Jeonbuk National University students, providing personalized curriculum recommendations, course information, and academic guidance.
 
-### 1. Frontend (port: 5173)
+![AI Mentor Interface](./Ai_mentor.png)
+
+## System Architecture
+
+The system consists of multiple microservices:
+- **Frontend**: Open WebUI interface (Port 5173)
+- **Backend**: API server (Port 8080)
+- **Pipeline**: Request routing and processing (Port 9099)
+- **AI Modules**: Specialized services for different tasks
+
+## Quick Start
+
+### Prerequisites
+- Python 3.11+
+- Node.js and npm
+- Conda (recommended)
+- OpenAI API Key
+- PostgreSQL database
+
+### 1. Frontend Setup (Port 5173)
 ```bash
 cd open-webui
 npm install
 npm run dev
 ```
 
-### 2. Backend (port: 8080)
+### 2. Backend Setup (Port 8080)
 ```bash
 conda create --name open-webui python=3.11
 conda activate open-webui
@@ -18,7 +37,7 @@ pip install -r requirements.txt -U
 sh dev.sh
 ```
 
-### 3. Pipeline (port: 9099)
+### 3. Pipeline Setup (Port 9099)
 ```bash
 conda activate open-webui
 cd pipelines/
@@ -26,45 +45,67 @@ pip install -r requirements.txt
 ./start.sh
 ```
 
-### 4. AI Modules
+### 4. AI Modules Setup
+
+Each module requires environment configuration in `.env` file:
+- `OPENAI_API_KEY`: Your OpenAI API key
+- `DB_HOST`: Database host
+- `DB_PASSWORD`: Database password
 
 ```bash
 conda activate open-webui
 
-# llm-agent (port: 8001)
+# LLM Agent (Port 8001) - Main orchestration service
 cd ai_modules/llm_agent-main/
 uvicorn main:app --host 0.0.0.0 --port 8001
 
-# curriculum (port: 7996)
+# Curriculum Service (Port 7996) - Course recommendation and graph generation
 cd ai_modules/curriculum-main/
 python main.py
 
-# faiss_search (port: 7997)
+# FAISS Search (Port 7997) - Vector-based course search
 cd ai_modules/faiss_search-main/
 python main.py
 
-# tool_dumb (port: 7998)
+# Tool Dumb (Port 7998) - Department mapping service
 cd ai_modules/tool_dumb-main/
 python main.py
 
-# tool_sql (port: 7999)
+# Tool SQL (Port 7999) - Database query service
 cd ai_modules/tool_sql-main/
 python main.py
 ```
 
-> ⚠️ **주의:** `ai_modules` 디렉토리의 각 모듈은 `.env` 파일에 `OPENAI_API_KEY`, `DB_HOST`, `DB_PASSWORD` 등의 환경 변수 설정 필요
+## Initial Configuration
 
----
-
-## 초기 설정
-
-### Pipeline 연동
-**Admin Panel** > **Settings** > **Connections** > **OpenAI API 연결 관리**
+### Pipeline Connection
+Navigate to **Admin Panel** > **Settings** > **Connections** > **OpenAI API Management**
 - URL: `http://localhost:9099`
-- Key: `0p3n-w3bu!`
+- API Key: `0p3n-w3bu!`
 
-### Pipeline 업로드
-**Admin Panel** > **Settings** > **Pipeline** > **업로드 파이프라인**
+### Upload Pipeline
+Go to **Admin Panel** > **Settings** > **Pipeline** and upload the required pipeline configuration.
 
-### Task Model 설정
-**Settings** > **External Task Model / Local Task Model**을 **OpenAI Pipeline**으로 설정
+### Task Model Configuration
+Set **External Task Model** or **Local Task Model** to **OpenAI Pipeline** in Settings.
+
+## Features
+
+- Personalized curriculum recommendations with visual graph
+- Course search and information retrieval
+- Professor and department information queries
+- Conversation context management
+- Multi-agent query routing system
+
+## Technology Stack
+
+- **Frontend**: Svelte, Open WebUI
+- **Backend**: Python, FastAPI, LangGraph
+- **AI**: OpenAI GPT, LangChain
+- **Database**: PostgreSQL
+- **Search**: FAISS vector database
+- **Visualization**: NetworkX, Matplotlib
+
+## License
+
+This project is developed for academic purposes at Jeonbuk National University.
