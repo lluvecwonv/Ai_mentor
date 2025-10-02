@@ -77,7 +77,12 @@ def llm_select_departments(query: str, candidate_depts: List[Dict], target_count
 
     system_prompt = """당신은 교육 전문가입니다.
 사용자의 쿼리와 가장 관련성이 높은 학과들을 선택해주세요.
-반드시 JSON 형식으로 응답해주세요: {"selected_departments": [학과명1, 학과명2, ...]}"""
+반드시 JSON 형식으로 응답해주세요: {"selected_departments": [학과명1, 학과명2, ...]}
+
+예시:
+- 쿼리: "인공지능 관련 학과는?" → 컴퓨터인공지능학부 선택
+- 쿼리: "반도체 설계를 배우고 싶어" → 전자공학부 선택
+- 쿼리: "소프트웨어 개발 진로" → 컴퓨터인공지능학부, 소프트웨어공학과 선택"""
 
     user_prompt = f"""
 쿼리: "{query}"

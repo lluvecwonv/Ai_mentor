@@ -94,11 +94,12 @@ class ConversationContextAnalyzer:
             }
 
     def _format_history(self, history):
-        """히스토리 간단 포맷팅"""
+        """히스토리 포맷팅 - 맥락 보존을 위해 전체 정보 포함"""
         formatted = []
         for entry in history[-3:]:  # 최근 3턴만
             if entry.get("role") == "user":
                 formatted.append(f"사용자: {entry.get('content', '')}")
             elif entry.get("role") == "assistant":
-                formatted.append(f"AI: {entry.get('content', '')[:100]}...")
+                content = entry.get('content', '')
+                formatted.append(f"AI: {content}")
         return "\n".join(formatted)

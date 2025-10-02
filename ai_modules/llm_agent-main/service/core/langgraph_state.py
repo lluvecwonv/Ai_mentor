@@ -35,13 +35,22 @@ class GraphState(TypedDict):
     session_id: str
     conversation_memory: Optional[Any]
 
+    # 쿼리 관련 (연속대화 처리)
+    query: Optional[str]  # 최종 처리될 쿼리 (재구성됨 or 마지막 질문 추출)
+    user_message: Optional[str]  # router에서 설정한 재구성된 쿼리
+    query_for_handlers: Optional[str]  # 핸들러들이 사용할 쿼리
+    is_continuation: bool  # 연속대화 여부
+    history_usage: Optional[Dict[str, Any]]  # 히스토리 사용 정보
+
     # 라우팅
     route: Optional[str]
     complexity: Optional[str]
     plan: List[Dict[str, Any]]
     routing_reason: Optional[str]
     expanded_query: Optional[str]
+    enhanced_query: Optional[str]
     keywords: Optional[str]
+    owner_hint: Optional[str]
 
     # 처리 결과
     slots: Annotated[Dict[str, Any], merge_dicts]
@@ -69,12 +78,19 @@ def create_initial_state(
         user_query=user_message,
         session_id=session_id,
         conversation_memory=None,
+        query=None,
+        user_message=None,
+        query_for_handlers=None,
+        is_continuation=False,
+        history_usage=None,
         route=None,
         complexity=None,
         plan=[],
         routing_reason=None,
         expanded_query=None,
+        enhanced_query=None,
         keywords=None,
+        owner_hint=None,
         slots={},
         processing_type=None,
         final_result=None,

@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 import faiss
 import logging
-from typing import List, Dict, Optional
+from typing import List, Dict
 from ..open_ai import llm_select_departments
 
 logger = logging.getLogger(__name__)

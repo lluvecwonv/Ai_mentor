@@ -17,12 +17,11 @@ class MediumNodes(BaseNode):
     async def _handle_medium_request(self, state: Dict[str, Any], handler: Optional[Any],
                                     handler_type: str, timer: NodeTimer) -> Dict[str, Any]:
         try:
-            # 원본 메시지 가져오기 (로깅용)
-            original_message = self.get_user_message(state)
+            # ✅ router에서 재구성된 쿼리 사용 (연속대화 처리 완료됨)
+            user_message = state.get("user_message") or state.get("query_for_handlers") or state.get("query", "")
 
-            # state에서 재구성된 쿼리 가져오기 (연속대화 처리됨)
-            query_for_handlers = state.get("query_for_handlers", original_message)
-            user_message = state.get("user_message", query_for_handlers)  # user_message는 routing에서 재구성된 쿼리
+            # 원본 메시지는 로깅용으로만 (get_user_message는 state["messages"]에서 가져옴)
+            original_from_messages = self.get_user_message(state)
 
             # state에서 분석된 정보들 가져오기
             expanded_query = state.get("expanded_query", user_message)
@@ -32,7 +31,7 @@ class MediumNodes(BaseNode):
             entities = state.get("entities", {})
             analysis = state.get("analysis", {})
 
-            logger.info(f"🔍 [{handler_type.upper()}] 원본: '{original_message}' → 사용: '{user_message}'")
+            logger.info(f"🔍 [{handler_type.upper()}] 메시지 원본: '{original_from_messages[:100]}...' → 실제 사용: '{user_message}'")
 
             # query_analysis 딕셔너리로 분석 정보 전달
             query_analysis = {

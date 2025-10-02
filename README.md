@@ -8,88 +8,94 @@ An AI-powered academic mentoring system for Jeonbuk National University students
 
 ## System Architecture
 
-The system consists of multiple microservices:
-- **Frontend**: Open WebUI interface (Port 5173)
-- **Backend**: API server (Port 8080)
+The system consists of multiple microservices communicating via HTTP APIs:
+- **Open WebUI**: Web interface (Port 8080)
 - **Pipeline**: Request routing and processing (Port 9099)
-- **AI Modules**: Specialized services for different tasks
+- **AI Modules**: Specialized microservices for different tasks
+
+## Project Structure
+
+```
+AiMentor_edit/
+├── open-webui/                  # Web UI application (Port 8080)
+├── pipelines/                   # Request routing pipeline (Port 9099)
+├── ai_modules/                  # AI microservices
+│   ├── llm_agent-main/          # Main orchestration service with LangGraph (Port 8001)
+│   ├── curriculum-main/         # Course recommendation and graph generation (Port 7996)
+│   ├── faiss_search-main/       # Vector-based course search (Port 7997)
+│   ├── department_mapping-main/ # Department mapping service (Port 8000)
+│   └── tool_sql-main/           # Database query service (Port 7999)
+├── docker-compose.yml           # Docker orchestration configuration
+├── restart_all.sh               # Service restart script
+└── Ai_mentor.png                # System interface screenshot
+```
 
 ## Quick Start
 
-### Prerequisites
+### Using Docker Compose (Recommended)
+
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+```
+
+Access the application at `http://localhost:8080`
+
+### Manual Setup
+
+#### Prerequisites
 - Python 3.11+
-- Node.js and npm
-- Conda (recommended)
 - OpenAI API Key
 - PostgreSQL database
 
-### 1. Frontend Setup (Port 5173)
+#### Environment Configuration
+
+Create `.env` file with:
 ```bash
+OPENAI_API_KEY=your_openai_api_key
+DB_HOST=your_database_host
+DB_PASSWORD=your_database_password
+VECTOR_DB_PASSWORD=your_vector_db_password
+```
+
+#### Starting Services
+
+```bash
+# Open WebUI (Port 8080)
 cd open-webui
-npm install
-npm run dev
-```
+docker run -d -p 8080:8080 --name openwebui [image]
 
-### 2. Backend Setup (Port 8080)
-```bash
-conda create --name open-webui python=3.11
-conda activate open-webui
-cd open-webui/backend/
-pip install -r requirements.txt -U
-sh dev.sh
-```
-
-### 3. Pipeline Setup (Port 9099)
-```bash
-conda activate open-webui
+# Pipeline (Port 9099)
 cd pipelines/
 pip install -r requirements.txt
 ./start.sh
-```
 
-### 4. AI Modules Setup
-
-Each module requires environment configuration in `.env` file:
-- `OPENAI_API_KEY`: Your OpenAI API key
-- `DB_HOST`: Database host
-- `DB_PASSWORD`: Database password
-
-```bash
-conda activate open-webui
-
-# LLM Agent (Port 8001) - Main orchestration service
+# LLM Agent (Port 8001)
 cd ai_modules/llm_agent-main/
 uvicorn main:app --host 0.0.0.0 --port 8001
 
-# Curriculum Service (Port 7996) - Course recommendation and graph generation
+# Curriculum Service (Port 7996)
 cd ai_modules/curriculum-main/
 python main.py
 
-# FAISS Search (Port 7997) - Vector-based course search
+# FAISS Search (Port 7997)
 cd ai_modules/faiss_search-main/
 python main.py
 
-# Tool Dumb (Port 7998) - Department mapping service
-cd ai_modules/tool_dumb-main/
+# Department Mapping (Port 8000)
+cd ai_modules/department_mapping-main/
 python main.py
 
-# Tool SQL (Port 7999) - Database query service
+# SQL Tool (Port 7999)
 cd ai_modules/tool_sql-main/
 python main.py
 ```
-
-## Initial Configuration
-
-### Pipeline Connection
-Navigate to **Admin Panel** > **Settings** > **Connections** > **OpenAI API Management**
-- URL: `http://localhost:9099`
-- API Key: `0p3n-w3bu!`
-
-### Upload Pipeline
-Go to **Admin Panel** > **Settings** > **Pipeline** and upload the required pipeline configuration.
-
-### Task Model Configuration
-Set **External Task Model** or **Local Task Model** to **OpenAI Pipeline** in Settings.
 
 ## Features
 
@@ -98,6 +104,7 @@ Set **External Task Model** or **Local Task Model** to **OpenAI Pipeline** in Se
 - Professor and department information queries
 - Conversation context management
 - Multi-agent query routing system
+- Light query validation for academic-focused responses
 
 ## Technology Stack
 
@@ -107,7 +114,14 @@ Set **External Task Model** or **Local Task Model** to **OpenAI Pipeline** in Se
 - **Database**: PostgreSQL
 - **Search**: FAISS vector database
 - **Visualization**: NetworkX, Matplotlib
+- **Containerization**: Docker, Docker Compose
 
 ## License
 
 This project is developed for academic purposes at Jeonbuk National University.
+
+## Copyright
+
+All rights reserved by [Natural Language Learning Lab (NLL Lab)](https://sites.google.com/view/nlllab/main), Jeonbuk National University.
+
+© 2024 NLL Lab, JBNU. All rights reserved.

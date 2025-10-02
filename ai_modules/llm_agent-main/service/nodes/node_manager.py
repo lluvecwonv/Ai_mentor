@@ -35,7 +35,6 @@ class NodeManager:
         nodes = {
             # Routing nodes
             "router": self.routing.router_node,
-            "light_validator": self.routing.light_validator_node,
 
             # Light node
             "light": self.light.light_node,

@@ -18,36 +18,32 @@ class RoutingNodes(BaseNode):
         """라우터 노드 - 복잡도 분석 및 라우팅"""
         with NodeTimer("Router") as timer:
             session_id = state.get("session_id", "default")
-            user_message = self.get_user_message(state)
             is_continuation = state.get("is_continuation", False)
-            reconstructed_query = state.get("query", "")
 
-            # 🔥 핵심 수정: 연속대화 여부에 따라 다르게 처리
-            if is_continuation and reconstructed_query and reconstructed_query.strip():
-                # 연속대화 → 재구성된 쿼리 사용
-                query_for_analysis = reconstructed_query
-                logger.info(f"🔄 연속대화 (재구성 쿼리 사용): '{query_for_analysis}'")
+            # 🔥 state["query"]는 이미 langgraph_app에서 처리된 쿼리
+            # - is_continuation=True → reconstructed_query (재구성됨)
+            # - is_continuation=False → 원본 쿼리 (마지막 질문만 추출됨)
+            # messages도 동일한 쿼리로 업데이트되어 있음
+            query_for_analysis = state.get("query") or self.get_user_message(state)
+
+            if not query_for_analysis or not query_for_analysis.strip():
+                logger.info("🚫 처리할 질문이 없음 - rejection으로 라우팅")
+                return {
+                    **state,
+                    "route": "light",
+                    "complexity": "light",
+                    "owner_hint": "LLM_FALLBACK",
+                    "routing_reason": "빈 질문",
+                    "plan": [],
+                    "expanded_query": "",
+                    "keywords": "",
+                    "step_times": self.update_step_time(state, "router", 0.001)
+                }
+
+            if is_continuation:
+                logger.info(f"🔄 연속대화 (재구성된 쿼리): '{query_for_analysis}'")
             else:
-                # 새로운 질문 → 마지막 질문만 추출
-                clean_message = extract_last_question(user_message)
-
-                # Follow-up 질문 생성 요청이나 빈 문자열인 경우 처리 중단
-                if not clean_message or not clean_message.strip():
-                    logger.info("🚫 처리할 질문이 없음 - LLM_FALLBACK으로 라우팅")
-                    return {
-                        **state,
-                        "route": "light",
-                        "complexity": "light",
-                        "owner_hint": "LLM_FALLBACK",
-                        "routing_reason": "빈 질문 또는 Follow-up 생성 요청",
-                        "plan": [],
-                        "expanded_query": "",
-                        "keywords": "",
-                        "step_times": self.update_step_time(state, "router", 0.001)
-                    }
-
-                query_for_analysis = clean_message
-                logger.info(f"🆕 새로운 질문 (마지막 질문 추출): '{query_for_analysis}'")
+                logger.info(f"🆕 새로운 질문: '{query_for_analysis}'")
 
             # 즉시 피드백 메시지 전송 (분석 전)
             initial_msg = generate_initial_feedback(query_for_analysis)
@@ -55,15 +51,12 @@ class RoutingNodes(BaseNode):
             if initial_msg and state.get("stream_callback"):
                 await state["stream_callback"](initial_msg)
 
-            # 히스토리 컨텍스트 추출
-            history_context = extract_history_context(user_message)
-
-            # 쿼리 분석 (히스토리 컨텍스트 포함)
+            # 쿼리 분석 (이미 재구성된 쿼리 사용, 히스토리 불필요)
             analysis_result = await self.query_analyzer.analyze_query_parallel(
                 query_for_analysis.strip(),
                 session_id=session_id,
                 is_reconstructed=is_continuation,
-                history_context=history_context
+                history_context=""  # 이미 재구성되었으므로 히스토리 불필요
             )
 
             complexity = analysis_result.get('complexity', 'medium')

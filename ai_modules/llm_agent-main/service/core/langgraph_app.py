@@ -2,6 +2,7 @@ import logging
 import asyncio
 from typing import Dict, Any
 from langgraph.graph import StateGraph, START, END
+from langchain_core.messages import HumanMessage
 
 # 핵심 컴포넌트만 import
 from ..handlers import (
@@ -80,7 +81,7 @@ class LangGraphApp:
                     "router",
                     edge_func,
                     {
-                        "light": "light_validator",  # 🔥 light는 validator를 거침
+                        "light": "rejection",  # 🔥 light 라우팅되면 바로 거절
                         "medium_sql": "medium_sql",
                         "medium_vector": "medium_vector",
                         "medium_curriculum": "medium_curriculum",
@@ -89,31 +90,11 @@ class LangGraphApp:
                     }
                 )
 
-        # 🔥 light_validator → light (검증 통과) or rejection (검증 실패)
-        def route_light_validation(state: Dict[str, Any]) -> str:
-            """Light 검증 결과에 따라 라우팅"""
-            validation_passed = state.get("light_validation_passed", True)
-            if validation_passed:
-                logger.info("✅ Light 검증 통과 → light 노드")
-                return "light"
-            else:
-                logger.warning("❌ Light 검증 실패 → rejection 노드")
-                return "reject"
-
-        graph.add_conditional_edges(
-            "light_validator",
-            route_light_validation,
-            {
-                "light": "light",
-                "reject": "rejection"  # 🔥 검증 실패 시 rejection 노드로
-            }
-        )
-
         # rejection → END (거절 메시지 반환 후 종료)
         graph.add_edge("rejection", END)
 
         # 모든 처리 노드 → synthesis → finalize → END
-        for node in ["light", "medium_sql", "medium_vector",  "medium_department", "heavy_sequential"]:
+        for node in ["medium_sql", "medium_vector",  "medium_department", "heavy_sequential"]:
             graph.add_edge(node, "synthesis")
 
         graph.add_edge("synthesis", "finalize")
@@ -124,11 +105,9 @@ class LangGraphApp:
 
         return compiled_graph
 
-    async def process_query(self, user_message: str, session_id: str = "default") -> Dict[str, Any]:
-        """통합 쿼리 처리 - 히스토리 분석 포함"""
-        logger.info(f"🚀 통합 쿼리 처리 시작: '{user_message}...'")
-
-        # Follow-up 질문 생성 요청 차단 (강화된 안전장치)
+    async def _prepare_query_state(self, user_message: str, session_id: str, stream_callback=None):
+        """공통 쿼리 준비 로직 - Follow-up 차단, 히스토리 분석, 쿼리 결정"""
+        # Follow-up 질문 생성 요청 차단
         follow_up_patterns = [
             "### Task:",
             "follow-up questions",
@@ -138,13 +117,8 @@ class LangGraphApp:
         ]
 
         if any(pattern in user_message for pattern in follow_up_patterns):
-            logger.warning("🚫 Follow-up 질문 생성 요청 차단 (LangGraph)")
-            return {
-                "response": "Follow-up 질문 생성 요청은 처리하지 않습니다.",
-                "complexity": "blocked",
-                "is_continuation": False,
-                "history_usage": {}
-            }
+            logger.warning("🚫 Follow-up 질문 생성 요청 차단")
+            return None
 
         # 히스토리 분석 수행
         default_result = {
@@ -156,7 +130,6 @@ class LangGraphApp:
             }
         }
 
-
         if not self.context_analyzer or not self.conversation_memory:
             logger.info("컨텍스트 분석기 또는 메모리가 없습니다. 기본값 반환")
             history_analysis = default_result
@@ -167,27 +140,54 @@ class LangGraphApp:
                 session_id
             )
 
-
         # 상태 초기화
         initial_state = create_initial_state(user_message, session_id)
         initial_state["conversation_memory"] = self.conversation_memory
         initial_state["is_continuation"] = history_analysis.get("is_continuation", False)
         initial_state["history_usage"] = history_analysis.get("history_usage", {})
 
-        # 스트리밍 콜백 추가 (중간 피드백용) - process_query용 (로그만 출력)
-        async def stream_callback_dummy(msg: str):
-            logger.info(f"📤 피드백 메시지 (non-streaming): {msg}")
-
-        initial_state["stream_callback"] = stream_callback_dummy
-
-        # 재구성된 쿼리 사용 (연속대화든 새 질문이든 항상 reconstructed_query 사용)
-        reconstructed_query = history_analysis.get("reconstructed_query", user_message)
-        initial_state["query"] = reconstructed_query
-
-        if history_analysis.get("is_continuation", False):
-            logger.info(f"🔄 연속대화 감지: '{user_message}' → '{reconstructed_query}'")
+        # 스트리밍 콜백 설정
+        if stream_callback:
+            initial_state["stream_callback"] = stream_callback
         else:
-            logger.info(f"🆕 새로운 질문: '{reconstructed_query}'")
+            async def stream_callback_dummy(msg: str):
+                logger.info(f"📤 피드백 메시지 (non-streaming): {msg}")
+            initial_state["stream_callback"] = stream_callback_dummy
+
+        # 쿼리 결정 로직
+        is_continuation = history_analysis.get("is_continuation", False)
+        if is_continuation:
+            # ✅ 연속대화: reconstructed_query 사용
+            query_to_use = history_analysis.get("reconstructed_query", user_message)
+            logger.info(f"🔄 연속대화 감지: '{user_message}' → '{query_to_use}'")
+        else:
+            # ✅ 새로운 질문: 마지막 질문만 추출
+            from service.nodes.utils import extract_last_question
+            query_to_use = extract_last_question(user_message)
+            logger.info(f"🆕 새로운 질문 (마지막 질문 추출): '{query_to_use}'")
+
+        # 🔥 state["query"], user_message, messages 모두 업데이트하여 모든 노드가 올바른 쿼리를 사용하도록 함
+        initial_state["query"] = query_to_use
+        initial_state["user_message"] = query_to_use
+        initial_state["query_for_handlers"] = query_to_use
+        initial_state["messages"] = [HumanMessage(content=query_to_use)]
+
+        return initial_state
+
+    async def process_query(self, user_message: str, session_id: str = "default") -> Dict[str, Any]:
+        """비스트리밍 쿼리 처리"""
+        logger.info(f"🚀 통합 쿼리 처리 시작: '{user_message}...'")
+
+        # 공통 준비 로직
+        initial_state = await self._prepare_query_state(user_message, session_id)
+
+        if initial_state is None:
+            return {
+                "response": "Follow-up 질문 생성 요청은 처리하지 않습니다.",
+                "complexity": "blocked",
+                "is_continuation": False,
+                "history_usage": {}
+            }
 
         # 그래프 실행
         result = await self.graph.ainvoke(initial_state)
@@ -212,63 +212,20 @@ class LangGraphApp:
         }
 
     async def process_query_stream(self, user_message: str, session_id: str = "default"):
-        """스트리밍 모드 쿼리 처리"""
+        """스트리밍 쿼리 처리"""
         logger.info(f"🚀 스트리밍 쿼리 처리 시작: '{user_message}...'")
 
-
-        # Follow-up 차단
-        follow_up_patterns = [
-            "### Task:",
-            "follow-up questions",
-            "follow-up prompts",
-            "Suggest 3-5 relevant",
-            "continue or deepen the discussion"
-        ]
-
-        if any(pattern in user_message for pattern in follow_up_patterns):
-            logger.warning("🚫 Follow-up 질문 생성 요청 차단")
-            return
-
-        # 히스토리 분석
-        default_result = {
-            "is_continuation": False,
-            "query": user_message,
-            "history_usage": {
-                "reuse_previous": False,
-                "relationship": "new_search"
-            }
-        }
-
-        if not self.context_analyzer or not self.conversation_memory:
-            history_analysis = default_result
-        else:
-            history_analysis = await self.context_analyzer.analyze_session_context(
-                user_message,
-                self.conversation_memory,
-                session_id
-            )
-
-        # 상태 초기화
-        initial_state = create_initial_state(user_message, session_id)
-        initial_state["conversation_memory"] = self.conversation_memory
-        initial_state["is_continuation"] = history_analysis.get("is_continuation", False)
-        initial_state["history_usage"] = history_analysis.get("history_usage", {})
-
-        # 스트리밍 콜백 추가 - 즉시 yield하는 큐 기반
+        # 스트리밍 콜백 큐 설정
         feedback_queue = []
 
         async def stream_callback(msg: str):
             feedback_queue.append(msg)
 
-        initial_state["stream_callback"] = stream_callback
+        # 공통 준비 로직
+        initial_state = await self._prepare_query_state(user_message, session_id, stream_callback)
 
-        reconstructed_query = history_analysis.get("reconstructed_query", user_message)
-        initial_state["query"] = reconstructed_query
-
-        if history_analysis.get("is_continuation", False):
-            logger.info(f"🔄 연속대화 감지: '{user_message}' → '{reconstructed_query}'")
-        else:
-            logger.info(f"🆕 새로운 질문: '{reconstructed_query}'")
+        if initial_state is None:
+            return
 
         # 그래프를 스트리밍으로 실행하면서 각 노드마다 피드백 확인
         final_state = None

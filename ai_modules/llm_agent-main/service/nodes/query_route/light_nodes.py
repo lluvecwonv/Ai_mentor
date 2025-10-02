@@ -20,7 +20,10 @@ class LightNodes(BaseNode):
     async def light_node(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """Light 노드 - 간단한 질문, 인사말 등 처리"""
         with NodeTimer("Light") as timer:
-            user_message = BaseNode.get_user_message(state)
+            # ✅ router에서 재구성된 쿼리 사용 (연속대화 처리 완료됨)
+            user_message = state.get("user_message") or state.get("query_for_handlers") or state.get("query", "")
+
+            logger.info(f"🔍 [LIGHT] 사용 쿼리: '{user_message}'")
 
             # Light 노드용 LLM 설정 (빠른 응답을 위해 작은 모델 사용)
             light_llm = LlmClient.create_with_config(
