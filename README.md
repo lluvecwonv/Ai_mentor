@@ -111,7 +111,7 @@ The system employs four specialized AI agents, each designed for specific academ
 Provides personalized learning path recommendations based on student goals and interests.
 
 <p align="center">
-  <img src="./assets/curriculum_agent.png" alt="Curriculum Agent" width="600"/>
+  <img src="./assets/curriculum_agent.png" alt="Curriculum Agent" width="400"/>
 </p>
 
 **Key Features:**
@@ -131,7 +131,7 @@ Provides personalized learning path recommendations based on student goals and i
 Converts natural language questions into SQL queries for academic database searches.
 
 <p align="center">
-  <img src="./assets/sql_agent.png" alt="SQL Agent" width="600"/>
+  <img src="./assets/sql_agent.png" alt="SQL Agent" width="400"/>
 </p>
 
 **Key Features:**
@@ -150,7 +150,7 @@ Converts natural language questions into SQL queries for academic database searc
 Hybrid search system combining LLM-based SQL filtering with vector similarity search.
 
 <p align="center">
-  <img src="./assets/faiss_agent.png" alt="FAISS Agent" width="600"/>
+  <img src="./assets/faiss_agent.png" alt="FAISS Agent" width="400"/>
 </p>
 
 **Key Features:**
@@ -169,7 +169,7 @@ Hybrid search system combining LLM-based SQL filtering with vector similarity se
 Provides detailed department information, requirements, and curriculum structure.
 
 <p align="center">
-  <img src="./assets/department_agent.png" alt="Department Agent" width="600"/>
+  <img src="./assets/department_agent.png" alt="Department Agent" width="400"/>
 </p>
 
 **Key Features:**
