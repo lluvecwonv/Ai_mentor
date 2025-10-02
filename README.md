@@ -47,6 +47,10 @@ docker-compose down
 
 Access the application at `http://localhost:8080`
 
+### Live Demo
+
+🌐 **Production Service**: [http://210.117.181.110:8080](http://210.117.181.110:8080)
+
 ### Manual Setup
 
 #### Prerequisites
