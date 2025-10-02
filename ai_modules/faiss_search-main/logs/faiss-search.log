@@ -3929,3 +3929,17 @@ FROM jbnu_class_gpt c
 WHERE c.department LIKE '%컴퓨터인공지능학부%'
 2025-10-02 02:54:15 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
 2025-10-02 02:54:15 | INFO | service.searchService | 검색 완료: 3개 결과
+2025-10-02 20:32:49 | INFO | service.searchService | 검색 시작: '데이터 분석에 관심있는데 어떤 수업을 들어야하지?'
+2025-10-02 20:32:51 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-02 20:32:51 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-10-02 20:32:51 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-10-02 20:33:10 | INFO | service.searchService | 검색 시작: '데이터 분석에 관심있는데 어떤 수업을 들어야하지?'
+2025-10-02 20:33:12 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-02 20:33:12 | INFO | service.searchService | 추출된 SQL: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-10-02 20:33:12 | INFO | service.searchService | SQL 생성됨: SELECT c.id, c.name, c.gpt_description, c.department as department_name, c.professor, c.credits, c.prerequisite, c.target_grade, c.schedule, c.location, c.delivery_mode, c.vector
+FROM jbnu_class_gpt c
+2025-10-02 20:33:24 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-02 20:33:24 | INFO | service.searchService | 검색 완료: 3개 결과
